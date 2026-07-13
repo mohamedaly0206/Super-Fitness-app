@@ -1,0 +1,14 @@
+{
+  "errors": {
+    "no_internet": "No internet connection",
+    "connection_timeout": "Connection timed out",
+    "send_timeout": "Send timed out",
+    "receive_timeout": "Receive timed out",
+    "server_error": "Server error",
+    "unexpected_error": "Unexpected error occurred",
+    "unknown_error": "Unknown error",
+    "login_successfully": "Login successful",
+    "login_error": "Login failed",
+    "signup_successfully": "Signup successful"
+  }
+}

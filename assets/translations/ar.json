@@ -1,0 +1,14 @@
+{
+  "errors": {
+    "no_internet": "لا يوجد اتصال بالإنترنت",
+    "connection_timeout": "انتهت مهلة الاتصال",
+    "send_timeout": "انتهت مهلة الإرسال",
+    "receive_timeout": "انتهت مهلة الاستقبال",
+    "server_error": "خطأ في الخادم",
+    "unexpected_error": "حدث خطأ غير متوقع",
+    "unknown_error": "خطأ غير معروف",
+    "login_successfully": "تم تسجيل الدخول بنجاح",
+    "login_error": "فشل تسجيل الدخول",
+    "signup_successfully": "تم التسجيل بنجاح"
+  }
+}

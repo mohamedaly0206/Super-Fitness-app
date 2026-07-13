@@ -1,17 +1,27 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/app.dart';
+import 'package:super_fitness_app/config/dependency_injection/di.dart';
+import 'package:super_fitness_app/core/network/dio_helper.dart';
+import 'package:super_fitness_app/core/resources/app_value.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      
-    );
-  }
+  DioHelper.init();
+  configureDependencies();
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [
+        Locale(AppKeys.enLocale),
+        Locale(AppKeys.arLocale),
+      ],
+      path: AppKeys.translationPath,
+      child: const FitnessApp(),
+    ),
+  );
 }
