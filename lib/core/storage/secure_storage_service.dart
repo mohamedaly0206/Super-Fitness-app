@@ -14,7 +14,5 @@ class SecureStorageService {
 
   static Future<void> deleteToken() async {
     await _storage.delete(key: AppKeys.tokenKey);
-    await _storage.delete(key: AppKeys.driverIdKey);
-    await _storage.delete(key: AppKeys.currentOrderIdKey);
   }
 }

@@ -66,4 +66,9 @@ class AppColors {
   static const Color navBarBackground = Color(0xFF1C1C1E);
 
   static const Color transparent = Colors.transparent;
+
+  //  GLASS
+  static const Color glassFill = Color(0x0FFFFFFF);
+  static const Color glassBorder = Color(0x2EFFFFFF);
+  static const Color glassShadow = Color(0x2E000000);
 }

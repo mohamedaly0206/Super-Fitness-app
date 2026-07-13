@@ -12,6 +12,7 @@ import 'package:super_fitness_app/core/widgets/button_loading_widget.dart';
 import 'package:super_fitness_app/core/widgets/button_with_prefix.dart';
 import 'package:super_fitness_app/core/widgets/custom_appbar.dart';
 import 'package:super_fitness_app/core/widgets/custom_bottom_nav_bar.dart';
+import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
 import 'package:super_fitness_app/core/widgets/custom_text_field.dart';
@@ -153,6 +154,179 @@ class _UIShowcasePageState extends State<UIShowcasePage> {
                   child: const Text('Info'),
                 ),
               ],
+            ),
+
+            const SizedBox(height: AppSize.s16),
+
+            _sectionTitle(context, 'Glass Container — Default'),
+            const CustomContainer(
+              child: Text('Default glass container'),
+            ),
+
+            const SizedBox(height: AppSize.s16),
+
+            _sectionTitle(context, 'Glass Container — Low Blur'),
+            const CustomContainer(
+              blur: 4,
+              child: Text('Blur 4'),
+            ),
+
+            const SizedBox(height: AppSize.s16),
+
+            _sectionTitle(context, 'Glass Container — High Blur'),
+            const CustomContainer(
+              blur: 50,
+              child: Text('Blur 50'),
+            ),
+
+            const SizedBox(height: AppSize.s16),
+
+            _sectionTitle(context, 'Glass Container — Gradient'),
+            const CustomContainer(
+              gradient: LinearGradient(
+                colors: [AppColors.primary, AppColors.red14],
+              ),
+              child: Text('Gradient glass'),
+            ),
+
+            const SizedBox(height: AppSize.s16),
+
+            _sectionTitle(context, 'Glass Container — Custom Color'),
+            CustomContainer(
+              color: AppColors.primary.withValues(alpha: 0.2),
+              child: const Text('Primary tinted'),
+            ),
+
+            const SizedBox(height: AppSize.s16),
+
+            _sectionTitle(context, 'Glass Container — Custom Border'),
+            const CustomContainer(
+              border: Border.fromBorderSide(
+                BorderSide(color: AppColors.primary, width: 1.5),
+              ),
+              child: Text('Primary border'),
+            ),
+
+            const SizedBox(height: AppSize.s16),
+
+            _sectionTitle(context, 'Glass Container — Custom Shadow'),
+            const CustomContainer(
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primary,
+                  blurRadius: 20,
+                  spreadRadius: -4,
+                ),
+              ],
+              child: Text('Primary shadow'),
+            ),
+
+            const SizedBox(height: AppSize.s16),
+
+            _sectionTitle(context, 'Glass Container — Rounded'),
+            const CustomContainer(
+              borderRadius: AppSize.borderRadiusLarge,
+              child: Text('Large radius'),
+            ),
+
+            const SizedBox(height: AppSize.s16),
+
+            _sectionTitle(context, 'Glass Container — Sizes'),
+            Row(
+              children: [
+                const Expanded(
+                  child: CustomContainer(
+                    padding: EdgeInsets.all(AppPadding.p8),
+                    child: Text('S', textAlign: TextAlign.center),
+                  ),
+                ),
+                const SizedBox(width: AppSize.s8),
+                const Expanded(
+                  child: CustomContainer(
+                    child: Text('M', textAlign: TextAlign.center),
+                  ),
+                ),
+                const SizedBox(width: AppSize.s8),
+                const Expanded(
+                  child: CustomContainer(
+                    padding: EdgeInsets.all(AppPadding.p24),
+                    child: Text('L', textAlign: TextAlign.center),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: AppSize.s16),
+
+            _sectionTitle(context, 'Glass Container — Card'),
+            CustomContainer(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Card Title',
+                    style: getBoldStyle(context: context, color: AppColors.textPrimary),
+                  ),
+                  const SizedBox(height: AppSize.s8),
+                  Text(
+                    'Subtitle with secondary text.',
+                    style: getRegularStyle(context: context, color: AppColors.textSecondary),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: AppSize.s16),
+
+            _sectionTitle(context, 'Glass Container — Grid'),
+            GridView.count(
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              mainAxisSpacing: AppSize.s8,
+              crossAxisSpacing: AppSize.s8,
+              children: List.generate(4, (i) {
+                final labels = ['Stats', 'Workout', 'Goal', 'Progress'];
+                final icons = [
+                  Icons.bar_chart,
+                  Icons.fitness_center,
+                  Icons.flag,
+                  Icons.trending_up,
+                ];
+                return CustomContainer(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(icons[i], color: AppColors.primary, size: AppSize.s32),
+                      const SizedBox(height: AppSize.s8),
+                      Text(labels[i]),
+                    ],
+                  ),
+                );
+              }),
+            ),
+
+            const SizedBox(height: AppSize.s16),
+
+            _sectionTitle(context, 'Glass Container — List Row'),
+            const CustomContainer(
+              child: Row(
+                children: [
+                  Icon(Icons.timer, color: AppColors.primary),
+                  SizedBox(width: AppSize.s12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Morning Run', style: TextStyle(fontWeight: FontWeight.w600)),
+                        Text('30 min · 5.2 km', style: TextStyle(fontSize: 12)),
+                      ],
+                    ),
+                  ),
+                  Icon(Icons.chevron_right, color: AppColors.textSecondary),
+                ],
+              ),
             ),
 
             const SizedBox(height: AppSize.s16),
