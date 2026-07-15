@@ -1,0 +1,34 @@
+name: Validate Branch Name
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize 
+      - reopened
+
+jobs:
+  validate-branch-name:
+    name: Validate Branch Name
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate Branch Name
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          echo "Branch: $BRANCH_NAME"
+
+          REGEX="^(feature|fix|refactor|chore|docs|test|hotfix)/FST3-[0-9]+-[a-z0-9-]+$"
+
+          if [[ ! "$BRANCH_NAME" =~ $REGEX ]]; then
+            echo "❌ Invalid branch name."
+            echo ""
+            echo "Expected format:"
+            echo "feature/FST3-123-login-screen"
+            echo "fix/FST3-45-cart-bug"
+            echo "refactor/FST3-99-auth-module"
+            exit 1
+          fi
+
+          echo "✅ Branch name is valid."
