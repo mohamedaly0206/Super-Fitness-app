@@ -29,16 +29,16 @@ class RegisterRequestEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-        firstName,
-        lastName,
-        email,
-        password,
-        rePassword,
-        gender,
-        height,
-        weight,
-        age,
-        goal,
-        activityLevel,
-      ];
+    firstName,
+    lastName,
+    email,
+    password,
+    rePassword,
+    gender,
+    height,
+    weight,
+    age,
+    goal,
+    activityLevel,
+  ];
 }

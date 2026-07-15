@@ -11,14 +11,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
   final AuthApiClient _authApiClient;
   const AuthRemoteDataSourceImpl(this._authApiClient);
   @override
-  Future<BaseResponse<RegisterResponseDto>> register(RegisterRequestDto request) async {
+  Future<BaseResponse<RegisterResponseDto>> register(
+    RegisterRequestDto request,
+  ) async {
     try {
-  final response = await _authApiClient.register(request);
-  
-  return SuccessBaseResponse<RegisterResponseDto>(data: response);
-}  catch (e) {
-  return ErrorBaseResponse<RegisterResponseDto>(failure: ErrorHandler.handle(e));
-  
-}
+      final response = await _authApiClient.register(request);
+
+      return SuccessBaseResponse<RegisterResponseDto>(data: response);
+    } catch (e) {
+      return ErrorBaseResponse<RegisterResponseDto>(
+        failure: ErrorHandler.handle(e),
+      );
+    }
   }
 }

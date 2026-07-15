@@ -27,4 +27,13 @@ class AuthConstants {
   static String get codeSentAgain => "auth.code_sent_again".tr();
   static String get resetPasswordCondition =>
       "auth.reset_password_condition".tr();
+
+  // Register
+  static String get heyThere => "auth.hey_there".tr();
+  static String get createAnAccount => "auth.create_an_account".tr();
+  static String get register => "auth.register".tr();
+  static String get firstName => "auth.first_name".tr();
+  static String get lastName => "auth.last_name".tr();
+  static String get or => "auth.or".tr();
+  static String get alreadyHaveAnAccount => "auth.already_have_an_account".tr();
 }

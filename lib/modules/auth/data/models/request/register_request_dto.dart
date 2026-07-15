@@ -46,7 +46,7 @@ class RegisterRequestDto {
       _$RegisterRequestDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$RegisterRequestDtoToJson(this);
-  
+
   factory RegisterRequestDto.fromDomain(RegisterRequestEntity entity) {
     return RegisterRequestDto(
       firstName: entity.firstName,
