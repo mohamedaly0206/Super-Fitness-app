@@ -1,3 +1,1 @@
-abstract class Routes {
-
-}
+abstract class Routes {}

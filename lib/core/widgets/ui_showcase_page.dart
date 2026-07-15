@@ -159,25 +159,17 @@ class _UIShowcasePageState extends State<UIShowcasePage> {
             const SizedBox(height: AppSize.s16),
 
             _sectionTitle(context, 'Glass Container — Default'),
-            const CustomContainer(
-              child: Text('Default glass container'),
-            ),
+            const CustomContainer(child: Text('Default glass container')),
 
             const SizedBox(height: AppSize.s16),
 
             _sectionTitle(context, 'Glass Container — Low Blur'),
-            const CustomContainer(
-              blur: 4,
-              child: Text('Blur 4'),
-            ),
+            const CustomContainer(blur: 4, child: Text('Blur 4')),
 
             const SizedBox(height: AppSize.s16),
 
             _sectionTitle(context, 'Glass Container — High Blur'),
-            const CustomContainer(
-              blur: 50,
-              child: Text('Blur 50'),
-            ),
+            const CustomContainer(blur: 50, child: Text('Blur 50')),
 
             const SizedBox(height: AppSize.s16),
 
@@ -265,12 +257,18 @@ class _UIShowcasePageState extends State<UIShowcasePage> {
                 children: [
                   Text(
                     'Card Title',
-                    style: getBoldStyle(context: context, color: AppColors.textPrimary),
+                    style: getBoldStyle(
+                      context: context,
+                      color: AppColors.textPrimary,
+                    ),
                   ),
                   const SizedBox(height: AppSize.s8),
                   Text(
                     'Subtitle with secondary text.',
-                    style: getRegularStyle(context: context, color: AppColors.textSecondary),
+                    style: getRegularStyle(
+                      context: context,
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ],
               ),
@@ -297,7 +295,11 @@ class _UIShowcasePageState extends State<UIShowcasePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(icons[i], color: AppColors.primary, size: AppSize.s32),
+                      Icon(
+                        icons[i],
+                        color: AppColors.primary,
+                        size: AppSize.s32,
+                      ),
                       const SizedBox(height: AppSize.s8),
                       Text(labels[i]),
                     ],
@@ -319,7 +321,10 @@ class _UIShowcasePageState extends State<UIShowcasePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('Morning Run', style: TextStyle(fontWeight: FontWeight.w600)),
+                        Text(
+                          'Morning Run',
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
                         Text('30 min · 5.2 km', style: TextStyle(fontSize: 12)),
                       ],
                     ),
