@@ -39,8 +39,11 @@
     "last_name": "Last Name",
     "or": "Or",
     "already_have_an_account": "Already Have An Account ?",
-    "register_continuation_placeholder": "Next Register screens will be implemented here.",
-    "login_placeholder": "Login screen will be implemented here."
+    "tell_us_about_yourself": "Tell us about yourself!",
+    "we_need_to_know_your_gender": "We need to know your gender",
+    "next": "Next",
+    "male": "Male",
+    "female": "Female"
   },
   "validation": {
     "email_required": "Email is required",

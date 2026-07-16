@@ -8,7 +8,7 @@ class RegisterState extends Equatable {
   final String? email;
   final String? password;
   final String? rePassword;
-  final String? gender;
+  final Gender? gender;
   final num? age;
   final num? weight;
   final num? height;
@@ -37,7 +37,7 @@ class RegisterState extends Equatable {
     String? email,
     String? password,
     String? rePassword,
-    String? gender,
+    Gender? gender,
     num? age,
     num? weight,
     num? height,
@@ -76,3 +76,5 @@ class RegisterState extends Equatable {
     activityLevel,
   ];
 }
+
+enum Gender { male, female }

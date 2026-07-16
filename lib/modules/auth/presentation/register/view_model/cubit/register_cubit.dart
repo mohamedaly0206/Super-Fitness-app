@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
 import 'package:super_fitness_app/config/base/base_state.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/request/register_request_entity.dart';
@@ -7,6 +10,7 @@ import 'package:super_fitness_app/modules/auth/domain/use_cases/register_use_cas
 import 'package:super_fitness_app/modules/auth/presentation/register/view_model/intent/register_intent.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
 
+@injectable
 class RegisterCubit extends Cubit<RegisterState> {
   final RegisterUseCase _registerUseCase;
   RegisterCubit(this._registerUseCase) : super((RegisterState()));
@@ -14,12 +18,15 @@ class RegisterCubit extends Cubit<RegisterState> {
   void handleRegisterIntent(RegisterIntent intent) {
     switch (intent) {
       case SubmitRegisterIntent():
-        register(intent.request);
+        _register(intent.request);
+        break;
+      case SelectGenderIntent():
+        _changeGender(intent.gender);
         break;
     }
   }
 
-  Future<void> register(RegisterRequestEntity request) async {
+  Future<void> _register(RegisterRequestEntity request) async {
     emit(state.copyWith(registerState: const BaseState(isLoading: true)));
     final response = await _registerUseCase.call(request);
     switch (response) {
@@ -34,5 +41,10 @@ class RegisterCubit extends Cubit<RegisterState> {
         );
         break;
     }
+  }
+
+  void _changeGender(Gender gender) {
+    emit(state.copyWith(gender: gender));
+    log(state.gender.toString());
   }
 }

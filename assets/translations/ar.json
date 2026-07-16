@@ -39,8 +39,12 @@
     "last_name": "اسم العائلة",
     "or": "أو",
     "already_have_an_account": "هل لديك حساب بالفعل؟",
-    "register_continuation_placeholder": "شاشات التسجيل التالية سيتم تنفيذها هنا.",
-    "login_placeholder": "شاشة تسجيل الدخول سيتم تنفيذها هنا."
+    "tell_us_about_yourself": "أخبرنا عن نفسك!",
+    "we_need_to_know_your_gender": "نحتاج إلى معرفة جنسك",
+     "next": "التالي",
+    "male": "ذكر",
+    "female": "انثى"
+   
   },
   "validation": {
     "email_required": "البريد الإلكتروني مطلوب",
