@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
-import 'package:super_fitness_app/features/auth/domain/usecases/register_usecase.dart';
-import 'package:super_fitness_app/features/auth/presentation/cubit/register_state.dart';
+import 'package:super_fitness_app/modules/auth/domain/usecases/register_usecase.dart';
+import 'package:super_fitness_app/modules/auth/presentation/cubit/register_state.dart';
 
 
 @lazySingleton

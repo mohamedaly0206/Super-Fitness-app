@@ -4,10 +4,10 @@ import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/config/routes/page_transitions.dart';
 import 'package:super_fitness_app/core/widgets/not_found_screen.dart';
 import 'package:super_fitness_app/core/widgets/ui_showcase_page.dart';
-import 'package:super_fitness_app/features/auth/presentation/cubit/register_cubit.dart';
-import 'package:super_fitness_app/features/auth/presentation/pages/login_placeholder_page.dart';
-import 'package:super_fitness_app/features/auth/presentation/pages/register_continuation_placeholder_page.dart';
-import 'package:super_fitness_app/features/auth/presentation/pages/register_page.dart';
+import 'package:super_fitness_app/modules/auth/presentation/cubit/register_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/pages/login_placeholder_page.dart';
+import 'package:super_fitness_app/modules/auth/presentation/pages/register_continuation_placeholder_page.dart';
+import 'package:super_fitness_app/modules/auth/presentation/pages/register_page.dart';
 
 abstract class Routes {
   static const String splash = '/';

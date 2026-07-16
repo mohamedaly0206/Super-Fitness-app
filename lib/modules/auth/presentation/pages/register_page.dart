@@ -13,13 +13,13 @@ import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
-import 'package:super_fitness_app/features/auth/presentation/cubit/register_cubit.dart';
-import 'package:super_fitness_app/features/auth/presentation/widgets/auth_or_divider.dart';
-import 'package:super_fitness_app/features/auth/presentation/widgets/login_redirect_row.dart';
-import 'package:super_fitness_app/features/auth/presentation/widgets/register_form_fields.dart';
-import 'package:super_fitness_app/features/auth/presentation/widgets/register_header.dart';
-import 'package:super_fitness_app/features/auth/presentation/widgets/register_submit_button.dart';
-import 'package:super_fitness_app/features/auth/presentation/widgets/social_login_buttons.dart';
+import 'package:super_fitness_app/modules/auth/presentation/cubit/register_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/widgets/auth_or_divider.dart';
+import 'package:super_fitness_app/modules/auth/presentation/widgets/login_redirect_row.dart';
+import 'package:super_fitness_app/modules/auth/presentation/widgets/register_form_fields.dart';
+import 'package:super_fitness_app/modules/auth/presentation/widgets/register_header.dart';
+import 'package:super_fitness_app/modules/auth/presentation/widgets/register_submit_button.dart';
+import 'package:super_fitness_app/modules/auth/presentation/widgets/social_login_buttons.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
