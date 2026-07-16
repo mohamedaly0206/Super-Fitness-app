@@ -9,14 +9,8 @@ class GeocodingHelper {
     try {
       final response = await _dio.get(
         'https://nominatim.openstreetmap.org/search',
-        queryParameters: {
-          'q': address,
-          'format': 'json',
-          'limit': 1,
-        },
-        options: Options(
-          headers: {'User-Agent': 'TrackingApp/1.0'},
-        ),
+        queryParameters: {'q': address, 'format': 'json', 'limit': 1},
+        options: Options(headers: {'User-Agent': 'TrackingApp/1.0'}),
       );
       final data = response.data;
       if (data is List && data.isNotEmpty) {

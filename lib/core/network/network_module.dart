@@ -6,7 +6,4 @@ import 'package:injectable/injectable.dart';
 abstract class NetworkModule {
   @singleton
   Dio get dio => DioHelper.dio;
-
-
-
 }
