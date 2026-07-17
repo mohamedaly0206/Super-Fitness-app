@@ -29,7 +29,7 @@ class StepProgressIndicator extends StatelessWidget {
           CircularProgressIndicator(
             value: exactProgress,
             strokeWidth: 4,
-            backgroundColor: theme.colorScheme.onPrimaryContainer,
+            backgroundColor: theme.colorScheme.primaryContainer,
             valueColor: AlwaysStoppedAnimation<Color>(activeColor),
           ),
           Center(

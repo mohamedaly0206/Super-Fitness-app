@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/localization_constants/auth_constants.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/view_model/cubit/register_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/view_model/intent/register_intent.dart';
