@@ -1,18 +1,22 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:super_fitness_app/app.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/core/network/dio_helper.dart';
 import 'package:super_fitness_app/core/resources/app_value.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   DioHelper.init();
   configureDependencies();
+
   await EasyLocalization.ensureInitialized();
+
+  FlutterNativeSplash.remove();
 
   runApp(
     EasyLocalization(
