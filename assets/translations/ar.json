@@ -10,5 +10,34 @@
     "login_successfully": "تم تسجيل الدخول بنجاح",
     "login_error": "فشل تسجيل الدخول",
     "signup_successfully": "تم التسجيل بنجاح"
+  },
+  "forgetPassword": {
+    "enterYourEmail": "أدخل بريدك الإلكتروني",
+    "forgetPassword": "نسيت كلمة المرور",
+    "emailHint": "البريد الإلكتروني",
+    "sendOtp": "إرسال الكود",
+
+    "otpTitle": "رمز التحقق",
+    "otpSubtitle": "أدخل رمز التحقق المرسل إلى بريدك الإلكتروني",
+    "confirm": "تأكيد",
+    "didntReceiveCode": "لم تستلم رمز التحقق؟",
+    "resendCode": "إعادة إرسال الرمز",
+    "resendIn": "إعادة الإرسال خلال ",
+    "invalidCode": "رمز التحقق غير صحيح",
+    "createNewPassword": "إنشاء كلمة مرور جديدة",
+    "passwordSubtitle": "تأكد أن كلمة المرور لا تقل عن 8 أحرف",
+    "passwordHint": "كلمة المرور",
+    "confirmPasswordHint": "تأكيد كلمة المرور",
+    "done": "تم",
+
+    "validation": {
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "invalidEmail": "يرجى إدخال بريد إلكتروني صحيح",
+      "passwordRequired": "كلمة المرور مطلوبة",
+      "passwordLength": "يجب ألا تقل كلمة المرور عن 8 أحرف",
+      "confirmPasswordRequired": "يرجى تأكيد كلمة المرور",
+      "passwordNotMatch": "كلمتا المرور غير متطابقتين",
+      "otpRequired": "يرجى إدخال رمز التحقق"
+    }
   }
 }
