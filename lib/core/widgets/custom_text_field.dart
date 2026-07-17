@@ -46,21 +46,36 @@ class _CustomTextFieldState extends State<CustomTextField> {
       onChanged: widget.onChanged,
       textInputAction: widget.textInputAction,
       decoration: InputDecoration(
+        isDense: true,
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 14,
+          horizontal: 16,
+        ),
         labelText: widget.labelText,
         hintText: widget.hintText,
         suffixIcon: widget.isPassword
-            ? IconButton(
-                icon: Icon(
+            ? GestureDetector(
+                child: Icon(
                   obscureText ? Icons.visibility_off : Icons.visibility,
+                  size: 24,
                 ),
-                onPressed: () {
+                onTap: () {
                   setState(() {
                     obscureText = !obscureText;
                   });
                 },
               )
             : null,
-        prefixIcon: widget.prefixIcon,
+        prefixIcon: widget.prefixIcon == null
+            ? null
+            : Padding(
+                padding: const EdgeInsetsDirectional.only(start: 12, end: 8),
+                child: widget.prefixIcon,
+              ),
+        prefixIconConstraints: const BoxConstraints(
+          minWidth: 40,
+          minHeight: 40,
+        ),
       ),
     );
   }
