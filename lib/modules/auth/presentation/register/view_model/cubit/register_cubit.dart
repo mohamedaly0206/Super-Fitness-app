@@ -23,6 +23,16 @@ class RegisterCubit extends Cubit<RegisterState> {
       case SelectGenderIntent():
         _changeGender(intent.gender);
         break;
+      case SelectAgeIntent():
+        _changeAge(intent.age);
+      case SelectWeightIntent():
+        _changeWeight(intent.weight);
+      case SelectHeightIntent():
+        _changeHeight(intent.height);
+      case SelectGoalIntent():
+        _changeGoal(intent.goal);
+      case SelectActivityLevelIntent():
+        _changeActivityLevel(intent.activityLevel);
     }
   }
 
@@ -32,6 +42,22 @@ class RegisterCubit extends Cubit<RegisterState> {
     switch (response) {
       case SuccessBaseResponse<RegisterResponseEntity>():
         emit(state.copyWith(registerState: BaseState(data: response.data)));
+        emit(
+          state.copyWith(
+            firstName: null,
+            lastName: null,
+            email: null,
+            password: null,
+            rePassword: null,
+            gender: null,
+            age: null,
+            weight: null,
+            height: null,
+            goal: null,
+            activityLevel: null,
+          ),
+        );
+
         break;
       case ErrorBaseResponse<RegisterResponseEntity>():
         emit(
@@ -46,5 +72,30 @@ class RegisterCubit extends Cubit<RegisterState> {
   void _changeGender(Gender gender) {
     emit(state.copyWith(gender: gender));
     log(state.gender.toString());
+  }
+
+  void _changeAge(num age) {
+    emit(state.copyWith(age: age));
+    log(state.age.toString());
+  }
+
+  void _changeWeight(num weight) {
+    emit(state.copyWith(weight: weight));
+    log(state.weight.toString());
+  }
+
+  void _changeHeight(num height) {
+    emit(state.copyWith(height: height));
+    log(state.height.toString());
+  }
+
+  void _changeGoal(String goal) {
+    emit(state.copyWith(goal: goal));
+    log(state.goal.toString());
+  }
+
+  void _changeActivityLevel(String activityLevel) {
+    emit(state.copyWith(activityLevel: activityLevel));
+    log(state.activityLevel.toString());
   }
 }

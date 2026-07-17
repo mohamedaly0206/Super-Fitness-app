@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 class AuthConstants {
   AuthConstants._();
-
+  static String get startYourJourney => "Start Your Journey".tr();
   static String get login => "auth.login".tr();
   static String get email => "auth.email".tr();
   static String get password => "auth.password".tr();
@@ -42,4 +42,16 @@ class AuthConstants {
   static String get next => "auth.next".tr();
   static String get male => "auth.male".tr();
   static String get female => "auth.female".tr();
+  static String get whatIsYourWeight => "what is your weight ?".tr();
+  static String get kg => "kg".tr();
+  static String get whatIsYourHight => "what is your hight ?".tr();
+  static String get cm => "Cm".tr();
+  static String get thisHelpsUsCreateYourPersonalizedPlan =>
+      "This Helps Us Create Your Personalized Plan".tr();
+  static String get howOldAreYou => "HOW OLD ARE YOU ?".tr();
+  static String get year => 'Year'.tr();
+  static String get whatIsYourGoal => "WHAT IS YOUR GOAL ?".tr();
+  static String get yourRegularPhysicalActivityLevel =>
+      "YOUR REGULAR PHYSICAL\nACTIVITY LEVEL ?".tr();
+  static String get registerSuccessMessage => "Register Success".tr();
 }

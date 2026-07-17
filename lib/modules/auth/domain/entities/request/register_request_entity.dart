@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
 
 class RegisterRequestEntity extends Equatable {
   final String firstName;
@@ -6,7 +7,7 @@ class RegisterRequestEntity extends Equatable {
   final String email;
   final String password;
   final String rePassword;
-  final String? gender;
+  final Gender? gender;
   final num? height;
   final num? weight;
   final num? age;
@@ -19,12 +20,12 @@ class RegisterRequestEntity extends Equatable {
     required this.email,
     required this.password,
     required this.rePassword,
-    this.gender,
-    this.height,
-    this.weight,
-    this.age,
-    this.goal,
-    this.activityLevel,
+    required this.gender,
+    required this.height,
+    required this.weight,
+    required this.age,
+    required this.goal,
+    required this.activityLevel,
   });
 
   @override

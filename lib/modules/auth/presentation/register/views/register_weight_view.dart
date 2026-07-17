@@ -7,25 +7,24 @@ import 'package:super_fitness_app/modules/auth/presentation/register/view_model/
 import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/widgets/register_number_picker.dart';
 
-class RegisterAgeView extends StatelessWidget {
+class RegisterWeightView extends StatelessWidget {
+  const RegisterWeightView({super.key, required this.pageController});
   final PageController pageController;
-  const RegisterAgeView({super.key, required this.pageController});
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterCubit, RegisterState>(
       builder: (context, state) {
         return RegisterNumberPickerView(
           pageController: pageController,
-          title: AuthConstants.howOldAreYou,
-          currentValue: state.age ?? 15,
-          startRange: 10,
-          endRange: 100,
-          isNextEnabled: state.age! >= 15,
+          title: AuthConstants.whatIsYourWeight,
+          unit: AuthConstants.kg,
+          currentValue: state.weight ?? 60,
+          startRange: 40,
+          endRange: 200,
+          isNextEnabled: state.weight! >= 40,
           onChanged: (val) => context
               .read<RegisterCubit>()
-              .handleRegisterIntent(SelectAgeIntent(val)),
-          unit: AuthConstants.year,
+              .handleRegisterIntent(SelectWeightIntent(val)),
         );
       },
     );

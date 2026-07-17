@@ -23,9 +23,9 @@ class RegisterState extends Equatable {
     this.password,
     this.rePassword,
     this.gender,
-    this.age,
-    this.weight,
-    this.height,
+    this.age = 20,
+    this.weight = 60,
+    this.height = 160,
     this.goal,
     this.activityLevel,
   });

@@ -13,3 +13,28 @@ class SelectGenderIntent extends RegisterIntent {
 
   SelectGenderIntent(this.gender);
 }
+
+class SelectAgeIntent extends RegisterIntent {
+  final num age;
+  SelectAgeIntent(this.age);
+}
+
+class SelectWeightIntent extends RegisterIntent {
+  final num weight;
+  SelectWeightIntent(this.weight);
+}
+
+class SelectHeightIntent extends RegisterIntent {
+  final num height;
+  SelectHeightIntent(this.height);
+}
+
+class SelectGoalIntent extends RegisterIntent {
+  final String goal;
+  SelectGoalIntent(this.goal);
+}
+
+class SelectActivityLevelIntent extends RegisterIntent {
+  final String activityLevel;
+  SelectActivityLevelIntent(this.activityLevel);
+}

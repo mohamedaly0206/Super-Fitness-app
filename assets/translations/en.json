@@ -43,7 +43,19 @@
     "we_need_to_know_your_gender": "We need to know your gender",
     "next": "Next",
     "male": "Male",
-    "female": "Female"
+    "female": "Female",
+    "whatIsYourWeight": "WHAT IS YOUR WEIGHT ?",
+    "kg": "Kg",
+    "whatIsYourHight": "WHAT IS YOUR HEIGHT ?",
+    "cm": "Cm",
+    "thisHelpsUsCreateYourPersonalizedPlan": "This helps us create your personalized plan",
+    "howOldAreYou ": "HOW OLD ARE YOU ?",
+    "year": "Year",
+    "whatIsYourGoal": "WHAT IS YOUR GOAL ?",
+    "yourRegularPhysicalActivityLevel":"YOUR REGULAR PHYSICAL\nACTIVITY LEVEL ?",
+    "startYourJourney": "Start your journey",
+    "registerSuccessMessage": "Registration successful"
+
   },
   "validation": {
     "email_required": "Email is required",

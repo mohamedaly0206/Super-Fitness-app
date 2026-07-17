@@ -41,10 +41,20 @@
     "already_have_an_account": "هل لديك حساب بالفعل؟",
     "tell_us_about_yourself": "أخبرنا عن نفسك!",
     "we_need_to_know_your_gender": "نحتاج إلى معرفة جنسك",
-     "next": "التالي",
+    "next": "التالي",
     "male": "ذكر",
-    "female": "انثى"
-   
+    "female": "انثى",
+    "whatIsYourWeight": "ما هو وزنك؟",
+    "kg": "كج",
+    "whatIsYourHight": "ما هو طولك؟",
+    "cm": "سم",
+    "thisHelpsUsCreateYourPersonalizedPlan": "هذا يساعدنا في انشاء خطة شخصية لك",
+    "howOldAreYou ": "كم عمرك؟",
+    "year": "العام",
+    "whatIsYourGoal": "ما هو هدفك؟",
+    "yourRegularPhysicalActivityLevel": "مستوى نشاطك البدني المعتاد؟",
+    "startYourJourney": "ابدء رحلتك",
+    "registerSuccessMessage": "تم التسجيل بنجاح"
   },
   "validation": {
     "email_required": "البريد الإلكتروني مطلوب",

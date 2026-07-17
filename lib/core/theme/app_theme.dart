@@ -108,6 +108,8 @@ class AppTheme {
       onError: AppColors.textWhite,
       surface: AppColors.grey1,
       onSurface: AppColors.textPrimary,
+      primaryContainer: AppColors.transparent,
+      onPrimaryContainer: AppColors.textHint,
     ),
 
     dividerColor: AppColors.divider,
@@ -173,11 +175,17 @@ class AppTheme {
         foregroundColor: AppColors.textWhite,
         disabledBackgroundColor: AppColors.grey700,
         disabledForegroundColor: AppColors.textWhite,
-        minimumSize: const Size(double.infinity, AppSize.s50),
+        minimumSize: const Size(double.infinity, AppSize.s38),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.borderRadiusButton),
         ),
+        padding: const EdgeInsets.all(0),
         elevation: 0,
+        textStyle: GoogleFonts.balooThambi2(
+          fontSize: FontSizeManager.s14,
+          fontWeight: FontWeight.w800,
+          color: AppColors.textWhite,
+        ),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(

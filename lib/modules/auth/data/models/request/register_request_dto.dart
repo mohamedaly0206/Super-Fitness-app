@@ -54,7 +54,7 @@ class RegisterRequestDto {
       email: entity.email,
       password: entity.password,
       rePassword: entity.rePassword,
-      gender: entity.gender,
+      gender: entity.gender?.name,
       height: entity.height,
       weight: entity.weight,
       age: entity.age,

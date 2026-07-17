@@ -20,85 +20,89 @@ class RegisterGenderView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cubit = context.read<RegisterCubit>();
-    return Padding(
-      padding: const EdgeInsets.only(top: AppPadding.p100),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            AuthConstants.tellUsAboutYourself,
-            style: getExtraBoldStyle(
-              context: context,
-              color: theme.colorScheme.onPrimary,
-              fontSize: FontSizeManager.s20,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+          child: Column(
+            children: [
+              Text(
+                AuthConstants.tellUsAboutYourself,
+                style: getExtraBoldStyle(
+                  context: context,
+                  color: theme.colorScheme.onPrimary,
+                  fontSize: FontSizeManager.s20,
+                ),
+              ),
+              Text(
+                AuthConstants.weNeedToKnowYourGender,
+                style: getMediumStyle(
+                  context: context,
+                  color: theme.colorScheme.onPrimary,
+                  fontSize: FontSizeManager.s18,
+                ),
+              ),
+            ],
           ),
-          Text(
-            AuthConstants.weNeedToKnowYourGender,
-            style: getMediumStyle(
-              context: context,
-              color: theme.colorScheme.onPrimary,
-              fontSize: FontSizeManager.s18,
-            ),
-          ),
-          const SizedBox(height: AppSize.s16),
-          BlocBuilder<RegisterCubit, RegisterState>(
-            builder: (context, state) {
-              return CustomContainer(
-                child: Column(
-                  children: [
-                    GenderCard(
-                      title: AuthConstants.male,
-                      icon: AppSvg.male,
-                      selected: state.gender == Gender.male,
-                      onTap: () {
-                        cubit.handleRegisterIntent(
-                          SelectGenderIntent(Gender.male),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 20),
+        ),
+        const SizedBox(height: AppSize.s16),
+        BlocBuilder<RegisterCubit, RegisterState>(
+          builder: (context, state) {
+            return CustomContainer(
+              child: Column(
+                children: [
+                  GenderCard(
+                    title: AuthConstants.male,
+                    icon: AppSvg.male,
+                    selected: state.gender == Gender.male,
+                    onTap: () {
+                      cubit.handleRegisterIntent(
+                        SelectGenderIntent(Gender.male),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
 
-                    GenderCard(
-                      title: AuthConstants.female,
-                      icon: AppSvg.female,
-                      selected: state.gender == Gender.female,
-                      onTap: () {
-                        cubit.handleRegisterIntent(
-                          SelectGenderIntent(Gender.female),
-                        );
-                      },
-                    ),
-                    SizedBox(height: AppSize.s24),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: state.gender == null
-                                ? null
-                                : () => pageController.nextPage(
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut,
-                                  ),
-                            child: Text(
-                              AuthConstants.next,
-                              style: getExtraBoldStyle(
-                                context: context,
-                                color: theme.colorScheme.onPrimary,
-                                fontSize: FontSizeManager.s14,
-                              ),
+                  GenderCard(
+                    title: AuthConstants.female,
+                    icon: AppSvg.female,
+                    selected: state.gender == Gender.female,
+                    onTap: () {
+                      cubit.handleRegisterIntent(
+                        SelectGenderIntent(Gender.female),
+                      );
+                    },
+                  ),
+                  SizedBox(height: AppSize.s24),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: state.gender == null
+                              ? null
+                              : () => pageController.nextPage(
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                ),
+                          child: Text(
+                            AuthConstants.next,
+                            style: getExtraBoldStyle(
+                              context: context,
+                              color: theme.colorScheme.onPrimary,
+                              fontSize: FontSizeManager.s14,
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }

@@ -45,7 +45,7 @@ class AppColors {
   static const Color textPrimary = grey12;
   static const Color textSecondary = grey10;
   static const Color textWhite = grey12;
-  static const Color textHint = grey7;
+  static const Color textHint = Color(0xFFD3D3D3);
   static const Color error = Color(0xFFFF3B30);
   static const Color success = Color(0xFF4CAF50);
   static const Color divider = grey3;
