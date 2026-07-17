@@ -106,6 +106,10 @@ dev_dependencies:
   # Testing
   test: ^1.30.0
   mockito: ^5.4.6
+  mocktail: ^1.0.5
+  bloc_test: ^10.0.0
+
+
 
   # Code Generation
   build_runner: ^2.4.13
