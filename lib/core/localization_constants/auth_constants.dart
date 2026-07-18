@@ -4,6 +4,9 @@ class AuthConstants {
   AuthConstants._();
 
   static String get login => "auth.login".tr();
+  static String get register => "auth.register".tr();
+  static String get heyThere => "auth.hey_there".tr();
+  static String get welcomeBack => "auth.welcome_back".tr();
   static String get email => "auth.email".tr();
   static String get password => "auth.password".tr();
   static String get enterYourEmail => "auth.enter_your_email".tr();
