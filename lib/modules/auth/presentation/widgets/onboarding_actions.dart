@@ -7,7 +7,7 @@ import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/primary_button.dart';
 import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_intent.dart';
-import 'package:super_fitness_app/modules/auth/presentation/onboarding/widgets/onboarding_indicator.dart';
+import 'package:super_fitness_app/modules/auth/presentation/widgets/onboarding_indicator.dart';
 
 class OnboardingActions extends StatelessWidget {
   final int currentIndex;

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_fitness_app/config/routes/routes.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
@@ -10,11 +11,11 @@ import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_intent.dart';
 import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_state.dart';
-import 'package:super_fitness_app/modules/auth/presentation/onboarding/widgets/onboarding_actions.dart';
-import 'package:super_fitness_app/modules/auth/presentation/onboarding/widgets/skip_button.dart';
+import 'package:super_fitness_app/modules/auth/presentation/widgets/onboarding_actions.dart';
+import 'package:super_fitness_app/modules/auth/presentation/widgets/skip_button.dart';
 
-class OnboardingScreen extends StatelessWidget {
-  const OnboardingScreen({super.key});
+class OnboardingPage extends StatelessWidget {
+  const OnboardingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class _OnboardingView extends StatelessWidget {
       listener: (context, state) {
         if (state.navigateToLogin) {
           //Todo: Navigate to Login screen
-          //Navigator.pushReplacementNamed(context, Routes.login);
+          Navigator.pushReplacementNamed(context, Routes.login);
         }
       },
       builder: (context, state) {

@@ -7,9 +7,9 @@ import 'package:super_fitness_app/config/base/base_state.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/forget_password_entity.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/reset_password_entity.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/verify_reset_code_entity.dart';
-import 'package:super_fitness_app/modules/auth/domain/use_cases/forget_password_usecase.dart';
-import 'package:super_fitness_app/modules/auth/domain/use_cases/reset_password_usecase.dart';
-import 'package:super_fitness_app/modules/auth/domain/use_cases/verify_reset_code_usecase.dart';
+import 'package:super_fitness_app/modules/auth/domain/usecases/forget_password_usecase.dart';
+import 'package:super_fitness_app/modules/auth/domain/usecases/reset_password_usecase.dart';
+import 'package:super_fitness_app/modules/auth/domain/usecases/verify_reset_code_usecase.dart';
 import 'forget_password_event.dart';
 import 'forget_password_step.dart';
 

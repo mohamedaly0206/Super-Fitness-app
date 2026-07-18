@@ -50,10 +50,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
       textInputAction: widget.textInputAction,
       decoration: InputDecoration(
         isDense: true,
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 14,
-          horizontal: 16,
-        ),
         labelText: widget.labelText,
         hintText: widget.hintText,
         constraints: const BoxConstraints(minHeight: AppSize.s36),

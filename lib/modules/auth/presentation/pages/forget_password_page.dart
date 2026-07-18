@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/resources/app_png.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
-import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_event.dart';
-import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_step.dart';
-import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/forget_password_actions.dart';
-import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/forget_password_step_switcher.dart';
+import 'package:super_fitness_app/modules/auth/presentation/cubit/forget_password_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/cubit/forget_password_event.dart';
+import 'package:super_fitness_app/modules/auth/presentation/cubit/forget_password_step.dart';
+import 'package:super_fitness_app/modules/auth/presentation/widgets/forget_password_actions.dart';
+import 'package:super_fitness_app/modules/auth/presentation/widgets/forget_password_step_switcher.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
   const ForgetPasswordPage({super.key});

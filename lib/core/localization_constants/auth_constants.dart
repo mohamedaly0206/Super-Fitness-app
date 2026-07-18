@@ -25,7 +25,8 @@ class AuthConstants {
   static String get didntReceiveCode => "auth.didnt_receive_code".tr();
   static String get resend => "auth.resend".tr();
   static String get codeSentAgain => "auth.code_sent_again".tr();
-  static String get resetPasswordCondition => "auth.reset_password_condition".tr();
+  static String get resetPasswordCondition =>
+      "auth.reset_password_condition".tr();
 
   // Register
   static String get heyThere => "auth.hey_there".tr();
@@ -36,10 +37,8 @@ class AuthConstants {
   static String get or => "auth.or".tr();
   static String get alreadyHaveAnAccount => "auth.already_have_an_account".tr();
 
-  // Temporary placeholder screens (Register flow continuation) remove it 
+  // Temporary placeholder screens (Register flow continuation) remove it
   static String get registerContinuationPlaceholder =>
       "auth.register_continuation_placeholder".tr();
   static String get loginPlaceholder => "auth.login_placeholder".tr();
-  static String get resetPasswordCondition =>
-      "auth.reset_password_condition".tr();
 }

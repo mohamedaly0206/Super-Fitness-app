@@ -5,20 +5,13 @@ import 'package:super_fitness_app/config/routes/page_transitions.dart';
 import 'package:super_fitness_app/config/routes/routes.dart';
 import 'package:super_fitness_app/core/widgets/not_found_screen.dart';
 import 'package:super_fitness_app/core/widgets/ui_showcase_page.dart';
+import 'package:super_fitness_app/modules/auth/presentation/cubit/forget_password_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/cubit/register_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/pages/forget_password_page.dart';
 import 'package:super_fitness_app/modules/auth/presentation/pages/login_placeholder_page.dart';
+import 'package:super_fitness_app/modules/auth/presentation/pages/onboarding_page.dart';
 import 'package:super_fitness_app/modules/auth/presentation/pages/register_continuation_placeholder_page.dart';
 import 'package:super_fitness_app/modules/auth/presentation/pages/register_page.dart';
-
-abstract class Routes {
-  static const String splash = '/';
-  static const String uiShowcase = '/ui-showcase';
-  static const String register = '/register';
-  // TEMPORARY — remove once the real Register-continuation/Login features
-  // replace them.
-  static const String registerContinuation = '/register-continuation';
-  static const String loginPlaceholder = '/login-placeholder';
-}
 
 abstract class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -34,9 +27,7 @@ abstract class AppRouter {
             ),
           );
         case Routes.onboarding:
-          return PageTransitions.fade(OnboardingScreen());
-        case Routes.uiShowcase:
-          return PageTransitions.fade(const UIShowcasePage());
+          return PageTransitions.fade(OnboardingPage());
         case Routes.register:
           return PageTransitions.fade(
             BlocProvider.value(
