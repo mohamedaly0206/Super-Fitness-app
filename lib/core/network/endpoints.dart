@@ -21,6 +21,7 @@ abstract class AuthEndPoint {
   static const String forgetPassword = '${Endpoints.auth}/forget-password';
   static const String verifyCode = '${Endpoints.auth}/verify-code';
   static const String resetPassword = '${Endpoints.auth}/reset-password';
+  static const String changePassword = "${Endpoints.auth}/change-password";
 }
 
 abstract class ProfileEndPoint {

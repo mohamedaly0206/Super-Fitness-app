@@ -11,6 +11,32 @@
     "login_error": "Login failed",
     "signup_successfully": "Signup successful"
   },
+  "forgetPassword": {
+    "enterYourEmail": "Enter Your Email",
+    "forgetPassword": "Forget Password",
+    "emailHint": "Email",
+    "sendOtp": "Send OTP",
+    "otpTitle": "OTP CODE",
+    "otpSubtitle": "Enter Your OTP Check Your Email",
+    "confirm": "Confirm",
+    "didntReceiveCode": "Didn't Receive Verification Code?",
+    "resendCode": "Resend Code?",
+    "resendIn": "Resend in ",
+    "invalidCode": "Invalid verification code",
+    "createNewPassword": "Create New Password",
+    "passwordSubtitle": "Make Sure Its 8 Characters Or More",
+    "passwordHint": "Password",
+    "confirmPasswordHint": "Confirm Password",
+    "done": "Done",
+    "validation": {
+      "emailRequired": "Email is required",
+      "invalidEmail": "Please enter a valid email",
+      "passwordRequired": "Password is required",
+      "passwordLength": "Password must be at least 8 characters",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordNotMatch": "Passwords do not match",
+      "otpRequired": "Please enter the verification code"
+    }
   "auth": {
     "login": "Login",
     "email": "Email",

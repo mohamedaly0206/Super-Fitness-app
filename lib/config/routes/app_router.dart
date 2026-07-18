@@ -27,6 +27,17 @@ abstract class AppRouter {
       switch (settings.name) {
         case Routes.uiShowcase:
           return PageTransitions.fade(const UIShowcasePage());
+        case Routes.forgetPassword:
+          return PageTransitions.fade(
+            BlocProvider(
+              create: (_) => getIt<ForgetPasswordCubit>(),
+              child: const ForgetPasswordPage(),
+            ),
+          );
+        case Routes.onboarding:
+          return PageTransitions.fade(OnboardingScreen());
+        case Routes.uiShowcase:
+          return PageTransitions.fade(const UIShowcasePage());
         case Routes.register:
           return PageTransitions.fade(MainRegisterView());
           return PageTransitions.fade(
