@@ -55,6 +55,8 @@
     "yourRegularPhysicalActivityLevel": "مستوى نشاطك البدني المعتاد؟",
     "startYourJourney": "ابدء رحلتك",
     "registerSuccessMessage": "تم التسجيل بنجاح"
+    "register_continuation_placeholder": "شاشات التسجيل التالية سيتم تنفيذها هنا.",
+    "login_placeholder": "شاشة تسجيل الدخول سيتم تنفيذها هنا."
   },
   "validation": {
     "email_required": "البريد الإلكتروني مطلوب",
@@ -65,7 +67,14 @@
     "name_required": "الاسم مطلوب",
     "short_name": "يجب ألا يقل الاسم عن 3 أحرف",
     "invalid_name": "الاسم يحتوي على أحرف غير صالحة",
+    "phone_required": "رقم الهاتف مطلوب",
     "phone_format_hint": "أدخل رقم هاتف صحيح، مثال: +201234567890",
+    "vehicle_number_required": "رقم المركبة مطلوب",
+    "id_number_required": "الرقم القومي مطلوب",
+    "national_id_length": "يجب أن يتكون الرقم القومي من 14 رقمًا",
+    "national_id_start": "يجب أن يبدأ الرقم القومي بـ 2 أو 3",
+    "national_id_numeric": "يجب أن يحتوي الرقم القومي على أرقام فقط",
+    "vehicle_number_invalid": "أدخل رقم مركبة صحيح",
     "complete_required_fields": "يرجى استكمال جميع الحقول المطلوبة",
     "confirm_password_required": "يرجى تأكيد كلمة المرور",
     "password_not_match": "كلمتا المرور غير متطابقتين",

@@ -15,4 +15,7 @@ abstract class AppSvg {
   static const String female = 'assets/svgs/female_icon.svg';
   static const String male = 'assets/svgs/male_icon.svg';
   static const String backIcon = 'assets/svgs/back_icon.svg';
+  static const String google = 'assets/svgs/Google.png';
+  static const String facebook = 'assets/svgs/facebook.png';
+  static const String apple = 'assets/svgs/apple.png';
 }

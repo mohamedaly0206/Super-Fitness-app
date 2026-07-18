@@ -1,3 +1,4 @@
+
 class AppConfig {
   static const baseUrl = "https://fitness.elevateegy.com/api/v1";
 }
@@ -13,7 +14,7 @@ abstract class Endpoints {
 }
 
 abstract class AuthEndPoint {
-  static const String register = '${Endpoints.auth}/signup';
+  static const String signup = '${Endpoints.auth}/signup';
   static const String login = '${Endpoints.auth}/login';
   static const String logout = '${Endpoints.auth}/logout';
   static const String refresh = '${Endpoints.auth}/refresh';

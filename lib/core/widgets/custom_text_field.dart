@@ -35,7 +35,7 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  bool obscureText = true;
+  bool obscureText = false;
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +111,76 @@ class _CustomTextFieldState extends State<CustomTextField> {
             minWidth: AppSize.s24 + AppPadding.p8,
             minHeight: AppSize.s24,
           ),
+        ),
+    return TextFormField(
+      controller: widget.controller,
+      validator: widget.validator,
+      obscureText: widget.isPassword ? obscureText : false,
+      focusNode: widget.focusNode,
+      keyboardType: widget.keyboardType,
+      readOnly: widget.readOnly,
+      onChanged: widget.onChanged,
+      textInputAction: widget.textInputAction,
+      decoration: InputDecoration(
+        isDense: true,
+        labelText: widget.labelText,
+        hintText: widget.hintText,
+        constraints: const BoxConstraints(minHeight: AppSize.s36),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppPadding.p16,
+          vertical: AppPadding.p8,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+          borderSide: const BorderSide(
+            color: AppColors.borderDefault,
+            width: AppSize.borderWidth,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+          borderSide: const BorderSide(
+            color: AppColors.borderDefault,
+            width: AppSize.borderWidth,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+          borderSide: const BorderSide(
+            color: AppColors.borderFocused,
+            width: AppSize.borderWidth,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+          borderSide: const BorderSide(
+            color: AppColors.borderError,
+            width: AppSize.borderWidth,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+          borderSide: const BorderSide(
+            color: AppColors.borderError,
+            width: AppSize.borderWidth,
+          ),
+        ),
+        suffixIcon: widget.isPassword
+            ? IconButton(
+                icon: Icon(
+                  obscureText ? Icons.visibility_off : Icons.visibility,
+                ),
+                onPressed: () {
+                  setState(() {
+                    obscureText = !obscureText;
+                  });
+                },
+              )
+            : null,
+        prefixIcon: widget.prefixIcon,
+        prefixIconConstraints: const BoxConstraints(
+          minWidth: AppSize.s24 + AppPadding.p8,
+          minHeight: AppSize.s24,
         ),
       ),
     );

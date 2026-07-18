@@ -15,6 +15,8 @@ class RegisterResponseDto {
 
   RegisterResponseDto({this.message, this.user, this.token});
 
+  RegisterResponseDto({this.message, this.user});
+
   factory RegisterResponseDto.fromJson(Map<String, dynamic> json) =>
       _$RegisterResponseDtoFromJson(json);
 
