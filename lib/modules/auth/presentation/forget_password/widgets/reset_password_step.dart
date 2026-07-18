@@ -6,9 +6,9 @@ import 'package:super_fitness_app/core/utils/app_validator.dart';
 import 'package:super_fitness_app/core/widgets/button_loading_widget.dart';
 import 'package:super_fitness_app/core/widgets/custom_text_field.dart';
 import 'package:super_fitness_app/core/widgets/primary_button.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/forget_password_actions.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/forget_password_card.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/forget_password_header.dart';
+import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/forget_password_actions.dart';
+import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/forget_password_card.dart';
+import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/forget_password_header.dart';
 
 class ResetPasswordStep extends StatelessWidget {
   final bool isLoading;

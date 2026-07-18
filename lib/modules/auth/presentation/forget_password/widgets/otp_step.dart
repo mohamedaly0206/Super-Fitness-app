@@ -7,11 +7,11 @@ import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/button_loading_widget.dart';
 import 'package:super_fitness_app/core/widgets/primary_button.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/forget_password_actions.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/forget_password_card.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/forget_password_header.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/otp_input.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/otp_timer.dart';
+import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/forget_password_actions.dart';
+import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/forget_password_card.dart';
+import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/forget_password_header.dart';
+import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/otp_input.dart';
+import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/otp_timer.dart';
 
 class OtpStep extends StatelessWidget {
   final bool isLoading;

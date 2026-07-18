@@ -2,8 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
 import 'package:super_fitness_app/modules/auth/domain/usecases/register_usecase.dart';
-import 'package:super_fitness_app/modules/auth/presentation/cubit/register_state.dart';
-
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_state.dart';
 
 @lazySingleton
 class RegisterCubit extends Cubit<RegisterState> {
@@ -33,7 +32,11 @@ class RegisterCubit extends Cubit<RegisterState> {
   /// to Home. Password/rePassword stay null; the backend register contract
   /// still requires them, so a future developer must decide how a
   /// Google-originated registration supplies a password (out of scope here).
-  void fillFromGoogleAccount({String? firstName, String? lastName, String? email}) {
+  void fillFromGoogleAccount({
+    String? firstName,
+    String? lastName,
+    String? email,
+  }) {
     emit(
       state.copyWith(
         firstName: firstName ?? state.firstName,

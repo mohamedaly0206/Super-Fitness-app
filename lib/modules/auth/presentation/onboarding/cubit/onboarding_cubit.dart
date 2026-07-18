@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_intent.dart';
-import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_state.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/onboarding_item.dart';
+import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_intent.dart';
+import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_state.dart';
+import 'package:super_fitness_app/modules/auth/presentation/onboarding/widgets/onboarding_item.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
   OnboardingCubit() : super(const OnboardingState());
