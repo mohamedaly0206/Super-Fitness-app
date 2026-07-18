@@ -11,66 +11,122 @@ import '../../../../../core/localization_constants/auth_constants.dart';
 import '../../../../../core/resources/app_png.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/app_text_style.dart';
+import '../../../../../core/utils/app_validator.dart';
+import '../widgets/auth_or_divider.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       background: Backgrounds.login,
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: AppPadding.p46,
-          horizontal: AppPadding.p16,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(child: Image.asset(AppPng.logo, height: AppSize.s100, width: AppSize.s100)),
-            Text(
-              AuthConstants.heyThere,
-              style: getRegularStyle(
-                context: context,
-                color: AppColors.textPrimary,
-                fontSize: FontSizeManager.s18,
-              ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppPadding.p32,
+              horizontal: AppPadding.p16,
             ),
-            Text(
-              AuthConstants.welcomeBack,
-              style: getBoldStyle(
-                context: context,
-                color: AppColors.textPrimary,
-                fontSize: FontSizeManager.s20,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Image.asset(
+                    AppPng.logo,
+                    height: AppSize.s100,
+                    width: AppSize.s100,
+                  ),
+                ),
+                Text(
+                  AuthConstants.heyThere,
+                  style: getRegularStyle(
+                    context: context,
+                    color: AppColors.textPrimary,
+                    fontSize: FontSizeManager.s18,
+                  ),
+                ),
+                Text(
+                  AuthConstants.welcomeBack,
+                  style: getBoldStyle(
+                    context: context,
+                    color: AppColors.textPrimary,
+                    fontSize: FontSizeManager.s20,
+                  ),
+                ),
+                const AppSizedBox(height: AppSize.s0),
+              ],
             ),
-            const AppSizedBox(
-              height: AppSize.s20,
-            ),
-            CustomContainer(
-              borderRadius: AppSize.borderRadiusLarge,
-              padding: const EdgeInsets.all(AppPadding.p16),
-              child: Column(
-                children: [
-                  Text(
-                    AuthConstants.login,
-                    style: getBoldStyle(
-                      context: context,
-                      color: AppColors.textPrimary,
-                      fontSize: FontSizeManager.s24,
+          ),
+          CustomContainer(
+            blur: 5,
+            borderRadius: AppSize.borderRadiusLarge,
+            width: double.infinity,
+            padding: const EdgeInsets.all(AppPadding.p20),
+            child: Column(
+              children: [
+                Text(
+                  AuthConstants.login,
+                  style: getBoldStyle(
+                    context: context,
+                    color: AppColors.textPrimary,
+                    fontSize: FontSizeManager.s24,
+                  ),
+                ),
+                const AppSizedBox(height: AppSize.s20),
+                CustomTextField(
+                  prefixIcon: Icon(Icons.email_outlined),
+                  controller: emailController,
+                  hintText: AuthConstants.email,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: AppValidator.email,
+                ),
+                const AppSizedBox(height: AppSize.s12),
+                CustomTextField(
+                  prefixIcon: Icon(Icons.lock_outline),
+                  controller: passwordController,
+                  hintText: AuthConstants.password,
+                  keyboardType: TextInputType.visiblePassword,
+                  validator: AppValidator.password,
+                  isPassword: true,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    child: Text(
+                      AuthConstants.forgetPassword,
+                      style:
+                          getRegularStyle(
+                            context: context,
+                            color: AppColors.primary,
+                            fontSize: FontSizeManager.s14,
+                          ).copyWith(
+                            decoration: TextDecoration.underline,
+                            decorationColor: AppColors.primary,
+                          ),
                     ),
                   ),
-                  const AppSizedBox(height: AppSize.s20),
-                  CustomTextField(),
-                  const AppSizedBox(
-                    height: AppSize.s12,
-                  ),
-                  CustomTextField(),
-                ],
-              ),
-            )
-          ],
-        ),
+                ),
+                AuthOrDivider(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
