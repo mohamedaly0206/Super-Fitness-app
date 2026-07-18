@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:super_fitness_app/config/base/base_state.dart';
+import 'package:super_fitness_app/core/network/model/user_entity.dart';
 
 class RegisterState extends Equatable {
   final BaseState registerState;
@@ -14,6 +15,9 @@ class RegisterState extends Equatable {
   final num? height;
   final String? goal;
   final String? activityLevel;
+  final bool? isLoading;
+  final String? errorMessage;
+  final UserEntity? result;
 
   const RegisterState({
     this.registerState = const BaseState(),
@@ -28,6 +32,9 @@ class RegisterState extends Equatable {
     this.height = 160,
     this.goal,
     this.activityLevel,
+    this.isLoading,
+    this.errorMessage,
+    this.result,
   });
 
   RegisterState copyWith({
@@ -43,6 +50,9 @@ class RegisterState extends Equatable {
     num? height,
     String? goal,
     String? activityLevel,
+    bool? isLoading,
+    String? errorMessage,
+    UserEntity? result,
   }) {
     return RegisterState(
       registerState: registerState ?? this.registerState,
@@ -57,6 +67,9 @@ class RegisterState extends Equatable {
       height: height ?? this.height,
       goal: goal ?? this.goal,
       activityLevel: activityLevel ?? this.activityLevel,
+      isLoading: isLoading ?? this.isLoading,
+      errorMessage: errorMessage ?? this.errorMessage,
+      result: result ?? this.result,
     );
   }
 
@@ -74,6 +87,8 @@ class RegisterState extends Equatable {
     height,
     goal,
     activityLevel,
+    isLoading,
+    errorMessage,
   ];
 }
 

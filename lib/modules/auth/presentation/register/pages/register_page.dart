@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
-import 'package:super_fitness_app/config/routes/app_router.dart';
 import 'package:super_fitness_app/core/localization_constants/auth_constants.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
@@ -13,16 +12,17 @@ import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
-import 'package:super_fitness_app/modules/auth/presentation/cubit/register_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/auth_or_divider.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/login_redirect_row.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/register_form_fields.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/register_header.dart';
-import 'package:super_fitness_app/modules/auth/presentation/widgets/register_submit_button.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/view_model/cubit/register_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/widgets/auth_or_divider.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/widgets/login_redirect_row.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/widgets/register_form_fields.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/widgets/register_header.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/widgets/register_submit_button.dart';
 import 'package:super_fitness_app/modules/auth/presentation/widgets/social_login_buttons.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  const RegisterPage({super.key, required this.pageController});
+  final PageController pageController;
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -36,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  bool _isGoogleLoading = false;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -47,6 +47,15 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
+  void _navigateToNextStep() {
+    if (widget.pageController.hasClients) {
+      widget.pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
   void _onRegisterPressed() {
     if (!_formKey.currentState!.validate()) return;
 
@@ -54,49 +63,44 @@ class _RegisterPageState extends State<RegisterPage> {
     cubit.updateFirstName(_firstNameController.text.trim());
     cubit.updateLastName(_lastNameController.text.trim());
     cubit.updateEmail(_emailController.text.trim());
-    // Keeps rePassword in sync with password internally — there is no
-    // Confirm Password field in this UI.
     cubit.updatePassword(_passwordController.text);
 
-    Navigator.pushNamed(context, Routes.registerContinuation);
+    _navigateToNextStep();
   }
 
   Future<void> _onGooglePressed() async {
-    setState(() => _isGoogleLoading = true);
+    setState(() => _isLoading = true);
     try {
       final result = await getIt<GoogleAuthService>().signIn();
       if (result == null) return; // user cancelled
 
       if (!mounted) return;
       context.read<RegisterCubit>().fillFromGoogleAccount(
-        firstName: result.firstName,
-        lastName: result.lastName,
-        email: result.email,
-      );
+            firstName: result.firstName,
+            lastName: result.lastName,
+            email: result.email,
+          );
 
-      Navigator.pushNamed(context, Routes.registerContinuation);
+      _navigateToNextStep();
     } catch (e) {
       if (!mounted) return;
       CustomSnackBar.error(context, e.toString());
     } finally {
-      if (mounted) setState(() => _isGoogleLoading = false);
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
-  // TODO(auth): Facebook Sign-Up is not implemented yet. When it is, add a
-  // `FacebookAuthService` (mirroring `GoogleAuthService` in
-  // lib/core/service/google_auth_service.dart) using the `flutter_facebook_auth`
-  // package, then wire it here exactly like `_onGooglePressed`.
-  void _onFacebookPressed() {}
+  void _onFacebookPressed() {
+    // TODO(auth): Implement Facebook Sign-Up
+  }
 
-  // TODO(auth): Apple Sign-Up is not implemented yet. When it is, add an
-  // `AppleAuthService` (mirroring `GoogleAuthService`) using the
-  // `sign_in_with_apple` package, then wire it here exactly like
-  // `_onGooglePressed`.
-  void _onApplePressed() {}
+  void _onApplePressed() {
+    // TODO(auth): Implement Apple Sign-Up
+  }
 
-  void _onLoginPressed() =>
-      Navigator.pushNamed(context, Routes.loginPlaceholder);
+  void _onLoginPressed() {
+    // Navigate back to login screen if needed
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,10 +116,6 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 const RegisterHeader(),
                 const AppSizedBox(height: AppSize.s20),
-                // Everything below (fields, Or divider, social buttons,
-                // Register button, and the Login row) lives inside this one
-                // container, matching the Figma exactly — nothing but the
-                // header above sits outside it.
                 CustomContainer(
                   borderRadius: AppSize.borderRadiusLarge,
                   padding: const EdgeInsets.all(AppPadding.p20),
@@ -143,11 +143,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         onFacebookTap: _onFacebookPressed,
                         onGoogleTap: _onGooglePressed,
                         onAppleTap: _onApplePressed,
-                        isGoogleLoading: _isGoogleLoading,
+                        isGoogleLoading: _isLoading,
                       ),
                       const AppSizedBox(height: AppSize.s20),
                       RegisterSubmitButton(
-                        isLoading: _isGoogleLoading,
+                        isLoading: _isLoading,
                         onTap: _onRegisterPressed,
                       ),
                       const AppSizedBox(height: AppSize.s20),

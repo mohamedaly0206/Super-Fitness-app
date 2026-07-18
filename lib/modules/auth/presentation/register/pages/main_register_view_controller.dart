@@ -6,18 +6,18 @@ import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/resources/app_png.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/view_model/cubit/register_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/views/register_activity_level_view.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/views/register_age_view.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/views/register_gender_view.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/views/register_goals_view.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/views/register_height_view.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/views/register_weight_view.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/views/test_view.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/pages/register_activity_level_view.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/pages/register_age_view.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/pages/register_gender_view.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/pages/register_goals_view.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/pages/register_height_view.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/pages/register_page.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/pages/register_weight_view.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/widgets/circular_progress_indicator.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/widgets/custom_register_back_button.dart';
 
-class MainRegisterView extends StatelessWidget {
-  MainRegisterView({super.key});
+class MainRegisterViewController extends StatelessWidget {
+  MainRegisterViewController({super.key});
 
   final PageController pageController = PageController();
   final int totalSteps = 6;
@@ -96,7 +96,7 @@ class MainRegisterView extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     controller: pageController,
                     children: [
-                      TestView(pageController: pageController),
+                      RegisterPage(pageController: pageController),
                       RegisterGenderView(pageController: pageController),
                       RegisterAgeView(pageController: pageController),
                       RegisterWeightView(pageController: pageController),

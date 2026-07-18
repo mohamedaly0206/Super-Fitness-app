@@ -98,4 +98,31 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(state.copyWith(activityLevel: activityLevel));
     log(state.activityLevel.toString());
   }
+   void updateFirstName(String value) =>
+      emit(state.copyWith(firstName: value, errorMessage: null));
+
+  void updateLastName(String value) =>
+      emit(state.copyWith(lastName: value, errorMessage: null));
+
+  void updateEmail(String value) =>
+      emit(state.copyWith(email: value, errorMessage: null));
+       void updatePassword(String value) => emit(
+    state.copyWith(password: value, rePassword: value, errorMessage: null),
+  );
+
+  /// Fills firstName/lastName/email from a successful Google sign-in,
+  /// exactly like filling the form manually — no API call, no navigation
+  /// to Home. Password/rePassword stay null; the backend register contract
+  /// still requires them, so a future developer must decide how a
+  /// Google-originated registration supplies a password (out of scope here).
+  void fillFromGoogleAccount({String? firstName, String? lastName, String? email}) {
+    emit(
+      state.copyWith(
+        firstName: firstName ?? state.firstName,
+        lastName: lastName ?? state.lastName,
+        email: email ?? state.email,
+        errorMessage: null,
+      ),
+    );
+  }
 }

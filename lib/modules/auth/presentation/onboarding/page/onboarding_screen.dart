@@ -7,9 +7,9 @@ import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
-import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_intent.dart';
-import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_state.dart';
+import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_intent.dart';
+import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/widgets/onboarding_actions.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/widgets/skip_button.dart';
 

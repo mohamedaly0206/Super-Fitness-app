@@ -11,13 +11,11 @@ import 'package:super_fitness_app/modules/auth/data/models/response/forget_passw
 import 'package:super_fitness_app/modules/auth/data/models/response/reset_password_response.dart';
 import 'package:super_fitness_app/modules/auth/data/models/response/verify_reset_code_response.dart';
 
-part '../data_sources/forget_password_api_client.g.dart';
-
+part 'forget_password_api_client.g.dart';
 @RestApi()
 abstract interface class ForgetPasswordApiClient {
   @factoryMethod
-  factory ForgetPasswordApiClient(Dio dio, {String baseUrl}) =
-      _ForgetPasswordApiClient;
+  factory ForgetPasswordApiClient(Dio dio, {String baseUrl}) = _ForgetPasswordApiClient;
 
   @POST(AuthEndPoint.forgetPassword)
   Future<ForgetPasswordResponseDto> forgotPassword(

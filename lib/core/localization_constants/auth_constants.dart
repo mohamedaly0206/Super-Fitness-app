@@ -40,20 +40,12 @@ class AuthConstants {
   static String get registerContinuationPlaceholder =>
       "auth.register_continuation_placeholder".tr();
   static String get loginPlaceholder => "auth.login_placeholder".tr();
-  static String get resetPasswordCondition =>
-      "auth.reset_password_condition".tr();
   static String get tellUsAboutYourself => "auth.tell_us_about_yourself".tr();
   static String get weNeedToKnowYourGender =>
       "auth.we_need_to_know_your_gender".tr();
 
   // Register
-  static String get heyThere => "auth.hey_there".tr();
-  static String get createAnAccount => "auth.create_an_account".tr();
-  static String get register => "auth.register".tr();
-  static String get firstName => "auth.first_name".tr();
-  static String get lastName => "auth.last_name".tr();
-  static String get or => "auth.or".tr();
-  static String get alreadyHaveAnAccount => "auth.already_have_an_account".tr();
+
   static String get next => "auth.next".tr();
   static String get male => "auth.male".tr();
   static String get female => "auth.female".tr();
