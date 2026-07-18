@@ -173,7 +173,7 @@ class AppTheme {
         foregroundColor: AppColors.textWhite,
         disabledBackgroundColor: AppColors.grey700,
         disabledForegroundColor: AppColors.textWhite,
-        minimumSize: const Size(double.infinity, AppSize.s50),
+        minimumSize: const Size(double.infinity, AppSize.s42),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.borderRadiusButton),
         ),

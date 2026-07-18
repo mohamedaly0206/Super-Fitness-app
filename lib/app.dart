@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:super_fitness_app/config/routes/app_router.dart';
+import 'package:super_fitness_app/config/routes/routes.dart';
 import 'package:super_fitness_app/core/theme/app_theme.dart';
 
 class FitnessApp extends StatelessWidget {
@@ -15,7 +16,7 @@ class FitnessApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       onGenerateRoute: AppRouter.onGenerateRoute,
-      initialRoute: Routes.uiShowcase,
+      initialRoute: Routes.onboarding,
     );
   }
 }

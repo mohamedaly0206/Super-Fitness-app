@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/config/routes/routes.dart';
 import 'package:super_fitness_app/core/resources/app_strings.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/config/routes/app_router.dart';
@@ -30,7 +31,7 @@ class NotFoundScreen extends StatelessWidget {
             FilledButton(
               onPressed: () => Navigator.pushNamedAndRemoveUntil(
                 context,
-                Routes.splash,
+                Routes.onboarding,
                 (_) => false,
               ),
               child: const Text(AppStrings.goHome),
