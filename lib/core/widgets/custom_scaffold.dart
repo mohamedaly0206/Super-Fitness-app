@@ -21,6 +21,7 @@ class CustomScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Positioned.fill(
