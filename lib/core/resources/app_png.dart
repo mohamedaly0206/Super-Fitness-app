@@ -16,4 +16,7 @@ abstract class AppPng {
   static const String homeAndSelectDetailsExerciseBackground =
       'assets/images/home_and_select_details_exercise_background.jpg';
   static const String chatBackground = 'assets/images/chat_background.jpg';
+  static const String man1 = 'assets/images/man1.png';
+  static const String man2 = 'assets/images/man2.png';
+  static const String man3 = 'assets/images/man3.png';
 }

@@ -7,6 +7,7 @@ import 'package:super_fitness_app/core/widgets/not_found_screen.dart';
 import 'package:super_fitness_app/core/widgets/ui_showcase_page.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/page/forget_password_screen.dart';
+import 'package:super_fitness_app/modules/auth/presentation/onboarding/page/onboarding_screen.dart';
 
 abstract class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -21,6 +22,8 @@ abstract class AppRouter {
               child: const ForgetPasswordPage(),
             ),
           );
+        case Routes.onboarding:
+          return PageTransitions.fade(OnboardingScreen());
         default:
           return PageTransitions.fade(
             NotFoundScreen(route: settings.name ?? ''),
