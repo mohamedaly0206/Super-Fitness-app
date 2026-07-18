@@ -9,6 +9,12 @@ class UserEntity {
   List<dynamic>? wishlist;
   String? id;
   List<dynamic>? addresses;
+  int? age;
+  int? weight;
+  int? height;
+  String? activityLevel;
+  String? goal;
+
   DateTime? createdAt;
 
   UserEntity({
@@ -22,6 +28,11 @@ class UserEntity {
     this.wishlist,
     this.id,
     this.addresses,
+    this.age,
+    this.weight,
+    this.height,
+    this.activityLevel,
+    this.goal,
     this.createdAt,
   });
 }

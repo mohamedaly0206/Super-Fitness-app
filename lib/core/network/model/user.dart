@@ -24,6 +24,17 @@ class UserDto {
   String? id;
   @JsonKey(name: "addresses")
   List<dynamic>? addresses;
+  @JsonKey(name: "age")
+  int? age;
+  @JsonKey(name: "weight")
+  int? weight;
+  @JsonKey(name: "height")
+  int? height;
+  @JsonKey(name: "activityLevel")
+  String? activityLevel;
+  @JsonKey(name: "goal")
+  String? goal;
+
   @JsonKey(name: "createdAt")
   DateTime? createdAt;
 
@@ -38,6 +49,11 @@ class UserDto {
     this.wishlist,
     this.id,
     this.addresses,
+    this.age,
+    this.weight,
+    this.height,
+    this.activityLevel,
+    this.goal,
     this.createdAt,
   });
 
@@ -57,6 +73,11 @@ class UserDto {
       role: role,
       wishlist: wishlist,
       addresses: addresses,
+      age: age,
+      weight: weight,
+      height: height,
+      activityLevel: activityLevel,
+      goal: goal,
       createdAt: createdAt,
     );
   }
