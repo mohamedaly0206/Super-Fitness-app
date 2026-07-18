@@ -11,6 +11,32 @@
     "login_error": "Login failed",
     "signup_successfully": "Signup successful"
   },
+  "forgetPassword": {
+    "enterYourEmail": "Enter Your Email",
+    "forgetPassword": "Forget Password",
+    "emailHint": "Email",
+    "sendOtp": "Send OTP",
+    "otpTitle": "OTP CODE",
+    "otpSubtitle": "Enter Your OTP Check Your Email",
+    "confirm": "Confirm",
+    "didntReceiveCode": "Didn't Receive Verification Code?",
+    "resendCode": "Resend Code?",
+    "resendIn": "Resend in ",
+    "invalidCode": "Invalid verification code",
+    "createNewPassword": "Create New Password",
+    "passwordSubtitle": "Make Sure Its 8 Characters Or More",
+    "passwordHint": "Password",
+    "confirmPasswordHint": "Confirm Password",
+    "done": "Done",
+    "validation": {
+      "emailRequired": "Email is required",
+      "invalidEmail": "Please enter a valid email",
+      "passwordRequired": "Password is required",
+      "passwordLength": "Password must be at least 8 characters",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordNotMatch": "Passwords do not match",
+      "otpRequired": "Please enter the verification code"
+    }
   "auth": {
     "login": "Login",
     "email": "Email",
@@ -56,6 +82,8 @@
     "startYourJourney": "Start your journey",
     "registerSuccessMessage": "Registration successful"
 
+    "register_continuation_placeholder": "Next Register screens will be implemented here.",
+    "login_placeholder": "Login screen will be implemented here."
   },
   "validation": {
     "email_required": "Email is required",
@@ -67,6 +95,14 @@
     "short_name": "Name must be at least 3 characters",
     "invalid_name": "Name contains invalid characters",
     "vehicle_number_required": "Vehicle number is required",
+    "phone_required": "Phone number is required",
+    "phone_format_hint": "Enter a valid phone number, e.g. +201234567890",
+    "vehicle_number_required": "Vehicle number is required",
+    "id_number_required": "National ID number is required",
+    "national_id_length": "National ID must be 14 digits",
+    "national_id_start": "National ID must start with 2 or 3",
+    "national_id_numeric": "National ID must contain digits only",
+    "vehicle_number_invalid": "Enter a valid vehicle number",
     "complete_required_fields": "Please complete all required fields",
     "confirm_password_required": "Please confirm your password",
     "password_not_match": "Passwords do not match",

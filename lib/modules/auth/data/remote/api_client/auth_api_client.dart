@@ -13,6 +13,6 @@ abstract class AuthApiClient {
   @factoryMethod
   factory AuthApiClient(Dio dio) = _AuthApiClient;
 
-  @POST(AuthEndPoint.register)
+  @POST(AuthEndPoint.signup)
   Future<RegisterResponseDto> register(@Body() RegisterRequestDto request);
 }
