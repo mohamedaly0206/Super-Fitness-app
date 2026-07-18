@@ -39,6 +39,7 @@
     "first_name": "First Name",
     "last_name": "Last Name",
     "or": "Or",
+    "dont_have_account": "Don't have an account? ",
     "already_have_an_account": "Already Have An Account ?",
     "register_continuation_placeholder": "Next Register screens will be implemented here.",
     "login_placeholder": "Login screen will be implemented here."

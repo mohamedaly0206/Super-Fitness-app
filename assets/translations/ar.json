@@ -41,7 +41,8 @@
     "or": "أو",
     "already_have_an_account": "هل لديك حساب بالفعل؟",
     "register_continuation_placeholder": "شاشات التسجيل التالية سيتم تنفيذها هنا.",
-    "login_placeholder": "شاشة تسجيل الدخول سيتم تنفيذها هنا."
+    "login_placeholder": "شاشة تسجيل الدخول سيتم تنفيذها هنا.",
+    "dont_have_account": "ليس لديك حساب؟"
   },
   "validation": {
     "email_required": "البريد الإلكتروني مطلوب",

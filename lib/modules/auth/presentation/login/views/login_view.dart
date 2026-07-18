@@ -4,6 +4,8 @@ import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/custom_text_field.dart';
+import 'package:super_fitness_app/modules/auth/presentation/login/widgets/login_submit_button.dart';
+import 'package:super_fitness_app/modules/auth/presentation/login/widgets/social_login_buttons.dart';
 
 import '../../../../../core/layout/app_padding.dart';
 import '../../../../../core/layout/app_size.dart';
@@ -13,6 +15,7 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/app_text_style.dart';
 import '../../../../../core/utils/app_validator.dart';
 import '../widgets/auth_or_divider.dart';
+import '../widgets/register_redirect_row.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -122,7 +125,22 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                 ),
-                AuthOrDivider(),
+                const AuthOrDivider(),
+                const AppSizedBox(
+                  height: AppSize.s10,
+                ),
+                SocialLoginButtons(
+                  onFacebookTap: () {},
+                  onGoogleTap: () {},
+                  onAppleTap: (){},
+                ),
+                const AppSizedBox(height: AppSize.s20),
+                LoginSubmitButton(
+                  //isLoading: _isGoogleLoading,
+                  onTap: (){},
+                ),
+                const AppSizedBox(height: AppSize.s20),
+                LoginRedirectRow(onLoginTap: (){}),
               ],
             ),
           ),

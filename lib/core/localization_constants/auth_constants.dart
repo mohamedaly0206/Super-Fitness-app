@@ -6,6 +6,7 @@ class AuthConstants {
   static String get login => "auth.login".tr();
   static String get or => "auth.or".tr();
   static String get register => "auth.register".tr();
+  static String get dontHaveAccount => "auth.dont_have_account".tr();
   static String get heyThere => "auth.hey_there".tr();
   static String get welcomeBack => "auth.welcome_back".tr();
   static String get email => "auth.email".tr();
