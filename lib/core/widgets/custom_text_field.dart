@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/core/layout/app_padding.dart';
+import 'package:super_fitness_app/core/layout/app_size.dart';
+import 'package:super_fitness_app/core/theme/app_colors.dart';
 
 class CustomTextField extends StatefulWidget {
   final String? hintText;
@@ -32,7 +35,7 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  bool obscureText = true;
+  bool obscureText = false;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +56,46 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         labelText: widget.labelText,
         hintText: widget.hintText,
+        constraints: const BoxConstraints(minHeight: AppSize.s36),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppPadding.p16,
+          vertical: AppPadding.p8,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+          borderSide: const BorderSide(
+            color: AppColors.borderDefault,
+            width: AppSize.borderWidth,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+          borderSide: const BorderSide(
+            color: AppColors.borderDefault,
+            width: AppSize.borderWidth,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+          borderSide: const BorderSide(
+            color: AppColors.borderFocused,
+            width: AppSize.borderWidth,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+          borderSide: const BorderSide(
+            color: AppColors.borderError,
+            width: AppSize.borderWidth,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+          borderSide: const BorderSide(
+            color: AppColors.borderError,
+            width: AppSize.borderWidth,
+          ),
+        ),
         suffixIcon: widget.isPassword
             ? GestureDetector(
                 child: Icon(

@@ -15,4 +15,7 @@ abstract class AppSvg {
   static const String mail = 'assets/svgs/mail.svg';
   static const String lock = 'assets/svgs/lock.svg';
   static const String eye = 'assets/svgs/eye.svg';
+  static const String google = 'assets/svgs/Google.png';
+  static const String facebook = 'assets/svgs/facebook.png';
+  static const String apple = 'assets/svgs/apple.png';
 }
