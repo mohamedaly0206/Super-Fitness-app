@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
+import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_intent.dart';
@@ -31,7 +32,13 @@ class _OnboardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<OnboardingCubit>();
 
-    return BlocBuilder<OnboardingCubit, OnboardingState>(
+    return BlocConsumer<OnboardingCubit, OnboardingState>(
+      listener: (context, state) {
+        if (state.navigateToLogin) {
+          //Todo: Navigate to Login screen
+          //Navigator.pushReplacementNamed(context, Routes.login);
+        }
+      },
       builder: (context, state) {
         final currentItem = cubit.items[state.currentPage];
 
@@ -39,8 +46,6 @@ class _OnboardingView extends StatelessWidget {
           background: Backgrounds.onboarding,
           body: Stack(
             children: [
-              const Positioned(top: 50, right: 20, child: SkipButton()),
-
               /// Images
               PageView.builder(
                 controller: cubit.pageController,
@@ -56,9 +61,8 @@ class _OnboardingView extends StatelessWidget {
                       tag: cubit.items[index].image,
                       child: Image.asset(
                         cubit.items[index].image,
-                        height: MediaQuery.of(context).size.height * .70,
-                        width: MediaQuery.of(context).size.width * .90,
-
+                        height: MediaQuery.of(context).size.height * .90,
+                        width: MediaQuery.of(context).size.width * .99,
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -71,7 +75,7 @@ class _OnboardingView extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   width: double.infinity,
-                  height: MediaQuery.of(context).size.height * .35,
+                  height: MediaQuery.of(context).size.height * .32,
                   decoration: BoxDecoration(
                     color: AppColors.background.withValues(alpha: .30),
                     borderRadius: const BorderRadius.only(
@@ -85,49 +89,36 @@ class _OnboardingView extends StatelessWidget {
                       topRight: Radius.circular(50),
                     ),
                     child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 30, sigmaY: 40),
+                      filter: ImageFilter.blur(sigmaX: 35, sigmaY: 20),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: AppPadding.p24,
+                          horizontal: AppPadding.p10,
                         ),
                         child: Column(
                           children: [
-                            const SizedBox(height: 50),
-
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              child: Text(
-                                currentItem.title,
-                                key: ValueKey(currentItem.title),
-                                textAlign: TextAlign.center,
-                                style: getBoldStyle(
-                                  context: context,
-                                  fontSize: 22,
-                                  color: AppColors.surface,
-                                ),
+                            AppSizedBox(height: 30),
+                            Text(
+                              currentItem.title,
+                              key: ValueKey(currentItem.title),
+                              textAlign: TextAlign.center,
+                              style: getBoldStyle(
+                                context: context,
+                                fontSize: 22,
+                                color: AppColors.surface,
                               ),
                             ),
-
-                            const SizedBox(height: 16),
-
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              child: Text(
-                                currentItem.description,
-                                key: ValueKey(currentItem.description),
-                                textAlign: TextAlign.center,
-                                style: getRegularStyle(
-                                  context: context,
-                                  fontSize: 14,
-                                  color: AppColors.surface.withValues(
-                                    alpha: .8,
-                                  ),
-                                ),
+                            const AppSizedBox(height: 16),
+                            Text(
+                              currentItem.description,
+                              key: ValueKey(currentItem.description),
+                              textAlign: TextAlign.center,
+                              style: getRegularStyle(
+                                context: context,
+                                fontSize: 14,
+                                color: AppColors.surface.withValues(alpha: .8),
                               ),
                             ),
-
                             const Spacer(),
-
                             OnboardingActions(
                               currentIndex: state.currentPage,
                               totalPages: cubit.items.length,
@@ -139,6 +130,8 @@ class _OnboardingView extends StatelessWidget {
                   ),
                 ),
               ),
+              // Skip Button
+              const Positioned(top: 50, right: 20, child: SkipButton()),
             ],
           ),
         );

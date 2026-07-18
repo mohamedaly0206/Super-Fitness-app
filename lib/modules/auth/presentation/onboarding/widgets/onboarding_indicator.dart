@@ -23,7 +23,7 @@ class OnboardingIndicator extends StatelessWidget {
         dotHeight: 8,
         spacing: 6,
         activeDotColor: AppColors.primary,
-        dotColor: AppColors.surface.withValues(alpha: .4),
+        dotColor: AppColors.surface,
       ),
     );
   }

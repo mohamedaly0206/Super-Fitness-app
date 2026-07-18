@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
+import 'package:super_fitness_app/core/theme/app_colors.dart';
+import 'package:super_fitness_app/core/theme/app_text_style.dart';
+import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/primary_button.dart';
 import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/cubit/onboarding_intent.dart';
@@ -35,8 +38,7 @@ class OnboardingActions extends StatelessWidget {
             controller: cubit.pageController,
             count: totalPages,
           ),
-          const SizedBox(height: 24),
-
+          const AppSizedBox(height: 24),
           if (state.isFirstPage)
             SizedBox(
               width: double.infinity,
@@ -55,12 +57,16 @@ class OnboardingActions extends StatelessWidget {
                     onPressed: () {
                       cubit.doIntent(const BackPressedIntent());
                     },
-                    child: const Text('Back'),
+                    child: Text(
+                      'Back',
+                      style: getSemiBoldStyle(
+                        context: context,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
                   ),
                 ),
-
-                const SizedBox(width: 16),
-
+                const AppSizedBox(width: 150),
                 Expanded(
                   child: PrimaryButton(
                     text: state.isLastPage ? 'Do it' : 'Next',

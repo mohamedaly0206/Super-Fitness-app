@@ -58,6 +58,7 @@ dependencies:
   shimmer: ^3.0.0
   google_fonts: ^8.1.0
   pinput: ^5.0.0
+  flutter_native_splash: ^2.4.8
   # Localization
   easy_localization: ^3.0.8
 
@@ -126,3 +127,15 @@ flutter:
     - assets/images/
     - assets/svgs/
     - assets/translations/
+
+flutter_native_splash:
+  color: "#202020"
+  image: assets/images/splash--logo.png
+
+  android: true
+  ios: true
+  web: false
+
+  android_12:
+    color: "#202020"
+    image: assets/images/splash--logo.png

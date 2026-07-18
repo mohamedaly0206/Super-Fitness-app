@@ -29,6 +29,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
         break;
 
       case FinishPressedIntent():
+        emit(state.copyWith(navigateToLogin: true));
         break;
     }
   }
