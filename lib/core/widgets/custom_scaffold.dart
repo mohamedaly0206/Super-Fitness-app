@@ -28,10 +28,7 @@ class CustomScaffold extends StatelessWidget {
           ),
           Positioned.fill(
             child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: AppSize.backgroundBlurSigma,
-                sigmaY: AppSize.backgroundBlurSigma,
-              ),
+              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
               child: Container(
                 color: AppColors.background.withValues(alpha: 0.10),
               ),
