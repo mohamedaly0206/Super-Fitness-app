@@ -1,17 +1,19 @@
-class UserEntity {
-  String? firstName;
-  String? lastName;
-  String? email;
-  String? gender;
-  String? phone;
-  String? photo;
-  String? role;
-  List<dynamic>? wishlist;
-  String? id;
-  List<dynamic>? addresses;
-  DateTime? createdAt;
+import 'package:equatable/equatable.dart';
 
-  UserEntity({
+class UserEntity extends Equatable {
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? gender;
+  final String? phone;
+  final String? photo;
+  final String? role;
+  final List<dynamic>? wishlist;
+  final String? id;
+  final List<dynamic>? addresses;
+  final DateTime? createdAt;
+
+  const UserEntity({
     this.firstName,
     this.lastName,
     this.email,
@@ -24,4 +26,19 @@ class UserEntity {
     this.addresses,
     this.createdAt,
   });
+
+  @override
+  List<Object?> get props => [
+    firstName,
+    lastName,
+    email,
+    gender,
+    phone,
+    photo,
+    role,
+    wishlist,
+    id,
+    addresses,
+    createdAt,
+  ];
 }
