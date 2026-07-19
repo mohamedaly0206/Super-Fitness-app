@@ -27,7 +27,8 @@
     "passwordSubtitle": "Make Sure Its 8 Characters Or More",
     "passwordHint": "Password",
     "confirmPasswordHint": "Confirm Password",
-    "done": "Done",
+    "done": "Done"
+  },
   "auth": {
     "login": "Login",
     "email": "Email",
@@ -50,11 +51,13 @@
     "code_sent_again": "Code sent again",
     "reset_password_condition": "Your new password must be different from previously used passwords",
     "hey_there": "Hey There",
+    "welcome_back": "WELCOME BACK",
     "create_an_account": "CREATE AN ACCOUNT",
     "register": "Register",
     "first_name": "First Name",
     "last_name": "Last Name",
     "or": "Or",
+    "dont_have_account": "Don't have an account? ",
     "already_have_an_account": "Already Have An Account ?",
     "tell_us_about_yourself": "Tell us about yourself!",
     "we_need_to_know_your_gender": "We need to know your gender",
@@ -66,13 +69,12 @@
     "whatIsYourHight": "WHAT IS YOUR HEIGHT ?",
     "cm": "Cm",
     "thisHelpsUsCreateYourPersonalizedPlan": "This helps us create your personalized plan",
-    "howOldAreYou ": "HOW OLD ARE YOU ?",
+    "howOldAreYou": "HOW OLD ARE YOU ?",
     "year": "Year",
     "whatIsYourGoal": "WHAT IS YOUR GOAL ?",
-    "yourRegularPhysicalActivityLevel":"YOUR REGULAR PHYSICAL\nACTIVITY LEVEL ?",
+    "yourRegularPhysicalActivityLevel": "YOUR REGULAR PHYSICAL\nACTIVITY LEVEL ?",
     "startYourJourney": "Start your journey",
     "registerSuccessMessage": "Registration successful",
-
     "register_continuation_placeholder": "Next Register screens will be implemented here.",
     "login_placeholder": "Login screen will be implemented here."
   },
@@ -100,4 +102,4 @@
     "code_required": "Verification code is required",
     "invalid_code": "Please enter a valid 6-digit code"
   }
-}}
+}

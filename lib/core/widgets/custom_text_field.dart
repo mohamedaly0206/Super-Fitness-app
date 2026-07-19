@@ -71,10 +71,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         prefixIcon: widget.prefixIcon == null
             ? null
             : Padding(
-                padding: const EdgeInsetsDirectional.only(
-                  start: 12,
-                  end: 8,
-                ),
+                padding: const EdgeInsetsDirectional.only(start: 12, end: 8),
                 child: widget.prefixIcon,
               ),
         prefixIconConstraints: const BoxConstraints(
@@ -84,9 +81,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         suffixIcon: widget.isPassword
             ? IconButton(
                 icon: Icon(
-                  _obscureText
-                      ? Icons.visibility_off
-                      : Icons.visibility,
+                  _obscureText ? Icons.visibility_off : Icons.visibility,
                 ),
                 onPressed: () {
                   setState(() {
@@ -101,13 +96,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   OutlineInputBorder _border(Color color) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(
-        AppSize.borderRadiusOutlined,
-      ),
-      borderSide: BorderSide(
-        color: color,
-        width: AppSize.borderWidth,
-      ),
+      borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+      borderSide: BorderSide(color: color, width: AppSize.borderWidth),
     );
   }
 }

@@ -7,19 +7,19 @@ class DummyLoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(background: Backgrounds.login, body:
-
-    Column(
-      children: [
-        Center(
-          child: Text('Dummy Login View'),
-        ),
-        ElevatedButton(onPressed: (){
-          Navigator.pushNamed(context, Routes.register);
-        }, child: Text('Register',))
-      ],
-    ),
-
+    return CustomScaffold(
+      background: Backgrounds.login,
+      body: Column(
+        children: [
+          Center(child: Text('Dummy Login View')),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.register);
+            },
+            child: Text('Register'),
+          ),
+        ],
+      ),
     );
   }
 }

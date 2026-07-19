@@ -39,9 +39,7 @@ class GoogleAuthServiceImpl implements GoogleAuthService {
     final idToken = account.authentication.idToken;
 
     final authorization =
-        await account.authorizationClient.authorizationForScopes([
-          'email',
-        ]) ??
+        await account.authorizationClient.authorizationForScopes(['email']) ??
         await account.authorizationClient.authorizeScopes(['email']);
 
     final credential = GoogleAuthProvider.credential(
@@ -64,6 +62,10 @@ class GoogleAuthServiceImpl implements GoogleAuthService {
       lastName = parts.length > 1 ? parts.sublist(1).join(' ') : null;
     }
 
-    return GoogleAuthResult(firstName: firstName, lastName: lastName, email: email);
+    return GoogleAuthResult(
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+    );
   }
 }

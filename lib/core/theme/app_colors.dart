@@ -59,7 +59,7 @@ class AppColors {
 
   //  UI SEMANTIC
   static const Color hintText = Color(0x8AFFFFFF);
-  static const Color iconInactive = Color(0xB3FFFFFF);
+  static const Color iconInactive = Colors.white;
   static const Color borderDefault = Color(0x61FFFFFF);
   static const Color borderFocused = Colors.white;
   static const Color borderError = Colors.redAccent;

@@ -14,14 +14,14 @@ class LoginRedirectRow extends StatelessWidget {
       onTap: onLoginTap,
       child: RichText(
         text: TextSpan(
-          text: '${AuthConstants.alreadyHaveAnAccount} ',
+          text: '${AuthConstants.dontHaveAccount} ',
           style: getRegularStyle(
             context: context,
             color: AppColors.textPrimary,
           ),
           children: [
             TextSpan(
-              text: AuthConstants.login,
+              text: AuthConstants.register,
               style: getSemiBoldStyle(
                 context: context,
                 color: AppColors.primary,

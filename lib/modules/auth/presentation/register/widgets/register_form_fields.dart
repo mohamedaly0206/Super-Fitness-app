@@ -5,7 +5,6 @@ import 'package:super_fitness_app/core/utils/app_validator.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_text_field.dart';
 
-
 class RegisterFormFields extends StatelessWidget {
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;

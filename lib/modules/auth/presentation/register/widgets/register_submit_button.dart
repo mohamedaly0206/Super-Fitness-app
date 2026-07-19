@@ -3,7 +3,6 @@ import 'package:super_fitness_app/core/localization_constants/auth_constants.dar
 import 'package:super_fitness_app/core/widgets/button_loading_widget.dart';
 import 'package:super_fitness_app/core/widgets/primary_button.dart';
 
-
 class RegisterSubmitButton extends StatelessWidget {
   final bool isLoading;
   final VoidCallback onTap;

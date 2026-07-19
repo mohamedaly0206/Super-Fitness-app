@@ -21,66 +21,92 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppPadding.p16,
-        vertical: AppPadding.p12,
-      ),
-      child: GNav(
-        selectedIndex: selectedIndex,
-        onTabChange: onItemTapped,
-        gap: AppSize.s8,
+    return SafeArea(
+      child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppPadding.p16,
           vertical: AppPadding.p12,
         ),
-        duration: AppDurations.navBarAnimation,
-        color: AppColors.iconInactive,
-        activeColor: AppColors.primary,
-        tabBackgroundColor: AppColors.primary.withValues(alpha: 0.15),
-        backgroundColor: AppColors.transparent,
-        tabBorderRadius: AppSize.borderRadiusTab,
-        textStyle: const TextStyle(
-          color: AppColors.primary,
-          fontSize: FontSizeManager.s12,
-          fontWeight: FontWeight.w600,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(AppSize.borderRadiusTab),
+          child: GNav(
+            tabMargin: const EdgeInsets.symmetric(
+              vertical: AppPadding.p8,
+              horizontal: AppPadding.p8,
+            ),
+            selectedIndex: selectedIndex,
+            onTabChange: onItemTapped,
+            gap: AppSize.s4,
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppPadding.p20,
+              vertical: AppPadding.p8,
+            ),
+            duration: AppDurations.navBarAnimation,
+            color: AppColors.iconInactive,
+            activeColor: AppColors.primary,
+            tabBackgroundColor: Colors.transparent,
+            backgroundColor: AppColors.navBarBackground,
+            tabBorderRadius: AppSize.borderRadiusTab,
+            textStyle: const TextStyle(
+              color: AppColors.primary,
+              fontSize: FontSizeManager.s12,
+              fontWeight: FontWeight.w600,
+            ),
+            tabs: [
+              GButton(
+                icon: Icons.circle,
+                leading: _buildTabContent(AppSvg.home, AppStrings.home, 0),
+              ),
+              GButton(
+                icon: Icons.circle,
+                leading: _buildTabContent(AppSvg.gym, AppStrings.workout, 1),
+              ),
+              GButton(
+                icon: Icons.circle,
+                leading: _buildTabContent(AppSvg.chatAi, AppStrings.chat, 2),
+              ),
+              GButton(
+                icon: Icons.circle,
+                leading: _buildTabContent(
+                  AppSvg.profile,
+                  AppStrings.profile,
+                  3,
+                ),
+              ),
+            ],
+          ),
         ),
-        tabs: [
-          GButton(
-            icon: Icons.circle,
-            leading: _navSvgIcon(AppSvg.home, 0),
-            text: AppStrings.home,
-          ),
-          GButton(
-            icon: Icons.circle,
-            leading: _navSvgIcon(AppSvg.gym, 1),
-            text: AppStrings.workout,
-          ),
-          GButton(
-            icon: Icons.circle,
-            leading: _navSvgIcon(AppSvg.chatAi, 2),
-            text: AppStrings.chat,
-          ),
-          GButton(
-            icon: Icons.circle,
-            leading: _navSvgIcon(AppSvg.profile, 3),
-            text: AppStrings.profile,
-          ),
-        ],
       ),
     );
   }
 
-  Widget _navSvgIcon(String path, int index) {
+  Widget _buildTabContent(String path, String label, int index) {
     final isSelected = selectedIndex == index;
-    return SvgPicture.asset(
-      path,
-      width: AppSize.svgIconSize,
-      height: AppSize.svgIconSize,
-      colorFilter: ColorFilter.mode(
-        isSelected ? AppColors.primary : AppColors.iconInactive,
-        BlendMode.srcIn,
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SvgPicture.asset(
+          path,
+          width: AppSize.svgIconSize,
+          height: AppSize.svgIconSize,
+          colorFilter: ColorFilter.mode(
+            isSelected ? AppColors.primary : AppColors.iconInactive,
+            BlendMode.srcIn,
+          ),
+        ),
+        if (isSelected) ...[
+          const SizedBox(height: 2),
+          Text(
+            label,
+            style: const TextStyle(
+              color: AppColors.primary,
+              fontSize: FontSizeManager.s12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ],
     );
   }
 }

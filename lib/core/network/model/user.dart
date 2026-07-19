@@ -12,6 +12,18 @@ class UserDto {
   final String? email;
   @JsonKey(name: "gender")
   final String? gender;
+  @JsonKey(name: "photo")
+  final String? photo;
+  @JsonKey(name: "phone")
+  final String? phone;
+  @JsonKey(name: "role")
+  final String? role;
+  @JsonKey(name: "wishlist")
+  final List<dynamic>? wishlist;
+  @JsonKey(name: "_id")
+  final String? id;
+  @JsonKey(name: "addresses")
+  final List<dynamic>? addresses;
   @JsonKey(name: "age")
   final int? age;
   @JsonKey(name: "weight")
@@ -22,25 +34,25 @@ class UserDto {
   final String? activityLevel;
   @JsonKey(name: "goal")
   final String? goal;
-  @JsonKey(name: "photo")
-  final String? photo;
-  @JsonKey(name: "_id")
-  final String? id;
   @JsonKey(name: "createdAt")
-  DateTime? createdAt;
+  final DateTime? createdAt;
 
-  UserDto(
-    this.age,
-    this.weight,
-    this.height,
-    this.activityLevel,
-    this.goal, {
+  UserDto({
     this.firstName,
     this.lastName,
     this.email,
     this.gender,
+    this.phone,
     this.photo,
+    this.role,
+    this.wishlist,
     this.id,
+    this.addresses,
+    this.age,
+    this.weight,
+    this.height,
+    this.activityLevel,
+    this.goal,
     this.createdAt,
   });
 
@@ -56,7 +68,14 @@ class UserDto {
       email: email,
       gender: gender,
       photo: photo,
-
+      role: role,
+      wishlist: wishlist,
+      addresses: addresses,
+      age: age,
+      weight: weight,
+      height: height,
+      activityLevel: activityLevel,
+      goal: goal,
       createdAt: createdAt,
     );
   }

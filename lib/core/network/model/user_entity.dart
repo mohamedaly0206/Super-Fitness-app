@@ -5,27 +5,35 @@ class UserEntity extends Equatable {
   final String? lastName;
   final String? email;
   final String? gender;
+  final String? phone;
+  final String? photo;
+  final String? role;
+  final List<dynamic>? wishlist;
+  final String? id;
+  final List<dynamic>? addresses;
   final int? age;
   final double? weight;
   final double? height;
   final String? activityLevel;
   final String? goal;
-  final String? photo;
-  final String? id;
   final DateTime? createdAt;
 
   const UserEntity({
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.gender,
+    this.phone,
+    this.photo,
+    this.role,
+    this.wishlist,
+    this.id,
+    this.addresses,
     this.age,
     this.weight,
     this.height,
     this.activityLevel,
     this.goal,
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.gender,
-    this.photo,
-    this.id,
     this.createdAt,
   });
 
@@ -35,13 +43,17 @@ class UserEntity extends Equatable {
     lastName,
     email,
     gender,
+    phone,
+    photo,
+    role,
+    wishlist,
+    id,
+    addresses,
     age,
     weight,
     height,
     activityLevel,
     goal,
-    photo,
-    id,
     createdAt,
   ];
 }

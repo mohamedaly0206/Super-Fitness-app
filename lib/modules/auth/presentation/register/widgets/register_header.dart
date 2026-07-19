@@ -7,7 +7,6 @@ import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 
-
 class RegisterHeader extends StatelessWidget {
   const RegisterHeader({super.key});
 

@@ -31,7 +31,9 @@ void main() {
       final editableHeightBefore = tester
           .getSize(find.byType(EditableText))
           .height;
-      final totalHeightBefore = tester.getSize(find.byType(CustomTextField)).height;
+      final totalHeightBefore = tester
+          .getSize(find.byType(CustomTextField))
+          .height;
 
       formKey.currentState!.validate();
       await tester.pump();
@@ -43,7 +45,9 @@ void main() {
       final editableHeightAfter = tester
           .getSize(find.byType(EditableText))
           .height;
-      final totalHeightAfter = tester.getSize(find.byType(CustomTextField)).height;
+      final totalHeightAfter = tester
+          .getSize(find.byType(CustomTextField))
+          .height;
 
       // The actual text input area must stay exactly the same size.
       expect(editableHeightAfter, editableHeightBefore);

@@ -5,11 +5,13 @@ import 'package:super_fitness_app/config/routes/page_transitions.dart';
 import 'package:super_fitness_app/config/routes/routes.dart';
 import 'package:super_fitness_app/core/widgets/not_found_screen.dart';
 import 'package:super_fitness_app/core/widgets/ui_showcase_page.dart';
-import 'package:super_fitness_app/modules/auth/presentation/dummy_login_view.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/page/forget_password_page.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/page/onboarding_page.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/pages/main_register_view_controller.dart';
+import 'package:super_fitness_app/modules/auth/presentation/login/view_model/cubit/login_cubit.dart';
+import '../../modules/app_sections/app_sections.dart';
+import '../../modules/auth/presentation/login/views/login_view.dart';
 
 abstract class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -30,7 +32,14 @@ abstract class AppRouter {
           return PageTransitions.fade(MainRegisterViewController());
 
         case Routes.login:
-          return PageTransitions.fade(const DummyLoginView());
+          return PageTransitions.fade(
+            BlocProvider(
+              create: (context) => getIt<LoginCubit>(),
+              child: const LoginView(),
+            ),
+          );
+        case Routes.appSections:
+          return PageTransitions.fade(const AppSections());
         default:
           return PageTransitions.fade(
             NotFoundScreen(route: settings.name ?? ''),

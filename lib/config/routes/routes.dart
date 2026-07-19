@@ -6,4 +6,5 @@ abstract class Routes {
   static const String login = '/login';
   static const onboarding = 'onboarding';
   static const loginPlaceholder = 'login-placeholder';
+  static const String appSections = '/app-sections';
 }

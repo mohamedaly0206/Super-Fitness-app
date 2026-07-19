@@ -97,7 +97,8 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(state.copyWith(activityLevel: activityLevel));
     log(state.activityLevel.toString());
   }
-   void updateFirstName(String value) =>
+
+  void updateFirstName(String value) =>
       emit(state.copyWith(firstName: value, errorMessage: null));
 
   void updateLastName(String value) =>
@@ -105,7 +106,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   void updateEmail(String value) =>
       emit(state.copyWith(email: value, errorMessage: null));
-       void updatePassword(String value) => emit(
+  void updatePassword(String value) => emit(
     state.copyWith(password: value, rePassword: value, errorMessage: null),
   );
 
@@ -114,7 +115,11 @@ class RegisterCubit extends Cubit<RegisterState> {
   /// to Home. Password/rePassword stay null; the backend register contract
   /// still requires them, so a future developer must decide how a
   /// Google-originated registration supplies a password (out of scope here).
-  void fillFromGoogleAccount({String? firstName, String? lastName, String? email}) {
+  void fillFromGoogleAccount({
+    String? firstName,
+    String? lastName,
+    String? email,
+  }) {
     emit(
       state.copyWith(
         firstName: firstName ?? state.firstName,

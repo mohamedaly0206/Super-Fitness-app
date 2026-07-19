@@ -16,7 +16,6 @@
     "forgetPassword": "نسيت كلمة المرور",
     "emailHint": "البريد الإلكتروني",
     "sendOtp": "إرسال الكود",
-
     "otpTitle": "رمز التحقق",
     "otpSubtitle": "أدخل رمز التحقق المرسل إلى بريدك الإلكتروني",
     "confirm": "تأكيد",
@@ -28,8 +27,9 @@
     "passwordSubtitle": "تأكد أن كلمة المرور لا تقل عن 8 أحرف",
     "passwordHint": "كلمة المرور",
     "confirmPasswordHint": "تأكيد كلمة المرور",
-    "done": "تم",
- "auth": {
+    "done": "تم"
+  },
+  "auth": {
     "login": "تسجيل الدخول",
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
@@ -51,23 +51,25 @@
     "code_sent_again": "تم إرسال الرمز مرة أخرى",
     "reset_password_condition": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمات المرور المستخدمة سابقًا",
     "hey_there": "أهلاً بك",
+    "welcome_back": "مرحبًا بعودتك",
     "create_an_account": "إنشاء حساب جديد",
     "register": "تسجيل",
     "first_name": "الاسم الأول",
     "last_name": "اسم العائلة",
     "or": "أو",
+    "dont_have_account": "ليس لديك حساب؟",
     "already_have_an_account": "هل لديك حساب بالفعل؟",
-    "tell_us_about_yourself": "أخبرنا عن نفسك!",
+    "tell_us_about_yourself": "أخبارنا عن نفسك!",
     "we_need_to_know_your_gender": "نحتاج إلى معرفة جنسك",
     "next": "التالي",
     "male": "ذكر",
     "female": "انثى",
     "whatIsYourWeight": "ما هو وزنك؟",
     "kg": "كج",
-    "whatIsYourHight": "ما هو طولك؟",
+    "whatIsYourHight": "ما هو طولك？",
     "cm": "سم",
     "thisHelpsUsCreateYourPersonalizedPlan": "هذا يساعدنا في انشاء خطة شخصية لك",
-    "howOldAreYou ": "كم عمرك؟",
+    "howOldAreYou": "كم عمرك؟",
     "year": "العام",
     "whatIsYourGoal": "ما هو هدفك؟",
     "yourRegularPhysicalActivityLevel": "مستوى نشاطك البدني المعتاد؟",
@@ -78,7 +80,7 @@
   },
   "validation": {
     "email_required": "البريد الإلكتروني مطلوب",
-    "invalid_email": "الرجاء إدخال بريد إلكتروني صحيح",
+    "invalid_email": "الرجاء إدخل بريد إلكتروني صحيح",
     "password_required": "كلمة المرور مطلوبة",
     "short_password": "يجب ألا تقل كلمة المرور عن 8 أحرف",
     "weak_password": "يجب أن تحتوي كلمة المرور على حرف كبير وحرف صغير ورقم ورمز خاص",
@@ -100,4 +102,4 @@
     "code_required": "رمز التحقق مطلوب",
     "invalid_code": "الرجاء إدخال رمز مكون من 6 أرقام"
   }
-}}
+}
