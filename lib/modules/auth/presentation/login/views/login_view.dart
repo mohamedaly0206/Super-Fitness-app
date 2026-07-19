@@ -4,13 +4,14 @@ import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
-import 'package:super_fitness_app/core/widgets/custom_text_field.dart';
 import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
+import 'package:super_fitness_app/core/widgets/custom_text_field.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/view_model/cubit/login_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/view_model/intent/login_intent.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/view_model/state/login_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/widgets/login_submit_button.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/widgets/social_login_buttons.dart';
+
 import '../../../../../core/layout/app_padding.dart';
 import '../../../../../core/layout/app_size.dart';
 import '../../../../../core/localization_constants/auth_constants.dart';
@@ -56,7 +57,8 @@ class _LoginViewState extends State<LoginView> {
     return CustomScaffold(
       background: Backgrounds.login,
       body: BlocListener<LoginCubit, LoginState>(
-        listenWhen: (previous, current) => previous.loginState != current.loginState,
+        listenWhen: (previous, current) =>
+            previous.loginState != current.loginState,
         listener: (context, state) {
           if (state.loginState.errorMessage != null) {
             CustomSnackBar.error(context, state.loginState.errorMessage!);
@@ -70,9 +72,7 @@ class _LoginViewState extends State<LoginView> {
             return SingleChildScrollView(
               physics: const ClampingScrollPhysics(),
               child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: constraints.maxHeight,
-                ),
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -152,25 +152,25 @@ class _LoginViewState extends State<LoginView> {
                                 onPressed: () {},
                                 style: TextButton.styleFrom(
                                   padding: EdgeInsets.zero,
-                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
                                 ),
                                 child: Text(
                                   AuthConstants.forgetPassword,
-                                  style: getRegularStyle(
-                                    context: context,
-                                    color: AppColors.primary,
-                                    fontSize: FontSizeManager.s14,
-                                  ).copyWith(
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: AppColors.primary,
-                                  ),
+                                  style:
+                                      getRegularStyle(
+                                        context: context,
+                                        color: AppColors.primary,
+                                        fontSize: FontSizeManager.s14,
+                                      ).copyWith(
+                                        decoration: TextDecoration.underline,
+                                        decorationColor: AppColors.primary,
+                                      ),
                                 ),
                               ),
                             ),
                             const AuthOrDivider(),
-                            const AppSizedBox(
-                              height: AppSize.s10,
-                            ),
+                            const AppSizedBox(height: AppSize.s10),
                             SocialLoginButtons(
                               onFacebookTap: () {},
                               onGoogleTap: () {},
@@ -178,7 +178,9 @@ class _LoginViewState extends State<LoginView> {
                             ),
                             const AppSizedBox(height: AppSize.s20),
                             BlocBuilder<LoginCubit, LoginState>(
-                              buildWhen: (previous, current) => previous.loginState.isLoading != current.loginState.isLoading,
+                              buildWhen: (previous, current) =>
+                                  previous.loginState.isLoading !=
+                                  current.loginState.isLoading,
                               builder: (context, state) {
                                 return LoginSubmitButton(
                                   isLoading: state.loginState.isLoading,
@@ -187,9 +189,7 @@ class _LoginViewState extends State<LoginView> {
                               },
                             ),
                             const AppSizedBox(height: AppSize.s20),
-                            LoginRedirectRow(
-                              onLoginTap: () {},
-                            ),
+                            LoginRedirectRow(onLoginTap: () {}),
                           ],
                         ),
                       ),
