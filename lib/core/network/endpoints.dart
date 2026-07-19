@@ -4,13 +4,13 @@ class AppConfig {
 }
 
 abstract class Endpoints {
-  static const String auth = '/api/auth';
-  static const String profile = '/api/profile';
-  static const String onboarding = '/api/onboarding';
-  static const String workouts = '/api/workouts';
-  static const String exercises = '/api/exercises';
-  static const String meals = '/api/meals';
-  static const String settings = '/api/settings';
+  static const String auth = '/auth';
+  static const String profile = '/profile';
+  static const String onboarding = '/onboarding';
+  static const String workouts = '/workouts';
+  static const String exercises = '/exercises';
+  static const String meals = '/meals';
+  static const String settings = '/settings';
 }
 
 abstract class AuthEndPoint {

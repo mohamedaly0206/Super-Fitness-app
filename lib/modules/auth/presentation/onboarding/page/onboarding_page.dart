@@ -12,7 +12,7 @@ import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onb
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_intent.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/widgets/onboarding_actions.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/widgets/skip_button.dart';
+import 'package:super_fitness_app/modules/auth/presentation/onboarding/widgets/skip_button.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:super_fitness_app/modules/auth/domain/entities/request/register_request_entity.dart';
 
 part 'register_request_dto.g.dart';
 
@@ -45,4 +46,20 @@ class RegisterRequestDto {
       _$RegisterRequestDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$RegisterRequestDtoToJson(this);
+
+  factory RegisterRequestDto.fromDomain(RegisterRequestEntity entity) {
+    return RegisterRequestDto(
+      firstName: entity.firstName,
+      lastName: entity.lastName,
+      email: entity.email,
+      password: entity.password,
+      rePassword: entity.rePassword,
+      gender: entity.gender?.name,
+      height: entity.height,
+      weight: entity.weight,
+      age: entity.age,
+      goal: entity.goal,
+      activityLevel: entity.activityLevel,
+    );
+  }
 }

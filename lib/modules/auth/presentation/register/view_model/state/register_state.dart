@@ -1,47 +1,50 @@
 import 'package:equatable/equatable.dart';
+import 'package:super_fitness_app/config/base/base_state.dart';
 import 'package:super_fitness_app/core/network/model/user_entity.dart';
 
-
 class RegisterState extends Equatable {
+  final BaseState registerState;
   final String? firstName;
   final String? lastName;
   final String? email;
   final String? password;
   final String? rePassword;
-  final String? gender;
+  final Gender? gender;
   final num? age;
   final num? weight;
   final num? height;
   final String? goal;
   final String? activityLevel;
-  final bool isLoading;
+  final bool? isLoading;
   final String? errorMessage;
   final UserEntity? result;
 
   const RegisterState({
+    this.registerState = const BaseState(),
     this.firstName,
     this.lastName,
     this.email,
     this.password,
     this.rePassword,
     this.gender,
-    this.age,
-    this.weight,
-    this.height,
+    this.age = 20,
+    this.weight = 60,
+    this.height = 160,
     this.goal,
     this.activityLevel,
-    this.isLoading = false,
+    this.isLoading,
     this.errorMessage,
     this.result,
   });
 
   RegisterState copyWith({
+    BaseState? registerState,
     String? firstName,
     String? lastName,
     String? email,
     String? password,
     String? rePassword,
-    String? gender,
+    Gender? gender,
     num? age,
     num? weight,
     num? height,
@@ -52,6 +55,7 @@ class RegisterState extends Equatable {
     UserEntity? result,
   }) {
     return RegisterState(
+      registerState: registerState ?? this.registerState,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       email: email ?? this.email,
@@ -64,13 +68,14 @@ class RegisterState extends Equatable {
       goal: goal ?? this.goal,
       activityLevel: activityLevel ?? this.activityLevel,
       isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage,
+      errorMessage: errorMessage ?? this.errorMessage,
       result: result ?? this.result,
     );
   }
 
   @override
   List<Object?> get props => [
+    registerState,
     firstName,
     lastName,
     email,
@@ -84,6 +89,7 @@ class RegisterState extends Equatable {
     activityLevel,
     isLoading,
     errorMessage,
-    result,
   ];
 }
+
+enum Gender { male, female }

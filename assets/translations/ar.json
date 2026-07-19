@@ -29,17 +29,7 @@
     "passwordHint": "كلمة المرور",
     "confirmPasswordHint": "تأكيد كلمة المرور",
     "done": "تم",
-
-    "validation": {
-      "emailRequired": "البريد الإلكتروني مطلوب",
-      "invalidEmail": "يرجى إدخال بريد إلكتروني صحيح",
-      "passwordRequired": "كلمة المرور مطلوبة",
-      "passwordLength": "يجب ألا تقل كلمة المرور عن 8 أحرف",
-      "confirmPasswordRequired": "يرجى تأكيد كلمة المرور",
-      "passwordNotMatch": "كلمتا المرور غير متطابقتين",
-      "otpRequired": "يرجى إدخال رمز التحقق"
-    }
-  "auth": {
+ "auth": {
     "login": "تسجيل الدخول",
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
@@ -67,6 +57,22 @@
     "last_name": "اسم العائلة",
     "or": "أو",
     "already_have_an_account": "هل لديك حساب بالفعل؟",
+    "tell_us_about_yourself": "أخبرنا عن نفسك!",
+    "we_need_to_know_your_gender": "نحتاج إلى معرفة جنسك",
+    "next": "التالي",
+    "male": "ذكر",
+    "female": "انثى",
+    "whatIsYourWeight": "ما هو وزنك؟",
+    "kg": "كج",
+    "whatIsYourHight": "ما هو طولك؟",
+    "cm": "سم",
+    "thisHelpsUsCreateYourPersonalizedPlan": "هذا يساعدنا في انشاء خطة شخصية لك",
+    "howOldAreYou ": "كم عمرك؟",
+    "year": "العام",
+    "whatIsYourGoal": "ما هو هدفك؟",
+    "yourRegularPhysicalActivityLevel": "مستوى نشاطك البدني المعتاد؟",
+    "startYourJourney": "ابدء رحلتك",
+    "registerSuccessMessage": "تم التسجيل بنجاح",
     "register_continuation_placeholder": "شاشات التسجيل التالية سيتم تنفيذها هنا.",
     "login_placeholder": "شاشة تسجيل الدخول سيتم تنفيذها هنا."
   },
@@ -94,4 +100,4 @@
     "code_required": "رمز التحقق مطلوب",
     "invalid_code": "الرجاء إدخال رمز مكون من 6 أرقام"
   }
-}
+}}

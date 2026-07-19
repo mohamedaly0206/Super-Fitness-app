@@ -4,45 +4,52 @@ import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 
 class CustomTextField extends StatefulWidget {
+  const CustomTextField({
+    super.key,
+    this.hintText,
+    this.labelText,
+    this.readOnly = false,
+    this.validator,
+    this.controller,
+    this.onChanged,
+    this.isPassword = false,
+    this.keyboardType = TextInputType.text,
+    this.focusNode,
+    this.prefixIcon,
+    this.textInputAction,
+  });
+
   final String? hintText;
   final String? labelText;
   final bool readOnly;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
-  final void Function(String)? onChanged;
+  final ValueChanged<String>? onChanged;
   final bool isPassword;
   final TextInputType keyboardType;
   final FocusNode? focusNode;
   final Widget? prefixIcon;
   final TextInputAction? textInputAction;
-  const CustomTextField({
-    super.key,
-    this.hintText,
-    this.labelText,
-    this.validator,
-    this.controller,
-    this.onChanged,
-    this.focusNode,
-    this.prefixIcon,
-    this.isPassword = false,
-    this.keyboardType = TextInputType.text,
-    this.readOnly = false,
-    this.textInputAction,
-  });
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  bool obscureText = false;
+  late bool _obscureText;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.isPassword;
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
       validator: widget.validator,
-      obscureText: widget.isPassword ? obscureText : false,
+      obscureText: widget.isPassword && _obscureText,
       focusNode: widget.focusNode,
       keyboardType: widget.keyboardType,
       readOnly: widget.readOnly,
@@ -52,69 +59,54 @@ class _CustomTextFieldState extends State<CustomTextField> {
         isDense: true,
         labelText: widget.labelText,
         hintText: widget.hintText,
-        constraints: const BoxConstraints(minHeight: AppSize.s36),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppPadding.p16,
           vertical: AppPadding.p8,
         ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
-          borderSide: const BorderSide(
-            color: AppColors.borderDefault,
-            width: AppSize.borderWidth,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
-          borderSide: const BorderSide(
-            color: AppColors.borderDefault,
-            width: AppSize.borderWidth,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
-          borderSide: const BorderSide(
-            color: AppColors.borderFocused,
-            width: AppSize.borderWidth,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
-          borderSide: const BorderSide(
-            color: AppColors.borderError,
-            width: AppSize.borderWidth,
-          ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
-          borderSide: const BorderSide(
-            color: AppColors.borderError,
-            width: AppSize.borderWidth,
-          ),
-        ),
-        suffixIcon: widget.isPassword
-            ? GestureDetector(
-                child: Icon(
-                  obscureText ? Icons.visibility_off : Icons.visibility,
-                  size: 24,
-                ),
-                onTap: () {
-                  setState(() {
-                    obscureText = !obscureText;
-                  });
-                },
-              )
-            : null,
+        border: _border(AppColors.borderDefault),
+        enabledBorder: _border(AppColors.borderDefault),
+        focusedBorder: _border(AppColors.borderFocused),
+        errorBorder: _border(AppColors.borderError),
+        focusedErrorBorder: _border(AppColors.borderError),
         prefixIcon: widget.prefixIcon == null
             ? null
             : Padding(
-                padding: const EdgeInsetsDirectional.only(start: 12, end: 8),
+                padding: const EdgeInsetsDirectional.only(
+                  start: 12,
+                  end: 8,
+                ),
                 child: widget.prefixIcon,
               ),
         prefixIconConstraints: const BoxConstraints(
           minWidth: 40,
           minHeight: 40,
         ),
+        suffixIcon: widget.isPassword
+            ? IconButton(
+                icon: Icon(
+                  _obscureText
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+              )
+            : null,
+      ),
+    );
+  }
+
+  OutlineInputBorder _border(Color color) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(
+        AppSize.borderRadiusOutlined,
+      ),
+      borderSide: BorderSide(
+        color: color,
+        width: AppSize.borderWidth,
       ),
     );
   }
