@@ -15,7 +15,10 @@ class LoginRedirectRow extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           text: '${AuthConstants.dontHaveAccount} ',
-          style: getRegularStyle(context: context, color: AppColors.textPrimary),
+          style: getRegularStyle(
+            context: context,
+            color: AppColors.textPrimary,
+          ),
           children: [
             TextSpan(
               text: AuthConstants.register,

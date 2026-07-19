@@ -14,11 +14,6 @@ class LoginUseCase {
     required String password,
     required bool rememberMe,
   }) async {
-    return _authRepo.login(
-      LoginRequestBody(
-        email: email,
-        password: password,
-      ),
-    );
+    return _authRepo.login(LoginRequestBody(email: email, password: password));
   }
 }

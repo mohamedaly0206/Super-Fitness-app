@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 
 class WorkoutsView extends StatelessWidget {
@@ -8,7 +8,14 @@ class WorkoutsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CustomScaffold(
       background: Backgrounds.weightAndGoalActivityEdit,
-      body: Text('Workouts View'),
+      body: SafeArea(
+        child: Center(
+          child: Text(
+            'Workouts Screen',
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ),
+      ),
     );
   }
 }

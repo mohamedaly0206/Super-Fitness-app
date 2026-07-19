@@ -4,7 +4,6 @@ import 'package:super_fitness_app/core/resources/app_svg.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 
-
 class SocialLoginButtons extends StatelessWidget {
   final VoidCallback onFacebookTap;
   final VoidCallback onGoogleTap;
@@ -28,10 +27,10 @@ class SocialLoginButtons extends StatelessWidget {
         const AppSizedBox(width: AppSize.s20),
         isGoogleLoading
             ? const SizedBox(
-          width: AppSize.s48,
-          height: AppSize.s48,
-          child: CircularProgressIndicator(strokeWidth: 2),
-        )
+                width: AppSize.s48,
+                height: AppSize.s48,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
             : _SocialIconButton(iconAsset: AppSvg.google, onTap: onGoogleTap),
         const AppSizedBox(width: AppSize.s20),
         _SocialIconButton(iconAsset: AppSvg.apple, onTap: onAppleTap),
@@ -39,7 +38,6 @@ class SocialLoginButtons extends StatelessWidget {
     );
   }
 }
-
 
 class _SocialIconButton extends StatelessWidget {
   final String iconAsset;

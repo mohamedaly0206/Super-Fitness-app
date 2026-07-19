@@ -19,10 +19,7 @@ class LoginSubmitButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: isLoading ? null : onTap,
       child: isLoading
-          ? const AppLoadingWidget(
-        size: 24,
-        color: AppColors.surface,
-      )
+          ? const AppLoadingWidget(size: 24, color: AppColors.surface)
           : Text(AuthConstants.login),
     );
   }

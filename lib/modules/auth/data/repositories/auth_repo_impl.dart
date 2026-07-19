@@ -13,9 +13,7 @@ class AuthRepoImpl implements AuthRepoContract {
   const AuthRepoImpl(this._remoteDataSource);
 
   @override
-  Future<BaseResponse<UserEntity>> login(
-      LoginRequestBody request,
-      ) async {
+  Future<BaseResponse<UserEntity>> login(LoginRequestBody request) async {
     final response = await _remoteDataSource.login(request);
 
     switch (response) {
@@ -24,9 +22,7 @@ class AuthRepoImpl implements AuthRepoContract {
           data: response.data.user?.toDomain() ?? UserEntity(),
         );
       case ErrorBaseResponse<LoginResponse>():
-        return ErrorBaseResponse<UserEntity>(
-          failure: response.failure,
-        );
+        return ErrorBaseResponse<UserEntity>(failure: response.failure);
     }
   }
 }

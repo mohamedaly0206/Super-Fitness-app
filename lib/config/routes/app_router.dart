@@ -4,6 +4,7 @@ import 'package:super_fitness_app/config/routes/page_transitions.dart';
 import 'package:super_fitness_app/core/widgets/not_found_screen.dart';
 import 'package:super_fitness_app/core/widgets/ui_showcase_page.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/view_model/cubit/login_cubit.dart';
+import '../../modules/app_sections/app_sections.dart';
 import '../../modules/auth/presentation/login/views/login_view.dart';
 import '../dependency_injection/di.dart';
 
@@ -11,6 +12,7 @@ abstract class Routes {
   static const String splash = '/';
   static const String uiShowcase = '/ui-showcase';
   static const String login = '/login';
+  static const String appSections = '/app-sections';
 }
 
 abstract class AppRouter {
@@ -26,6 +28,8 @@ abstract class AppRouter {
               child: const LoginView(),
             ),
           );
+        case Routes.appSections:
+          return PageTransitions.fade(const AppSections());
         default:
           return PageTransitions.fade(
             NotFoundScreen(route: settings.name ?? ''),

@@ -4,7 +4,5 @@ import 'package:super_fitness_app/modules/auth/data/models/request/login_respons
 import '../../models/request/login_request_body.dart';
 
 abstract interface class AuthRemoteDataSourceContract {
-  Future<BaseResponse<LoginResponse>> login(
-      LoginRequestBody request,
-      );
+  Future<BaseResponse<LoginResponse>> login(LoginRequestBody request);
 }

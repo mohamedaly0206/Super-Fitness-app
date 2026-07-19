@@ -11,7 +11,7 @@ import 'package:super_fitness_app/modules/auth/presentation/login/view_model/int
 import 'package:super_fitness_app/modules/auth/presentation/login/view_model/state/login_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/widgets/login_submit_button.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/widgets/social_login_buttons.dart';
-
+import '../../../../../config/routes/app_router.dart';
 import '../../../../../core/layout/app_padding.dart';
 import '../../../../../core/layout/app_size.dart';
 import '../../../../../core/localization_constants/auth_constants.dart';
@@ -58,13 +58,19 @@ class _LoginViewState extends State<LoginView> {
       background: Backgrounds.login,
       body: BlocListener<LoginCubit, LoginState>(
         listenWhen: (previous, current) =>
-            previous.loginState != current.loginState,
+        previous.loginState != current.loginState,
         listener: (context, state) {
           if (state.loginState.errorMessage != null) {
             CustomSnackBar.error(context, state.loginState.errorMessage!);
           }
           if (state.loginState.data != null) {
             CustomSnackBar.success(context, 'Login Successfully!');
+
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              Routes.appSections,
+                  (route) => false,
+            );
           }
         },
         child: LayoutBuilder(

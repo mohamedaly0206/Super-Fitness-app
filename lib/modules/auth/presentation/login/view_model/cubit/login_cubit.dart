@@ -16,18 +16,12 @@ class LoginCubit extends Cubit<LoginState> {
   void handleLoginIntent(LoginIntent intent) {
     switch (intent) {
       case SubmitLoginIntent():
-        _login(
-          email: intent.email,
-          password: intent.password,
-        );
+        _login(email: intent.email, password: intent.password);
         break;
     }
   }
 
-  Future<void> _login({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> _login({required String email, required String password}) async {
     emit(state.copyWith(loginState: const BaseState(isLoading: true)));
 
     final response = await _loginUseCase.call(

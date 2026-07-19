@@ -39,15 +39,15 @@ class _AppSectionsState extends State<AppSections> {
 
   List<_AppSection> get _sections => [
     const _AppSection(label: AppStrings.home, screen: HomeView()),
-    const _AppSection(label: AppStrings.workout, screen: WorkoutsView()),
     const _AppSection(label: AppStrings.chat, screen: ChatView()),
+    const _AppSection(label: AppStrings.workout, screen: WorkoutsView()),
     const _AppSection(label: AppStrings.profile, screen: ProfileView()),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      extendBody: true,
       body: IndexedStack(
         index: _currentIndex,
         children: _sections.map((section) => section.screen).toList(),
