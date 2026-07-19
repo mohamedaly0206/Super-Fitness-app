@@ -39,7 +39,7 @@ class CustomBottomNavBar extends StatelessWidget {
             gap: AppSize.s4,
             padding: const EdgeInsets.symmetric(
               horizontal: AppPadding.p20,
-              vertical: AppPadding.p12,
+              vertical: AppPadding.p8,
             ),
             duration: AppDurations.navBarAnimation,
             color: AppColors.iconInactive,
