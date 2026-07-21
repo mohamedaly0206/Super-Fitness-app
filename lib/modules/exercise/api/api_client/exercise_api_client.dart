@@ -23,5 +23,6 @@ abstract interface class ExerciseApiClient {
   Future<ExercisesResponseDto> getExercisesByMuscleAndDifficulty({
     @Query("primeMoverMuscleId") required String primeMoverMuscleId,
     @Query("difficultyLevelId") required String difficultyLevelId,
+    @Query("page") required int page,
   });
 }

@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
 import 'package:super_fitness_app/modules/exercise/data/datasources/exercise_remote_data_source.dart';
-import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/exercises_paginated_response.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/level_entity.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_entity.dart';
 import 'package:super_fitness_app/modules/exercise/domain/repositories/exercise_repo.dart';
@@ -37,20 +37,26 @@ class ExerciseRepoImpl implements ExerciseRepo {
   }
 
   @override
-  Future<BaseResponse<List<ExerciseEntity>>> getExercisesByMuscleAndDifficulty({
+  Future<BaseResponse<ExercisesPaginatedResponse>> getExercisesByMuscleAndDifficulty({
     required String primeMoverMuscleId,
     required String difficultyLevelId,
+    required int page,
   }) async {
     final response = await exerciseRemoteDataSource.getExercisesByMuscleAndDifficulty(
       primeMoverMuscleId: primeMoverMuscleId,
       difficultyLevelId: difficultyLevelId,
+      page: page,
     );
 
     switch (response) {
-      case SuccessBaseResponse<List<ExerciseEntity>>():
-        return SuccessBaseResponse<List<ExerciseEntity>>(data: response.data);
-      case ErrorBaseResponse<List<ExerciseEntity>>():
-        return ErrorBaseResponse<List<ExerciseEntity>>(failure: response.failure);
+      case SuccessBaseResponse<ExercisesPaginatedResponse>():
+        return SuccessBaseResponse<ExercisesPaginatedResponse>(
+          data: response.data,
+        );
+      case ErrorBaseResponse<ExercisesPaginatedResponse>():
+        return ErrorBaseResponse<ExercisesPaginatedResponse>(
+          failure: response.failure,
+        );
     }
   }
 }
