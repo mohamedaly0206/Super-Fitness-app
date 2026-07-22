@@ -1,11 +1,11 @@
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/reset_password_entity.dart';
-import 'package:super_fitness_app/modules/auth/domain/repositories/auth_repository.dart';
+import 'package:super_fitness_app/modules/auth/domain/repositories/auth_repo_contract.dart';
 
 @injectable
 class ResetPasswordUseCase {
-  final AuthRepository _repository;
+  final AuthRepoContract _repository;
 
   ResetPasswordUseCase(this._repository);
 

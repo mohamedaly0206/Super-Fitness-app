@@ -11,6 +11,7 @@ import 'package:super_fitness_app/modules/auth/presentation/login/view_model/int
 import 'package:super_fitness_app/modules/auth/presentation/login/view_model/state/login_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/widgets/login_submit_button.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/widgets/social_login_buttons.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/pages/main_register_view_controller.dart';
 import '../../../../../config/routes/routes.dart';
 import '../../../../../core/layout/app_padding.dart';
 import '../../../../../core/layout/app_size.dart';
@@ -19,7 +20,6 @@ import '../../../../../core/resources/app_png.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/app_text_style.dart';
 import '../../../../../core/utils/app_validator.dart';
-import '../../register/pages/register_page.dart';
 import '../widgets/auth_or_divider.dart';
 import '../widgets/register_redirect_row.dart';
 
@@ -156,7 +156,12 @@ class _LoginViewState extends State<LoginView> {
                             Align(
                               alignment: Alignment.centerRight,
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    Routes.forgetPassword,
+                                  );
+                                },
                                 style: TextButton.styleFrom(
                                   padding: EdgeInsets.zero,
                                   tapTargetSize:
@@ -201,7 +206,8 @@ class _LoginViewState extends State<LoginView> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => RegisterPage(),
+                                    builder: (context) =>
+                                        MainRegisterViewController(),
                                   ),
                                 );
                               },
