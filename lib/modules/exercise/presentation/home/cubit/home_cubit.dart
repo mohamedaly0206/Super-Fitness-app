@@ -7,24 +7,31 @@ import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_enti
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercises_paginated_response.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/level_entity.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_entity.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_group_entity.dart';
+import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_all_muscles_use_case.dart';
 import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_exercises_by_muscle_and_difficulty_use_case.dart';
 import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_levels_use_case.dart';
+import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_muscles_by_muscle_group_use_case.dart';
 import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_random_muscles_use_case.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_event.dart';
 
 part 'home_state.dart';
 
-
 @lazySingleton
 class HomeCubit extends Cubit<HomeState> {
   final GetLevelsUseCase getLevelsUseCase;
   final GetExercisesByMuscleAndDifficultyUseCase
-  getExercisesByMuscleAndDifficultyUseCase;
+      getExercisesByMuscleAndDifficultyUseCase;
   final GetRandomMusclesUseCase getRandomMusclesUseCase;
+  final GetAllMusclesUseCase getAllMusclesUseCase;
+  final GetMusclesByMuscleGroupUseCase getMusclesByMuscleGroupUseCase;
+
   HomeCubit({
     required this.getLevelsUseCase,
     required this.getExercisesByMuscleAndDifficultyUseCase,
     required this.getRandomMusclesUseCase,
+    required this.getAllMusclesUseCase,
+    required this.getMusclesByMuscleGroupUseCase,
   }) : super(HomeState());
 
   void doEvent(HomeEvent event) {
@@ -35,6 +42,10 @@ class HomeCubit extends Cubit<HomeState> {
         _getLevels();
       case GetRandomMusclesEvent():
         _getRandomMuscles();
+      case GetMuscleGroupsEvent():
+        _getMuscleGroups();
+      case GetMusclesByGroupEvent():
+        _getMusclesByGroup(event.muscleGroupId);
     }
   }
 
@@ -44,10 +55,12 @@ class HomeCubit extends Cubit<HomeState> {
     _getExercisesByMuscleAndDifficulty(state.currentPage + 1);
   }
 
-  bool get canLoadMore => !state.exerciseState.isLoading && state.currentPage < state.totalPages;
+  bool get canLoadMore =>
+      !state.exerciseState.isLoading && state.currentPage < state.totalPages;
 
   void _getLevels() async {
-    emit(state.copyWith(levelState: state.levelState.copyWith(isLoadingParam: true)));
+    emit(state.copyWith(
+        levelState: state.levelState.copyWith(isLoadingParam: true)));
     final response = await getLevelsUseCase.call();
     switch (response) {
       case SuccessBaseResponse<List<LevelEntity>>():
@@ -69,7 +82,8 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void _getRandomMuscles() async {
-    emit(state.copyWith(musclesState: state.musclesState.copyWith(isLoadingParam: true)));
+    emit(state.copyWith(
+        musclesState: state.musclesState.copyWith(isLoadingParam: true)));
     final response = await getRandomMusclesUseCase.call();
     switch (response) {
       case SuccessBaseResponse<List<MuscleEntity>>():
@@ -90,6 +104,59 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  void _getMuscleGroups() async {
+    emit(state.copyWith(
+        muscleGroupsState:
+            state.muscleGroupsState.copyWith(isLoadingParam: true)));
+    final response = await getAllMusclesUseCase();
+    switch (response) {
+      case SuccessBaseResponse<List<MuscleGroupEntity>>():
+        emit(state.copyWith(
+          muscleGroupsState: state.muscleGroupsState.copyWith(
+            isLoadingParam: false,
+            dataParam: response.data,
+          ),
+        ));
+        if (response.data.isNotEmpty) {
+          _getMusclesByGroup(response.data.first.id);
+        }
+      case ErrorBaseResponse<List<MuscleGroupEntity>>():
+        emit(state.copyWith(
+          muscleGroupsState: state.muscleGroupsState.copyWith(
+            isLoadingParam: false,
+            errorMessageParam: response.failure.message,
+          ),
+        ));
+    }
+  }
+
+  void _getMusclesByGroup(String muscleGroupId) async {
+    emit(state.copyWith(
+      musclesByGroupState:
+          state.musclesByGroupState.copyWith(isLoadingParam: true),
+      selectedMuscleGroupId: muscleGroupId,
+    ));
+    final response = await getMusclesByMuscleGroupUseCase(
+      muscleGroupId: muscleGroupId,
+    );
+    switch (response) {
+      case SuccessBaseResponse<List<MuscleEntity>>():
+        emit(state.copyWith(
+          musclesByGroupState: state.musclesByGroupState.copyWith(
+            isLoadingParam: false,
+            dataParam: response.data,
+          ),
+        ));
+      case ErrorBaseResponse<List<MuscleEntity>>():
+        emit(state.copyWith(
+          musclesByGroupState: state.musclesByGroupState.copyWith(
+            isLoadingParam: false,
+            errorMessageParam: response.failure.message,
+          ),
+        ));
+    }
+  }
+
   void _tryFetchExercises() {
     if (state.musclesState.data != null &&
         state.musclesState.data!.isNotEmpty &&
@@ -103,7 +170,9 @@ class HomeCubit extends Cubit<HomeState> {
     final levels = state.levelState.data;
     final muscles = state.musclesState.data;
 
-    if (levels == null || levels.isEmpty || muscles == null || muscles.isEmpty) return;
+    if (levels == null || levels.isEmpty || muscles == null || muscles.isEmpty) {
+      return;
+    }
 
     final firstLevelId = levels.first.id;
     final firstMuscleId = muscles.first.id;
@@ -115,12 +184,17 @@ class HomeCubit extends Cubit<HomeState> {
       currentPage: page,
     ));
 
-    final response = await getExercisesByMuscleAndDifficultyUseCase.call(primeMoverMuscleId: firstMuscleId, difficultyLevelId: firstLevelId, page: page);
+    final response = await getExercisesByMuscleAndDifficultyUseCase.call(
+      primeMoverMuscleId: firstMuscleId,
+      difficultyLevelId: firstLevelId,
+      page: page,
+    );
 
     switch (response) {
       case SuccessBaseResponse<ExercisesPaginatedResponse>():
         final paginated = response.data;
-        final existingExercises = isFirstPage ? <ExerciseEntity>[] : (state.exerciseState.data ?? []);
+        final existingExercises =
+            isFirstPage ? <ExerciseEntity>[] : (state.exerciseState.data ?? []);
         emit(state.copyWith(
           exerciseState: state.exerciseState.copyWith(
             isLoadingParam: false,

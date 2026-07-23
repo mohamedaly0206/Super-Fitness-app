@@ -33,6 +33,7 @@ abstract class LevelsEndPoint {
 
 abstract class MusclesEndPoint {
   static const String muscles = Endpoints.muscles;
+  static const String allMuscles = Endpoints.muscles;
   static String muscleGroupById(String id) => '${Endpoints.musclesGroup}/$id';
   static const String random = '${Endpoints.muscles}/random';
   static const String byMuscleGroup =

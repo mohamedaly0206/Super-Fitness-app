@@ -9,12 +9,15 @@ import 'package:super_fitness_app/modules/exercise/presentation/exercise_details
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_event.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/pages/home_page.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_cubit.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/workouts/pages/workouts_page.dart';
 
 abstract class Routes {
   static const String splash = '/';
   static const String uiShowcase = '/ui-showcase';
   static const String homeRoutes = '/home';
   static const String exerciseDetails = '/exercise-details';
+  static const String workouts = '/workouts';
 }
 
 abstract class AppRouter {
@@ -26,7 +29,8 @@ abstract class AppRouter {
             BlocProvider(
               create: (context) => getIt<HomeCubit>()
                 ..doEvent(GetRandomMusclesEvent())
-                ..doEvent(GetLevelsEvent()),
+                ..doEvent(GetLevelsEvent())
+                ..doEvent(GetMuscleGroupsEvent()),
               child: const HomePage(),
             ),
           );
@@ -35,6 +39,14 @@ abstract class AppRouter {
           final exercise = settings.arguments as ExerciseEntity;
           return PageTransitions.slide(
             ExerciseDetailsPage(exercise: exercise),
+          );
+
+        case Routes.workouts:
+          return PageTransitions.slide(
+            BlocProvider(
+              create: (context) => getIt<WorkoutsCubit>(),
+              child: const WorkoutsPage(),
+            ),
           );
 
         case Routes.uiShowcase:

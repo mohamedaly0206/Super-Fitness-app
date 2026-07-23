@@ -6,6 +6,7 @@ import 'package:super_fitness_app/modules/exercise/data/datasources/exercise_rem
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercises_paginated_response.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/level_entity.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_entity.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_group_entity.dart';
 
 @LazySingleton(as: ExerciseRemoteDataSource)
 class ExerciseRemoteDataSourceImpl implements ExerciseRemoteDataSource {
@@ -29,6 +30,34 @@ class ExerciseRemoteDataSourceImpl implements ExerciseRemoteDataSource {
   Future<BaseResponse<List<MuscleEntity>>> getRandomMuscles() async {
     try {
       final response = await exerciseApiClient.getRandomMuscles();
+      return SuccessBaseResponse<List<MuscleEntity>>(
+        data: response.muscles?.map((e) => e.toEntity()).toList() ?? [],
+      );
+    } catch (e) {
+      return ErrorBaseResponse<List<MuscleEntity>>(failure: ErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<BaseResponse<List<MuscleGroupEntity>>> getAllMuscles() async {
+    try {
+      final response = await exerciseApiClient.getAllMuscles();
+      return SuccessBaseResponse<List<MuscleGroupEntity>>(
+        data: response.musclesGroup?.map((e) => e.toEntity()).toList() ?? [],
+      );
+    } catch (e) {
+      return ErrorBaseResponse<List<MuscleGroupEntity>>(failure: ErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<BaseResponse<List<MuscleEntity>>> getMusclesByMuscleGroup({
+    required String muscleGroupId,
+  }) async {
+    try {
+      final response = await exerciseApiClient.getMusclesByMuscleGroup(
+        muscleGroupId: muscleGroupId,
+      );
       return SuccessBaseResponse<List<MuscleEntity>>(
         data: response.muscles?.map((e) => e.toEntity()).toList() ?? [],
       );

@@ -9,3 +9,10 @@ class GetExerciseByMuscleAndDifficultyEvent extends HomeEvent {
 class GetLevelsEvent extends HomeEvent {}
 
 class GetRandomMusclesEvent extends HomeEvent {}
+
+class GetMuscleGroupsEvent extends HomeEvent {}
+
+class GetMusclesByGroupEvent extends HomeEvent {
+  final String muscleGroupId;
+  GetMusclesByGroupEvent({required this.muscleGroupId});
+}

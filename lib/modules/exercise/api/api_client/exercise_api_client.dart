@@ -4,6 +4,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:super_fitness_app/core/network/endpoints.dart';
 import 'package:super_fitness_app/modules/exercise/data/models/exercises_response_dto.dart';
 import 'package:super_fitness_app/modules/exercise/data/models/levels_response_dto.dart';
+import 'package:super_fitness_app/modules/exercise/data/models/muscle_groups_response_dto.dart';
 import 'package:super_fitness_app/modules/exercise/data/models/muscles_response_dto.dart';
 
 part 'exercise_api_client.g.dart';
@@ -18,6 +19,14 @@ abstract interface class ExerciseApiClient {
 
   @GET(MusclesEndPoint.random)
   Future<MusclesResponseDto> getRandomMuscles();
+
+  @GET(MusclesEndPoint.allMuscles)
+  Future<MuscleGroupsResponseDto> getAllMuscles();
+
+  @GET(MusclesEndPoint.byMuscleGroup)
+  Future<MusclesResponseDto> getMusclesByMuscleGroup({
+    @Query("muscleGroupId") required String muscleGroupId,
+  });
 
   @GET(ExercisesEndPoint.byMuscleDifficulty)
   Future<ExercisesResponseDto> getExercisesByMuscleAndDifficulty({

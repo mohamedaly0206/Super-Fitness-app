@@ -18,16 +18,14 @@ Widget popularTrainingCard({
 
   return GestureDetector(
     onTap: () {
-      Navigator.pushNamed(
-        context,
-        Routes.exerciseDetails,
-        arguments: exercise,
-      );
+      Navigator.pushNamed(context, Routes.exerciseDetails, arguments: exercise);
     },
-    child: Container(
-      margin: EdgeInsets.all(4),
+    child: CustomContainer(
       width: 250,
       height: 160,
+      padding: EdgeInsets.zero,
+      borderRadius: 16,
+      margin: EdgeInsets.all(4),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Stack(
@@ -36,15 +34,15 @@ Widget popularTrainingCard({
             thumbnailUrl.isNotEmpty
                 ? CachedNetworkImageWidget(
                     urlToImage: thumbnailUrl,
-                    width: 120,
-                    height: 130,
+                    width: 250,
+                    height: 160,
                   )
                 : Container(
-                    width: 120,
-                    height: 130,
                     color: AppColors.grey2,
                     child: const Icon(Icons.play_circle_outline, size: 48),
                   ),
+
+            Container(color: Colors.black.withValues(alpha: 0.3)),
 
             Positioned(
               left: 0,
@@ -61,12 +59,22 @@ Widget popularTrainingCard({
                       Text(
                         'Exercise that',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                          color: Colors.white,
+                        ),
                       ),
                       Text(
                         exercise.exercise,
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                          color: Colors.white,
+                        ),
                       ),
                       Row(
                         children: [

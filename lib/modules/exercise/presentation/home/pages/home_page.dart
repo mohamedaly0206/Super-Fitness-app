@@ -4,10 +4,12 @@ import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/category_widget.dart';
-import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/empty_widget.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/home_card_shimmer_widget.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/home_card_widget.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/home_parts_widget.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/home_workouts_section.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/popular_training_card_widget.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/popular_training_shimmer_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -23,6 +25,7 @@ class HomePage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // category
             Padding(
@@ -60,7 +63,7 @@ class HomePage extends StatelessWidget {
                       previous.musclesState != current.musclesState,
                   builder: (context, state) {
                     if (state.musclesState.isLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return homeCardShimmer();
                     }
                     if (state.musclesState.data != null) {
                       final muscles = state.musclesState.data!;
@@ -92,10 +95,14 @@ class HomePage extends StatelessWidget {
             ),
 
             // workouts
-            emptyWidget("Workouts"),
+            HomeWorkoutsSection(),
 
             // food
-            emptyWidget("Food"),
+            homeParts(
+              context: context,
+              title: 'Food',
+              child: SizedBox(height: 131),
+            ),
 
             // popular training
             homeParts(
@@ -108,7 +115,7 @@ class HomePage extends StatelessWidget {
                       previous.exerciseState != current.exerciseState,
                   builder: (context, state) {
                     if (state.exerciseState.isLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return popularTrainingShimmer();
                     }
                     if (state.exerciseState.data != null) {
                       final exercises = state.exerciseState.data!;
