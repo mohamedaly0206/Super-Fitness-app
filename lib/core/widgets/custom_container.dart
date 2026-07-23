@@ -20,7 +20,7 @@ class CustomContainer extends StatelessWidget {
     this.gradient,
     this.alignment,
     this.decoration,
-    this.blur = 20,
+    this.blur = 10,
   });
 
   final Widget? child;
@@ -35,6 +35,8 @@ class CustomContainer extends StatelessWidget {
   final Gradient? gradient;
   final AlignmentGeometry? alignment;
   final Decoration? decoration;
+
+  /// Background blur (same value as Figma)
   final double blur;
 
   @override
@@ -51,15 +53,15 @@ class CustomContainer extends StatelessWidget {
       borderRadius: BorderRadius.circular(borderRadius),
       child: BackdropFilter(
         filter: ImageFilter.blur(
-          sigmaX: blur * 2,
-          sigmaY: blur * 2,
+          sigmaX: blur,
+          sigmaY: blur,
           tileMode: TileMode.decal,
         ),
         child: Container(
           width: width,
           height: height,
-          padding: padding,
           margin: margin,
+          padding: padding,
           alignment: alignment,
           decoration: decoration ?? defaultDecoration,
           child: child,

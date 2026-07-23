@@ -37,16 +37,7 @@ class CustomScaffold extends StatelessWidget {
               ),
             ),
           ),
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: AppColors.textPrimary.withValues(alpha: 0.08),
-                  width: AppSize.borderWidth,
-                ),
-              ),
-            ),
-          ),
+
           body,
         ],
       ),

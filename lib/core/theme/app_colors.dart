@@ -68,7 +68,7 @@ class AppColors {
   static const Color transparent = Colors.transparent;
 
   //  GLASS
-  static const Color glassFill = Color(0x0FFFFFFF);
-  static const Color glassBorder = Color(0x2EFFFFFF);
-  static const Color glassShadow = Color(0x2E000000);
+  static const Color glassFill = Color(0x80242424); // #242424 @ 50%
+  static const Color glassBorder = Color(0x33FFFFFF); // 20% white
+  static const Color glassShadow = Color(0x33000000); // 20% black
 }
