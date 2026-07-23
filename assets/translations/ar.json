@@ -10,5 +10,8 @@
     "login_successfully": "تم تسجيل الدخول بنجاح",
     "login_error": "فشل تسجيل الدخول",
     "signup_successfully": "تم التسجيل بنجاح"
+  },
+  "meals": {
+    "ingredients": "المكونات"
   }
 }

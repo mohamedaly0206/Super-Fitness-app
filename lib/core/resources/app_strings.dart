@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 abstract class AppStrings {
   AppStrings._();
 
@@ -6,6 +8,7 @@ abstract class AppStrings {
   static const String oops = 'Oops!';
   static const String goHome = 'Go Home';
   static const String routeNotFound = 'Route not found';
+  static String get ingredients => "meals.Ingredients".tr();
 
   //  NAVIGATION
   static const String home = 'Home';
