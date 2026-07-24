@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
-import 'package:super_fitness_app/core/localization_constants/auth_constants.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
+import 'package:super_fitness_app/core/localization_constants/auth_constants.dart';
 import 'package:super_fitness_app/core/service/google_auth_service.dart';
+import 'package:super_fitness_app/core/service/remote_config_service.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
@@ -20,6 +21,7 @@ import 'package:super_fitness_app/modules/auth/presentation/register/widgets/soc
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key, required this.pageController});
+
   final PageController pageController;
 
   @override
@@ -70,16 +72,31 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() => _isLoading = true);
     try {
       final result = await getIt<GoogleAuthService>().signIn();
-      if (result == null) return; // user cancelled
+
+      if (result == null) {
+        if (mounted) setState(() => _isLoading = false);
+        return;
+      }
+
+      String googlePassword = '';
+      try {
+        googlePassword = getIt<RemoteConfigService>().googlePassword;
+      } catch (e) {
+        googlePassword = 'DefaultGooglePassword123!';
+      }
 
       if (!mounted) return;
+
+
       context.read<RegisterCubit>().fillFromGoogleAccount(
-        firstName: result.firstName,
-        lastName: result.lastName,
-        email: result.email,
+        firstName: result.firstName ?? '',
+        lastName: result.lastName ?? '',
+        email: result.email ?? '',
+        googlePassword: googlePassword,
       );
 
       _navigateToNextStep();
+
     } catch (e) {
       if (!mounted) return;
       CustomSnackBar.error(context, e.toString());
@@ -89,15 +106,9 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _onFacebookPressed() {
-    // TODO(auth): Implement Facebook Sign-Up
-  }
-
-  void _onApplePressed() {
-    // TODO(auth): Implement Apple Sign-Up
   }
 
   void _onLoginPressed() {
-    // Navigate back to login screen if needed
   }
 
   @override
@@ -136,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   SocialLoginButtons(
                     onFacebookTap: _onFacebookPressed,
                     onGoogleTap: _onGooglePressed,
-                    onAppleTap: _onApplePressed,
+                    onAppleTap: () {},
                     isGoogleLoading: _isLoading,
                   ),
                   const AppSizedBox(height: AppSize.s20),

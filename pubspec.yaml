@@ -96,6 +96,7 @@ dependencies:
   wheel_slider: ^1.2.2
   horizontal_picker: ^1.2.0
   smooth_page_indicator: ^2.0.1
+  firebase_remote_config: ^6.5.5
 
 dev_dependencies:
   flutter_test:

@@ -18,7 +18,7 @@ abstract interface class AuthRemoteDataSourceContract {
     RegisterRequestDto request,
   );
   Future<BaseResponse<LoginResponse>> login(LoginRequestBody request);
-   Future<BaseResponse<ForgetPasswordResponseDto>> forgotPassword(
+   Future<BaseResponse<ForgetPasswordResponseDto>> forgetPassword(
     ForgetPasswordRequestDto request,
   );
 

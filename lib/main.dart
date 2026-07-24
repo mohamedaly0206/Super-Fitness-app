@@ -6,6 +6,7 @@ import 'package:super_fitness_app/app.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/core/network/dio_helper.dart';
 import 'package:super_fitness_app/core/resources/app_value.dart';
+import 'package:super_fitness_app/core/service/remote_config_service.dart';
 
 import 'firebase_options.dart';
 
@@ -16,6 +17,7 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   DioHelper.init();
   configureDependencies();
+  await getIt<RemoteConfigService>().init();
   FlutterNativeSplash.remove();
   runApp(
     EasyLocalization(

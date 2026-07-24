@@ -92,7 +92,7 @@ class AuthRepoImpl implements AuthRepoContract {
   Future<BaseResponse<ForgetPasswordEntity>> forgetPassword({
     required String email,
   }) async {
-    final response = await _remoteDataSource.forgotPassword(
+    final response = await _remoteDataSource.forgetPassword(
       ForgetPasswordRequestDto(email: email),
     );
 

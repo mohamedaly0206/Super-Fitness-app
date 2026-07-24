@@ -62,7 +62,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSourceContract {
   }
 
   @override
-  Future<BaseResponse<ForgetPasswordResponseDto>> forgotPassword(
+  Future<BaseResponse<ForgetPasswordResponseDto>> forgetPassword(
     ForgetPasswordRequestDto request,
   ) {
     return _safeApiCaller.safeCall(() async {
