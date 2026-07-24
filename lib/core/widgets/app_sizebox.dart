@@ -15,4 +15,3 @@ class AppSizedBox extends StatelessWidget {
     );
   }
 }
-  

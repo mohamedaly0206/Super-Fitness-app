@@ -10,5 +10,8 @@
     "login_successfully": "Login successful",
     "login_error": "Login failed",
     "signup_successfully": "Signup successful"
+  },
+  "meals": {
+    "ingredients": "Ingredients"
   }
 }

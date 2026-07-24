@@ -5,6 +5,7 @@ import 'package:super_fitness_app/core/network/endpoints.dart';
 import 'package:super_fitness_app/modules/meals/data/models/meal_categories_response_dto.dart';
 import 'package:super_fitness_app/modules/meals/data/models/meal_details_response_dto.dart';
 import 'package:super_fitness_app/modules/meals/data/models/meals_response_dto.dart';
+import 'package:super_fitness_app/modules/meals/data/models/response/meals_details_dto.dart';
 
 part 'meals_api_client.g.dart';
 
@@ -22,4 +23,6 @@ abstract interface class MealsApiClient {
 
   @GET(MealEndPoint.lookup)
   Future<MealDetailsResponseDto> getMealDetails({@Query("i") required String id});
+  @GET(MealEndPoint.lookup)
+  Future<MealsDetailsDto> getMeals(@Query('i') String id);
 }

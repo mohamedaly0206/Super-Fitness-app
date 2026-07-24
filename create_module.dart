@@ -6,8 +6,7 @@ void main(List<String> args) {
     exit(1);
   }
 
-      //Usage: dart create_module.dart <module_name>
-
+  //Usage: dart create_module.dart <module_name>
 
   final moduleName = args.first;
   // Use Platform.pathSeparator to ensure it works properly across different OS if ever moved,

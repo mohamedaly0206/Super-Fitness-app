@@ -5,6 +5,7 @@ import 'package:super_fitness_app/config/routes/page_transitions.dart';
 import 'package:super_fitness_app/modules/app_sections/presentation/pages/app_sections_page.dart';
 import 'package:super_fitness_app/core/widgets/not_found_screen.dart';
 import 'package:super_fitness_app/core/widgets/ui_showcase_page.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_details/page/food_details_page.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/page/food_recommendation_page.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise_details/pages/exercise_details_page.dart';
@@ -19,6 +20,7 @@ abstract class Routes {
   static const String exerciseDetails = '/exercise-details';
   static const String workouts = '/workouts';
 }
+
 
 abstract class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -47,6 +49,9 @@ abstract class AppRouter {
         case Routes.foodRecommendation:
           return PageTransitions.slide(const FoodRecommendationPage());
 
+        case Routes.foodDetails:
+          //static mealId just for demo
+          return PageTransitions.fade(FoodDetailsPage(mealId: '53457'));
         default:
           return PageTransitions.fade(
             NotFoundScreen(route: settings.name ?? ''),

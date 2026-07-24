@@ -22,6 +22,7 @@ class CustomScaffold extends StatelessWidget {
     return Scaffold(
       appBar: appBar,
       body: Stack(
+        fit: StackFit.expand,
         children: [
           Positioned.fill(
             child: Image.asset(background.background, fit: BoxFit.cover),

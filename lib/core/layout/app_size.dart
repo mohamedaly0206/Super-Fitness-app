@@ -61,7 +61,7 @@ class AppSize {
   static const double focusedBorderWidth = 1.2;
 
   //  BLUR
-  static const double backgroundBlurSigma = 34.6;
+  static const double backgroundBlurSigma = 10;
 
   //  SVG ICON
   static const double svgIconSize = 24.0;

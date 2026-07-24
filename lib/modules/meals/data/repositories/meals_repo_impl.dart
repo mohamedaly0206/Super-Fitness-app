@@ -1,10 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:super_fitness_app/config/base/base_response.dart';
-import 'package:super_fitness_app/modules/meals/data/datasources/meals_remote_data_source.dart';
-import 'package:super_fitness_app/modules/meals/domain/entities/meal_category_entity.dart';
-import 'package:super_fitness_app/modules/meals/domain/entities/meal_details_entity.dart';
-import 'package:super_fitness_app/modules/meals/domain/entities/meal_entity.dart';
-import 'package:super_fitness_app/modules/meals/domain/repositories/meals_repo.dart';
+import '../../domain/repositories/meals_repo.dart';
 
 @Injectable(as: MealsRepo)
 class MealsRepoImpl implements MealsRepo {

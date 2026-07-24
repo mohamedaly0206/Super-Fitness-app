@@ -49,6 +49,6 @@ abstract class ExercisesEndPoint {
 
 abstract class MealEndPoint {
   static const String categories = 'categories.php';
-  static const String filter = 'filter.php';
-  static const String lookup = 'lookup.php';
+  static const String filter = '/filter.php';
+  static const String lookup = '/lookup.php';
 }
