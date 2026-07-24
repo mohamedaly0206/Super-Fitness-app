@@ -66,26 +66,24 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _onGooglePressed() {
-    context.read<RegisterCubit>().handleRegisterIntent(
-       GoogleRegisterIntent(),
-    );
+    context.read<RegisterCubit>().handleRegisterIntent(GoogleRegisterIntent());
   }
 
   void _onFacebookPressed() {
     context.read<RegisterCubit>().handleRegisterIntent(
-       FacebookRegisterIntent(),
+      FacebookRegisterIntent(),
     );
   }
 
   void _onLoginPressed() {
-    // Navigate to Login screen
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listenWhen: (previous, current) =>
-      previous.registerState != current.registerState ||
+          previous.registerState != current.registerState ||
           previous.email != current.email,
       listener: (context, state) {
         if (state.registerState.errorMessage != null &&

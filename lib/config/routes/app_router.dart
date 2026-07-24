@@ -10,7 +10,6 @@ import 'package:super_fitness_app/modules/auth/presentation/forget_password/page
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/page/onboarding_page.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/pages/main_register_view_controller.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/view_model/cubit/login_cubit.dart';
-import '../../modules/app_sections/app_sections.dart';
 import '../../modules/auth/presentation/login/views/login_view.dart';
 
 abstract class AppRouter {
@@ -38,8 +37,6 @@ abstract class AppRouter {
               child: const LoginView(),
             ),
           );
-        case Routes.appSections:
-          return PageTransitions.fade(const AppSections());
         default:
           return PageTransitions.fade(
             NotFoundScreen(route: settings.name ?? ''),
