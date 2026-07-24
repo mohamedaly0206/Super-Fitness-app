@@ -99,27 +99,40 @@ class FoodDetailsCubit extends Cubit<FoodDetailsState> {
   }
 
   void _playInlineYoutubeVideo(String url) {
+    emit(state.copyWith(isLoading: true));
     if (url.isEmpty) {
       return;
     }
 
-    // 1. Manually extract video ID using a bulletproof method
     final videoId = _extractYoutubeId(url);
 
     if (videoId != null && videoId.isNotEmpty) {
-      // 2. Initialize the controller
       final controller = YoutubePlayerController.fromVideoId(
         videoId: videoId,
         autoPlay: true,
       );
-      emit(state.copyWith(isPlayingVideo: true, youtubeController: controller));
-    } else {}
+      emit(
+        state.copyWith(
+          isPlayingVideo: true,
+          youtubeController: controller,
+          isLoading: false,
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          isPlayingVideo: false,
+          isLoading: false,
+          errorMessage: AppStrings.unableToLoadVideo,
+        ),
+      );
+    }
   }
 
   // Bulletproof fallback for TheMealDB URLs without relying on Regex
   String? _extractYoutubeId(String url) {
     final RegExp regExp = RegExp(
-     AppStrings.youTubeVideoIdRegex,
+      AppStrings.youTubeVideoIdRegex,
 
       caseSensitive: false,
 

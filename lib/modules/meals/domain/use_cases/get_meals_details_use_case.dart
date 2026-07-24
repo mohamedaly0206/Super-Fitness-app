@@ -8,5 +8,6 @@ class GetMealsDetailsUseCase {
   final MealsRepo mealsRepo;
   GetMealsDetailsUseCase({required this.mealsRepo});
 
-  Future<BaseResponse<MealsDetailsEntity>> call(String mealId) => mealsRepo.getMeals(mealId);
+  Future<BaseResponse<MealsDetailsEntity>> call(String mealId) =>
+      mealsRepo.getMeals(mealId);
 }

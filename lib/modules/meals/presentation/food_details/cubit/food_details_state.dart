@@ -5,6 +5,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class FoodDetailsState extends Equatable {
   final BaseState getFoodDetailsState;
   final bool isLoading;
+  final String? errorMessage;
   final List<Map<String, String>> validIngredients;
 
   final bool isPlayingVideo;
@@ -16,6 +17,7 @@ class FoodDetailsState extends Equatable {
     this.validIngredients = const [],
     this.isPlayingVideo = false,
     this.youtubeController,
+    this.errorMessage,
   });
 
   FoodDetailsState copyWith({
@@ -24,6 +26,7 @@ class FoodDetailsState extends Equatable {
     List<Map<String, String>>? validIngredients,
     bool? isPlayingVideo,
     YoutubePlayerController? youtubeController,
+    String? errorMessage,
   }) {
     return FoodDetailsState(
       getFoodDetailsState: getFoodDetailsState ?? this.getFoodDetailsState,
@@ -31,6 +34,7 @@ class FoodDetailsState extends Equatable {
       validIngredients: validIngredients ?? this.validIngredients,
       isPlayingVideo: isPlayingVideo ?? this.isPlayingVideo,
       youtubeController: youtubeController ?? this.youtubeController,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
@@ -41,5 +45,6 @@ class FoodDetailsState extends Equatable {
     validIngredients,
     isPlayingVideo,
     youtubeController,
+    errorMessage,
   ];
 }

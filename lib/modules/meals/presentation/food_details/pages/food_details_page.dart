@@ -23,52 +23,70 @@ class FoodDetailsPage extends StatelessWidget {
       create: (context) =>
           getIt<FoodDetailsCubit>()
             ..handleFoodDetailsIntent(GetMealsDetailsIntent(mealId: mealId)),
-      child: CustomScaffold(
-        background: Backgrounds.homeAndSelectDetailsExercise,
-        body: BlocBuilder<FoodDetailsCubit, FoodDetailsState>(
-          builder: (context, state) {
-            return state.getFoodDetailsState.isLoading
-                ? const Center(child: AppLoadingWidget()):state.getFoodDetailsState.errorMessage != null
-                ? Center(child: Text(state.getFoodDetailsState.errorMessage!)) 
-                : SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FoodDetailsTopHeader(
-                          meal: state.getFoodDetailsState.data.meals?.first,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                            top: 16,
-                            right: 16,
-                          ),
+      child: BlocBuilder<FoodDetailsCubit, FoodDetailsState>(
+        builder: (context, state) {
+          return PopScope(
+            canPop: !state.isPlayingVideo,
+            onPopInvokedWithResult: (didPop, result) {
+              if (!didPop) {
+                context.read<FoodDetailsCubit>().handleFoodDetailsIntent(
+                  CloseYoutubeVideoIntent(),
+                );
+              }
+            },
+            child: CustomScaffold(
+              background: Backgrounds.homeAndSelectDetailsExercise,
+              body: BlocBuilder<FoodDetailsCubit, FoodDetailsState>(
+                builder: (context, state) {
+                  return state.getFoodDetailsState.isLoading
+                      ? const Center(child: AppLoadingWidget())
+                      : state.getFoodDetailsState.errorMessage != null
+                      ? Center(
+                          child: Text(state.getFoodDetailsState.errorMessage!),
+                        )
+                      : SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                context.ingredients,
-                                style: getBoldStyle(
-                                  context: context,
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.onPrimary,
-                                  fontSize: FontSizeManager.s20,
-                                ),
+                              FoodDetailsTopHeader(
+                                meal:
+                                    state.getFoodDetailsState.data.meals?.first,
                               ),
-                              const SizedBox(height: AppSize.s8),
-                              // REMOVED Expanded() here:
-                              IngrediEntsWidget(
-                                ingredients: state.validIngredients,
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 16,
+                                  top: 16,
+                                  right: 16,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      context.ingredients,
+                                      style: getBoldStyle(
+                                        context: context,
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.onPrimary,
+                                        fontSize: FontSizeManager.s20,
+                                      ),
+                                    ),
+                                    const SizedBox(height: AppSize.s8),
+                                    // REMOVED Expanded() here:
+                                    IngrediEntsWidget(
+                                      ingredients: state.validIngredients,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-          },
-        ),
+                        );
+                },
+              ),
+            ),
+          );
+        },
       ),
     );
   }

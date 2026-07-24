@@ -55,8 +55,6 @@ class MealDto {
   final String? strMeasure19;
   final String? strMeasure20;
 
- 
-
   MealDto(
     this.strCountry,
     this.strMealAlternate,

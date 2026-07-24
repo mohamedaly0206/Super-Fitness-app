@@ -65,7 +65,9 @@ class AppErrorWidget extends StatelessWidget {
                   backgroundColor: AppColors.primary,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppSize.borderRadiusButton),
+                    borderRadius: BorderRadius.circular(
+                      AppSize.borderRadiusButton,
+                    ),
                   ),
                 ),
                 onPressed: onRetry,

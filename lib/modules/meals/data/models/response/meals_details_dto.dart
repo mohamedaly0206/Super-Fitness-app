@@ -15,9 +15,9 @@ class MealsDetailsDto {
       _$MealsDetailsDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$MealsDetailsDtoToJson(this);
-  
+
   MealsDetailsEntity toDomain() => MealsDetailsEntity(
-        // Map the list of MealDto to a list of MealEntity
-        meals: meals?.map((meal) => meal.toDomain()).toList(),
-      );
+    // Map the list of MealDto to a list of MealEntity
+    meals: meals?.map((meal) => meal.toDomain()).toList(),
+  );
 }

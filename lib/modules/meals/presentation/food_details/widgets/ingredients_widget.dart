@@ -3,8 +3,8 @@ import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 
 class IngrediEntsWidget extends StatelessWidget {
- const  IngrediEntsWidget({super.key, required this.ingredients});
- final List<Map<String, String>> ingredients;
+  const IngrediEntsWidget({super.key, required this.ingredients});
+  final List<Map<String, String>> ingredients;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

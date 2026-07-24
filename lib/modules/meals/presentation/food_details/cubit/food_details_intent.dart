@@ -9,4 +9,5 @@ class OpenYoutubeVideoIIntent extends FoodDetailsIntent {
   final String videoUrl;
   OpenYoutubeVideoIIntent({required this.videoUrl});
 }
+
 class CloseYoutubeVideoIntent extends FoodDetailsIntent {}

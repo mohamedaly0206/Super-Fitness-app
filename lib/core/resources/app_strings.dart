@@ -6,7 +6,10 @@ abstract class AppStrings {
   static const String oops = 'Oops!';
   static const String goHome = 'Go Home';
   static const String routeNotFound = 'Route not found';
-  static const String youTubeVideoIdRegex= r'(?:youtu\.be\/|youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})';
+  static const String youTubeVideoIdRegex =
+      r'(?:youtu\.be\/|youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})';
+  static const String unableToLoadVideo =
+      'Unable to play video, please try again';
   //  NAVIGATION
   static const String home = 'Home';
   static const String workout = 'Workout';

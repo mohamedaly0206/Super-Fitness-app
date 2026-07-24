@@ -99,7 +99,8 @@ class MealEntity extends Equatable {
     this.strMeasure17,
     this.strMeasure18,
     this.strMeasure19,
-    this.strMeasure20, this.strArea,
+    this.strMeasure20,
+    this.strArea,
   });
 
   @override

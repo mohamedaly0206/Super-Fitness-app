@@ -1,4 +1,3 @@
 class AppLottie {
   AppLottie._();
-
 }

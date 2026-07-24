@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
+import 'package:super_fitness_app/core/widgets/app_loading_widget.dart';
 import 'package:super_fitness_app/core/widgets/custom_back_button.dart';
 import 'package:super_fitness_app/modules/meals/domain/entities/meal_entity.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_cubit.dart';
@@ -29,13 +30,15 @@ class FoodDetailsTopHeader extends StatelessWidget {
             children: [
               if (isPlaying && controller != null)
                 SizedBox.expand(
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                    ),
-                    child: YoutubePlayer(controller: controller),
-                  ),
+                  child: state.isLoading
+                      ? const Center(child: AppLoadingWidget())
+                      : ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                          ),
+                          child: YoutubePlayer(controller: controller),
+                        ),
                 )
               else
                 GestureDetector(
