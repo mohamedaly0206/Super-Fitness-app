@@ -109,7 +109,7 @@ class FoodDetailsTopHeader extends StatelessWidget {
                 ),
 
               if (!isPlaying)
-                const Positioned(top: 50, left: 20, child: CustomBackButton()),
+                const Positioned(top: 60, left: 20, child: CustomBackButton()),
 
               if (!isPlaying)
                 Positioned(
