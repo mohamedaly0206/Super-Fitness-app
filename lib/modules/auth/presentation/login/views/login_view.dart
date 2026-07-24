@@ -53,13 +53,19 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
+  void _onGooglePressed() {
+    context.read<LoginCubit>().handleLoginIntent(
+      GoogleLoginIntent(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       background: Backgrounds.login,
       body: BlocListener<LoginCubit, LoginState>(
         listenWhen: (previous, current) =>
-            previous.loginState != current.loginState,
+        previous.loginState != current.loginState,
         listener: (context, state) {
           if (state.loginState.errorMessage != null) {
             CustomSnackBar.error(context, state.loginState.errorMessage!);
@@ -70,7 +76,7 @@ class _LoginViewState extends State<LoginView> {
             Navigator.pushNamedAndRemoveUntil(
               context,
               Routes.appSections,
-              (route) => false,
+                  (route) => false,
             );
           }
         },
@@ -165,33 +171,41 @@ class _LoginViewState extends State<LoginView> {
                                 style: TextButton.styleFrom(
                                   padding: EdgeInsets.zero,
                                   tapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
+                                  MaterialTapTargetSize.shrinkWrap,
                                 ),
                                 child: Text(
                                   AuthConstants.forgetPassword,
                                   style:
-                                      getRegularStyle(
-                                        context: context,
-                                        color: AppColors.primary,
-                                        fontSize: FontSizeManager.s14,
-                                      ).copyWith(
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: AppColors.primary,
-                                      ),
+                                  getRegularStyle(
+                                    context: context,
+                                    color: AppColors.primary,
+                                    fontSize: FontSizeManager.s14,
+                                  ).copyWith(
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: AppColors.primary,
+                                  ),
                                 ),
                               ),
                             ),
                             const AuthOrDivider(),
                             const AppSizedBox(height: AppSize.s10),
-                            SocialLoginButtons(
-                              onFacebookTap: () {},
-                              onGoogleTap: () {},
-                              onAppleTap: () {},
+                            BlocBuilder<LoginCubit, LoginState>(
+                              buildWhen: (previous, current) =>
+                              previous.loginState.isLoading !=
+                                  current.loginState.isLoading,
+                              builder: (context, state) {
+                                return SocialLoginButtons(
+                                  onFacebookTap: () {},
+                                  onGoogleTap: _onGooglePressed,
+                                  onAppleTap: () {},
+                                  isGoogleLoading: state.loginState.isLoading,
+                                );
+                              },
                             ),
                             const AppSizedBox(height: AppSize.s20),
                             BlocBuilder<LoginCubit, LoginState>(
                               buildWhen: (previous, current) =>
-                                  previous.loginState.isLoading !=
+                              previous.loginState.isLoading !=
                                   current.loginState.isLoading,
                               builder: (context, state) {
                                 return LoginSubmitButton(

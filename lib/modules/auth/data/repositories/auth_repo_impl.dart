@@ -18,6 +18,7 @@ import 'package:super_fitness_app/modules/auth/domain/entities/response/register
 import 'package:super_fitness_app/modules/auth/domain/entities/verify_reset_code_entity.dart';
 import 'package:super_fitness_app/modules/auth/domain/repositories/auth_repo_contract.dart';
 
+import '../../../../core/storage/secure_storage_service.dart';
 import '../models/request/login_request_body.dart';
 import '../models/request/register_request_dto.dart';
 import '../models/request/verify_reset_code_request.dart';
@@ -53,9 +54,15 @@ class AuthRepoImpl implements AuthRepoContract {
 
     switch (response) {
       case SuccessBaseResponse<LoginResponse>():
+        final token = response.data.token;
+        if (token != null && token.isNotEmpty) {
+          await SecureStorageService.saveToken(token);
+        }
+
         return SuccessBaseResponse<UserEntity>(
           data: response.data.user?.toDomain() ?? UserEntity(),
         );
+
       case ErrorBaseResponse<LoginResponse>():
         return ErrorBaseResponse<UserEntity>(failure: response.failure);
     }
