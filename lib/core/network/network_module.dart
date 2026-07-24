@@ -17,5 +17,5 @@ abstract class NetworkModule {
   ExerciseApiClient exerciseApi(Dio dio) => ExerciseApiClient(dio);
 
   @singleton
-  MealsApiClient mealsApi(Dio dio) => MealsApiClient(dio);
+  MealsApiClient mealsApi(@Named('MealsDio') Dio dio) => MealsApiClient(dio);
 }

@@ -18,6 +18,7 @@ abstract class AppStrings {
 
   //  SHOWCASE
   static const String uiShowcase = 'UI Showcase';
+  static const String foodRecommendation = 'Food Recommendation';
 }
 
 abstract class AppHttpHeaders {

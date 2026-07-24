@@ -8,19 +8,26 @@ Widget homeParts({
   required BuildContext context,
   required String title,
   required Widget child,
+  Widget? trailing,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text(
-          title,
-          style: getSemiBoldStyle(
-            context: context,
-            fontSize: FontSizeManager.s18,
-            color: AppColors.textPrimary,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: getSemiBoldStyle(
+                context: context,
+                fontSize: FontSizeManager.s18,
+                color: AppColors.textPrimary,
+              ),
+            ),
+            if (trailing != null) trailing,
+          ],
         ),
       ),
       child,

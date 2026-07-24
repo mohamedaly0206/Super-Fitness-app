@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
+import 'package:super_fitness_app/core/theme/app_text_style.dart';
+import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/category_widget.dart';
@@ -11,6 +13,7 @@ import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/hom
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/home_workouts_section.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/popular_training_card_widget.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/popular_training_shimmer_widget.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/page/food_recommendation_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -100,8 +103,62 @@ class HomePage extends StatelessWidget {
               // food
               homeParts(
                 context: context,
-                title: 'Food',
-                child: SizedBox(height: 131),
+                title: 'Recommendation Food',
+                trailing: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const FoodRecommendationPage(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'See All',
+                    style: getMediumStyle(
+                      context: context,
+                      fontSize: FontSizeManager.s14,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                ),
+                child: SizedBox(
+                  height: 131,
+                  child: BlocBuilder<HomeCubit, HomeState>(
+                    buildWhen: (previous, current) =>
+                        previous.foodCategoriesState !=
+                        current.foodCategoriesState,
+                    builder: (context, state) {
+                      if (state.foodCategoriesState.isLoading) {
+                        return homeCardShimmer();
+                      }
+                      if (state.foodCategoriesState.data != null) {
+                        final categories = state.foodCategoriesState.data!;
+                        return ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return Container(margin: EdgeInsets.all(6));
+                          },
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: categories.length,
+                          itemBuilder: (context, index) {
+                            final category = categories[index];
+                            return homeCard(
+                              image: category.thumbnail,
+                              title: category.name,
+                            );
+                          },
+                        );
+                      }
+                      if (state.foodCategoriesState.errorMessage != null) {
+                        return Center(
+                          child: Text(state.foodCategoriesState.errorMessage!),
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
+                ),
               ),
 
               // popular training

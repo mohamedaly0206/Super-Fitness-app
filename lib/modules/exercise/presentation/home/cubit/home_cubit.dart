@@ -14,6 +14,8 @@ import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_levels_u
 import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_muscles_by_muscle_group_use_case.dart';
 import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_random_muscles_use_case.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_event.dart';
+import 'package:super_fitness_app/modules/meals/domain/entities/meal_category_entity.dart';
+import 'package:super_fitness_app/modules/meals/domain/use_cases/get_categories_use_case.dart';
 
 part 'home_state.dart';
 
@@ -25,6 +27,7 @@ class HomeCubit extends Cubit<HomeState> {
   final GetRandomMusclesUseCase getRandomMusclesUseCase;
   final GetAllMusclesUseCase getAllMusclesUseCase;
   final GetMusclesByMuscleGroupUseCase getMusclesByMuscleGroupUseCase;
+  final GetCategoriesUseCase getCategoriesUseCase;
 
   HomeCubit({
     required this.getLevelsUseCase,
@@ -32,6 +35,7 @@ class HomeCubit extends Cubit<HomeState> {
     required this.getRandomMusclesUseCase,
     required this.getAllMusclesUseCase,
     required this.getMusclesByMuscleGroupUseCase,
+    required this.getCategoriesUseCase,
   }) : super(HomeState());
 
   void doEvent(HomeEvent event) {
@@ -46,6 +50,8 @@ class HomeCubit extends Cubit<HomeState> {
         _getMuscleGroups();
       case GetMusclesByGroupEvent():
         _getMusclesByGroup(event.muscleGroupId);
+      case GetFoodCategoriesEvent():
+        _getFoodCategories();
     }
   }
 
@@ -206,6 +212,29 @@ class HomeCubit extends Cubit<HomeState> {
       case ErrorBaseResponse<ExercisesPaginatedResponse>():
         emit(state.copyWith(
           exerciseState: state.exerciseState.copyWith(
+            isLoadingParam: false,
+            errorMessageParam: response.failure.message,
+          ),
+        ));
+    }
+  }
+
+  void _getFoodCategories() async {
+    emit(state.copyWith(
+        foodCategoriesState:
+            state.foodCategoriesState.copyWith(isLoadingParam: true)));
+    final response = await getCategoriesUseCase();
+    switch (response) {
+      case SuccessBaseResponse<List<MealCategoryEntity>>():
+        emit(state.copyWith(
+          foodCategoriesState: state.foodCategoriesState.copyWith(
+            isLoadingParam: false,
+            dataParam: response.data,
+          ),
+        ));
+      case ErrorBaseResponse<List<MealCategoryEntity>>():
+        emit(state.copyWith(
+          foodCategoriesState: state.foodCategoriesState.copyWith(
             isLoadingParam: false,
             errorMessageParam: response.failure.message,
           ),

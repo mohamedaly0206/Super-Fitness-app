@@ -39,7 +39,6 @@ class DioHelper {
         connectTimeout: AppDurations.apiTimeout,
         receiveTimeout: AppDurations.apiTimeout,
         responseType: ResponseType.json,
-        headers: {AppHttpHeaders.contentType: AppHttpHeaders.jsonContentType},
       ),
     );
 

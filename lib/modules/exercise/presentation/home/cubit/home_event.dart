@@ -16,3 +16,5 @@ class GetMusclesByGroupEvent extends HomeEvent {
   final String muscleGroupId;
   GetMusclesByGroupEvent({required this.muscleGroupId});
 }
+
+class GetFoodCategoriesEvent extends HomeEvent {}

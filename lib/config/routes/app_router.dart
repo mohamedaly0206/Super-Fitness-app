@@ -5,6 +5,7 @@ import 'package:super_fitness_app/config/routes/page_transitions.dart';
 import 'package:super_fitness_app/modules/app_sections/presentation/pages/app_sections_page.dart';
 import 'package:super_fitness_app/core/widgets/not_found_screen.dart';
 import 'package:super_fitness_app/core/widgets/ui_showcase_page.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/page/food_recommendation_page.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise_details/pages/exercise_details_page.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_cubit.dart';
@@ -13,6 +14,7 @@ import 'package:super_fitness_app/modules/exercise/presentation/workouts/pages/w
 abstract class Routes {
   static const String splash = '/';
   static const String uiShowcase = '/ui-showcase';
+  static const String foodRecommendation = '/food-recommendation';
   static const String homeRoutes = '/home';
   static const String exerciseDetails = '/exercise-details';
   static const String workouts = '/workouts';
@@ -42,6 +44,8 @@ abstract class AppRouter {
 
         case Routes.uiShowcase:
           return PageTransitions.fade(const UIShowcasePage());
+        case Routes.foodRecommendation:
+          return PageTransitions.slide(const FoodRecommendationPage());
 
         default:
           return PageTransitions.fade(

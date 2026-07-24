@@ -22,7 +22,8 @@ class AppSectionsPage extends StatelessWidget {
           create: (_) => getIt<HomeCubit>()
             ..doEvent(GetRandomMusclesEvent())
             ..doEvent(GetLevelsEvent())
-            ..doEvent(GetMuscleGroupsEvent()),
+            ..doEvent(GetMuscleGroupsEvent())
+            ..doEvent(GetFoodCategoriesEvent()),
         ),
         BlocProvider(create: (_) => getIt<WorkoutsCubit>()),
       ],
