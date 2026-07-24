@@ -12,7 +12,8 @@ abstract class AppRouter {
         case Routes.uiShowcase:
           return PageTransitions.fade(const UIShowcasePage());
         case Routes.foodDetails:
-          return PageTransitions.fade(FoodDetailsPage(mealId: '53133'));
+          //static mealId just for demo
+          return PageTransitions.fade(FoodDetailsPage(mealId: '53457'));
         default:
           return PageTransitions.fade(
             NotFoundScreen(route: settings.name ?? ''),
