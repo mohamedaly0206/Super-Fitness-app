@@ -3,17 +3,8 @@ import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 
 class IngrediEntsWidget extends StatelessWidget {
-  IngrediEntsWidget({super.key});
-  final ingredients = [
-    {'name': 'Meal Breasts', 'amount': '250g'},
-    {'name': 'Unsalted Butter', 'amount': '1tbsp'},
-    {'name': 'Sesame Or Vegetable Oil', 'amount': '2 Tsp'},
-    {'name': 'Fresh Ginger', 'amount': '2 Tsp'},
-    {'name': 'Large Eggs', 'amount': '100 G'},
-    {'name': 'Large Eggs', 'amount': '100 G'},
-    {'name': 'Large Eggs', 'amount': '100 G'},
-    {'name': 'Large Eggs', 'amount': '100 G'},
-  ];
+ const  IngrediEntsWidget({super.key, required this.ingredients});
+ final List<Map<String, String>> ingredients;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

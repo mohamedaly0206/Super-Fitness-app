@@ -1,5 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
-
 abstract class AppStrings {
   AppStrings._();
 
@@ -8,8 +6,7 @@ abstract class AppStrings {
   static const String oops = 'Oops!';
   static const String goHome = 'Go Home';
   static const String routeNotFound = 'Route not found';
-  static String get ingredients => "meals.Ingredients".tr();
-
+  static const String youTubeVideoIdRegex= r'(?:youtu\.be\/|youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})';
   //  NAVIGATION
   static const String home = 'Home';
   static const String workout = 'Workout';

@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:super_fitness_app/core/network/endpoints.dart';
+import 'package:super_fitness_app/modules/meals/data/models/response/meals_details_dto.dart';
 
 part 'meals_api_client.g.dart';
 
@@ -9,4 +11,7 @@ abstract interface class MealsApiClient {
   @factoryMethod
   factory MealsApiClient(@Named('MealsDio') Dio dio, {String baseUrl}) =
       _MealsApiClient;
+
+  @GET(MealEndPoint.lookup)
+  Future<MealsDetailsDto> getMeals(@Query('i') String id);
 }
