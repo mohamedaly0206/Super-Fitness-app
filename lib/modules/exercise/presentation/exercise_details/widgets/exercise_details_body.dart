@@ -4,25 +4,15 @@ import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
-import 'package:super_fitness_app/modules/exercise/presentation/exercise_details/widgets/youtube_webview.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/exercise_details/widgets/exercise_details_top_header.dart';
 
 Widget exerciseDetailsBody({
   required BuildContext context,
   required ExerciseEntity exercise,
 }) {
-  final videoUrl =
-      exercise.shortYoutubeDemonstrationLink.isNotEmpty
-          ? exercise.shortYoutubeDemonstrationLink
-          : exercise.inDepthYoutubeExplanationLink;
-
   return Column(
     children: [
-      // Video - no padding, full width
-      SizedBox(
-        height: 220,
-        width: double.infinity,
-        child: YoutubeWebview(url: videoUrl),
-      ),
+      ExerciseDetailsTopHeader(exercise: exercise),
 
       // Details below video
       Expanded(

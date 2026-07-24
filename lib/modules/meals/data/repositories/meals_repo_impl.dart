@@ -1,5 +1,11 @@
 import 'package:injectable/injectable.dart';
-import '../../domain/repositories/meals_repo.dart';
+import 'package:super_fitness_app/config/base/base_response.dart';
+import 'package:super_fitness_app/modules/meals/data/datasources/meals_remote_data_source.dart';
+import 'package:super_fitness_app/modules/meals/domain/entities/meal_category_entity.dart';
+import 'package:super_fitness_app/modules/meals/domain/entities/meal_details_entity.dart';
+import 'package:super_fitness_app/modules/meals/domain/entities/meal_entity.dart';
+import 'package:super_fitness_app/modules/meals/domain/entities/meals_details_entity.dart';
+import 'package:super_fitness_app/modules/meals/domain/repositories/meals_repo.dart';
 
 @Injectable(as: MealsRepo)
 class MealsRepoImpl implements MealsRepo {
@@ -52,6 +58,19 @@ class MealsRepoImpl implements MealsRepo {
         return ErrorBaseResponse<MealDetailsEntity>(
           failure: response.failure,
         );
+    }
+  }
+
+  @override
+  Future<BaseResponse<MealsDetailsEntity>> getMeals(String id) async {
+    final response = await mealsRemoteDataSource.getMeals(id);
+
+    switch (response) {
+      case SuccessBaseResponse():
+        final entity = response.data.toDomain();
+        return SuccessBaseResponse<MealsDetailsEntity>(data: entity);
+      case ErrorBaseResponse():
+        return ErrorBaseResponse<MealsDetailsEntity>(failure: response.failure);
     }
   }
 }

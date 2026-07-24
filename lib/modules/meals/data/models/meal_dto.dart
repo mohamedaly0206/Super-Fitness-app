@@ -26,6 +26,10 @@ class MealDto {
       id: idMeal ?? "",
       name: strMeal ?? "",
       thumbnail: strMealThumb ?? "",
+      category: "",
+      instructions: "",
+      imageUrl: strMealThumb ?? "",
+      youtubeUrl: "",
     );
   }
 }

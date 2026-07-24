@@ -4,6 +4,7 @@ import 'package:super_fitness_app/config/routes/app_router.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/see_all_text.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_event.dart';
@@ -57,7 +58,7 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                     ),
                   ),
                   const Spacer(),
-                  GestureDetector(
+                  SeeAllText(
                     onTap: () {
                       Navigator.pushNamed(
                         context,
@@ -65,14 +66,6 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                         arguments: groups[_selectedIndex].id,
                       );
                     },
-                    child: Text(
-                      'See All',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.primary,
-                      ),
-                    ),
                   ),
                 ],
               ),
@@ -144,7 +137,7 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                       itemCount: muscles.length,
                       itemBuilder: (context, index) {
                         final muscle = muscles[index];
-                        return homeCard(
+                        return HomeCardWidget(
                           image: muscle.image,
                           title: muscle.name,
                         );

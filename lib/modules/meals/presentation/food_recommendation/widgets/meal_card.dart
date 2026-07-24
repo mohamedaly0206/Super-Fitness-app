@@ -23,12 +23,11 @@ class MealCard extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             CachedNetworkImageWidget(
-              urlToImage: meal.thumbnail,
+              urlToImage: meal.thumbnail ?? '',
               width: double.infinity,
               height: double.infinity,
             ),
-            // Subtle overall scrim so the card reads as one elegant surface,
-            // not just a bright photo with a dark strip at the bottom.
+            
             DecoratedBox(
               decoration: BoxDecoration(
                 color: AppColors.grey0.withValues(alpha: 0.15),

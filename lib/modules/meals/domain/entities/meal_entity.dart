@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 class MealEntity extends Equatable {
   final String id;
   final String name;
+  final String? thumbnail;
   final String category;
   final String instructions;
   final String imageUrl;
@@ -54,6 +55,7 @@ class MealEntity extends Equatable {
   const MealEntity({
     required this.id,
     required this.name,
+    this.thumbnail,
     required this.category,
     required this.instructions,
     required this.imageUrl,
@@ -107,6 +109,7 @@ class MealEntity extends Equatable {
   List<Object?> get props => [
     id,
     name,
+    thumbnail,
     category,
     instructions,
     imageUrl,
@@ -154,15 +157,4 @@ class MealEntity extends Equatable {
     strMeasure19,
     strMeasure20,
   ];
-}
-class MealEntity {
-  final String id;
-  final String name;
-  final String thumbnail;
-
-  const MealEntity({
-    required this.id,
-    required this.name,
-    required this.thumbnail,
-  });
 }

@@ -11,7 +11,13 @@ import 'package:super_fitness_app/config/base/base_response.dart' as _i5;
 import 'package:super_fitness_app/modules/meals/data/datasources/meals_remote_data_source.dart'
     as _i3;
 import 'package:super_fitness_app/modules/meals/data/models/response/meals_details_dto.dart'
+    as _i10;
+import 'package:super_fitness_app/modules/meals/domain/entities/meal_category_entity.dart'
     as _i6;
+import 'package:super_fitness_app/modules/meals/domain/entities/meal_details_entity.dart'
+    as _i9;
+import 'package:super_fitness_app/modules/meals/domain/entities/meal_entity.dart'
+    as _i8;
 import 'package:super_fitness_app/modules/meals/domain/entities/meals_details_entity.dart'
     as _i2;
 
@@ -42,31 +48,104 @@ class _FakeMealsDetailsEntity_0 extends _i1.SmartFake
 class MockMealsRemoteDataSource extends _i1.Mock
     implements _i3.MealsRemoteDataSource {
   @override
-  _i4.Future<_i5.BaseResponse<_i6.MealsDetailsDto>> getMeals(String? mealId) =>
+  _i4.Future<_i5.BaseResponse<List<_i6.MealCategoryEntity>>> getCategories() =>
       (super.noSuchMethod(
-            Invocation.method(#getMeals, [mealId]),
+            Invocation.method(#getCategories, []),
             returnValue:
-                _i4.Future<_i5.BaseResponse<_i6.MealsDetailsDto>>.value(
-                  _i7.dummyValue<_i5.BaseResponse<_i6.MealsDetailsDto>>(
+                _i4.Future<
+                  _i5.BaseResponse<List<_i6.MealCategoryEntity>>
+                >.value(
+                  _i7.dummyValue<
+                    _i5.BaseResponse<List<_i6.MealCategoryEntity>>
+                  >(this, Invocation.method(#getCategories, [])),
+                ),
+            returnValueForMissingStub:
+                _i4.Future<
+                  _i5.BaseResponse<List<_i6.MealCategoryEntity>>
+                >.value(
+                  _i7.dummyValue<
+                    _i5.BaseResponse<List<_i6.MealCategoryEntity>>
+                  >(this, Invocation.method(#getCategories, [])),
+                ),
+          )
+          as _i4.Future<_i5.BaseResponse<List<_i6.MealCategoryEntity>>>);
+
+  @override
+  _i4.Future<_i5.BaseResponse<List<_i8.MealEntity>>> getMealsByCategory({
+    required String? category,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#getMealsByCategory, [], {#category: category}),
+            returnValue:
+                _i4.Future<_i5.BaseResponse<List<_i8.MealEntity>>>.value(
+                  _i7.dummyValue<_i5.BaseResponse<List<_i8.MealEntity>>>(
                     this,
-                    Invocation.method(#getMeals, [mealId]),
+                    Invocation.method(#getMealsByCategory, [], {
+                      #category: category,
+                    }),
                   ),
                 ),
             returnValueForMissingStub:
-                _i4.Future<_i5.BaseResponse<_i6.MealsDetailsDto>>.value(
-                  _i7.dummyValue<_i5.BaseResponse<_i6.MealsDetailsDto>>(
+                _i4.Future<_i5.BaseResponse<List<_i8.MealEntity>>>.value(
+                  _i7.dummyValue<_i5.BaseResponse<List<_i8.MealEntity>>>(
                     this,
-                    Invocation.method(#getMeals, [mealId]),
+                    Invocation.method(#getMealsByCategory, [], {
+                      #category: category,
+                    }),
                   ),
                 ),
           )
-          as _i4.Future<_i5.BaseResponse<_i6.MealsDetailsDto>>);
+          as _i4.Future<_i5.BaseResponse<List<_i8.MealEntity>>>);
+
+  @override
+  _i4.Future<_i5.BaseResponse<_i9.MealDetailsEntity>> getMealDetails({
+    required String? id,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#getMealDetails, [], {#id: id}),
+            returnValue:
+                _i4.Future<_i5.BaseResponse<_i9.MealDetailsEntity>>.value(
+                  _i7.dummyValue<_i5.BaseResponse<_i9.MealDetailsEntity>>(
+                    this,
+                    Invocation.method(#getMealDetails, [], {#id: id}),
+                  ),
+                ),
+            returnValueForMissingStub:
+                _i4.Future<_i5.BaseResponse<_i9.MealDetailsEntity>>.value(
+                  _i7.dummyValue<_i5.BaseResponse<_i9.MealDetailsEntity>>(
+                    this,
+                    Invocation.method(#getMealDetails, [], {#id: id}),
+                  ),
+                ),
+          )
+          as _i4.Future<_i5.BaseResponse<_i9.MealDetailsEntity>>);
+
+  @override
+  _i4.Future<_i5.BaseResponse<_i10.MealsDetailsDto>> getMeals(String? id) =>
+      (super.noSuchMethod(
+            Invocation.method(#getMeals, [id]),
+            returnValue:
+                _i4.Future<_i5.BaseResponse<_i10.MealsDetailsDto>>.value(
+                  _i7.dummyValue<_i5.BaseResponse<_i10.MealsDetailsDto>>(
+                    this,
+                    Invocation.method(#getMeals, [id]),
+                  ),
+                ),
+            returnValueForMissingStub:
+                _i4.Future<_i5.BaseResponse<_i10.MealsDetailsDto>>.value(
+                  _i7.dummyValue<_i5.BaseResponse<_i10.MealsDetailsDto>>(
+                    this,
+                    Invocation.method(#getMeals, [id]),
+                  ),
+                ),
+          )
+          as _i4.Future<_i5.BaseResponse<_i10.MealsDetailsDto>>);
 }
 
 /// A class which mocks [MealsDetailsDto].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMealsDetailsDto extends _i1.Mock implements _i6.MealsDetailsDto {
+class MockMealsDetailsDto extends _i1.Mock implements _i10.MealsDetailsDto {
   @override
   Map<String, dynamic> toJson() =>
       (super.noSuchMethod(

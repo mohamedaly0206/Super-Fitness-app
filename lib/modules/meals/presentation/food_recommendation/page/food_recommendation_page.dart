@@ -4,7 +4,7 @@ import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/widgets/app_error_widget.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
-import 'package:super_fitness_app/modules/meals/presentation/food_details/page/food_details_page.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_details/pages/food_details_page.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/cubit/food_recommendation_cubit.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/widgets/food_category_selector.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/widgets/food_recommendation_header.dart';
@@ -12,12 +12,16 @@ import 'package:super_fitness_app/modules/meals/presentation/food_recommendation
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/widgets/meals_grid_shimmer.dart';
 
 class FoodRecommendationPage extends StatelessWidget {
-  const FoodRecommendationPage({super.key});
+  final String? initialCategoryName;
+
+  const FoodRecommendationPage({super.key, this.initialCategoryName});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<FoodRecommendationCubit>()..loadCategories(),
+      create: (_) =>
+          getIt<FoodRecommendationCubit>()
+            ..loadCategories(initialCategoryName: initialCategoryName),
       child: const _FoodRecommendationView(),
     );
   }
@@ -74,14 +78,15 @@ class _FoodRecommendationViewState extends State<_FoodRecommendationView> {
       case FoodRecommendationCategoriesLoaded():
       case FoodRecommendationLoadingMeals():
         return const MealsGridShimmer();
-      case FoodRecommendationMealsLoaded():
+          case FoodRecommendationMealsLoaded():
         return MealsGrid(
           meals: state.meals,
           onMealTap: (meal) {
-            // Replace with the real Food Details screen (with meal id) later.
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const FoodDetailsPage()),
+              MaterialPageRoute(
+                builder: (_) => FoodDetailsPage(mealId: meal.id),
+              ),
             );
           },
         );

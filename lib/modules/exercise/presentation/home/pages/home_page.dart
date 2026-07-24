@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
-import 'package:super_fitness_app/core/theme/app_text_style.dart';
-import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/category_widget.dart';
@@ -13,6 +11,7 @@ import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/hom
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/home_workouts_section.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/popular_training_card_widget.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/popular_training_shimmer_widget.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/see_all_text.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/page/food_recommendation_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -79,7 +78,7 @@ class HomePage extends StatelessWidget {
                           itemCount: muscles.length,
                           itemBuilder: (context, index) {
                             final muscle = muscles[index];
-                            return homeCard(
+                            return HomeCardWidget(
                               image: muscle.image,
                               title: muscle.name,
                             );
@@ -103,8 +102,8 @@ class HomePage extends StatelessWidget {
               // food
               homeParts(
                 context: context,
-                title: 'Recommendation Food',
-                trailing: GestureDetector(
+                title: 'Recommendation For You',
+                trailing: SeeAllText(
                   onTap: () {
                     Navigator.push(
                       context,
@@ -113,14 +112,6 @@ class HomePage extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text(
-                    'See All',
-                    style: getMediumStyle(
-                      context: context,
-                      fontSize: FontSizeManager.s14,
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
                 ),
                 child: SizedBox(
                   height: 131,
@@ -143,9 +134,19 @@ class HomePage extends StatelessWidget {
                           itemCount: categories.length,
                           itemBuilder: (context, index) {
                             final category = categories[index];
-                            return homeCard(
+                            return HomeCardWidget(
                               image: category.thumbnail,
                               title: category.name,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => FoodRecommendationPage(
+                                      initialCategoryName: category.name,
+                                    ),
+                                  ),
+                                );
+                              },
                             );
                           },
                         );

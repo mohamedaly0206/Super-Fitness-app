@@ -19,7 +19,7 @@ class FoodRecommendationCubit extends Cubit<FoodRecommendationState> {
     required this.getMealsByCategoryUseCase,
   }) : super(const FoodRecommendationInitial());
 
-  Future<void> loadCategories() async {
+  Future<void> loadCategories({String? initialCategoryName}) async {
     emit(const FoodRecommendationLoadingCategories());
 
     final response = await getCategoriesUseCase();
@@ -30,14 +30,19 @@ class FoodRecommendationCubit extends Cubit<FoodRecommendationState> {
           emit(const FoodRecommendationError(message: 'No categories found'));
           return;
         }
-        final firstCategory = categories.first;
+        final selectedCategory = initialCategoryName != null
+            ? categories.firstWhere(
+                (c) => c.name == initialCategoryName,
+                orElse: () => categories.first,
+              )
+            : categories.first;
         emit(
           FoodRecommendationCategoriesLoaded(
             categories: categories,
-            selectedCategory: firstCategory,
+            selectedCategory: selectedCategory,
           ),
         );
-        await selectCategory(firstCategory);
+        await selectCategory(selectedCategory);
       case ErrorBaseResponse<List<MealCategoryEntity>>():
         emit(FoodRecommendationError(message: response.failure.message));
     }
