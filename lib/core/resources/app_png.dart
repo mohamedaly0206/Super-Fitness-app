@@ -16,4 +16,7 @@ abstract class AppPng {
   static const String homeAndSelectDetailsExerciseBackground =
       'assets/images/home_and_select_details_exercise_background.jpg';
   static const String chatBackground = 'assets/images/chat_background.jpg';
+
+  //  FOOD RECOMMENDATION
+  static const String backArrow = 'assets/svgs/Vector.png';
 }
