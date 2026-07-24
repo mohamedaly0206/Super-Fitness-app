@@ -17,11 +17,19 @@ class WorkoutsPage extends StatefulWidget {
 
 class _WorkoutsPageState extends State<WorkoutsPage> {
   int _selectedIndex = 0;
+  bool _didFetchGroups = false;
 
   @override
-  void initState() {
-    super.initState();
-    context.read<WorkoutsCubit>().doEvent(GetMuscleGroupsEvent());
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_didFetchGroups) {
+      _didFetchGroups = true;
+      final initialId =
+          ModalRoute.of(context)?.settings.arguments as String?;
+      context.read<WorkoutsCubit>().doEvent(
+        GetMuscleGroupsEvent(initialMuscleGroupId: initialId),
+      );
+    }
   }
 
   @override
@@ -46,19 +54,27 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
       ),
       body: BlocBuilder<WorkoutsCubit, WorkoutsState>(
         buildWhen: (prev, curr) =>
-            prev.muscleGroupsState.data != curr.muscleGroupsState.data,
+            prev.muscleGroupsState.data != curr.muscleGroupsState.data ||
+            prev.selectedGroupId != curr.selectedGroupId,
         builder: (context, state) {
           if (state.muscleGroupsState.isLoading) {
             return const WorkoutsTabShimmer();
           }
           if (state.muscleGroupsState.errorMessage != null) {
-            return Center(
-              child: Text(state.muscleGroupsState.errorMessage!),
-            );
+            return Center(child: Text(state.muscleGroupsState.errorMessage!));
           }
           final groups = state.muscleGroupsState.data;
           if (groups == null || groups.isEmpty) {
             return const Center(child: Text('No muscle groups'));
+          }
+
+          if (state.selectedGroupId != null) {
+            final idx = groups.indexWhere(
+              (g) => g.id == state.selectedGroupId,
+            );
+            if (idx != -1 && _selectedIndex != idx) {
+              _selectedIndex = idx;
+            }
           }
 
           return Column(
@@ -69,7 +85,8 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   itemCount: groups.length,
-                  separatorBuilder: (context, index) => const SizedBox(width: 10),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: 10),
                   itemBuilder: (context, index) {
                     final isSelected = _selectedIndex == index;
                     return GestureDetector(
@@ -87,7 +104,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeInOut,
                         alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
                         decoration: BoxDecoration(
                           color: isSelected
                               ? AppColors.primary
@@ -100,9 +117,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
-                            color: isSelected
-                                ? Colors.white
-                                : Colors.white70,
+                            color: isSelected ? Colors.white : Colors.white70,
                           ),
                           child: Text(groups[index].name),
                         ),
@@ -112,9 +127,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                 ),
               ),
               const SizedBox(height: 10),
-              Expanded(
-                child: _buildMuscleGrid(),
-              ),
+              Expanded(child: _buildMuscleGrid()),
             ],
           );
         },
@@ -148,10 +161,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
           itemCount: muscles.length,
           itemBuilder: (context, index) {
             final muscle = muscles[index];
-            return WorkoutGridItem(
-              image: muscle.image,
-              title: muscle.name,
-            );
+            return WorkoutGridItem(image: muscle.image, title: muscle.name);
           },
         );
       },

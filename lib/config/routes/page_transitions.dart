@@ -9,8 +9,10 @@ abstract class PageTransitions {
     transitionDuration: AppDurations.fadeTransition,
   );
 
-  static PageRoute<dynamic> slide(Widget page) => PageRouteBuilder<dynamic>(
-    pageBuilder: (_, _, _) => page,
+  static PageRoute<dynamic> slide(Widget page, {RouteSettings? settings}) =>
+      PageRouteBuilder<dynamic>(
+        settings: settings,
+        pageBuilder: (_, _, _) => page,
     transitionsBuilder: (_, a, _, child) => SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(1.0, 0.0),

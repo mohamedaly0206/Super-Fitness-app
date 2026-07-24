@@ -24,13 +24,13 @@ class WorkoutsCubit extends Cubit<WorkoutsState> {
   void doEvent(WorkoutsEvent event) {
     switch (event) {
       case GetMuscleGroupsEvent():
-        _getMuscleGroups();
+        _getMuscleGroups(event.initialMuscleGroupId);
       case GetMusclesByGroupEvent():
         _getMusclesByGroup(event.muscleGroupId);
     }
   }
 
-  void _getMuscleGroups() async {
+  void _getMuscleGroups(String? initialMuscleGroupId) async {
     emit(state.copyWith(
       muscleGroupsState: state.muscleGroupsState.copyWith(isLoadingParam: true),
     ));
@@ -44,7 +44,8 @@ class WorkoutsCubit extends Cubit<WorkoutsState> {
           ),
         ));
         if (response.data.isNotEmpty) {
-          _getMusclesByGroup(response.data.first.id);
+          final groupId = initialMuscleGroupId ?? response.data.first.id;
+          _getMusclesByGroup(groupId);
         }
       case ErrorBaseResponse<List<MuscleGroupEntity>>():
         emit(state.copyWith(

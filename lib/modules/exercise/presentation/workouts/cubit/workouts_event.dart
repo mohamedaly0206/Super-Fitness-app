@@ -1,6 +1,9 @@
 sealed class WorkoutsEvent {}
 
-class GetMuscleGroupsEvent extends WorkoutsEvent {}
+class GetMuscleGroupsEvent extends WorkoutsEvent {
+  final String? initialMuscleGroupId;
+  GetMuscleGroupsEvent({this.initialMuscleGroupId});
+}
 
 class GetMusclesByGroupEvent extends WorkoutsEvent {
   final String muscleGroupId;

@@ -59,7 +59,11 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                   const Spacer(),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, Routes.workouts);
+                      Navigator.pushNamed(
+                        context,
+                        Routes.workouts,
+                        arguments: groups[_selectedIndex].id,
+                      );
                     },
                     child: Text(
                       'See All',
