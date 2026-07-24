@@ -38,3 +38,7 @@ class SelectActivityLevelIntent extends RegisterIntent {
   final String activityLevel;
   SelectActivityLevelIntent(this.activityLevel);
 }
+
+class GoogleRegisterIntent extends RegisterIntent {}
+
+class FacebookRegisterIntent extends RegisterIntent {}

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
 import 'package:super_fitness_app/config/base/base_state.dart';
@@ -29,6 +30,9 @@ class LoginCubit extends Cubit<LoginState> {
       case GoogleLoginIntent():
         _loginWithGoogle();
         break;
+      case FacebookLoginIntent():
+        _loginWithFacebook();
+        break;
     }
   }
 
@@ -56,6 +60,52 @@ class LoginCubit extends Cubit<LoginState> {
       final email = googleAccount.email ?? '';
 
       await _login(email: email, password: googlePassword);
+    } catch (e) {
+      emit(
+        state.copyWith(
+          loginState: BaseState(errorMessage: e.toString()),
+        ),
+      );
+    }
+  }
+
+  Future<void> _loginWithFacebook() async {
+    emit(state.copyWith(loginState: const BaseState(isLoading: true)));
+
+    try {
+      final LoginResult result = await FacebookAuth.instance.login(
+        permissions: ['email', 'public_profile'],
+      );
+
+      if (result.status == LoginStatus.success) {
+        final userData = await FacebookAuth.instance.getUserData();
+        final email = userData['email'] as String? ?? '';
+
+        if (email.isEmpty) {
+          emit(
+            state.copyWith(
+              loginState: const BaseState(
+                errorMessage: 'Facebook account does not provide an email address.',
+              ),
+            ),
+          );
+          return;
+        }
+
+        String facebookPassword = '';
+        try {
+          facebookPassword = _remoteConfigService.facebookPassword;
+          if (facebookPassword.isEmpty) {
+            facebookPassword = 'FacebookAuth@2026';
+          }
+        } catch (e) {
+          facebookPassword = 'FacebookAuth@2026';
+        }
+
+        await _login(email: email, password: facebookPassword);
+      } else {
+        emit(state.copyWith(loginState: const BaseState(isLoading: false)));
+      }
     } catch (e) {
       emit(
         state.copyWith(

@@ -59,6 +59,12 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
+  void _onFacebookPressed() {
+    context.read<LoginCubit>().handleLoginIntent(
+      FacebookLoginIntent(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -195,7 +201,7 @@ class _LoginViewState extends State<LoginView> {
                                   current.loginState.isLoading,
                               builder: (context, state) {
                                 return SocialLoginButtons(
-                                  onFacebookTap: () {},
+                                  onFacebookTap: _onFacebookPressed,
                                   onGoogleTap: _onGooglePressed,
                                   onAppleTap: () {},
                                   isGoogleLoading: state.loginState.isLoading,

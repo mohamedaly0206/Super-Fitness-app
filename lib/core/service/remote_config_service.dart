@@ -16,4 +16,6 @@ class RemoteConfigService {
   }
 
   String get googlePassword => _remoteConfig.getString('google_password');
+
+  String get facebookPassword => _remoteConfig.getString('facebook_password');
 }

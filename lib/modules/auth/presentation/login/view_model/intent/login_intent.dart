@@ -6,4 +6,7 @@ class SubmitLoginIntent extends LoginIntent {
 
   SubmitLoginIntent({required this.email, required this.password});
 }
+
 class GoogleLoginIntent extends LoginIntent {}
+
+class FacebookLoginIntent extends LoginIntent {}
