@@ -3,6 +3,7 @@ import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
+import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise_details/widgets/exercise_details_top_header.dart';
 
@@ -59,35 +60,35 @@ Widget exerciseDetailsBody({
               _infoRow(
                 context,
                 icon: Icons.fitness_center,
-                label: 'Target Muscle',
+                label: context.targetMuscle,
                 value: exercise.targetMuscleGroup,
               ),
               const SizedBox(height: 10),
               _infoRow(
                 context,
                 icon: Icons.accessibility_new,
-                label: 'Primary Muscle',
+                label: context.primaryMuscle,
                 value: exercise.primeMoverMuscle,
               ),
               const SizedBox(height: 10),
               _infoRow(
                 context,
                 icon: Icons.build,
-                label: 'Equipment',
+                label: context.equipment,
                 value: exercise.primaryEquipment,
               ),
               const SizedBox(height: 10),
               _infoRow(
                 context,
                 icon: Icons.swap_horiz,
-                label: 'Force Type',
+                label: context.forceType,
                 value: exercise.forceType,
               ),
               const SizedBox(height: 10),
               _infoRow(
                 context,
                 icon: Icons.settings,
-                label: 'Mechanics',
+                label: context.mechanics,
                 value: exercise.mechanics,
               ),
             ],
@@ -124,7 +125,7 @@ Widget _infoRow(
               ),
               const SizedBox(height: 2),
               Text(
-                value.isNotEmpty ? value : 'N/A',
+                value.isNotEmpty ? value : context.na,
                 style: TextStyle(
                   fontSize: 14,
                   color: AppColors.textPrimary,

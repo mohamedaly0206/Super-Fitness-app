@@ -25,7 +25,7 @@ class ExerciseDetailsCubit extends Cubit<ExerciseDetailsState> {
     emit(state.copyWith(isLoading: true));
 
     if (url.isEmpty) {
-      emit(state.copyWith(isLoading: false, errorMessage: 'No video available'));
+      emit(state.copyWith(isLoading: false, errorMessage: AppStrings.unableToLoadVideo));
       return;
     }
 

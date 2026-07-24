@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
@@ -13,7 +14,7 @@ class SeeAllText extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Text(
-        'See All',
+        context.seeAll,
         style: getMediumStyle(
           context: context,
           fontSize: FontSizeManager.s14,

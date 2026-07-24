@@ -12,6 +12,7 @@ import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/hom
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/popular_training_card_widget.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/popular_training_shimmer_widget.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/see_all_text.dart';
+import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/page/food_recommendation_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -34,16 +35,16 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: homeParts(
                   context: context,
-                  title: 'Category',
+                  title: context.category,
                   child: categoryContainer(
                     ListView.separated(
                       scrollDirection: Axis.horizontal,
                       separatorBuilder: (context, index) {
                         return Container(width: 1, color: AppColors.divider);
                       },
-                      itemCount: categories.length,
+                      itemCount: categoriesBuilder(context).length,
                       itemBuilder: (context, index) {
-                        final category = categories[index];
+                        final category = categoriesBuilder(context)[index];
                         return categoryCard(
                           title: category.title,
                           image: category.image,
@@ -57,7 +58,7 @@ class HomePage extends StatelessWidget {
               // Recommendation To Day
               homeParts(
                 context: context,
-                title: 'Recommendation To Day',
+                title: context.recommendationToday,
                 child: SizedBox(
                   height: 130,
                   child: BlocBuilder<HomeCubit, HomeState>(
@@ -102,7 +103,7 @@ class HomePage extends StatelessWidget {
               // food
               homeParts(
                 context: context,
-                title: 'Recommendation For You',
+                title: context.recommendationForYou,
                 trailing: SeeAllText(
                   onTap: () {
                     Navigator.push(
@@ -165,7 +166,7 @@ class HomePage extends StatelessWidget {
               // popular training
               homeParts(
                 context: context,
-                title: "Popular Training",
+                title: context.popularTraining,
                 child: SizedBox(
                   height: 200,
                   child: BlocBuilder<HomeCubit, HomeState>(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class YoutubeWebview extends StatefulWidget {
@@ -28,7 +29,7 @@ class _YoutubeWebviewState extends State<YoutubeWebview> {
         <!DOCTYPE html>
         <html>
         <body style="margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#242424;">
-          <p style="color:#919191;font-family:sans-serif;">No video available</p>
+          <p style="color:#919191;font-family:sans-serif;">${context.noVideoAvailable}</p>
         </body>
         </html>
       ''';

@@ -3,6 +3,7 @@ import 'package:super_fitness_app/config/routes/app_router.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/widgets/cached_network_image.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
+import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/youtube_thumbnail.dart';
 
@@ -57,7 +58,7 @@ Widget popularTrainingCard({
                   child: Column(
                     children: [
                       Text(
-                        'Exercise that',
+                        context.exerciseThat,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -85,7 +86,7 @@ Widget popularTrainingCard({
                             padding: EdgeInsets.zero,
                             borderRadius: 1000,
                             child: Text(
-                              '${exercise.primaryItems} ${exercise.primaryItems > 1 ? "Tasks" : "Task"}',
+                              '${exercise.primaryItems} ${exercise.primaryItems > 1 ? context.tasks : context.task}',
                               style: TextStyle(fontWeight: FontWeight.bold),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,

@@ -13,5 +13,33 @@
   },
   "meals": {
     "ingredients": "Ingredients"
+  },
+  "exercise": {
+    "category": "Category",
+    "recommendation_today": "Recommendation To Day",
+    "recommendation_for_you": "Recommendation For You",
+    "popular_training": "Popular Training",
+    "upcoming_workouts": "Upcoming Workouts",
+    "workouts": "Workouts",
+    "see_all": "See All",
+    "exercise_that": "Exercise that",
+    "tasks": "Tasks",
+    "task": "Task",
+    "target_muscle": "Target Muscle",
+    "primary_muscle": "Primary Muscle",
+    "equipment": "Equipment",
+    "force_type": "Force Type",
+    "mechanics": "Mechanics",
+    "na": "N/A",
+    "no_muscle_groups": "No muscle groups",
+    "no_muscles": "No muscles",
+    "no_video_available": "No video available",
+    "greeting": "Hi",
+    "start_day": "Let's start Your Day",
+    "gym": "Gym",
+    "fitness": "Fitness",
+    "yoga": "Yoga",
+    "aerobics": "Aerobics",
+    "trainer": "Trainer"
   }
 }

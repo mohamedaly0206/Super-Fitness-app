@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 import 'package:super_fitness_app/core/resources/app_png.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
@@ -10,13 +11,14 @@ class DommyCategory {
   DommyCategory({required this.title, required this.image});
 }
 
-final List<DommyCategory> categories = [
-  DommyCategory(title: 'Gym', image: AppPng.gym),
-  DommyCategory(title: 'Fitness', image: AppPng.fitness),
-  DommyCategory(title: 'Yoga', image: AppPng.yoga),
-  DommyCategory(title: 'Aerobics', image: AppPng.aerobics),
-  DommyCategory(title: 'Trainer', image: AppPng.training),
-];
+final List<DommyCategory> Function(BuildContext) categoriesBuilder =
+    (context) => [
+          DommyCategory(title: context.gym, image: AppPng.gym),
+          DommyCategory(title: context.fitness, image: AppPng.fitness),
+          DommyCategory(title: context.yoga, image: AppPng.yoga),
+          DommyCategory(title: context.aerobics, image: AppPng.aerobics),
+          DommyCategory(title: context.trainer, image: AppPng.training),
+        ];
 
 Widget categoryCard({required String title, required String image}) {
   return Column(

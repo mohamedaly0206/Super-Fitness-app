@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
+import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
+import 'package:super_fitness_app/core/widgets/grid_shimmer.dart';
+import 'package:super_fitness_app/core/widgets/tab_bar_shimmer.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_event.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/widgets/workout_grid_item.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/widgets/workouts_tab_shimmer.dart';
-import 'package:super_fitness_app/modules/exercise/presentation/workouts/widgets/workouts_grid_shimmer.dart';
+
 
 class WorkoutsPage extends StatefulWidget {
   const WorkoutsPage({super.key});
@@ -24,8 +27,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
     super.didChangeDependencies();
     if (!_didFetchGroups) {
       _didFetchGroups = true;
-      final initialId =
-          ModalRoute.of(context)?.settings.arguments as String?;
+      final initialId = ModalRoute.of(context)?.settings.arguments as String?;
       context.read<WorkoutsCubit>().doEvent(
         GetMuscleGroupsEvent(initialMuscleGroupId: initialId),
       );
@@ -39,7 +41,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Workouts',
+          context.workouts,
           style: TextStyle(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.w600,
@@ -58,20 +60,24 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
             prev.selectedGroupId != curr.selectedGroupId,
         builder: (context, state) {
           if (state.muscleGroupsState.isLoading) {
-            return const WorkoutsTabShimmer();
+            return const Column(
+              children: [
+                TabBarShimmer(),
+                SizedBox(height: 10),
+                Expanded(child: GridShimmer()),
+              ],
+            );
           }
           if (state.muscleGroupsState.errorMessage != null) {
             return Center(child: Text(state.muscleGroupsState.errorMessage!));
           }
           final groups = state.muscleGroupsState.data;
           if (groups == null || groups.isEmpty) {
-            return const Center(child: Text('No muscle groups'));
+            return Center(child: Text(context.noMuscleGroups));
           }
 
           if (state.selectedGroupId != null) {
-            final idx = groups.indexWhere(
-              (g) => g.id == state.selectedGroupId,
-            );
+            final idx = groups.indexWhere((g) => g.id == state.selectedGroupId);
             if (idx != -1 && _selectedIndex != idx) {
               _selectedIndex = idx;
             }
@@ -140,14 +146,14 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
       buildWhen: (prev, curr) => prev.musclesState != curr.musclesState,
       builder: (context, state) {
         if (state.musclesState.isLoading) {
-          return const WorkoutsGridShimmer();
+          return const GridShimmer();
         }
         if (state.musclesState.errorMessage != null) {
           return Center(child: Text(state.musclesState.errorMessage!));
         }
         final muscles = state.musclesState.data;
         if (muscles == null || muscles.isEmpty) {
-          return const Center(child: Text('No muscles'));
+          return Center(child: Text(context.noMuscles));
         }
 
         return GridView.builder(

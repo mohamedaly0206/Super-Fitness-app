@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -13,11 +14,11 @@ class HomeHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Hi Ziad',
+                '${context.greeting} Ziad',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Text(
-                'Let\'s start Your Day',
+                context.startDay,
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ],
