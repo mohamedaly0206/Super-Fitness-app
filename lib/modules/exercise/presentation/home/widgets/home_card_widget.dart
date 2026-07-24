@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/core/layout/app_padding.dart';
+import 'package:super_fitness_app/core/layout/app_size.dart';
+import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/cached_network_image.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
 
@@ -14,19 +17,19 @@ class HomeCardWidget extends StatelessWidget {
     return GestureDetector(
     onTap:onTap ,
     child: Container(
-      margin: EdgeInsets.all(4),
-      width: 120,
-      height: 130,
+      margin: EdgeInsets.all(AppPadding.p4),
+      width: AppSize.s120,
+      height: AppSize.s130,
       decoration: BoxDecoration(
         color: Colors.grey[800],
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppSize.borderRadiusSnackBar),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppSize.borderRadiusSnackBar),
         child: Stack(
           fit: StackFit.expand,
           children: [
-            CachedNetworkImageWidget(urlToImage: image, width: 120, height: 130),
+            CachedNetworkImageWidget(urlToImage: image, width: AppSize.s120, height: AppSize.s130),
     
             Positioned(
               left: 0,
@@ -34,19 +37,19 @@ class HomeCardWidget extends StatelessWidget {
               bottom: 0,
               child: ClipRRect(
                 borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20),
+                  top: Radius.circular(AppSize.borderRadiusOutlined),
                 ),
                 child: CustomContainer(
-                  height: 36,
+                  height: AppSize.s36,
                   width: double.infinity,
                   padding: EdgeInsets.zero,
-                  borderRadius: 0,
+                  borderRadius: AppSize.s0,
                   alignment: Alignment.center,
                   child: Text(
                     title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: Colors.white, fontSize: 12),
+                    style: const TextStyle(color: Colors.white, fontSize: FontSizeManager.s12),
                   ),
                 ),
               ),

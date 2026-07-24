@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_fitness_app/core/layout/app_padding.dart';
+import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
+import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 import 'package:super_fitness_app/core/widgets/grid_shimmer.dart';
@@ -8,7 +11,6 @@ import 'package:super_fitness_app/core/widgets/tab_bar_shimmer.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_event.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/widgets/workout_grid_item.dart';
-import 'package:super_fitness_app/modules/exercise/presentation/workouts/widgets/workouts_tab_shimmer.dart';
 
 
 class WorkoutsPage extends StatefulWidget {
@@ -63,7 +65,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
             return const Column(
               children: [
                 TabBarShimmer(),
-                SizedBox(height: 10),
+                SizedBox(height: AppSize.s10),
                 Expanded(child: GridShimmer()),
               ],
             );
@@ -86,13 +88,13 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
           return Column(
             children: [
               SizedBox(
-                height: 50,
+                height: AppSize.s50,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
                   itemCount: groups.length,
                   separatorBuilder: (context, index) =>
-                      const SizedBox(width: 10),
+                      const SizedBox(width: AppSize.s10),
                   itemBuilder: (context, index) {
                     final isSelected = _selectedIndex == index;
                     return GestureDetector(
@@ -110,19 +112,19 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeInOut,
                         alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
                         decoration: BoxDecoration(
                           color: isSelected
                               ? AppColors.primary
                               : Colors.transparent,
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(AppSize.borderRadiusPill),
                         ),
                         child: AnimatedDefaultTextStyle(
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                            fontSize: FontSizeManager.s14,
                             color: isSelected ? Colors.white : Colors.white70,
                           ),
                           child: Text(groups[index].name),
@@ -132,7 +134,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                   },
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: AppSize.s10),
               Expanded(child: _buildMuscleGrid()),
             ],
           );
@@ -157,11 +159,11 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
         }
 
         return GridView.builder(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(AppPadding.p12),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
+            crossAxisSpacing: AppSize.s12,
+            mainAxisSpacing: AppSize.s12,
             childAspectRatio: 1.0,
           ),
           itemCount: muscles.length,

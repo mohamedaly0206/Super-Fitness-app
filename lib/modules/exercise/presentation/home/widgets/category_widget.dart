@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/core/layout/app_padding.dart';
+import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 import 'package:super_fitness_app/core/resources/app_png.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
@@ -11,20 +13,24 @@ class DommyCategory {
   DommyCategory({required this.title, required this.image});
 }
 
-final List<DommyCategory> Function(BuildContext) categoriesBuilder =
-    (context) => [
-          DommyCategory(title: context.gym, image: AppPng.gym),
-          DommyCategory(title: context.fitness, image: AppPng.fitness),
-          DommyCategory(title: context.yoga, image: AppPng.yoga),
-          DommyCategory(title: context.aerobics, image: AppPng.aerobics),
-          DommyCategory(title: context.trainer, image: AppPng.training),
-        ];
+List<DommyCategory> categoriesBuilder(BuildContext context) => [
+  DommyCategory(title: context.gym, image: AppPng.gym),
+  DommyCategory(title: context.fitness, image: AppPng.fitness),
+  DommyCategory(title: context.yoga, image: AppPng.yoga),
+  DommyCategory(title: context.aerobics, image: AppPng.aerobics),
+  DommyCategory(title: context.trainer, image: AppPng.training),
+];
 
 Widget categoryCard({required String title, required String image}) {
   return Column(
     children: [
-      Image.asset(image, height: 64, width: 80, fit: BoxFit.contain),
-      AppSizedBox(height: 10),
+      Image.asset(
+        image,
+        height: AppSize.s64,
+        width: AppSize.s80,
+        fit: BoxFit.contain,
+      ),
+      AppSizedBox(height: AppSize.s10),
       Text(title),
     ],
   );
@@ -32,11 +38,12 @@ Widget categoryCard({required String title, required String image}) {
 
 Widget categoryContainer(Widget child) {
   return Container(
-    height: 116,
-    padding: EdgeInsets.symmetric(vertical: 8),
+    height: AppSize.s116,
+    padding: EdgeInsets.symmetric(vertical: AppPadding.p8),
+    margin: EdgeInsets.symmetric(horizontal: AppPadding.p8),
     decoration: BoxDecoration(
       color: AppColors.grey2,
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
     ),
     child: child,
   );

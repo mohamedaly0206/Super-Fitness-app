@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_fitness_app/core/layout/app_padding.dart';
+import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
@@ -31,26 +33,23 @@ class HomePage extends StatelessWidget {
               HomeHeader(),
 
               // category
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: homeParts(
-                  context: context,
-                  title: context.category,
-                  child: categoryContainer(
-                    ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      separatorBuilder: (context, index) {
-                        return Container(width: 1, color: AppColors.divider);
-                      },
-                      itemCount: categoriesBuilder(context).length,
-                      itemBuilder: (context, index) {
-                        final category = categoriesBuilder(context)[index];
-                        return categoryCard(
-                          title: category.title,
-                          image: category.image,
-                        );
-                      },
-                    ),
+              homeParts(
+                context: context,
+                title: context.category,
+                child: categoryContainer(
+                  ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (context, index) {
+                      return Container(width: 1, color: AppColors.divider);
+                    },
+                    itemCount: categoriesBuilder(context).length,
+                    itemBuilder: (context, index) {
+                      final category = categoriesBuilder(context)[index];
+                      return categoryCard(
+                        title: category.title,
+                        image: category.image,
+                      );
+                    },
                   ),
                 ),
               ),
@@ -60,7 +59,7 @@ class HomePage extends StatelessWidget {
                 context: context,
                 title: context.recommendationToday,
                 child: SizedBox(
-                  height: 130,
+                  height: AppSize.s130,
                   child: BlocBuilder<HomeCubit, HomeState>(
                     buildWhen: (previous, current) =>
                         previous.musclesState != current.musclesState,
@@ -72,7 +71,9 @@ class HomePage extends StatelessWidget {
                         final muscles = state.musclesState.data!;
                         return ListView.separated(
                           separatorBuilder: (context, index) {
-                            return Container(margin: EdgeInsets.all(6));
+                            return Container(
+                              margin: EdgeInsets.all(AppPadding.p8),
+                            );
                           },
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
@@ -115,7 +116,7 @@ class HomePage extends StatelessWidget {
                   },
                 ),
                 child: SizedBox(
-                  height: 131,
+                  height: AppSize.s131,
                   child: BlocBuilder<HomeCubit, HomeState>(
                     buildWhen: (previous, current) =>
                         previous.foodCategoriesState !=
@@ -128,7 +129,9 @@ class HomePage extends StatelessWidget {
                         final categories = state.foodCategoriesState.data!;
                         return ListView.separated(
                           separatorBuilder: (context, index) {
-                            return Container(margin: EdgeInsets.all(6));
+                            return Container(
+                              margin: EdgeInsets.all(AppPadding.p8),
+                            );
                           },
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
@@ -168,7 +171,7 @@ class HomePage extends StatelessWidget {
                 context: context,
                 title: context.popularTraining,
                 child: SizedBox(
-                  height: 200,
+                  height: AppSize.s200,
                   child: BlocBuilder<HomeCubit, HomeState>(
                     buildWhen: (previous, current) =>
                         previous.exerciseState != current.exerciseState,
@@ -180,7 +183,9 @@ class HomePage extends StatelessWidget {
                         final exercises = state.exerciseState.data!;
                         return ListView.separated(
                           separatorBuilder: (context, index) {
-                            return Container(margin: EdgeInsets.all(6));
+                            return Container(
+                              margin: EdgeInsets.all(AppPadding.p8),
+                            );
                           },
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
@@ -205,7 +210,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
 
-              Container(height: 90),
+              Container(height: AppSize.s90),
             ],
           ),
         ),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/config/routes/app_router.dart';
+import 'package:super_fitness_app/core/layout/app_padding.dart';
+import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/see_all_text.dart';
-import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_event.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/home_card_shimmer_widget.dart';
@@ -34,7 +35,7 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
         }
         if (state.muscleGroupsState.errorMessage != null) {
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(AppPadding.p8),
             child: Text(state.muscleGroupsState.errorMessage!),
           );
         }
@@ -47,7 +48,7 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p8),
               child: Row(
                 children: [
                   Text(
@@ -72,12 +73,12 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
               ),
             ),
             SizedBox(
-              height: 40,
+              height: AppSize.s40,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 itemCount: groups.length,
-                separatorBuilder: (context, index) => const SizedBox(width: 10),
+                separatorBuilder: (context, index) => const SizedBox(width: AppSize.s10),
                 itemBuilder: (context, index) {
                   final isSelected = _selectedIndex == index;
                   return GestureDetector(
@@ -95,19 +96,19 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
                       alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
                       decoration: BoxDecoration(
                         color: isSelected
                             ? AppColors.primary
                             : Colors.transparent,
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(AppSize.borderRadiusPill),
                       ),
                       child: AnimatedDefaultTextStyle(
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeInOut,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 14,
+                          fontSize: FontSizeManager.s14,
                           color: isSelected ? Colors.white : Colors.white70,
                         ),
                         child: Text(groups[index].name),
@@ -117,9 +118,9 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                 },
               ),
             ),
-            AppSizedBox(height: 5),
+            SizedBox(height: AppSize.s5),
             SizedBox(
-              height: 130,
+              height: AppSize.s130,
               child: BlocBuilder<HomeCubit, HomeState>(
                 buildWhen: (prev, curr) =>
                     prev.musclesByGroupState != curr.musclesByGroupState,
@@ -131,7 +132,7 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                     final muscles = state.musclesByGroupState.data!;
                     return ListView.separated(
                       separatorBuilder: (context, index) {
-                        return Container(margin: EdgeInsets.all(6));
+                        return Container(margin: EdgeInsets.all(AppPadding.p8));
                       },
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,

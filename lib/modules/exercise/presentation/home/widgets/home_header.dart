@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/core/layout/app_padding.dart';
+import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -7,7 +9,7 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
       child: Row(
         children: [
           Column(
@@ -15,11 +17,11 @@ class HomeHeader extends StatelessWidget {
             children: [
               Text(
                 '${context.greeting} Ziad',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: AppSize.s20, fontWeight: FontWeight.bold),
               ),
               Text(
                 context.startDay,
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: AppSize.s25, fontWeight: FontWeight.bold),
               ),
             ],
           ),

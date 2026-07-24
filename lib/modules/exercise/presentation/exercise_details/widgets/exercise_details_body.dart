@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/core/layout/app_padding.dart';
+import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
@@ -18,7 +20,7 @@ Widget exerciseDetailsBody({
       // Details below video
       Expanded(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppPadding.p16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -35,17 +37,17 @@ Widget exerciseDetailsBody({
                       ),
                     ),
                   ),
-                  const SizedBox(width: 10),
+                   const SizedBox(width: AppSize.s10),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: EdgeInsets.symmetric(horizontal: AppPadding.p12, vertical: AppPadding.p8),
                     decoration: BoxDecoration(
                       color: AppColors.primary.withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
                     ),
                     child: Text(
                       exercise.difficultyLevel,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: FontSizeManager.s12,
                         color: AppColors.primary,
                         fontWeight: FontWeight.w600,
                       ),
@@ -54,7 +56,7 @@ Widget exerciseDetailsBody({
                 ],
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: AppSize.s20),
 
               // Key Info Cards
               _infoRow(
@@ -63,28 +65,28 @@ Widget exerciseDetailsBody({
                 label: context.targetMuscle,
                 value: exercise.targetMuscleGroup,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: AppSize.s10),
               _infoRow(
                 context,
                 icon: Icons.accessibility_new,
                 label: context.primaryMuscle,
                 value: exercise.primeMoverMuscle,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: AppSize.s10),
               _infoRow(
                 context,
                 icon: Icons.build,
                 label: context.equipment,
                 value: exercise.primaryEquipment,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: AppSize.s10),
               _infoRow(
                 context,
                 icon: Icons.swap_horiz,
                 label: context.forceType,
                 value: exercise.forceType,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: AppSize.s10),
               _infoRow(
                 context,
                 icon: Icons.settings,
@@ -106,12 +108,12 @@ Widget _infoRow(
   required String value,
 }) {
   return CustomContainer(
-    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-    borderRadius: 14,
+    padding: const EdgeInsets.symmetric(horizontal: AppPadding.p14, vertical: AppPadding.p12),
+    borderRadius: AppSize.borderRadiusTag,
     child: Row(
       children: [
-        Icon(icon, size: 20, color: AppColors.primary),
-        const SizedBox(width: 12),
+        Icon(icon, size: AppSize.s20, color: AppColors.primary),
+        const SizedBox(width: AppSize.s12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,15 +121,15 @@ Widget _infoRow(
               Text(
                 label,
                 style: TextStyle(
-                  fontSize: 11,
+                  fontSize: FontSizeManager.s11,
                   color: AppColors.textHint,
                 ),
               ),
-              const SizedBox(height: 2),
+              const SizedBox(height: AppSize.s2),
               Text(
                 value.isNotEmpty ? value : context.na,
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: FontSizeManager.s14,
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w600,
                 ),

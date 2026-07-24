@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:super_fitness_app/config/routes/app_router.dart';
+import 'package:super_fitness_app/core/layout/app_padding.dart';
+import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
+import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/cached_network_image.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
@@ -22,25 +25,25 @@ Widget popularTrainingCard({
       Navigator.pushNamed(context, Routes.exerciseDetails, arguments: exercise);
     },
     child: CustomContainer(
-      width: 250,
-      height: 160,
+      width: AppSize.s250,
+      height: AppSize.s160,
       padding: EdgeInsets.zero,
-      borderRadius: 16,
-      margin: EdgeInsets.all(4),
+      borderRadius: AppSize.borderRadiusSnackBar,
+      margin: EdgeInsets.all(AppPadding.p4),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppSize.borderRadiusSnackBar),
         child: Stack(
           fit: StackFit.expand,
           children: [
             thumbnailUrl.isNotEmpty
                 ? CachedNetworkImageWidget(
                     urlToImage: thumbnailUrl,
-                    width: 250,
-                    height: 160,
+                    width: AppSize.s250,
+                    height: AppSize.s160,
                   )
                 : Container(
                     color: AppColors.grey2,
-                    child: const Icon(Icons.play_circle_outline, size: 48),
+                    child: const Icon(Icons.play_circle_outline, size: AppSize.s48),
                   ),
 
             Container(color: Colors.black.withValues(alpha: 0.3)),
@@ -51,10 +54,10 @@ Widget popularTrainingCard({
               bottom: 0,
               child: ClipRRect(
                 borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(12),
+                  top: Radius.circular(AppSize.borderRadiusCard),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(AppPadding.p8),
                   child: Column(
                     children: [
                       Text(
@@ -62,7 +65,7 @@ Widget popularTrainingCard({
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 17,
+                          fontSize: FontSizeManager.s17,
                           color: Colors.white,
                         ),
                       ),
@@ -73,18 +76,18 @@ Widget popularTrainingCard({
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 17,
+                          fontSize: FontSizeManager.s17,
                           color: Colors.white,
                         ),
                       ),
                       Row(
                         children: [
                           CustomContainer(
-                            width: 60,
-                            height: 40,
+                            width: AppSize.s60,
+                            height: AppSize.s40,
                             alignment: Alignment.center,
                             padding: EdgeInsets.zero,
-                            borderRadius: 1000,
+                            borderRadius: AppSize.borderRadiusFullyRounded,
                             child: Text(
                               '${exercise.primaryItems} ${exercise.primaryItems > 1 ? context.tasks : context.task}',
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -95,9 +98,9 @@ Widget popularTrainingCard({
                           const Spacer(),
                           CustomContainer(
                             alignment: Alignment.center,
-                            height: 40,
-                            width: 70,
-                            borderRadius: 1000,
+                            height: AppSize.s40,
+                            width: AppSize.s70,
+                            borderRadius: AppSize.borderRadiusFullyRounded,
                             padding: EdgeInsets.zero,
                             child: Text(
                               maxLines: 1,
