@@ -3,12 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise/widgets/exercise_list_item.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise/widgets/exercise_list_loading.dart';
 import '../cubit/exercise_cubit.dart';
 
 class ExercisesList extends StatelessWidget {
-  const ExercisesList({super.key});
+  final void Function(ExerciseEntity exercise) onPlayVideo;
+
+  const ExercisesList({super.key, required this.onPlayVideo});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,7 @@ class ExercisesList extends StatelessWidget {
     );
 
     if (isLoading) {
-      return ExerciseListLoading();
+      return const ExerciseListLoading();
     }
 
     return Padding(
@@ -43,7 +46,10 @@ class ExercisesList extends StatelessWidget {
           itemCount: exercises.length,
           separatorBuilder: (_, __) => Divider(color: AppColors.border),
           itemBuilder: (_, index) {
-            return ExerciseListItem(exercise: exercises[index]);
+            return ExerciseListItem(
+              exercise: exercises[index],
+              onPlayVideo: onPlayVideo,
+            );
           },
         ),
       ),

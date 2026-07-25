@@ -7,12 +7,16 @@ import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
+import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/see_all_text.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_event.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/home_card_shimmer_widget.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/home_card_widget.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/home_tab_shimmer_widget.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_cubit.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_event.dart'
+    hide GetMusclesByGroupEvent;
 
 class HomeWorkoutsSection extends StatefulWidget {
   const HomeWorkoutsSection({super.key});
@@ -31,7 +35,9 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
           prev.muscleGroupsState.data != curr.muscleGroupsState.data,
       builder: (context, state) {
         if (state.muscleGroupsState.isLoading) {
-          return homeTabShimmer();
+          return homeTabShimmer(
+            
+          );
         }
         if (state.muscleGroupsState.errorMessage != null) {
           return Padding(
@@ -62,11 +68,12 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                   const Spacer(),
                   SeeAllText(
                     onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        Routes.workouts,
-                        arguments: groups[_selectedIndex].id,
+                      context.read<WorkoutsCubit>().doEvent(
+                        SetSelectedGroupEvent(
+                          groupId: groups[_selectedIndex].id,
+                        ),
                       );
+                      context.read<AppSectionsCubit>().changeSection(1);
                     },
                   ),
                 ],

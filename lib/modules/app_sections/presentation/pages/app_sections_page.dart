@@ -60,7 +60,7 @@ class _AppSectionsView extends StatelessWidget {
               Positioned(
                 left: 16,
                 right: 16,
-                bottom: MediaQuery.of(context).padding.bottom,
+                bottom: 25,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(24),
                   child: Container(

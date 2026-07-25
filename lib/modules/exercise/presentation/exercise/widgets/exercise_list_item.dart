@@ -5,12 +5,16 @@ import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_enti
 import '../cubit/exercise_cubit.dart';
 import '../cubit/exercise_intent.dart';
 import 'exercise_card.dart';
-import 'show_exercise_video.dart';
 
 class ExerciseListItem extends StatelessWidget {
   final ExerciseEntity exercise;
+  final void Function(ExerciseEntity exercise) onPlayVideo;
 
-  const ExerciseListItem({super.key, required this.exercise});
+  const ExerciseListItem({
+    super.key,
+    required this.exercise,
+    required this.onPlayVideo,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +32,7 @@ class ExerciseListItem extends StatelessWidget {
       },
       onPlay: () {
         cubit.doIntent(ExerciseSelectedIntent(exercise: exercise));
-
-        showExerciseVideo(context, exercise);
+        onPlayVideo(exercise);
       },
     );
   }

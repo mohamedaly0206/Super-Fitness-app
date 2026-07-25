@@ -27,6 +27,8 @@ class WorkoutsCubit extends Cubit<WorkoutsState> {
         _getMuscleGroups(event.initialMuscleGroupId);
       case GetMusclesByGroupEvent():
         _getMusclesByGroup(event.muscleGroupId);
+      case SetSelectedGroupEvent():
+        _getMusclesByGroup(event.groupId);
     }
   }
 

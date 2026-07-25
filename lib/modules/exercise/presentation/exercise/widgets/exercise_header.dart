@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:super_fitness_app/config/routes/app_router.dart';
 import 'package:super_fitness_app/core/extensions/youtube_extension.dart';
+import 'package:super_fitness_app/core/layout/app_padding.dart';
+import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/resources/app_svg.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/cached_network_image.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise/widgets/difficulty_selector.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise/widgets/info_chip.dart';
-import 'package:super_fitness_app/modules/exercise/presentation/exercise/widgets/show_exercise_video.dart';
 
 import '../cubit/exercise_cubit.dart';
 
 class ExerciseHeader extends StatelessWidget {
-  const ExerciseHeader({super.key});
+  final void Function(ExerciseEntity exercise) onPlayVideo;
+
+  const ExerciseHeader({super.key, required this.onPlayVideo});
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +32,15 @@ class ExerciseHeader extends StatelessWidget {
     }
 
     return SizedBox(
-      height: 450,
+      height: AppSize.s220 * 2,
       child: Stack(
         children: [
-          // Image
           CachedNetworkImageWidget(
             urlToImage: exercise.shortYoutubeDemonstrationLink.thumbnailUrl,
             width: double.infinity,
-            height: 500,
+            height: AppSize.s250 * 2,
           ),
 
-          /// Gradient
           Positioned.fill(
             child: IgnorePointer(
               child: Container(
@@ -52,26 +55,69 @@ class ExerciseHeader extends StatelessWidget {
             ),
           ),
 
-          /// Back Button
           Positioned(
-            top: MediaQuery.of(context).padding.top + 10,
-            left: 16,
+            top: MediaQuery.of(context).padding.top + AppSize.s10,
+            left: AppPadding.p16,
             child: CircleAvatar(
               backgroundColor: AppColors.primary,
               child: GestureDetector(
                 onTap: () => Navigator.pop(context),
-                child: SvgPicture.asset(AppSvg.back, height: 15),
+                child: SvgPicture.asset(AppSvg.back, height: AppSize.s15),
               ),
             ),
           ),
 
-          /// Play Button
+          Positioned(
+            top: MediaQuery.of(context).padding.top + AppSize.s10,
+            right: AppPadding.p16,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  Routes.exerciseDetails,
+                  arguments: exercise,
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p12,
+                  vertical: AppPadding.p8,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(
+                    AppSize.borderRadiusPill,
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.info_outline_rounded,
+                      color: AppColors.textPrimary,
+                      size: AppSize.s18,
+                    ),
+                    const SizedBox(width: AppSize.s4),
+                    Text(
+                      'Details',
+                      style: getMediumStyle(
+                        context: context,
+                        fontSize: AppSize.s14,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+
           Positioned.fill(
             child: Center(
               child: InkWell(
-                onTap: () => showExerciseVideo(context, exercise),
+                onTap: () => onPlayVideo(exercise),
                 child: Container(
-                  padding: const EdgeInsets.all(18),
+                  padding: const EdgeInsets.all(AppPadding.p18),
                   decoration: const BoxDecoration(
                     color: AppColors.glassShadow,
                     shape: BoxShape.circle,
@@ -79,29 +125,28 @@ class ExerciseHeader extends StatelessWidget {
                   child: const Icon(
                     Icons.play_arrow_rounded,
                     color: AppColors.primary,
-                    size: 42,
+                    size: AppSize.s42,
                   ),
                 ),
               ),
             ),
           ),
 
-          /// العنوان
           Positioned(
-            left: 20,
-            right: 20,
-            bottom: 100,
+            left: AppPadding.p20,
+            right: AppPadding.p20,
+            bottom: AppSize.s100,
             child: Column(
               children: [
                 Text(
                   exercise.exercise,
                   style: getMediumStyle(
                     context: context,
-                    fontSize: 25,
+                    fontSize: AppSize.s25,
                     color: Colors.white,
                   ),
                 ),
-                const AppSizedBox(height: 8),
+                const AppSizedBox(height: AppSize.s8),
                 Text(
                   exercise.primeMoverMuscle,
                   style: getRegularStyle(
@@ -113,11 +158,10 @@ class ExerciseHeader extends StatelessWidget {
             ),
           ),
 
-          /// Chips
           Positioned(
-            left: 12,
-            right: 12,
-            bottom: 80,
+            left: AppPadding.p12,
+            right: AppPadding.p12,
+            bottom: AppSize.s80,
             child: Row(
               children: const [
                 InfoChip(text: "30 Min"),
@@ -127,11 +171,10 @@ class ExerciseHeader extends StatelessWidget {
             ),
           ),
 
-          /// Difficulty
           const Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
+            left: AppSize.s0,
+            right: AppSize.s0,
+            bottom: AppSize.s0,
             child: DifficultySelector(),
           ),
         ],
