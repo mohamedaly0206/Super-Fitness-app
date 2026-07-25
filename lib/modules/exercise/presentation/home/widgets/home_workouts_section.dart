@@ -142,6 +142,13 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                         return HomeCardWidget(
                           image: muscle.image,
                           title: muscle.name,
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              Routes.exercises,
+                              arguments: muscle.id,
+                            );
+                          },
                         );
                       },
                     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_fitness_app/config/routes/app_router.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
@@ -15,7 +16,6 @@ import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/pop
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/popular_training_shimmer_widget.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/see_all_text.dart';
 import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
-import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/page/food_recommendation_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -83,6 +83,13 @@ class HomePage extends StatelessWidget {
                             return HomeCardWidget(
                               image: muscle.image,
                               title: muscle.name,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  Routes.exercises,
+                                  arguments: muscle.id,
+                                );
+                              },
                             );
                           },
                         );
@@ -107,12 +114,7 @@ class HomePage extends StatelessWidget {
                 title: context.recommendationForYou,
                 trailing: SeeAllText(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const FoodRecommendationPage(),
-                      ),
-                    );
+                    Navigator.pushNamed(context, Routes.foodRecommendation);
                   },
                 ),
                 child: SizedBox(
@@ -142,13 +144,10 @@ class HomePage extends StatelessWidget {
                               image: category.thumbnail,
                               title: category.name,
                               onTap: () {
-                                Navigator.push(
+                                Navigator.pushNamed(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (_) => FoodRecommendationPage(
-                                      initialCategoryName: category.name,
-                                    ),
-                                  ),
+                                  Routes.foodRecommendation,
+                                  arguments: category.name,
                                 );
                               },
                             );

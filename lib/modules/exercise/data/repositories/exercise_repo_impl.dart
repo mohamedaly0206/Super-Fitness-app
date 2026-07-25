@@ -1,7 +1,11 @@
 import 'package:injectable/injectable.dart';
+import 'package:super_fitness_app/core/network/mapper/difficulty_levels_response_mapper.dart';
+import 'package:super_fitness_app/core/network/mapper/exercises_response_mapper.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
 import 'package:super_fitness_app/modules/exercise/data/datasources/exercise_remote_data_source.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/difficulty_levels_response_entity.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercises_paginated_response.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/exercises_response_entity.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/level_entity.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_entity.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_group_entity.dart';
@@ -84,6 +88,48 @@ class ExerciseRepoImpl implements ExerciseRepo {
         );
       case ErrorBaseResponse<ExercisesPaginatedResponse>():
         return ErrorBaseResponse<ExercisesPaginatedResponse>(
+          failure: response.failure,
+        );
+    }
+  }
+
+  @override
+  Future<BaseResponse<DifficultyLevelsResponseEntity>> getDifficultyLevelsByPrimeMover(
+    String primeMoverMuscleId,
+  ) async {
+    final response = await exerciseRemoteDataSource.getDifficultyLevelsByPrimeMover(
+      primeMoverMuscleId: primeMoverMuscleId,
+    );
+
+    switch (response) {
+      case SuccessBaseResponse():
+        return SuccessBaseResponse<DifficultyLevelsResponseEntity>(
+          data: response.data.toDomain(),
+        );
+      case ErrorBaseResponse():
+        return ErrorBaseResponse<DifficultyLevelsResponseEntity>(
+          failure: response.failure,
+        );
+    }
+  }
+
+  @override
+  Future<BaseResponse<ExercisesResponseEntity>> getExercisesByPrimeMoverAndDifficulty({
+    required String primeMoverMuscleId,
+    required String difficultyLevelId,
+  }) async {
+    final response = await exerciseRemoteDataSource.getExercisesByPrimeMoverAndDifficulty(
+      primeMoverMuscleId: primeMoverMuscleId,
+      difficultyLevelId: difficultyLevelId,
+    );
+
+    switch (response) {
+      case SuccessBaseResponse():
+        return SuccessBaseResponse<ExercisesResponseEntity>(
+          data: response.data.toDomain(),
+        );
+      case ErrorBaseResponse():
+        return ErrorBaseResponse<ExercisesResponseEntity>(
           failure: response.failure,
         );
     }

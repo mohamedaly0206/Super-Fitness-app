@@ -32,7 +32,7 @@ void main() {
 
   setUp(() {
     mockRemoteDataSource = MockMealsRemoteDataSource();
-    repo = MealsRepoImpl(mockRemoteDataSource);
+    repo = MealsRepoImpl(mealsRemoteDataSource: mockRemoteDataSource);
   });
 
   const tMealId = '52772';

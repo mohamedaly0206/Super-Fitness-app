@@ -8,40 +8,49 @@ import 'package:super_fitness_app/core/widgets/cached_network_image.dart';
 class WorkoutGridItem extends StatelessWidget {
   final String image;
   final String title;
+  final VoidCallback? onTap;
 
-  const WorkoutGridItem({super.key, required this.image, required this.title});
+  const WorkoutGridItem({
+    super.key,
+    required this.image,
+    required this.title,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(AppSize.borderRadiusSnackBar),
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          CachedNetworkImageWidget(
-            urlToImage: image,
-            width: double.infinity,
-            height: double.infinity,
-          ),
-          Container(color: Colors.black.withValues(alpha: 0.3)),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.textPrimary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: FontSizeManager.s17,
+    return GestureDetector(
+      onTap: onTap,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppSize.borderRadiusSnackBar),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            CachedNetworkImageWidget(
+              urlToImage: image,
+              width: double.infinity,
+              height: double.infinity,
+            ),
+            Container(color: Colors.black.withValues(alpha: 0.3)),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: FontSizeManager.s17,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

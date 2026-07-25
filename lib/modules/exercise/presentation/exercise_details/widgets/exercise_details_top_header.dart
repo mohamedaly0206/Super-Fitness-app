@@ -16,7 +16,7 @@ class ExerciseDetailsTopHeader extends StatelessWidget {
   String get _videoUrl =>
       exercise.shortYoutubeDemonstrationLink.isNotEmpty
           ? exercise.shortYoutubeDemonstrationLink
-          : exercise.inDepthYoutubeExplanationLink;
+          : exercise.inDepthYoutubeExplanationLink ?? '';
 
   String? get _videoId {
     if (_videoUrl.isEmpty) return null;

@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
+
+import '../cubit/exercise_cubit.dart';
+import '../cubit/exercise_intent.dart';
+import 'exercise_card.dart';
+import 'show_exercise_video.dart';
+
+class ExerciseListItem extends StatelessWidget {
+  final ExerciseEntity exercise;
+
+  const ExerciseListItem({super.key, required this.exercise});
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<ExerciseCubit>();
+
+    final isSelected = context.select(
+      (ExerciseCubit cubit) => cubit.state.selectedExercise?.id == exercise.id,
+    );
+
+    return ExerciseCard(
+      exercise: exercise,
+      isSelected: isSelected,
+      onTap: () {
+        cubit.doIntent(ExerciseSelectedIntent(exercise: exercise));
+      },
+      onPlay: () {
+        cubit.doIntent(ExerciseSelectedIntent(exercise: exercise));
+
+        showExerciseVideo(context, exercise);
+      },
+    );
+  }
+}

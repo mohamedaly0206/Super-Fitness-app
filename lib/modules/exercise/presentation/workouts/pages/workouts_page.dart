@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_fitness_app/config/routes/app_router.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
@@ -169,7 +170,17 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
           itemCount: muscles.length,
           itemBuilder: (context, index) {
             final muscle = muscles[index];
-            return WorkoutGridItem(image: muscle.image, title: muscle.name);
+            return WorkoutGridItem(
+              image: muscle.image,
+              title: muscle.name,
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  Routes.exercises,
+                  arguments: muscle.id,
+                );
+              },
+            );
           },
         );
       },

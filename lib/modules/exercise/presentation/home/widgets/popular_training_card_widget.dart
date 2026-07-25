@@ -17,7 +17,7 @@ Widget popularTrainingCard({
   final thumbnailUrl = youtubeThumbnail(
     exercise.shortYoutubeDemonstrationLink.isNotEmpty
         ? exercise.shortYoutubeDemonstrationLink
-        : exercise.inDepthYoutubeExplanationLink,
+        : exercise.inDepthYoutubeExplanationLink ?? '',
   );
 
   return GestureDetector(

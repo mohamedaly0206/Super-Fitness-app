@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
+import 'package:super_fitness_app/config/routes/app_router.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/widgets/app_error_widget.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/grid_shimmer.dart';
 import 'package:super_fitness_app/core/widgets/tab_bar_shimmer.dart';
-import 'package:super_fitness_app/modules/meals/presentation/food_details/pages/food_details_page.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/cubit/food_recommendation_cubit.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/widgets/food_category_selector.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/widgets/food_recommendation_header.dart';
@@ -89,11 +89,10 @@ class _FoodRecommendationViewState extends State<_FoodRecommendationView> {
         return MealsGrid(
           meals: state.meals,
           onMealTap: (meal) {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(
-                builder: (_) => FoodDetailsPage(mealId: meal.id),
-              ),
+              Routes.foodDetails,
+              arguments: meal.id,
             );
           },
         );

@@ -1,16 +1,18 @@
-class ExerciseEntity {
+import 'package:equatable/equatable.dart';
+
+class ExerciseEntity extends Equatable {
   final String id;
   final String exercise;
   final String shortYoutubeDemonstration;
-  final String inDepthYoutubeExplanation;
+  final String? inDepthYoutubeExplanation;
   final String difficultyLevel;
   final String targetMuscleGroup;
   final String primeMoverMuscle;
-  final String secondaryMuscle;
-  final String tertiaryMuscle;
+  final String? secondaryMuscle;
+  final String? tertiaryMuscle;
   final String primaryEquipment;
   final int primaryItems;
-  final String secondaryEquipment;
+  final String? secondaryEquipment;
   final int secondaryItems;
   final String posture;
   final String singleOrDoubleArm;
@@ -21,32 +23,32 @@ class ExerciseEntity {
   final String footElevation;
   final String combinationExercises;
   final String movementPattern1;
-  final String movementPattern2;
-  final String movementPattern3;
+  final String? movementPattern2;
+  final String? movementPattern3;
   final String planeOfMotion1;
-  final String planeOfMotion2;
-  final String planeOfMotion3;
+  final String? planeOfMotion2;
+  final String? planeOfMotion3;
   final String bodyRegion;
   final String forceType;
   final String mechanics;
   final String laterality;
   final String primaryExerciseClassification;
   final String shortYoutubeDemonstrationLink;
-  final String inDepthYoutubeExplanationLink;
+  final String? inDepthYoutubeExplanationLink;
 
   const ExerciseEntity({
     required this.id,
     required this.exercise,
     required this.shortYoutubeDemonstration,
-    required this.inDepthYoutubeExplanation,
+    this.inDepthYoutubeExplanation,
     required this.difficultyLevel,
     required this.targetMuscleGroup,
     required this.primeMoverMuscle,
-    required this.secondaryMuscle,
-    required this.tertiaryMuscle,
+    this.secondaryMuscle,
+    this.tertiaryMuscle,
     required this.primaryEquipment,
     required this.primaryItems,
-    required this.secondaryEquipment,
+    this.secondaryEquipment,
     required this.secondaryItems,
     required this.posture,
     required this.singleOrDoubleArm,
@@ -57,17 +59,55 @@ class ExerciseEntity {
     required this.footElevation,
     required this.combinationExercises,
     required this.movementPattern1,
-    required this.movementPattern2,
-    required this.movementPattern3,
+    this.movementPattern2,
+    this.movementPattern3,
     required this.planeOfMotion1,
-    required this.planeOfMotion2,
-    required this.planeOfMotion3,
+    this.planeOfMotion2,
+    this.planeOfMotion3,
     required this.bodyRegion,
     required this.forceType,
     required this.mechanics,
     required this.laterality,
     required this.primaryExerciseClassification,
     required this.shortYoutubeDemonstrationLink,
-    required this.inDepthYoutubeExplanationLink,
+    this.inDepthYoutubeExplanationLink,
   });
+
+  @override
+  List<Object?> get props => [
+    id,
+    exercise,
+    shortYoutubeDemonstration,
+    inDepthYoutubeExplanation,
+    difficultyLevel,
+    targetMuscleGroup,
+    primeMoverMuscle,
+    secondaryMuscle,
+    tertiaryMuscle,
+    primaryEquipment,
+    primaryItems,
+    secondaryEquipment,
+    secondaryItems,
+    posture,
+    singleOrDoubleArm,
+    continuousOrAlternatingArms,
+    grip,
+    loadPositionEnding,
+    continuousOrAlternatingLegs,
+    footElevation,
+    combinationExercises,
+    movementPattern1,
+    movementPattern2,
+    movementPattern3,
+    planeOfMotion1,
+    planeOfMotion2,
+    planeOfMotion3,
+    bodyRegion,
+    forceType,
+    mechanics,
+    laterality,
+    primaryExerciseClassification,
+    shortYoutubeDemonstrationLink,
+    inDepthYoutubeExplanationLink,
+  ];
 }
