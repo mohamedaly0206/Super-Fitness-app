@@ -10,5 +10,36 @@
     "login_successfully": "تم تسجيل الدخول بنجاح",
     "login_error": "فشل تسجيل الدخول",
     "signup_successfully": "تم التسجيل بنجاح"
+  },
+  "meals": {
+    "ingredients": "المكونات"
+  },
+  "exercise": {
+    "category": "الفئات",
+    "recommendation_today": "توصيات اليوم",
+    "recommendation_for_you": "توصيات لك",
+    "popular_training": "التدريب الشائع",
+    "upcoming_workouts": "التمارين القادمة",
+    "workouts": "التمارين",
+    "see_all": "عرض الكل",
+    "exercise_that": "تمرين يتطلب",
+    "tasks": "مهام",
+    "task": "مهمة",
+    "target_muscle": "العضلة المستهدفة",
+    "primary_muscle": "العضلة الرئيسية",
+    "equipment": "المعدات",
+    "force_type": "نوع القوة",
+    "mechanics": "الميكانيكا",
+    "na": "غير متوفر",
+    "no_muscle_groups": "لا توجد مجموعات عضلية",
+    "no_muscles": "لا توجد عضلات",
+    "no_video_available": "لا يوجد فيديو متاح",
+    "greeting": "مرحباً",
+    "start_day": "لنبدأ يومك",
+    "gym": "الجيم",
+    "fitness": "اللياقة",
+    "yoga": "اليوغا",
+    "aerobics": "الкарديو",
+    "trainer": "المدرب"
   }
 }

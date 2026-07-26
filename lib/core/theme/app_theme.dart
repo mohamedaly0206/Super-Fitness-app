@@ -1,7 +1,6 @@
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
-import 'package:super_fitness_app/core/layout/app_durations.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -109,6 +108,7 @@ class AppTheme {
       onError: AppColors.textWhite,
       surface: AppColors.grey1,
       onSurface: AppColors.textPrimary,
+      onSurfaceVariant: AppColors.grey3,
     ),
 
     dividerColor: AppColors.divider,

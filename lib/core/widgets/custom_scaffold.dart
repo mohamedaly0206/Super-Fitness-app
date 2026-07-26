@@ -22,6 +22,7 @@ class CustomScaffold extends StatelessWidget {
     return Scaffold(
       appBar: appBar,
       body: Stack(
+        fit: StackFit.expand,
         children: [
           Positioned.fill(
             child: Image.asset(background.background, fit: BoxFit.cover),
@@ -37,16 +38,7 @@ class CustomScaffold extends StatelessWidget {
               ),
             ),
           ),
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: AppColors.textPrimary.withValues(alpha: 0.08),
-                  width: AppSize.borderWidth,
-                ),
-              ),
-            ),
-          ),
+
           body,
         ],
       ),

@@ -7,6 +7,7 @@ import 'interceptors/auth_interceptor.dart';
 
 class DioHelper {
   static late Dio dio;
+  static late Dio mealsDio;
 
   static void init() {
     dio = Dio(
@@ -31,5 +32,25 @@ class DioHelper {
           compact: true,
         ),
       );
+
+    mealsDio = Dio(
+      BaseOptions(
+        baseUrl: AppConfig.mealsBaseUrl,
+        connectTimeout: AppDurations.apiTimeout,
+        receiveTimeout: AppDurations.apiTimeout,
+        responseType: ResponseType.json,
+      ),
+    );
+
+    mealsDio.interceptors.add(
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+      ),
+    );
   }
 }

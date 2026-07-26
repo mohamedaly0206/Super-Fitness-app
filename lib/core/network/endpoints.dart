@@ -1,52 +1,55 @@
 class AppConfig {
-  static const baseUrl = "https://fitness.online-bakers.com/api";
+  static const String baseUrl = "https://fitness.elevateegy.com/api/v1/";
+  static const String mealsBaseUrl = "https://www.themealdb.com/api/json/v1/1/";
+
 }
 
 abstract class Endpoints {
-  static const String auth = '/api/auth';
-  static const String profile = '/api/profile';
-  static const String onboarding = '/api/onboarding';
-  static const String workouts = '/api/workouts';
-  static const String exercises = '/api/exercises';
-  static const String meals = '/api/meals';
-  static const String settings = '/api/settings';
+  static const String auth = 'auth';
+  static const String levels = 'levels';
+  static const String muscles = 'muscles';
+  static const String musclesGroup = 'musclesGroup';
+  static const String exercises = 'exercises';
 }
 
 abstract class AuthEndPoint {
-  static const String register = '${Endpoints.auth}/register';
-  static const String login = '${Endpoints.auth}/login';
+  static const String signup = '${Endpoints.auth}/signup';
+  static const String signin = '${Endpoints.auth}/signin';
+  static const String changePassword = '${Endpoints.auth}/change-password';
+  static const String uploadPhoto = '${Endpoints.auth}/upload-photo';
+  static const String profileData = '${Endpoints.auth}/profile-data';
   static const String logout = '${Endpoints.auth}/logout';
-  static const String refresh = '${Endpoints.auth}/refresh';
-  static const String forgetPassword = '${Endpoints.auth}/forget-password';
-  static const String verifyCode = '${Endpoints.auth}/verify-code';
-  static const String resetPassword = '${Endpoints.auth}/reset-password';
+  static const String forgotPassword = '${Endpoints.auth}/forgotPassword';
+  static const String verifyResetCode = '${Endpoints.auth}/verifyResetCode';
+  static const String resetPassword = '${Endpoints.auth}/resetPassword';
+  static const String deleteMe = '${Endpoints.auth}/deleteMe';
+  static const String editProfile = '${Endpoints.auth}/editProfile';
 }
 
-abstract class ProfileEndPoint {
-  static const String getProfile = Endpoints.profile;
-  static const String updateProfile = '${Endpoints.profile}/update';
-  static const String uploadAvatar = '${Endpoints.profile}/upload-avatar';
+abstract class LevelsEndPoint {
+  static const String levels = Endpoints.levels;
+  static const String difficultyByPrimeMover =
+      '${Endpoints.levels}/difficulty-levels/by-prime-mover';
 }
 
-abstract class OnboardingEndPoint {
-  static const String submit = '${Endpoints.onboarding}/submit';
-  static const String status = '${Endpoints.onboarding}/status';
+abstract class MusclesEndPoint {
+  static const String muscles = Endpoints.muscles;
+  static const String allMuscles = Endpoints.muscles;
+  static String muscleGroupById(String id) => '${Endpoints.musclesGroup}/$id';
+  static const String random = '${Endpoints.muscles}/random';
+  static const String byMuscleGroup =
+      '${Endpoints.musclesGroup}/by-muscle-group';
 }
 
-abstract class WorkoutEndPoint {
-  static const String workouts = Endpoints.workouts;
-  static String workoutById(String id) => '${Endpoints.workouts}/$id';
-  static const String trackProgress = '${Endpoints.workouts}/track-progress';
+abstract class ExercisesEndPoint {
   static const String exercises = Endpoints.exercises;
-  static String exerciseById(String id) => '${Endpoints.exercises}/$id';
+  static const String byMuscleDifficulty =
+      '${Endpoints.exercises}/by-muscle-difficulty';
+  static const String random = '${Endpoints.exercises}/random';
 }
 
 abstract class MealEndPoint {
-  static const String meals = Endpoints.meals;
-  static String mealById(String id) => '${Endpoints.meals}/$id';
-  static const String logMeal = '${Endpoints.meals}/log';
-}
-
-abstract class SettingsEndPoint {
-  static const String settings = Endpoints.settings;
+  static const String categories = 'categories.php';
+  static const String filter = 'filter.php';
+  static const String lookup = 'lookup.php';
 }

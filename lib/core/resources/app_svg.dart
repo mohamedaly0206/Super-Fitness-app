@@ -12,4 +12,6 @@ abstract class AppSvg {
   static const String securityWarning = 'assets/svgs/Security Warning.svg';
   static const String change = 'assets/svgs/Change.svg';
   static const String chatRobot = 'assets/svgs/chat robot.svg';
+  static const String backButtonIcon = 'assets/svgs/back_button_icon.svg';
+  static const String back = 'assets/svgs/back.svg';
 }
