@@ -37,7 +37,7 @@ class DifficultyChip extends StatelessWidget {
             style: getSemiBoldStyle(
               context: context,
               fontSize: 14,
-              color: isSelected ? Colors.white : Colors.white.withOpacity(.75),
+              color: isSelected ? Colors.white : Colors.white.withValues(alpha: .75),
             ),
           ),
         ),

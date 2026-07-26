@@ -1,24 +1,29 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:super_fitness_app/app.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/core/network/dio_helper.dart';
 import 'package:super_fitness_app/core/resources/app_value.dart';
+import 'package:super_fitness_app/core/service/remote_config_service.dart';
 import 'package:super_fitness_app/core/storage/secure_storage_service.dart';
 
-const staticToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNmE1ZTA2ZTBlYTk2NThjZWEyNDgzNTc3IiwiaWF0IjoxNzg0NTQ3MDQwfQ.1a3d3BuT7yDwMBnqGEB74-KZHAnZTkvlC3zLGQY9_2I';
+import 'firebase_options.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  await SecureStorageService.saveToken(staticToken);
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await EasyLocalization.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   DioHelper.init();
   configureDependencies();
-  await EasyLocalization.ensureInitialized();
+  await getIt<RemoteConfigService>().init();
 
+  final token = await SecureStorageService.getToken();
+  final hasToken = token != null && token.isNotEmpty;
+
+  FlutterNativeSplash.remove();
   runApp(
     EasyLocalization(
       supportedLocales: const [
@@ -26,7 +31,7 @@ Future<void> main() async {
         Locale(AppKeys.arLocale),
       ],
       path: AppKeys.translationPath,
-      child: const FitnessApp(),
+      child: FitnessApp(hasToken: hasToken),
     ),
   );
 }
