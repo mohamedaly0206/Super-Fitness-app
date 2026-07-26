@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:super_fitness_app/core/resources/app_strings.dart';
 import 'package:super_fitness_app/modules/smart_coach/data/models/ollama_chat_response.dart';
 
 import '../../domain/entities/chat_message.dart';
@@ -12,16 +13,30 @@ class OllamaApiClient {
 
   OllamaApiClient(this._dio);
 
+  List<ChatMessage> _withSystemPrompt(
+    List<ChatMessage> messages, {
+    String languageCode = 'en',
+  }) {
+    if (messages.isNotEmpty && messages.first.role == 'system') {
+      return messages;
+    }
+    return [
+      ChatMessage.system(AppStrings.smartCoachSystemPromptFor(languageCode)),
+      ...messages,
+    ];
+  }
+
   Stream<String> sendChatMessageStream({
     required List<ChatMessage> messages,
     String model = 'gemma3:1b',
+    String languageCode = 'en',
   }) async* {
     try {
       final response = await _dio.post(
         '/api/chat',
         data: {
           'model': model,
-          'messages': messages.map((m) => m.toMap()).toList(),
+          'messages': _withSystemPrompt(messages, languageCode: languageCode).map((m) => m.toMap()).toList(),
           'stream': true,
         },
         options: Options(responseType: ResponseType.stream),
@@ -71,13 +86,14 @@ class OllamaApiClient {
   Future<String> sendChatMessage({
     required List<ChatMessage> messages,
     String model = 'gemma3:1b',
+    String languageCode = 'en',
   }) async {
     try {
       final response = await _dio.post(
         '/api/chat',
         data: {
           'model': model,
-          'messages': messages.map((m) => m.toMap()).toList(),
+          'messages': _withSystemPrompt(messages, languageCode: languageCode).map((m) => m.toMap()).toList(),
           'stream': false,
         },
         options: Options(
@@ -105,6 +121,38 @@ class OllamaApiClient {
       return true;
     } catch (_) {
       return false;
+    }
+  }
+
+  Future<String> generateChatTitle({
+    required String firstMessage,
+    String model = 'gemma3:1b',
+  }) async {
+    try {
+      final response = await _dio.post(
+        '/api/chat',
+        data: {
+          'model': model,
+          'messages': [
+            {
+              'role': 'system',
+              'content':
+                  'Generate a short conversation title (max 5 words) based on the user\'s message. Reply with ONLY the title, no quotes, no punctuation.',
+            },
+            {'role': 'user', 'content': firstMessage},
+          ],
+          'stream': false,
+        },
+        options: Options(
+          responseType: ResponseType.json,
+          receiveTimeout: const Duration(seconds: 30),
+        ),
+      );
+
+      final ollamaResponse = OllamaChatResponse.fromJson(response.data);
+      return ollamaResponse.message?.content.trim() ?? 'New Chat';
+    } catch (_) {
+      return 'New Chat';
     }
   }
 

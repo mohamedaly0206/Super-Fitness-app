@@ -14,10 +14,12 @@ class SmartCoachRemoteDataSourceImpl implements SmartCoachRemoteDataSource {
   Stream<String> streamChat({
     required List<ChatMessage> messages,
     String model = 'gemma3:1b',
+    String languageCode = 'en',
   }) {
     return _ollamaClient.sendChatMessageStream(
       messages: messages,
       model: model,
+      languageCode: languageCode,
     );
   }
 
@@ -25,16 +27,23 @@ class SmartCoachRemoteDataSourceImpl implements SmartCoachRemoteDataSource {
   Future<String> sendChat({
     required List<ChatMessage> messages,
     String model = 'gemma3:1b',
+    String languageCode = 'en',
   }) {
     return _ollamaClient.sendChatMessage(
       messages: messages,
       model: model,
+      languageCode: languageCode,
     );
   }
 
   @override
   Future<bool> isOllamaRunning() {
     return _ollamaClient.isServerRunning();
+  }
+
+  @override
+  Future<String> generateChatTitle({required String firstMessage}) {
+    return _ollamaClient.generateChatTitle(firstMessage: firstMessage);
   }
 
   @override

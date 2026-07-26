@@ -56,4 +56,29 @@ void main() {
     print('\nFull response: ${buffer.toString()}');
     expect(buffer.isNotEmpty, isTrue);
   });
+
+  test('generate chat title', () async {
+    final title = await client.generateChatTitle(
+      firstMessage: 'Can you suggest a high protein vegetarian meal plan?',
+    );
+    print('Title: $title');
+    expect(title.isNotEmpty, isTrue);
+  });
+
+  test('arabic streaming chat', () async {
+    final stream = client.sendChatMessageStream(
+      messages: [
+        const ChatMessage.user('ايش افضل تمارين لتكبير الصدر؟'),
+      ],
+      languageCode: 'ar',
+    );
+
+    final buffer = StringBuffer();
+    await for (final token in stream) {
+      stdout.write(token);
+      buffer.write(token);
+    }
+    print('\nFull response: ${buffer.toString()}');
+    expect(buffer.isNotEmpty, isTrue);
+  }, timeout: const Timeout(Duration(minutes: 2)));
 }

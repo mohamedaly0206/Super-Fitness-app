@@ -14,21 +14,36 @@ class SmartCoachRepoImpl implements SmartCoachRepo {
   Stream<String> streamChat({
     required List<ChatMessage> messages,
     String model = 'gemma3:1b',
+    String languageCode = 'en',
   }) {
-    return _remoteDataSource.streamChat(messages: messages, model: model);
+    return _remoteDataSource.streamChat(
+      messages: messages,
+      model: model,
+      languageCode: languageCode,
+    );
   }
 
   @override
   Future<String> sendChat({
     required List<ChatMessage> messages,
     String model = 'gemma3:1b',
+    String languageCode = 'en',
   }) {
-    return _remoteDataSource.sendChat(messages: messages, model: model);
+    return _remoteDataSource.sendChat(
+      messages: messages,
+      model: model,
+      languageCode: languageCode,
+    );
   }
 
   @override
   Future<bool> isOllamaRunning() {
     return _remoteDataSource.isOllamaRunning();
+  }
+
+  @override
+  Future<String> generateChatTitle({required String firstMessage}) {
+    return _remoteDataSource.generateChatTitle(firstMessage: firstMessage);
   }
 
   @override
