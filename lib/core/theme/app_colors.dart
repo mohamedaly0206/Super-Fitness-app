@@ -45,7 +45,7 @@ class AppColors {
   static const Color textPrimary = grey12;
   static const Color textSecondary = grey10;
   static const Color textWhite = grey12;
-  static const Color textHint = grey7;
+  static const Color textHint = Color(0xFFD3D3D3);
   static const Color error = Color(0xFFFF3B30);
   static const Color success = Color(0xFF4CAF50);
   static const Color divider = grey3;
@@ -59,7 +59,7 @@ class AppColors {
 
   //  UI SEMANTIC
   static const Color hintText = Color(0x8AFFFFFF);
-  static const Color iconInactive = Color(0xB3FFFFFF);
+  static const Color iconInactive = Colors.white;
   static const Color borderDefault = Color(0x61FFFFFF);
   static const Color borderFocused = Colors.white;
   static const Color borderError = Colors.redAccent;

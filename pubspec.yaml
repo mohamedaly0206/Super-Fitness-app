@@ -48,7 +48,7 @@ dependencies:
   pretty_dio_logger: ^1.4.0
 
   # Serialization
-  json_annotation: ^4.11.0
+  json_annotation: ^4.12.0
 
   # Storage
   flutter_secure_storage: ^10.0.0
@@ -61,6 +61,8 @@ dependencies:
   shimmer: ^3.0.0
   google_fonts: ^8.1.0
   pinput: ^5.0.0
+  flutter_animate: ^4.5.2
+  flutter_native_splash: ^2.4.8
   # Localization
   easy_localization: ^3.0.8
 
@@ -75,6 +77,8 @@ dependencies:
 
   # Notifications
   firebase_core: ^4.10.0
+  firebase_auth: ^6.5.6
+  google_sign_in: ^7.2.0
   firebase_messaging: ^16.2.2
   permission_handler: ^12.0.2
   geolocator: ^13.0.2
@@ -91,6 +95,12 @@ dependencies:
   flutter_polyline_points: ^3.1.0
   url_launcher: ^6.0.0
   google_nav_bar: ^5.0.6
+  wheel_picker: ^0.3.0
+  wheel_slider: ^1.2.2
+  horizontal_picker: ^1.2.0
+  smooth_page_indicator: ^2.0.1
+  firebase_remote_config: ^6.5.5
+  flutter_facebook_auth: ^7.2.0
   youtube_player_flutter: ^10.0.1
   youtube_player_iframe: ^6.0.2
 
@@ -108,8 +118,9 @@ dev_dependencies:
   # Testing
   test: ^1.30.0
   mockito: ^5.4.6
-  mocktail: ^1.0.4
+  mocktail: ^1.0.5
   bloc_test: ^10.0.0
+
 
 
   # Code Generation
@@ -134,3 +145,15 @@ flutter:
     - assets/images/
     - assets/svgs/
     - assets/translations/
+
+flutter_native_splash:
+  color: "#202020"
+  image: assets/images/splash--logo.png
+
+  android: true
+  ios: true
+  web: false
+
+  android_12:
+    color: "#202020"
+    image: assets/images/splash--logo.png
