@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:super_fitness_app/core/resources/app_png.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
-import 'package:super_fitness_app/core/layout/app_size.dart';
 
 class CustomScaffold extends StatelessWidget {
   final Backgrounds background;
@@ -21,6 +20,7 @@ class CustomScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -29,10 +29,7 @@ class CustomScaffold extends StatelessWidget {
           ),
           Positioned.fill(
             child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: AppSize.backgroundBlurSigma,
-                sigmaY: AppSize.backgroundBlurSigma,
-              ),
+              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
               child: Container(
                 color: AppColors.background.withValues(alpha: 0.10),
               ),

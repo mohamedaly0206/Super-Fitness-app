@@ -30,7 +30,7 @@ class NotFoundScreen extends StatelessWidget {
             FilledButton(
               onPressed: () => Navigator.pushNamedAndRemoveUntil(
                 context,
-                Routes.splash,
+                Routes.onboarding,
                 (_) => false,
               ),
               child: const Text(AppStrings.goHome),
