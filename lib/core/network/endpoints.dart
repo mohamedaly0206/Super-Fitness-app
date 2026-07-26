@@ -15,12 +15,15 @@ abstract class Endpoints {
 abstract class AuthEndPoint {
   static const String signup = '${Endpoints.auth}/signup';
   static const String signin = '${Endpoints.auth}/signin';
+  static const String login = signin;
   static const String changePassword = '${Endpoints.auth}/change-password';
   static const String uploadPhoto = '${Endpoints.auth}/upload-photo';
   static const String profileData = '${Endpoints.auth}/profile-data';
   static const String logout = '${Endpoints.auth}/logout';
   static const String forgotPassword = '${Endpoints.auth}/forgotPassword';
+  static const String forgetPassword = forgotPassword;
   static const String verifyResetCode = '${Endpoints.auth}/verifyResetCode';
+  static const String verifyCode = verifyResetCode;
   static const String resetPassword = '${Endpoints.auth}/resetPassword';
   static const String deleteMe = '${Endpoints.auth}/deleteMe';
   static const String editProfile = '${Endpoints.auth}/editProfile';

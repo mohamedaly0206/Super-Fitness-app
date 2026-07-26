@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
-import 'package:super_fitness_app/config/routes/app_router.dart';
+import 'package:super_fitness_app/config/routes/routes.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/widgets/app_error_widget.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';

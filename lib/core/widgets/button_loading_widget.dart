@@ -13,7 +13,7 @@ class ButtonLoadingWidget extends StatelessWidget {
       highlightColor: AppColors.primaryLight.withValues(alpha: 0.6),
       child: Container(
         width: double.infinity,
-        height: AppSize.s52,
+        height: AppSize.s38,
         decoration: BoxDecoration(
           color: AppColors.primary,
           borderRadius: BorderRadius.circular(AppSize.borderRadiusButton),

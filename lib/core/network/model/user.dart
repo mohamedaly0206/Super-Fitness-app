@@ -5,27 +5,37 @@ part 'user.g.dart';
 @JsonSerializable()
 class UserDto {
   @JsonKey(name: "firstName")
-  String? firstName;
+  final String? firstName;
   @JsonKey(name: "lastName")
-  String? lastName;
+  final String? lastName;
   @JsonKey(name: "email")
-  String? email;
+  final String? email;
   @JsonKey(name: "gender")
-  String? gender;
-  @JsonKey(name: "phone")
-  String? phone;
+  final String? gender;
   @JsonKey(name: "photo")
-  String? photo;
+  final String? photo;
+  @JsonKey(name: "phone")
+  final String? phone;
   @JsonKey(name: "role")
-  String? role;
+  final String? role;
   @JsonKey(name: "wishlist")
-  List<dynamic>? wishlist;
+  final List<dynamic>? wishlist;
   @JsonKey(name: "_id")
-  String? id;
+  final String? id;
   @JsonKey(name: "addresses")
-  List<dynamic>? addresses;
+  final List<dynamic>? addresses;
+  @JsonKey(name: "age")
+  final int? age;
+  @JsonKey(name: "weight")
+  final double? weight;
+  @JsonKey(name: "height")
+  final double? height;
+  @JsonKey(name: "activityLevel")
+  final String? activityLevel;
+  @JsonKey(name: "goal")
+  final String? goal;
   @JsonKey(name: "createdAt")
-  DateTime? createdAt;
+  final DateTime? createdAt;
 
   UserDto({
     this.firstName,
@@ -38,6 +48,11 @@ class UserDto {
     this.wishlist,
     this.id,
     this.addresses,
+    this.age,
+    this.weight,
+    this.height,
+    this.activityLevel,
+    this.goal,
     this.createdAt,
   });
 
@@ -52,11 +67,15 @@ class UserDto {
       lastName: lastName,
       email: email,
       gender: gender,
-      phone: phone,
       photo: photo,
       role: role,
       wishlist: wishlist,
       addresses: addresses,
+      age: age,
+      weight: weight,
+      height: height,
+      activityLevel: activityLevel,
+      goal: goal,
       createdAt: createdAt,
     );
   }
