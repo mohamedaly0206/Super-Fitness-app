@@ -16,7 +16,6 @@ class FitnessApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       onGenerateRoute: AppRouter.onGenerateRoute,
       initialRoute: Routes.homeRoutes,
-
     );
   }
 }

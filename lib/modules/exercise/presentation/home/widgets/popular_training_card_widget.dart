@@ -43,7 +43,10 @@ Widget popularTrainingCard({
                   )
                 : Container(
                     color: AppColors.grey2,
-                    child: const Icon(Icons.play_circle_outline, size: AppSize.s48),
+                    child: const Icon(
+                      Icons.play_circle_outline,
+                      size: AppSize.s48,
+                    ),
                   ),
 
             Container(color: Colors.black.withValues(alpha: 0.3)),

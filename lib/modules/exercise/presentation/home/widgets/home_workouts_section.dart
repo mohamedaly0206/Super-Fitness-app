@@ -35,9 +35,7 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
           prev.muscleGroupsState.data != curr.muscleGroupsState.data,
       builder: (context, state) {
         if (state.muscleGroupsState.isLoading) {
-          return homeTabShimmer(
-            
-          );
+          return homeTabShimmer();
         }
         if (state.muscleGroupsState.errorMessage != null) {
           return Padding(
@@ -54,7 +52,10 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p8),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p8,
+                vertical: AppPadding.p8,
+              ),
               child: Row(
                 children: [
                   Text(
@@ -85,7 +86,8 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 itemCount: groups.length,
-                separatorBuilder: (context, index) => const SizedBox(width: AppSize.s10),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(width: AppSize.s10),
                 itemBuilder: (context, index) {
                   final isSelected = _selectedIndex == index;
                   return GestureDetector(
@@ -103,12 +105,16 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
                       alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppPadding.p20,
+                      ),
                       decoration: BoxDecoration(
                         color: isSelected
                             ? AppColors.primary
                             : Colors.transparent,
-                        borderRadius: BorderRadius.circular(AppSize.borderRadiusPill),
+                        borderRadius: BorderRadius.circular(
+                          AppSize.borderRadiusPill,
+                        ),
                       ),
                       child: AnimatedDefaultTextStyle(
                         duration: const Duration(milliseconds: 300),

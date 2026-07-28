@@ -24,7 +24,6 @@ abstract class Routes {
   static const String uiShowcase = '/ui-showcase';
 }
 
-
 abstract class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     try {
@@ -42,7 +41,9 @@ abstract class AppRouter {
           );
         case Routes.foodRecommendation:
           final args = settings.arguments as String?;
-          return PageTransitions.fade(FoodRecommendationPage(initialCategoryName: args));
+          return PageTransitions.fade(
+            FoodRecommendationPage(initialCategoryName: args),
+          );
         case Routes.foodDetails:
           final mealId = settings.arguments as String;
           return PageTransitions.fade(FoodDetailsPage(mealId: mealId));
@@ -51,7 +52,9 @@ abstract class AppRouter {
           return PageTransitions.fade(ExerciseDetailsPage(exercise: exercise));
         case Routes.exercises:
           final primeMoverMuscleId = settings.arguments as String;
-          return PageTransitions.fade(ExerciseScreen(primeMoverMuscleId: primeMoverMuscleId));
+          return PageTransitions.fade(
+            ExerciseScreen(primeMoverMuscleId: primeMoverMuscleId),
+          );
         default:
           return PageTransitions.fade(
             NotFoundScreen(route: settings.name ?? ''),

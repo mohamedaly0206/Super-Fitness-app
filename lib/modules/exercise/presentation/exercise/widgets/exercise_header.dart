@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:super_fitness_app/config/routes/app_router.dart';
 import 'package:super_fitness_app/core/extensions/youtube_extension.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
-import 'package:super_fitness_app/core/resources/app_svg.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/cached_network_image.dart';
+import 'package:super_fitness_app/core/widgets/custom_back_button.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise/widgets/difficulty_selector.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise/widgets/info_chip.dart';
@@ -58,13 +57,7 @@ class ExerciseHeader extends StatelessWidget {
           Positioned(
             top: MediaQuery.of(context).padding.top + AppSize.s10,
             left: AppPadding.p16,
-            child: CircleAvatar(
-              backgroundColor: AppColors.primary,
-              child: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: SvgPicture.asset(AppSvg.back, height: AppSize.s15),
-              ),
-            ),
+            child: CustomBackButton(),
           ),
 
           Positioned(
@@ -85,9 +78,7 @@ class ExerciseHeader extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(
-                    AppSize.borderRadiusPill,
-                  ),
+                  borderRadius: BorderRadius.circular(AppSize.borderRadiusPill),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,

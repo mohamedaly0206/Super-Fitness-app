@@ -24,32 +24,44 @@ void main() {
   final tMealsDetailsDto = MealsDetailsDto(); // Inject properties as needed
 
   group('getMeals', () {
-    test('should return SuccessBaseResponse when api call is successful', () async {
-      // Arrange
-      when(mockApiClient.getMeals(tMealId))
-          .thenAnswer((_) async => tMealsDetailsDto);
+    test(
+      'should return SuccessBaseResponse when api call is successful',
+      () async {
+        // Arrange
+        when(
+          mockApiClient.getMeals(tMealId),
+        ).thenAnswer((_) async => tMealsDetailsDto);
 
-      // Act
-      final result = await dataSource.getMeals(tMealId);
+        // Act
+        final result = await dataSource.getMeals(tMealId);
 
-      // Assert
-      expect(result, isA<SuccessBaseResponse<MealsDetailsDto>>());
-      expect((result as SuccessBaseResponse<MealsDetailsDto>).data, equals(tMealsDetailsDto));
-      verify(mockApiClient.getMeals(tMealId)).called(1);
-      verifyNoMoreInteractions(mockApiClient);
-    });
+        // Assert
+        expect(result, isA<SuccessBaseResponse<MealsDetailsDto>>());
+        expect(
+          (result as SuccessBaseResponse<MealsDetailsDto>).data,
+          equals(tMealsDetailsDto),
+        );
+        verify(mockApiClient.getMeals(tMealId)).called(1);
+        verifyNoMoreInteractions(mockApiClient);
+      },
+    );
 
-    test('should return ErrorBaseResponse when api call throws an exception', () async {
-      // Arrange
-      when(mockApiClient.getMeals(tMealId)).thenThrow(Exception('Server Failure'));
+    test(
+      'should return ErrorBaseResponse when api call throws an exception',
+      () async {
+        // Arrange
+        when(
+          mockApiClient.getMeals(tMealId),
+        ).thenThrow(Exception('Server Failure'));
 
-      // Act
-      final result = await dataSource.getMeals(tMealId);
+        // Act
+        final result = await dataSource.getMeals(tMealId);
 
-      // Assert
-      expect(result, isA<ErrorBaseResponse<MealsDetailsDto>>());
-      verify(mockApiClient.getMeals(tMealId)).called(1);
-      verifyNoMoreInteractions(mockApiClient);
-    });
+        // Assert
+        expect(result, isA<ErrorBaseResponse<MealsDetailsDto>>());
+        verify(mockApiClient.getMeals(tMealId)).called(1);
+        verifyNoMoreInteractions(mockApiClient);
+      },
+    );
   });
 }
