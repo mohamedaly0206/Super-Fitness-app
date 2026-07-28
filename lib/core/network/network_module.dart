@@ -3,6 +3,7 @@ import 'package:super_fitness_app/core/network/dio_helper.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/modules/exercise/api/api_client/exercise_api_client.dart';
 import 'package:super_fitness_app/modules/meals/api/api_client/meals_api_client.dart';
+import 'package:super_fitness_app/modules/profile/api/api_client/profile_api_client.dart';
 
 @module
 abstract class NetworkModule {
@@ -18,4 +19,7 @@ abstract class NetworkModule {
 
   @singleton
   MealsApiClient mealsApi(@Named('MealsDio') Dio dio) => MealsApiClient(dio);
+
+  @singleton
+  ProfileApiClient profileApi(Dio dio) => ProfileApiClient(dio);
 }
