@@ -17,11 +17,17 @@ class HomeHeader extends StatelessWidget {
             children: [
               Text(
                 '${context.greeting} Ziad',
-                style: TextStyle(fontSize: AppSize.s20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: AppSize.s20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
                 context.startDay,
-                style: TextStyle(fontSize: AppSize.s25, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: AppSize.s25,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),

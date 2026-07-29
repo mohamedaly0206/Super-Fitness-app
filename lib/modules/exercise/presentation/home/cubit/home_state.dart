@@ -41,7 +41,8 @@ class HomeState extends Equatable {
       muscleGroupsState: muscleGroupsState ?? this.muscleGroupsState,
       musclesByGroupState: musclesByGroupState ?? this.musclesByGroupState,
       foodCategoriesState: foodCategoriesState ?? this.foodCategoriesState,
-      selectedMuscleGroupId: selectedMuscleGroupId ?? this.selectedMuscleGroupId,
+      selectedMuscleGroupId:
+          selectedMuscleGroupId ?? this.selectedMuscleGroupId,
       currentPage: currentPage ?? this.currentPage,
       totalPages: totalPages ?? this.totalPages,
     );
@@ -49,14 +50,14 @@ class HomeState extends Equatable {
 
   @override
   List<Object> get props => [
-        levelState,
-        exerciseState,
-        musclesState,
-        muscleGroupsState,
-        musclesByGroupState,
-        foodCategoriesState,
-        ? selectedMuscleGroupId,
-        currentPage,
-        totalPages,
-      ];
+    levelState,
+    exerciseState,
+    musclesState,
+    muscleGroupsState,
+    musclesByGroupState,
+    foodCategoriesState,
+    ?selectedMuscleGroupId,
+    currentPage,
+    totalPages,
+  ];
 }

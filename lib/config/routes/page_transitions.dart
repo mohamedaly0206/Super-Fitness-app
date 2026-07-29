@@ -13,15 +13,15 @@ abstract class PageTransitions {
       PageRouteBuilder<dynamic>(
         settings: settings,
         pageBuilder: (_, _, _) => page,
-    transitionsBuilder: (_, a, _, child) => SlideTransition(
-      position: Tween<Offset>(
-        begin: const Offset(1.0, 0.0),
-        end: Offset.zero,
-      ).animate(CurvedAnimation(parent: a, curve: Curves.easeOutCubic)),
-      child: child,
-    ),
-    transitionDuration: AppDurations.slideTransition,
-  );
+        transitionsBuilder: (_, a, _, child) => SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(1.0, 0.0),
+            end: Offset.zero,
+          ).animate(CurvedAnimation(parent: a, curve: Curves.easeOutCubic)),
+          child: child,
+        ),
+        transitionDuration: AppDurations.slideTransition,
+      );
 
   static PageRoute<dynamic> search(Widget page) => PageRouteBuilder<dynamic>(
     pageBuilder: (_, animation, _) => page,

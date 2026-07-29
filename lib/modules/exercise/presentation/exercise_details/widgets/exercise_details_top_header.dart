@@ -13,10 +13,9 @@ class ExerciseDetailsTopHeader extends StatelessWidget {
 
   final ExerciseEntity exercise;
 
-  String get _videoUrl =>
-      exercise.shortYoutubeDemonstrationLink.isNotEmpty
-          ? exercise.shortYoutubeDemonstrationLink
-          : exercise.inDepthYoutubeExplanationLink ?? '';
+  String get _videoUrl => exercise.shortYoutubeDemonstrationLink.isNotEmpty
+      ? exercise.shortYoutubeDemonstrationLink
+      : exercise.inDepthYoutubeExplanationLink ?? '';
 
   String? get _videoId {
     if (_videoUrl.isEmpty) return null;
@@ -52,8 +51,12 @@ class ExerciseDetailsTopHeader extends StatelessWidget {
                     ? const Center(child: AppLoadingWidget())
                     : ClipRRect(
                         borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(AppSize.borderRadiusOutlined),
-                          bottomRight: Radius.circular(AppSize.borderRadiusOutlined),
+                          bottomLeft: Radius.circular(
+                            AppSize.borderRadiusOutlined,
+                          ),
+                          bottomRight: Radius.circular(
+                            AppSize.borderRadiusOutlined,
+                          ),
                         ),
                         child: YoutubePlayer(controller: controller),
                       )
@@ -69,8 +72,12 @@ class ExerciseDetailsTopHeader extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(AppSize.borderRadiusOutlined),
-                        bottomRight: Radius.circular(AppSize.borderRadiusOutlined),
+                        bottomLeft: Radius.circular(
+                          AppSize.borderRadiusOutlined,
+                        ),
+                        bottomRight: Radius.circular(
+                          AppSize.borderRadiusOutlined,
+                        ),
                       ),
                       image: _thumbnailUrl != null
                           ? DecorationImage(
@@ -83,8 +90,12 @@ class ExerciseDetailsTopHeader extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(AppSize.borderRadiusOutlined),
-                          bottomRight: Radius.circular(AppSize.borderRadiusOutlined),
+                          bottomLeft: Radius.circular(
+                            AppSize.borderRadiusOutlined,
+                          ),
+                          bottomRight: Radius.circular(
+                            AppSize.borderRadiusOutlined,
+                          ),
                         ),
                         color: Colors.black.withValues(alpha: 0.4),
                       ),

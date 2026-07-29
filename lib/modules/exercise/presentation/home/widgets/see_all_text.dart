@@ -15,14 +15,15 @@ class SeeAllText extends StatelessWidget {
       onTap: onTap,
       child: Text(
         context.seeAll,
-        style: getMediumStyle(
-          context: context,
-          fontSize: FontSizeManager.s14,
-          color: AppColors.primary,
-        ).copyWith(
-          decoration: TextDecoration.underline,
-          decorationColor: AppColors.primary,
-        ),
+        style:
+            getMediumStyle(
+              context: context,
+              fontSize: FontSizeManager.s14,
+              color: AppColors.primary,
+            ).copyWith(
+              decoration: TextDecoration.underline,
+              decorationColor: AppColors.primary,
+            ),
       ),
     );
   }

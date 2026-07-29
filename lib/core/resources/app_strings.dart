@@ -15,6 +15,8 @@ abstract class AppStrings {
   static const String workout = 'Workout';
   static const String chat = 'Chat';
   static const String profile = 'Profile';
+  static const String editProfile = 'Edit Profile';
+  static const String changeProfile = 'Change Password';
 
   //  EXIT
   static const String pressBackAgainToExit = 'Press back again to exit';

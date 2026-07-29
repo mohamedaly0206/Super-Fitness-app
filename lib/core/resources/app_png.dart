@@ -23,8 +23,6 @@ abstract class AppPng {
   //  FOOD RECOMMENDATION
   static const String backArrow = 'assets/svgs/Vector.png';
 
-
-
   // category images
   static const String aerobics = 'assets/images/aerobics.png';
   static const String fitness = 'assets/images/fitness.png';

@@ -85,9 +85,7 @@ class ExerciseHeader extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(
-                    AppSize.borderRadiusPill,
-                  ),
+                  borderRadius: BorderRadius.circular(AppSize.borderRadiusPill),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,

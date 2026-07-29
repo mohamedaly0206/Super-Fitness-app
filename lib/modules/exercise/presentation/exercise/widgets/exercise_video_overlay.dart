@@ -53,9 +53,7 @@ class _ExerciseVideoOverlayState extends State<ExerciseVideoOverlay> {
           child: GestureDetector(
             onTap: () {},
             child: Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: AppPadding.p20,
-              ),
+              margin: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
               decoration: BoxDecoration(
                 color: AppColors.background,
                 borderRadius: BorderRadius.circular(AppSize.s16),
