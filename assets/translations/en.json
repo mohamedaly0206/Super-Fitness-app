@@ -109,6 +109,10 @@
     "register_continuation_placeholder": "Next Register screens will be implemented here.",
     "login_placeholder": "Login screen will be implemented here."
   },
+  "smart_coach": {
+    "assist_you": "How Can I Assist You\nToday ?",
+    "get_started": "Get Started"
+  },
   "validation": {
     "email_required": "Email is required",
     "invalid_email": "Please enter a valid email address",

@@ -89,16 +89,14 @@ class SendSmartCoachMessageUseCase {
           : ConversationStatus.active,
     );
 
-    /// First Message => Generate Title
-    print("previousMessages = ${previousMessages.length}");
+    /// Only generate title on the first user message
+    if (previousMessages.length <= 1) {
+      final title = await _smartCoachRepo.generateChatTitle(
+        firstMessage: userMessage,
+      );
 
-    final title = await _smartCoachRepo.generateChatTitle(
-      firstMessage: userMessage,
-    );
-
-    print("Generated Title = $title");
-
-    updatedConversation = updatedConversation.copyWith(title: title);
+      updatedConversation = updatedConversation.copyWith(title: title);
+    }
 
     await _conversationRepository.updateConversation(updatedConversation);
 

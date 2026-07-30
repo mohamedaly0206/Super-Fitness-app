@@ -76,42 +76,51 @@ class _SmartCoachViewState extends State<_SmartCoachView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SmartCoachCubit, SmartCoachState>(
-      listenWhen: (previous, current) {
-        final oldLength = previous.currentSession?.messages.length ?? 0;
-        final newLength = current.currentSession?.messages.length ?? 0;
-        return oldLength != newLength || previous.isTyping != current.isTyping;
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) {
+          Navigator.of(context).pop();
+        }
       },
-      listener: (_, state) {
-        _scrollToBottom();
-      },
-      builder: (context, state) {
-        return CustomScaffold(
-          background: Backgrounds.chat,
-          extendBehindAppBar: true,
-          appBar: state.currentSession == null
-              ? const WelcomeAppBar()
-              : ChatAppBar(
-                  conversation: state.currentSession!.conversation,
-                  scrollOffset: _scrollOffset,
-                ),
-          endDrawer: const ChatHistoryDrawer(),
-          body: state.currentSession == null
-              ? const WelcomeView()
-              : Column(
-                  children: [
-                    Expanded(
-                      child: MessageList(
-                        controller: _scrollController,
-                        messages: state.currentSession!.messages,
-                        isTyping: state.isTyping,
+      child: BlocConsumer<SmartCoachCubit, SmartCoachState>(
+        listenWhen: (previous, current) {
+          final oldLength = previous.currentSession?.messages.length ?? 0;
+          final newLength = current.currentSession?.messages.length ?? 0;
+          return oldLength != newLength ||
+              previous.isTyping != current.isTyping;
+        },
+        listener: (_, state) {
+          _scrollToBottom();
+        },
+        builder: (context, state) {
+          return CustomScaffold(
+            background: Backgrounds.chat,
+            extendBehindAppBar: true,
+            appBar: state.currentSession == null
+                ? const WelcomeAppBar()
+                : ChatAppBar(
+                    conversation: state.currentSession!.conversation,
+                    scrollOffset: _scrollOffset,
+                  ),
+            endDrawer: const ChatHistoryDrawer(),
+            body: state.currentSession == null
+                ? const WelcomeView()
+                : Column(
+                    children: [
+                      Expanded(
+                        child: MessageList(
+                          controller: _scrollController,
+                          messages: state.currentSession!.messages,
+                          isTyping: state.isTyping,
+                        ),
                       ),
-                    ),
-                    const MessageInput(),
-                  ],
-                ),
-        );
-      },
+                      const MessageInput(),
+                    ],
+                  ),
+          );
+        },
+      ),
     );
   }
 }

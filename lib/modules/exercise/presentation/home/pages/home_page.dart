@@ -44,10 +44,17 @@ class HomePage extends StatelessWidget {
                     },
                     itemCount: categoriesBuilder(context).length,
                     itemBuilder: (context, index) {
-                      final category = categoriesBuilder(context)[index];
+                      final categories = categoriesBuilder(context);
+                      final category = categories[index];
                       return categoryCard(
                         title: category.title,
                         image: category.image,
+                        onTap: index == categories.length - 1
+                            ? () => Navigator.pushNamed(
+                                  context,
+                                  Routes.smartCotchChat,
+                                )
+                            : null,
                       );
                     },
                   ),

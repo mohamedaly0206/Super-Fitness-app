@@ -44,6 +44,35 @@ class MessageContent extends StatelessWidget {
     listBullet: const TextStyle(color: AppColors.primary),
   );
 
+  Widget _buildImage(Uri uri, String? title, String? alt) {
+    if (uri.scheme == 'data') {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image.memory(
+          uri.data!.contentAsBytes(),
+          fit: BoxFit.contain,
+          errorBuilder: (_, __, ___) => const _ImageError(),
+        ),
+      );
+    }
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Image.network(
+        uri.toString(),
+        fit: BoxFit.contain,
+        loadingBuilder: (_, child, progress) {
+          if (progress == null) return child;
+          return const SizedBox(
+            height: 120,
+            child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+          );
+        },
+        errorBuilder: (_, __, ___) => const _ImageError(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final time = DateFormat('h:mm a').format(message.createdAt);
@@ -70,6 +99,7 @@ class MessageContent extends StatelessWidget {
               selectable: true,
               shrinkWrap: true,
               styleSheet: _styleSheet,
+              imageBuilder: _buildImage,
             ),
             const SizedBox(height: 8),
             Align(
@@ -84,6 +114,24 @@ class MessageContent extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ImageError extends StatelessWidget {
+  const _ImageError();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: .1),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: const Center(
+        child: Icon(Icons.broken_image_outlined, color: Colors.white38, size: 32),
       ),
     );
   }

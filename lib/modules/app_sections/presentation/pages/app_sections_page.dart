@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
+import 'package:super_fitness_app/config/routes/routes.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_cubit.dart';
@@ -67,7 +68,13 @@ class _AppSectionsView extends StatelessWidget {
                     color: AppColors.navBarBackground,
                     child: CustomBottomNavBar(
                       selectedIndex: currentIndex,
-                      onItemTapped: cubit.changeSection,
+                      onItemTapped: (index) {
+                        if (index == 2) {
+                          Navigator.pushNamed(context, Routes.smartCotchChat).then((_) => cubit.changeSection(0));
+                        } else {
+                          cubit.changeSection(index);
+                        }
+                      },
                     ),
                   ),
                 ),

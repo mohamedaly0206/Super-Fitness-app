@@ -109,6 +109,10 @@
     "register_continuation_placeholder": "شاشات التسجيل التالية سيتم تنفيذها هنا.",
     "login_placeholder": "شاشة تسجيل الدخول سيتم تنفيذها هنا."
   },
+  "smart_coach": {
+    "assist_you": "كيف يمكنني مساعدتك\nاليوم؟",
+    "get_started": "ابدأ"
+  },
   "validation": {
     "email_required": "البريد الإلكتروني مطلوب",
     "invalid_email": "الرجاء إدخل بريد إلكتروني صحيح",

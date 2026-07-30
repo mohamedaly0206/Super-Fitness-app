@@ -18,8 +18,7 @@ class FitnessApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       onGenerateRoute: AppRouter.onGenerateRoute,
-      //initialRoute: hasToken ? Routes.appSections : Routes.onboarding,
-      initialRoute: Routes.smartCotchChat,
+      initialRoute: hasToken ? Routes.appSections : Routes.onboarding,
     );
   }
 }

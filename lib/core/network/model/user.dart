@@ -63,6 +63,7 @@ class UserDto {
 
   UserEntity toDomain() {
     return UserEntity(
+      id: id,
       firstName: firstName,
       lastName: lastName,
       email: email,

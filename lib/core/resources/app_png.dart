@@ -28,6 +28,9 @@ abstract class AppPng {
 
 
 
+  // smart coach
+  static const String robot = 'assets/images/Robot.png';
+
   // category images
   static const String aerobics = 'assets/images/aerobics.png';
   static const String fitness = 'assets/images/fitness.png';

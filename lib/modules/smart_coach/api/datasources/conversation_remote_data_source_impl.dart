@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
+import 'package:super_fitness_app/core/storage/secure_storage_service.dart';
 import 'package:super_fitness_app/modules/smart_coach/data/datasources/conversation_remote_data_source.dart';
 import 'package:super_fitness_app/modules/smart_coach/data/models/conversation_dto.dart';
 
@@ -9,29 +10,41 @@ class ConversationRemoteDataSourceImpl implements ConversationRemoteDataSource {
 
   ConversationRemoteDataSourceImpl(this._firestore);
 
-  CollectionReference<Map<String, dynamic>> get _collection =>
-      _firestore.collection('conversations');
+  Future<CollectionReference<Map<String, dynamic>>> _getCollection() async {
+    final userId = await SecureStorageService.getUserId();
+    if (userId == null || userId.isEmpty) {
+      throw Exception('User not authenticated');
+    }
+    return _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('conversations');
+  }
 
   @override
   Future<void> createConversation(ConversationDto conversation) async {
-    await _collection.doc(conversation.id).set(conversation.toJson());
+    final col = await _getCollection();
+    await col.doc(conversation.id).set(conversation.toJson());
   }
 
   @override
   Future<void> updateConversation(ConversationDto conversation) async {
-    await _collection
+    final col = await _getCollection();
+    await col
         .doc(conversation.id)
         .set(conversation.toJson(), SetOptions(merge: true));
   }
 
   @override
   Future<void> deleteConversation(String conversationId) async {
-    await _collection.doc(conversationId).delete();
+    final col = await _getCollection();
+    await col.doc(conversationId).delete();
   }
 
   @override
   Future<ConversationDto?> getConversation(String conversationId) async {
-    final doc = await _collection.doc(conversationId).get();
+    final col = await _getCollection();
+    final doc = await col.doc(conversationId).get();
 
     if (!doc.exists) {
       return null;
@@ -42,7 +55,8 @@ class ConversationRemoteDataSourceImpl implements ConversationRemoteDataSource {
 
   @override
   Future<List<ConversationDto>> getConversations() async {
-    final snapshot = await _collection
+    final col = await _getCollection();
+    final snapshot = await col
         .orderBy('updatedAt', descending: true)
         .get();
 

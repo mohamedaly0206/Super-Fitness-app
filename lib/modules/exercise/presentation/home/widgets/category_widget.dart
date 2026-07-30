@@ -21,18 +21,25 @@ List<DommyCategory> categoriesBuilder(BuildContext context) => [
   DommyCategory(title: context.trainer, image: AppPng.training),
 ];
 
-Widget categoryCard({required String title, required String image}) {
-  return Column(
-    children: [
-      Image.asset(
-        image,
-        height: AppSize.s64,
-        width: AppSize.s80,
-        fit: BoxFit.contain,
-      ),
-      AppSizedBox(height: AppSize.s10),
-      Text(title),
-    ],
+Widget categoryCard({
+  required String title,
+  required String image,
+  VoidCallback? onTap,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Column(
+      children: [
+        Image.asset(
+          image,
+          height: AppSize.s64,
+          width: AppSize.s80,
+          fit: BoxFit.contain,
+        ),
+        AppSizedBox(height: AppSize.s10),
+        Text(title),
+      ],
+    ),
   );
 }
 
