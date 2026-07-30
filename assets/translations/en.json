@@ -41,5 +41,12 @@
     "yoga": "Yoga",
     "aerobics": "Aerobics",
     "trainer": "Trainer"
+  },
+  "profile": {
+    "profile": "Profile",
+    "logout": "Logout",
+    "logout_confirmation_title": "Are You Sure To Close The Application?",
+    "yes": "YES",
+    "no": "NO"
   }
 }

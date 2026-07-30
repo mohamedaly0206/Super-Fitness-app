@@ -41,5 +41,12 @@
     "yoga": "اليوغا",
     "aerobics": "الкарديو",
     "trainer": "المدرب"
+  },
+  "profile": {
+    "profile": "الملف الشخصي",
+    "logout": "تسجيل الخروج",
+    "logout_confirmation_title": "هل أنت متأكد أنك تريد إغلاق التطبيق؟",
+    "yes": "نعم",
+    "no": "لا"
   }
 }
