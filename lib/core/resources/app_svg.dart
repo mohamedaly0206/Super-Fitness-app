@@ -23,4 +23,6 @@ abstract class AppSvg {
   static const String apple = 'assets/svgs/apple.png';
   static const String backButtonIcon = 'assets/svgs/back_button_icon.svg';
   static const String back = 'assets/svgs/back.svg';
+  static const String menu = 'assets/svgs/menu.svg';
+  static const String arrowLeft = 'assets/svgs/Arrow-Left.svg';
 }

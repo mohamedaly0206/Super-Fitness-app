@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
+import 'package:super_fitness_app/core/network/mapper/message_mapper.dart';
 
-import '../../domain/entities/chat_message.dart';
+import '../../domain/entities/message.dart';
 import '../../domain/repositories/smart_coach_repo.dart';
 import '../datasources/smart_coach_remote_data_source.dart';
 
@@ -12,28 +13,26 @@ class SmartCoachRepoImpl implements SmartCoachRepo {
 
   @override
   Stream<String> streamChat({
-    required List<ChatMessage> messages,
+    required List<Message> messages,
     String model = 'gemma3:1b',
-    String languageCode = 'en',
   }) {
-    return _remoteDataSource.streamChat(
-      messages: messages,
-      model: model,
-      languageCode: languageCode,
-    );
+    final chatMessages = messages
+        .map((message) => message.toChatMessage())
+        .toList();
+
+    return _remoteDataSource.streamChat(messages: chatMessages, model: model);
   }
 
   @override
   Future<String> sendChat({
-    required List<ChatMessage> messages,
+    required List<Message> messages,
     String model = 'gemma3:1b',
-    String languageCode = 'en',
   }) {
-    return _remoteDataSource.sendChat(
-      messages: messages,
-      model: model,
-      languageCode: languageCode,
-    );
+    final chatMessages = messages
+        .map((message) => message.toChatMessage())
+        .toList();
+
+    return _remoteDataSource.sendChat(messages: chatMessages, model: model);
   }
 
   @override

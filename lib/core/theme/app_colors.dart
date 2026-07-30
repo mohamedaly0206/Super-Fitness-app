@@ -71,4 +71,5 @@ class AppColors {
   static const Color glassFill = Color(0x80242424); // #242424 @ 50%
   static const Color glassBorder = Color(0x33FFFFFF); // 20% white
   static const Color glassShadow = Color(0x33000000); // 20% black
+  static const Color glassPrimaryFill = Color.fromARGB(99, 255, 140, 0);
 }

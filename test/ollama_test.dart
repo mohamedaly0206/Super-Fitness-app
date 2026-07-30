@@ -33,7 +33,9 @@ void main() {
     final response = await client.sendChatMessage(
       messages: [
         const ChatMessage.system('You are a fitness coach. Be concise.'),
-        const ChatMessage.user('What is the best warm-up before lifting weights?'),
+        const ChatMessage.user(
+          'What is the best warm-up before lifting weights?',
+        ),
       ],
     );
     print('Response: $response');
@@ -67,10 +69,7 @@ void main() {
 
   test('arabic streaming chat', () async {
     final stream = client.sendChatMessageStream(
-      messages: [
-        const ChatMessage.user('ايش افضل تمارين لتكبير الصدر؟'),
-      ],
-      languageCode: 'ar',
+      messages: [const ChatMessage.user('ايش افضل تمارين لتكبير الصدر؟')],
     );
 
     final buffer = StringBuffer();

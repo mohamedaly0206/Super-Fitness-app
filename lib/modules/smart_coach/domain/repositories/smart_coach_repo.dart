@@ -1,17 +1,9 @@
-import '../entities/chat_message.dart';
+import '../entities/message.dart';
 
 abstract class SmartCoachRepo {
-  Stream<String> streamChat({
-    required List<ChatMessage> messages,
-    String model,
-    String languageCode,
-  });
+  Stream<String> streamChat({required List<Message> messages, String model});
 
-  Future<String> sendChat({
-    required List<ChatMessage> messages,
-    String model,
-    String languageCode,
-  });
+  Future<String> sendChat({required List<Message> messages, String model});
 
   Future<bool> isOllamaRunning();
 

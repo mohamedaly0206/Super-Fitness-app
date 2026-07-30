@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:super_fitness_app/core/resources/app_strings.dart';
+import 'package:super_fitness_app/config/ai_config.dart';
 import 'package:super_fitness_app/modules/smart_coach/data/models/ollama_chat_response.dart';
 
 import '../../domain/entities/chat_message.dart';
@@ -13,30 +13,22 @@ class OllamaApiClient {
 
   OllamaApiClient(this._dio);
 
-  List<ChatMessage> _withSystemPrompt(
-    List<ChatMessage> messages, {
-    String languageCode = 'en',
-  }) {
-    if (messages.isNotEmpty && messages.first.role == 'system') {
-      return messages;
-    }
-    return [
-      ChatMessage.system(AppStrings.smartCoachSystemPromptFor(languageCode)),
-      ...messages,
-    ];
+  List<ChatMessage> _withSystemPrompt(List<ChatMessage> messages) {
+    return messages;
   }
 
   Stream<String> sendChatMessageStream({
     required List<ChatMessage> messages,
-    String model = 'gemma3:1b',
-    String languageCode = 'en',
+    String model = AiConfig.model,
   }) async* {
     try {
       final response = await _dio.post(
         '/api/chat',
         data: {
           'model': model,
-          'messages': _withSystemPrompt(messages, languageCode: languageCode).map((m) => m.toMap()).toList(),
+          'messages': _withSystemPrompt(
+            messages,
+          ).map((m) => m.toMap()).toList(),
           'stream': true,
         },
         options: Options(responseType: ResponseType.stream),
@@ -52,6 +44,7 @@ class OllamaApiClient {
 
         for (final line in lines) {
           if (line.trim().isEmpty) continue;
+
           try {
             final data = jsonDecode(line) as Map<String, dynamic>;
             final ollamaResponse = OllamaChatResponse.fromJson(data);
@@ -71,6 +64,7 @@ class OllamaApiClient {
         try {
           final data = jsonDecode(buffer) as Map<String, dynamic>;
           final ollamaResponse = OllamaChatResponse.fromJson(data);
+
           if (ollamaResponse.message?.content != null) {
             yield ollamaResponse.message!.content;
           }
@@ -85,20 +79,21 @@ class OllamaApiClient {
 
   Future<String> sendChatMessage({
     required List<ChatMessage> messages,
-    String model = 'gemma3:1b',
-    String languageCode = 'en',
+    String model = AiConfig.model,
   }) async {
     try {
       final response = await _dio.post(
         '/api/chat',
         data: {
           'model': model,
-          'messages': _withSystemPrompt(messages, languageCode: languageCode).map((m) => m.toMap()).toList(),
+          'messages': _withSystemPrompt(
+            messages,
+          ).map((m) => m.toMap()).toList(),
           'stream': false,
         },
         options: Options(
           responseType: ResponseType.json,
-          receiveTimeout: const Duration(minutes: 5),
+          receiveTimeout: AiConfig.chatTimeout,
         ),
       );
 
@@ -126,7 +121,7 @@ class OllamaApiClient {
 
   Future<String> generateChatTitle({
     required String firstMessage,
-    String model = 'gemma3:1b',
+    String model = AiConfig.model,
   }) async {
     try {
       final response = await _dio.post(
@@ -137,7 +132,7 @@ class OllamaApiClient {
             {
               'role': 'system',
               'content':
-                  'Generate a short conversation title (max 5 words) based on the user\'s message. Reply with ONLY the title, no quotes, no punctuation.',
+                  'Generate a short conversation title (max 5 words) based on the user message. Reply with ONLY the title.',
             },
             {'role': 'user', 'content': firstMessage},
           ],
@@ -145,14 +140,16 @@ class OllamaApiClient {
         },
         options: Options(
           responseType: ResponseType.json,
-          receiveTimeout: const Duration(seconds: 30),
+          receiveTimeout: AiConfig.titleTimeout,
         ),
       );
 
       final ollamaResponse = OllamaChatResponse.fromJson(response.data);
-      return ollamaResponse.message?.content.trim() ?? 'New Chat';
+
+      return ollamaResponse.message?.content.trim() ??
+          AiConfig.defaultConversationTitle;
     } catch (_) {
-      return 'New Chat';
+      return AiConfig.defaultConversationTitle;
     }
   }
 

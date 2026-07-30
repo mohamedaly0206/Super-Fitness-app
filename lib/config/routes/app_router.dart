@@ -17,6 +17,7 @@ import 'package:super_fitness_app/modules/exercise/presentation/exercise/page/ex
 import 'package:super_fitness_app/modules/exercise/presentation/exercise_details/pages/exercise_details_page.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/pages/food_details_page.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/page/food_recommendation_page.dart';
+import 'package:super_fitness_app/modules/smart_coach/presentation/page/smart_coach_screen.dart';
 
 abstract class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -74,14 +75,17 @@ abstract class AppRouter {
           FoodDetailsPage(mealId: mealId),
           settings: settings,
         );
+      case Routes.smartCotchChat:
+        return PageTransitions.fade(const SmartCoachScreen());
+
+      // case Routes.test:
+      //   return PageTransitions.fade(const TestScreen());
 
       case Routes.uiShowcase:
         return PageTransitions.fade(const UIShowcasePage());
 
       default:
-        return PageTransitions.fade(
-          NotFoundScreen(route: settings.name ?? ''),
-        );
+        return PageTransitions.fade(NotFoundScreen(route: settings.name ?? ''));
     }
   }
 }

@@ -13,4 +13,6 @@ abstract class Routes {
   static const String foodRecommendation = '/food-recommendation';
   static const String exerciseDetails = '/exercise-details';
   static const String workouts = '/workouts';
+  static const String smartCotchChat = '/chat';
+  static const String test = '/test';
 }

@@ -25,5 +25,6 @@ abstract class NetworkModule {
   MealsApiClient mealsApi(@Named('MealsDio') Dio dio) => MealsApiClient(dio);
 
   @singleton
-  OllamaApiClient ollamaApi(@Named('OllamaDio') Dio dio) => OllamaApiClient(dio);
+  OllamaApiClient ollamaApi(@Named('OllamaDio') Dio dio) =>
+      OllamaApiClient(dio);
 }

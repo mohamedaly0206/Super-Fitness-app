@@ -103,6 +103,7 @@ dependencies:
   flutter_facebook_auth: ^7.2.0
   youtube_player_flutter: ^10.0.1
   youtube_player_iframe: ^6.0.2
+  flutter_markdown_plus: ^1.0.12
 
 dev_dependencies:
   flutter_test:
@@ -145,6 +146,8 @@ flutter:
     - assets/images/
     - assets/svgs/
     - assets/translations/
+    - assets/lottie/
+
 
 flutter_native_splash:
   color: "#202020"

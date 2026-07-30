@@ -19,7 +19,6 @@ class SmartCoachRemoteDataSourceImpl implements SmartCoachRemoteDataSource {
     return _ollamaClient.sendChatMessageStream(
       messages: messages,
       model: model,
-      languageCode: languageCode,
     );
   }
 
@@ -29,11 +28,7 @@ class SmartCoachRemoteDataSourceImpl implements SmartCoachRemoteDataSource {
     String model = 'gemma3:1b',
     String languageCode = 'en',
   }) {
-    return _ollamaClient.sendChatMessage(
-      messages: messages,
-      model: model,
-      languageCode: languageCode,
-    );
+    return _ollamaClient.sendChatMessage(messages: messages, model: model);
   }
 
   @override
