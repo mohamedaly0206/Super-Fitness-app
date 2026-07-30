@@ -4,11 +4,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:super_fitness_app/core/resources/app_strings.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
+import '../../../../../config/routes/app_router.dart';
 import '../../../../../core/layout/app_size.dart';
 import '../../../../../core/resources/app_svg.dart';
+import '../../../../../core/resources/app_value.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/theme/app_text_style.dart';
 import '../../../../../core/theme/font_size_manager.dart';
+import '../../../data/models/requests/web_view_args.dart';
 import '../widgets/profile_header.dart';
 import '../widgets/profile_image.dart';
 import '../widgets/profile_item_data.dart';
@@ -136,7 +139,16 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       title: AppStrings.security,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          Routes.webView,
+                          arguments: WebViewArgs(
+                            title: AppStrings.security,
+                            url: AppKeys.security,
+                          ),
+                        );
+                      },
                     ),
                     ProfileItemData(
                       leadingIcon: SvgPicture.asset(
@@ -148,7 +160,16 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       title: AppStrings.privacyPolicy,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          Routes.webView,
+                          arguments: WebViewArgs(
+                            title: AppStrings.privacyPolicy,
+                            url: AppKeys.privacyPolicy,
+                          ),
+                        );
+                      },
                     ),
                     ProfileItemData(
                       leadingIcon: SvgPicture.asset(
@@ -160,7 +181,16 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       title: AppStrings.help,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          Routes.webView,
+                          arguments: WebViewArgs(
+                            title: AppStrings.help,
+                            url: AppKeys.help,
+                          ),
+                        );
+                      },
                     ),
                     ProfileItemData(
                       leadingIcon: SvgPicture.asset(

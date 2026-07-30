@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/config/routes/page_transitions.dart';
+import 'package:super_fitness_app/core/widgets/app_web_view.dart';
 import 'package:super_fitness_app/core/widgets/not_found_screen.dart';
 import 'package:super_fitness_app/core/widgets/ui_showcase_page.dart';
 import 'package:super_fitness_app/modules/app_sections/presentation/pages/app_sections_page.dart';
@@ -12,6 +13,7 @@ import 'package:super_fitness_app/modules/exercise/presentation/workouts/pages/w
 import 'package:super_fitness_app/modules/meals/presentation/food_details/pages/food_details_page.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/page/food_recommendation_page.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
+import 'package:super_fitness_app/modules/profile/data/models/requests/web_view_args.dart';
 
 abstract class Routes {
   static const String splash = '/';
@@ -22,6 +24,7 @@ abstract class Routes {
   static const String workouts = '/workouts';
   static const String foodDetails = '/foodDetails';
   static const String uiShowcase = '/ui-showcase';
+  static const String webView = '/web-view';
 }
 
 abstract class AppRouter {
@@ -55,6 +58,9 @@ abstract class AppRouter {
           return PageTransitions.fade(
             ExerciseScreen(primeMoverMuscleId: primeMoverMuscleId),
           );
+        case Routes.webView:
+          final args = settings.arguments as WebViewArgs;
+          return PageTransitions.fade(AppWebView(args: args));
         default:
           return PageTransitions.fade(
             NotFoundScreen(route: settings.name ?? ''),
