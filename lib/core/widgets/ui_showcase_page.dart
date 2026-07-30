@@ -33,10 +33,7 @@ class _UIShowcasePageState extends State<UIShowcasePage> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       background: Backgrounds.login,
-      appBar: const CustomAppBar(
-        title: AppStrings.uiShowcase,
-        showBackButton: false,
-      ),
+      appBar: CustomAppBar(title: AppStrings.uiShowcase, showBackButton: false),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppPadding.p16),
         child: Column(

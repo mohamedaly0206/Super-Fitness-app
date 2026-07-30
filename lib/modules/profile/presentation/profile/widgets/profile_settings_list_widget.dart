@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:super_fitness_app/modules/profile/presentation/profile/widgets/profile_item_data.dart';
-
-import '../../../../../core/layout/app_size.dart';
-import '../../../../../core/theme/app_text_style.dart';
+import 'package:super_fitness_app/core/layout/app_size.dart';
+import 'package:super_fitness_app/core/theme/app_colors.dart';
+import 'package:super_fitness_app/core/theme/app_text_style.dart';
+import 'profile_item_data.dart';
 
 class ProfileSettingsListWidget extends StatelessWidget {
   const ProfileSettingsListWidget({super.key, required this.items});
@@ -33,17 +33,21 @@ class ProfileSettingsListWidget extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      item.leadingIcon,
-                      SizedBox(width: AppSize.s16),
+                      if (item.leadingIcon != null) ...[
+                        item.leadingIcon!,
+                        SizedBox(width: AppSize.s16),
+                      ],
                       Expanded(
-                        child: Text(
-                          item.title,
-                          style: getSemiBoldStyle(
-                            context: context,
-                            color: theme.colorScheme.onPrimary,
-                            fontSize: AppSize.s16,
-                          ),
-                        ),
+                        child:
+                            item.customTitleWidget ??
+                            Text(
+                              item.title,
+                              style: getSemiBoldStyle(
+                                context: context,
+                                color: item.textColor ?? AppColors.textWhite,
+                                fontSize: AppSize.s16,
+                              ),
+                            ),
                       ),
                       item.trailing ??
                           Icon(

@@ -41,5 +41,29 @@
     "yoga": "اليوغا",
     "aerobics": "الкарديو",
     "trainer": "المدرب"
-  }
+  },
+  "general": {
+    "retry": "إعادة المحاولة",
+    "oops": "عذراً",
+    "go_home": "الصفحة الرئيسية",
+    "route_not_found": "المسار غير موجود",
+    "unable_to_load_video": "تعذر تشغيل الفيديو، حاول مرة أخرى",
+    "press_back_again_to_exit": "اضغط مرة أخرى للخروج",
+    "ui_showcase": "واجهة العرض",
+    "food_recommendation": "اقتراحات الطعام"
+  },
+  "navigation": {
+    "home": "الرئيسية",
+    "workout": "التمارين",
+    "chat": "الدردشة",
+    "profile": "الملف الشخصي"
+  },
+  "profile": {
+    "edit_profile": "تعديل الملف الشخصي",
+    "change_password": "تغيير كلمة المرور",
+    "security": "الأمان",
+    "privacy_policy": "سياسة الخصوصية",
+    "help": "المساعدة",
+    "logout": "تسجيل الخروج",
+    "select_language": "اختر اللغة"  }
 }

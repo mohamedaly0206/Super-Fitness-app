@@ -90,7 +90,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   youtube_player_flutter: ^10.0.1
   youtube_player_iframe: ^6.0.2
-
+  flutter_phoenix: ^1.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

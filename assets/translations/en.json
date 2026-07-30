@@ -41,5 +41,30 @@
     "yoga": "Yoga",
     "aerobics": "Aerobics",
     "trainer": "Trainer"
+  },
+  "general": {
+    "retry": "Retry",
+    "oops": "Oops!",
+    "go_home": "Go Home",
+    "route_not_found": "Route not found",
+    "unable_to_load_video": "Unable to play video, please try again",
+    "press_back_again_to_exit": "Press back again to exit",
+    "ui_showcase": "UI Showcase",
+    "food_recommendation": "Food Recommendation"
+  },
+  "navigation": {
+    "home": "Home",
+    "workout": "Workout",
+    "chat": "Chat",
+    "profile": "Profile"
+  },
+  "profile": {
+    "edit_profile": "Edit Profile",
+    "change_password": "Change Password",
+    "security": "Security",
+    "privacy_policy": "Privacy Policy",
+    "help": "Help",
+    "logout": "Logout",
+    "select_language": "Select Language"
   }
 }

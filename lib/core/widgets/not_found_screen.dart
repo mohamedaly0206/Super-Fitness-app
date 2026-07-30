@@ -33,7 +33,7 @@ class NotFoundScreen extends StatelessWidget {
                 Routes.splash,
                 (_) => false,
               ),
-              child: const Text(AppStrings.goHome),
+              child: Text(AppStrings.goHome),
             ),
           ],
         ),

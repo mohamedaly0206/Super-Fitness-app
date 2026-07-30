@@ -1,15 +1,19 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ProfileItemData {
-  final Widget leadingIcon;
+  final Widget? leadingIcon;
   final String title;
+  final Widget? customTitleWidget;
   final Widget? trailing;
   final VoidCallback? onTap;
+  final Color? textColor;
 
   ProfileItemData({
-    required this.leadingIcon,
+    this.leadingIcon,
     required this.title,
+    this.customTitleWidget,
     this.trailing,
     this.onTap,
+    this.textColor,
   });
 }
