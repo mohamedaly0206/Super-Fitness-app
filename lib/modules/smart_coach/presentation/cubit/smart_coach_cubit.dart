@@ -30,6 +30,7 @@ class SmartCoachCubit extends Cubit<SmartCoachState> {
   final SendSmartCoachMessageUseCase _sendSmartCoachMessageUseCase;
   final AddMessageUseCase _addMessageUseCase;
   final _uuid = const Uuid();
+  bool _conversationPersisted = false;
 
   StreamSubscription? _streamSubscription;
 
@@ -98,25 +99,21 @@ class SmartCoachCubit extends Cubit<SmartCoachState> {
       status: ConversationStatus.active,
     );
 
-    try {
-      await _createConversationUseCase(conversation);
+    final session = ChatSession(
+      conversation: conversation,
+      messages: const [],
+    );
 
-      final session = ChatSession(
-        conversation: conversation,
-        messages: const [],
-      );
+    _conversationPersisted = false;
 
-      emit(
-        state.copyWith(
-          currentSession: session,
-          conversations: [conversation, ...state.conversations],
-          clearError: true,
-        ),
-      );
-      await _createGreeting();
-    } catch (e) {
-      emit(state.copyWith(errorMessage: e.toString()));
-    }
+    emit(
+      state.copyWith(
+        currentSession: session,
+        conversations: [conversation, ...state.conversations],
+        clearError: true,
+      ),
+    );
+    await _createGreeting();
   }
 
   Future<void> _openConversation(String conversationId) async {
@@ -143,10 +140,22 @@ class SmartCoachCubit extends Cubit<SmartCoachState> {
       );
 
       emit(state.copyWith(currentSession: session, isLoading: false));
+      _conversationPersisted = true;
       await _createGreeting();
     } catch (e) {
       emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
+  }
+
+  Future<void> _persistCurrentSession() async {
+    final session = state.currentSession;
+    if (session == null) return;
+
+    await _createConversationUseCase(session.conversation);
+    for (final message in session.messages) {
+      await _addMessageUseCase(message);
+    }
+    _conversationPersisted = true;
   }
 
   Future<void> _sendMessage(String text) async {
@@ -156,6 +165,15 @@ class SmartCoachCubit extends Cubit<SmartCoachState> {
 
     if (state.currentSession == null) {
       await _createConversation();
+    }
+
+    if (!_conversationPersisted) {
+      try {
+        await _persistCurrentSession();
+      } catch (e) {
+        emit(state.copyWith(errorMessage: e.toString()));
+        return;
+      }
     }
 
     ChatSession session = state.currentSession!;
@@ -260,7 +278,9 @@ class SmartCoachCubit extends Cubit<SmartCoachState> {
 
   Future<void> _deleteConversation(String conversationId) async {
     try {
-      await _deleteConversationUseCase(conversationId);
+      if (_conversationPersisted) {
+        await _deleteConversationUseCase(conversationId);
+      }
 
       final conversations = state.conversations
           .where((e) => e.id != conversationId)
@@ -298,8 +318,6 @@ class SmartCoachCubit extends Cubit<SmartCoachState> {
       content: SmartCoachConstants.greeting,
       createdAt: DateTime.now(),
     );
-
-    await _addMessageUseCase(message);
 
     emit(state.copyWith(currentSession: session.copyWith(messages: [message])));
   }

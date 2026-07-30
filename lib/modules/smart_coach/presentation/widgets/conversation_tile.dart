@@ -7,6 +7,7 @@ import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import '../../domain/entities/conversation.dart';
 import '../cubit/smart_coach_cubit.dart';
 import '../cubit/smart_coach_intent.dart';
+import '../cubit/smart_coach_state.dart';
 
 class ConversationTile extends StatelessWidget {
   final Conversation conversation;
@@ -50,7 +51,20 @@ class ConversationTile extends StatelessWidget {
                     ),
                     title: const Text('Delete Conversation'),
                     onTap: () {
+                      final isCurrent = context
+                              .read<SmartCoachCubit>()
+                              .state
+                              .currentSession
+                              ?.conversation
+                              .id ==
+                          conversation.id;
+
                       Navigator.pop(context);
+
+                      if (isCurrent && Navigator.canPop(context)) {
+                        Navigator.pop(context);
+                      }
+
                       context.read<SmartCoachCubit>().doIntent(
                         DeleteConversationIntent(conversation.id),
                       );

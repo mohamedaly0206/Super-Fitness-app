@@ -38,7 +38,18 @@ class ConversationRemoteDataSourceImpl implements ConversationRemoteDataSource {
   @override
   Future<void> deleteConversation(String conversationId) async {
     final col = await _getCollection();
-    await col.doc(conversationId).delete();
+
+    final messagesSnapshot = await col
+        .doc(conversationId)
+        .collection('messages')
+        .get();
+
+    final batch = _firestore.batch();
+    for (final doc in messagesSnapshot.docs) {
+      batch.delete(doc.reference);
+    }
+    batch.delete(col.doc(conversationId));
+    await batch.commit();
   }
 
   @override
