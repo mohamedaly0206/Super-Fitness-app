@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:super_fitness_app/core/network/endpoints.dart';
+import 'package:super_fitness_app/modules/profile/data/models/requests/change_password_request_dto.dart';
+import 'package:super_fitness_app/modules/profile/data/models/response/change_password_response_dto.dart';
 import 'package:super_fitness_app/modules/profile/data/models/response/logout_response_dto.dart';
 
 part 'profile_api_client.g.dart';
@@ -13,4 +15,9 @@ abstract interface class ProfileApiClient {
 
   @GET(AuthEndPoint.logout)
   Future<LogoutResponseDto> logout();
+  
+  @PATCH(AuthEndPoint.changePassword)
+  Future<ChangePasswordResponseDto> changePassword(
+    @Body() ChangePasswordRequestDto request,
+  );
 }
