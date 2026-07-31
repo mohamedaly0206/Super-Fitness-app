@@ -5,9 +5,9 @@ import 'package:super_fitness_app/core/localization_constants/profile_constants.
 import 'package:super_fitness_app/core/widgets/custom_appbar.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
-import 'package:super_fitness_app/modules/profile/presentation/profile/cubit/logout_cubit.dart';
-import 'package:super_fitness_app/modules/profile/presentation/profile/widgets/logout_confirmation_dialog.dart';
-import 'package:super_fitness_app/modules/profile/presentation/profile/widgets/logout_list_item.dart';
+import 'package:super_fitness_app/modules/profile/presentation/logout/cubit/logout_cubit.dart';
+import 'package:super_fitness_app/modules/profile/presentation/logout/widgets/logout_confirmation_dialog.dart';
+import 'package:super_fitness_app/modules/profile/presentation/logout/widgets/logout_list_item.dart';
 
 class LogoutPage extends StatelessWidget {
   const LogoutPage({super.key});

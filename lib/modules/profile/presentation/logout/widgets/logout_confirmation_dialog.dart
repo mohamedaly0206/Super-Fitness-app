@@ -5,7 +5,7 @@ import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/localization_constants/profile_constants.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
-import 'package:super_fitness_app/modules/profile/presentation/profile/cubit/logout_cubit.dart';
+import 'package:super_fitness_app/modules/profile/presentation/logout/cubit/logout_cubit.dart';
 
 Future<void> showLogoutConfirmationDialog(BuildContext context) {
   final logoutCubit = context.read<LogoutCubit>();
