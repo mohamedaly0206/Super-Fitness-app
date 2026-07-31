@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
+import 'package:super_fitness_app/core/theme/app_text_style.dart';
 
 import '../cubit/smart_coach_cubit.dart';
 import '../cubit/smart_coach_intent.dart';
@@ -56,8 +57,9 @@ class _MessageInputState extends State<MessageInput> {
                     onFieldSubmitted: (_) => _send(),
                     decoration: InputDecoration(
                       hintText: 'Ask your Smart Coach...',
-                      hintStyle: TextStyle(
-                        color: Colors.white.withValues(alpha: .45),
+                      hintStyle: getMediumStyle(
+                        context: context,
+                        color: AppColors.textSecondary,
                       ),
                       filled: true,
                       fillColor: AppColors.glassFill,
@@ -74,7 +76,7 @@ class _MessageInputState extends State<MessageInput> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(28),
                         borderSide: const BorderSide(
-                          color: AppColors.primary,
+                          color: AppColors.chatGlassPrimaryFill,
                           width: 1.2,
                         ),
                       ),
@@ -93,12 +95,12 @@ class _MessageInputState extends State<MessageInput> {
                     onTap: state.isTyping ? null : _send,
                     borderRadius: BorderRadius.circular(30),
                     child: Container(
-                      width: 54,
-                      height: 54,
+                      width: 52,
+                      height: 52,
                       decoration: BoxDecoration(
                         color: state.isTyping
-                            ? AppColors.glassFill
-                            : AppColors.glassPrimaryFill,
+                            ? AppColors.chatGlassFill
+                            : AppColors.chatGlassPrimaryFill,
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(

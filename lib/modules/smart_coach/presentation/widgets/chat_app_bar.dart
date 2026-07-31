@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:super_fitness_app/core/resources/app_svg.dart';
+import 'package:super_fitness_app/core/theme/app_colors.dart';
+import 'package:super_fitness_app/core/theme/app_text_style.dart';
+import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_back_botton.dart';
 import 'package:super_fitness_app/modules/smart_coach/domain/entities/conversation.dart';
 
@@ -18,7 +21,6 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('AppBar Title = ${conversation?.title}');
     final title = _getTitle();
     final blur = (scrollOffset / 8).clamp(0.0, 18.0);
     final opacity = (scrollOffset / 120).clamp(0.0, .35);
@@ -36,10 +38,8 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
               height: kToolbarHeight,
               child: Row(
                 children: [
-                  const SizedBox(width: 18),
-
+                  const AppSizedBox(width: 18),
                   const CustomBackBotton(),
-
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -53,6 +53,11 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                         child: Text(
                           title,
+                          style: getExtraBoldStyle(
+                            context: context,
+                            color: AppColors.textPrimary,
+                            fontSize: 22,
+                          ),
                           textAlign: TextAlign.center,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -79,7 +84,7 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
                     },
                   ),
 
-                  const SizedBox(width: 18),
+                  const AppSizedBox(width: 18),
                 ],
               ),
             ),

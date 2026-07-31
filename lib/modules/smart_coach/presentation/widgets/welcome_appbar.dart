@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:super_fitness_app/core/resources/app_svg.dart';
+import 'package:super_fitness_app/core/theme/app_colors.dart';
+import 'package:super_fitness_app/core/theme/app_text_style.dart';
+import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_back_botton.dart';
 
 class WelcomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -19,21 +22,25 @@ class WelcomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             const CustomBackBotton(),
 
-            const Expanded(
+            Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Hi Ahmed",
-                    style: TextStyle(color: Colors.white70, fontSize: 14),
+                    "Hi Ahmed ,",
+                    style: getMediumStyle(
+                      context: context,
+                      color: AppColors.textPrimary,
+                      fontSize: 18,
+                    ),
                   ),
-                  SizedBox(height: 2),
+                  AppSizedBox(height: 2),
                   Text(
                     "I Am Your Smart Coach",
-                    style: TextStyle(
-                      color: Colors.white,
+                    style: getBoldStyle(
+                      context: context,
+                      color: AppColors.textPrimary,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],

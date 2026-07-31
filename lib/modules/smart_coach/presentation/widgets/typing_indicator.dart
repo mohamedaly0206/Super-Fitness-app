@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
+import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 
 import '../../domain/entities/message_role.dart';
 import 'chat_avatar.dart';
@@ -13,18 +14,23 @@ class TypingIndicator extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const ChatAvatar(role: MessageRole.assistant),
 
-          const SizedBox(width: 10),
+          const AppSizedBox(width: 10),
 
           Container(
-            width: 90,
-            height: 54,
+            width: 80,
+            height: 50,
             decoration: BoxDecoration(
-              color: AppColors.glassFill,
-              borderRadius: BorderRadius.circular(18),
+              color: AppColors.chatGlassFill,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(0),
+                topRight: Radius.circular(25),
+                bottomLeft: Radius.circular(25),
+                bottomRight: Radius.circular(25),
+              ),
             ),
             child: Center(
               child: Lottie.asset(

@@ -26,8 +26,6 @@ abstract class AppPng {
   //  FOOD RECOMMENDATION
   static const String backArrow = 'assets/svgs/Vector.png';
 
-
-
   // smart coach
   static const String robot = 'assets/images/Robot.png';
 
@@ -37,4 +35,6 @@ abstract class AppPng {
   static const String gym = 'assets/images/gym.png';
   static const String training = 'assets/images/training.png';
   static const String yoga = 'assets/images/yoga.png';
+  static const String coach = 'assets/images/coach_avatar.png';
+  static const String user = 'assets/images/user.png';
 }

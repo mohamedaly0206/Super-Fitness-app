@@ -1,28 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/core/layout/app_size.dart';
+import 'package:super_fitness_app/core/resources/app_png.dart';
+import 'package:super_fitness_app/core/theme/app_colors.dart';
 
 import '../../domain/entities/message_role.dart';
 
 class ChatAvatar extends StatelessWidget {
   final MessageRole role;
+  final String? userImageUrl;
 
-  const ChatAvatar({super.key, required this.role});
+  const ChatAvatar({super.key, required this.role, this.userImageUrl});
 
   @override
   Widget build(BuildContext context) {
-    final image = role == MessageRole.assistant
-        ? 'assets/images/ai.png'
-        : 'assets/images/man1.png';
+    final isUser = role == MessageRole.user;
+
+    Widget child;
+    if (isUser && userImageUrl != null && userImageUrl!.isNotEmpty) {
+      child = Image.network(
+        userImageUrl!,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) =>
+            Image.asset(AppPng.user, fit: BoxFit.cover),
+      );
+    } else if (isUser) {
+      child = Image.asset(AppPng.user, fit: BoxFit.cover);
+    } else {
+      child = Image.asset(AppPng.coach, fit: BoxFit.cover);
+    }
 
     return Container(
-      width: 38,
-      height: 38,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: const Color(0xffFF6A00), width: 1.2),
+        boxShadow: isUser
+            ? null
+            : [
+                BoxShadow(
+                  color: AppColors.chatGlassPrimaryFill.withValues(alpha: .60),
+                  blurRadius: 15,
+                  spreadRadius: 1,
+                ),
+              ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(2),
-        child: ClipOval(child: Image.asset(image, fit: BoxFit.cover)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppSize.s42 / 2),
+        child: SizedBox(width: AppSize.s42, height: AppSize.s42, child: child),
       ),
     );
   }

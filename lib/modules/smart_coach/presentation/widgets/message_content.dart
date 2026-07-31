@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/font_size_manager.dart';
 import '../../domain/entities/message.dart';
 
 class MessageContent extends StatelessWidget {
@@ -17,31 +19,63 @@ class MessageContent extends StatelessWidget {
     required this.onCopy,
   });
 
+  TextStyle getRegularStyle2({
+    double fontSize = FontSizeManager.s14,
+    FontWeight fontWeight = FontWeightManager.regular,
+    FontStyle fontStyle = FontStyle.normal,
+    required Color color,
+  }) {
+    return GoogleFonts.balooThambi2(
+      fontSize: fontSize,
+      color: color,
+      fontWeight: fontWeight,
+      fontStyle: fontStyle,
+    );
+  }
+
   MarkdownStyleSheet get _styleSheet => MarkdownStyleSheet(
-    p: const TextStyle(color: Colors.white, fontSize: 15, height: 1.5),
-    h1: const TextStyle(
-      color: Colors.white,
-      fontSize: 24,
-      fontWeight: FontWeight.bold,
+    p: getRegularStyle2(
+      color: AppColors.textPrimary,
+      fontSize: FontSizeManager.s16,
     ),
-    h2: const TextStyle(
-      color: Colors.white,
-      fontSize: 20,
-      fontWeight: FontWeight.bold,
+    h1: getRegularStyle2(
+      color: AppColors.textPrimary,
+      fontSize: FontSizeManager.s24,
+      fontWeight: FontWeightManager.bold,
     ),
-    h3: const TextStyle(
-      color: Colors.white,
-      fontSize: 18,
-      fontWeight: FontWeight.w600,
+    h2: getRegularStyle2(
+      color: AppColors.textPrimary,
+      fontSize: FontSizeManager.s20,
+      fontWeight: FontWeightManager.bold,
     ),
-    strong: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-    em: const TextStyle(color: Colors.white70, fontStyle: FontStyle.italic),
-    blockquote: const TextStyle(
-      color: Colors.white70,
+    h3: getRegularStyle2(
+      color: AppColors.textPrimary,
+      fontSize: FontSizeManager.s18,
+      fontWeight: FontWeightManager.semiBold,
+    ),
+    strong: getRegularStyle2(
+      color: AppColors.textPrimary,
+      fontSize: FontSizeManager.s16,
+      fontWeight: FontWeightManager.bold,
+    ),
+    em: getRegularStyle2(
+      color: AppColors.textSecondary,
+      fontSize: FontSizeManager.s16,
       fontStyle: FontStyle.italic,
     ),
-    code: const TextStyle(color: AppColors.primary, fontFamily: 'monospace'),
-    listBullet: const TextStyle(color: AppColors.primary),
+    blockquote: getRegularStyle2(
+      color: AppColors.textSecondary,
+      fontSize: FontSizeManager.s14,
+      fontStyle: FontStyle.italic,
+    ),
+    code: getRegularStyle2(
+      color: AppColors.primary,
+      fontSize: FontSizeManager.s14,
+    ),
+    listBullet: getRegularStyle2(
+      color: AppColors.primary,
+      fontSize: FontSizeManager.s16,
+    ),
   );
 
   Widget _buildImage(Uri uri, String? title, String? alt) {
@@ -83,12 +117,14 @@ class MessageContent extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 290),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: isUser ? AppColors.glassPrimaryFill : AppColors.glassFill,
+          color: isUser
+              ? AppColors.chatGlassPrimaryFill
+              : AppColors.chatGlassFill,
           borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(20),
-            topRight: const Radius.circular(20),
-            bottomLeft: Radius.circular(isUser ? 20 : 6),
-            bottomRight: Radius.circular(isUser ? 6 : 20),
+            topLeft: Radius.circular(isUser ? 20 : 6),
+            topRight: Radius.circular(isUser ? 6 : 20),
+            bottomLeft: const Radius.circular(20),
+            bottomRight: const Radius.circular(20),
           ),
         ),
         child: Column(
@@ -106,9 +142,9 @@ class MessageContent extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: Text(
                 time,
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: .45),
-                  fontSize: 10,
+                style: getRegularStyle2(
+                  color: AppColors.textPrimary.withValues(alpha: .45),
+                  fontSize: FontSizeManager.s10,
                 ),
               ),
             ),
@@ -131,7 +167,11 @@ class _ImageError extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: const Center(
-        child: Icon(Icons.broken_image_outlined, color: Colors.white38, size: 32),
+        child: Icon(
+          Icons.broken_image_outlined,
+          color: Colors.white38,
+          size: 32,
+        ),
       ),
     );
   }

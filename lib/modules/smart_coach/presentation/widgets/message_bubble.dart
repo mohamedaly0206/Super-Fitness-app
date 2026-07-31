@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
 
 import '../../domain/entities/message.dart';
 import '../../domain/entities/message_role.dart';
@@ -36,9 +37,7 @@ class _MessageBubbleState extends State<MessageBubble> {
 
     if (!mounted) return;
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Copied'), duration: Duration(seconds: 1)),
-    );
+    CustomSnackBar.copied(context);
   }
 
   @override
@@ -54,7 +53,7 @@ class _MessageBubbleState extends State<MessageBubble> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 4),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: isUser
                 ? MainAxisAlignment.end
                 : MainAxisAlignment.start,

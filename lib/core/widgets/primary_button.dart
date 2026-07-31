@@ -26,7 +26,7 @@ class PrimaryButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: getSemiBoldStyle(context: context, color: AppColors.surface),
+        style: getBoldStyle(context: context, color: AppColors.surface),
       ),
     );
   }

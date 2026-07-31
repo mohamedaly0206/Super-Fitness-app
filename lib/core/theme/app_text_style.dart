@@ -5,13 +5,13 @@ import '../layout/responsive.dart';
 import 'app_colors.dart';
 
 TextStyle _getTextStyle(
-  BuildContext context,
+  BuildContext? context,
   double fontSize,
   FontWeight fontWeight,
   Color color,
 ) {
   return GoogleFonts.balooThambi2(
-    fontSize: Responsive.scale(context, fontSize),
+    fontSize: Responsive.scale(context!, fontSize),
     color: color,
     fontWeight: fontWeight,
   );
@@ -28,7 +28,7 @@ TextStyle getLightStyle({
 
 // Regular
 TextStyle getRegularStyle({
-  required BuildContext context,
+  BuildContext? context,
   double fontSize = FontSizeManager.s14,
   required Color color,
 }) {
