@@ -8,4 +8,10 @@ extension ProfileConstants on BuildContext {
       "profile.logout_confirmation_title".tr();
   String get yes => "profile.yes".tr();
   String get no => "profile.no".tr();
+  String get changePassword => "profile.change_password".tr();
+  String get changePasswordSubtitle =>
+      "profile.change_password_subtitle".tr();
+  String get createNewPassword => "profile.create_new_password".tr();
+  String get oldPassword => "profile.old_password".tr();
+  String get done => "profile.done".tr();
 }

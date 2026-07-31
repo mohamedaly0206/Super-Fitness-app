@@ -1,4 +1,8 @@
 {
+  "auth": {
+    "new_password": "كلمة المرور الجديدة",
+    "confirm_password": "تأكيد كلمة المرور"
+  },
   "errors": {
     "no_internet": "لا يوجد اتصال بالإنترنت",
     "connection_timeout": "انتهت مهلة الاتصال",
@@ -9,7 +13,16 @@
     "unknown_error": "خطأ غير معروف",
     "login_successfully": "تم تسجيل الدخول بنجاح",
     "login_error": "فشل تسجيل الدخول",
-    "signup_successfully": "تم التسجيل بنجاح"
+    "signup_successfully": "تم التسجيل بنجاح",
+    "change_password_successfully": "تم تغيير كلمة المرور بنجاح"
+  },
+  "validation": {
+    "password_required": "كلمة المرور مطلوبة",
+    "short_password": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+    "weak_password": "يجب أن تحتوي كلمة المرور على حرف كبير وصغير ورقم ورمز خاص",
+    "confirm_password_required": "يرجى تأكيد كلمة المرور",
+    "password_not_match": "كلمتا المرور غير متطابقتين",
+    "new_password_same_as_old": "يجب أن تكون كلمة المرور الجديدة مختلفة عن القديمة"
   },
   "meals": {
     "ingredients": "المكونات"
@@ -47,6 +60,11 @@
     "logout": "تسجيل الخروج",
     "logout_confirmation_title": "هل أنت متأكد أنك تريد إغلاق التطبيق؟",
     "yes": "نعم",
-    "no": "لا"
+    "no": "لا",
+    "change_password": "تغيير كلمة المرور",
+    "change_password_subtitle": "تأكد من أنها 8 أحرف أو أكثر",
+    "create_new_password": "إنشاء كلمة مرور جديدة",
+    "old_password": "كلمة المرور القديمة",
+    "done": "تم"
   }
 }
