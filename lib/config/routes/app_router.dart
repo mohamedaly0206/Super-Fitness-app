@@ -14,6 +14,8 @@ import 'package:super_fitness_app/modules/meals/presentation/food_details/pages/
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/page/food_recommendation_page.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
 import 'package:super_fitness_app/modules/profile/data/models/requests/web_view_args.dart';
+import 'package:super_fitness_app/modules/profile/presentation/change_password/cubit/change_password_cubit.dart';
+import 'package:super_fitness_app/modules/profile/presentation/change_password/pages/change_password_page.dart';
 
 abstract class Routes {
   static const String splash = '/';
@@ -25,6 +27,7 @@ abstract class Routes {
   static const String foodDetails = '/foodDetails';
   static const String uiShowcase = '/ui-showcase';
   static const String webView = '/web-view';
+  static const String changePassword = '/change-password';
 }
 
 abstract class AppRouter {
@@ -61,6 +64,13 @@ abstract class AppRouter {
         case Routes.webView:
           final args = settings.arguments as WebViewArgs;
           return PageTransitions.fade(AppWebView(args: args));
+        case Routes.changePassword:
+          return PageTransitions.fade(
+            BlocProvider(
+              create: (_) => getIt<ChangePasswordCubit>(),
+              child: const ChangePasswordPage(),
+            ),
+          );
         default:
           return PageTransitions.fade(
             NotFoundScreen(route: settings.name ?? ''),

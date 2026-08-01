@@ -6,6 +6,9 @@ import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/core/resources/app_strings.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
+import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
+import 'package:super_fitness_app/modules/profile/presentation/logout/cubit/logout_cubit.dart';
+import 'package:super_fitness_app/modules/profile/presentation/logout/widgets/logout_confirmation_dialog.dart';
 
 import '../../../../../config/routes/app_router.dart';
 import '../../../../../core/layout/app_size.dart';
@@ -28,9 +31,14 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          getIt<ProfileCubit>()..doIntent(const GetProfileDataIntent()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              getIt<ProfileCubit>()..doIntent(const GetProfileDataIntent()),
+        ),
+        BlocProvider(create: (context) => getIt<LogoutCubit>()),
+      ],
       child: const ProfileViewBody(),
     );
   }
@@ -46,194 +54,217 @@ class ProfileViewBody extends StatelessWidget {
     return CustomScaffold(
       background: Backgrounds.profileAndEdit,
       body: SafeArea(
-        child: BlocBuilder<ProfileCubit, ProfileState>(
-          builder: (context, state) {
-            final user = state.user;
-            final bool hasPhoto =
-                user?.photo != null && user!.photo!.isNotEmpty;
-            final String? photoUrl = user?.photo;
-            final String userName =
-                '${user?.firstName ?? ''} ${user?.lastName ?? ''}'.trim();
-            final displayName = userName.isEmpty ? 'User' : userName;
+        child: BlocConsumer<LogoutCubit, LogoutState>(
+          listenWhen: (previous, current) =>
+              previous.logoutState != current.logoutState,
+          listener: (context, logoutStateState) {
+            if (logoutStateState.logoutState.data == true) {
+            } else if (logoutStateState.logoutState.errorMessage != null) {
+              CustomSnackBar.error(
+                context,
+                logoutStateState.logoutState.errorMessage!,
+              );
+            }
+          },
+          builder: (context, logoutState) {
+            return BlocBuilder<ProfileCubit, ProfileState>(
+              builder: (context, profileState) {
+                final user = profileState.user;
+                final bool hasPhoto =
+                    user?.photo != null && user!.photo!.isNotEmpty;
+                final String? photoUrl = user?.photo;
+                final String userName =
+                    '${user?.firstName ?? ''} ${user?.lastName ?? ''}'.trim();
+                final displayName = userName.isEmpty ? 'User' : userName;
 
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  const ProfileHeader(),
-                  const SizedBox(height: 16),
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const ProfileHeader(),
+                      const SizedBox(height: 16),
 
-                  ProfileImage(hasPhoto: hasPhoto, photoUrl: photoUrl),
-                  const AppSizedBox(height: 7),
+                      ProfileImage(hasPhoto: hasPhoto, photoUrl: photoUrl),
+                      const AppSizedBox(height: 7),
 
-                  Text(
-                    state.baseState.isLoading ? 'Loading...' : displayName,
-                    style: getBoldStyle(
-                      context: context,
-                      color: AppColors.textWhite,
-                      fontSize: FontSizeManager.s22,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: AppSize.s16),
-                    child: ProfileSettingsListWidget(
-                      items: [
-                        ProfileItemData(
-                          leadingIcon: SvgPicture.asset(
-                            AppSvg.profile,
-                            height: AppSize.s22,
-                            colorFilter: const ColorFilter.mode(
-                              AppColors.primary,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                          title: AppStrings.editProfile,
-                          onTap: () {},
+                      Text(
+                        profileState.baseState.isLoading
+                            ? 'Loading...'
+                            : displayName,
+                        style: getBoldStyle(
+                          context: context,
+                          color: AppColors.textWhite,
+                          fontSize: FontSizeManager.s22,
                         ),
-                        ProfileItemData(
-                          leadingIcon: SvgPicture.asset(
-                            AppSvg.change,
-                            height: AppSize.s22,
-                            colorFilter: const ColorFilter.mode(
-                              AppColors.primary,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                          title: AppStrings.changeProfile,
-                          onTap: () {},
-                        ),
-                        ProfileItemData(
-                          leadingIcon: SvgPicture.asset(
-                            AppSvg.language,
-                            height: AppSize.s22,
-                            colorFilter: const ColorFilter.mode(
-                              AppColors.primary,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                          title: '',
-                          customTitleWidget: RichText(
-                            text: TextSpan(
-                              text: AppStrings.selectLanguage + ' (',
-                              style: getSemiBoldStyle(
-                                context: context,
-                                color: AppColors.textWhite,
-                                fontSize: AppSize.s16,
+                      ),
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: AppSize.s16),
+                        child: ProfileSettingsListWidget(
+                          items: [
+                            ProfileItemData(
+                              leadingIcon: SvgPicture.asset(
+                                AppSvg.profile,
+                                height: AppSize.s22,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColors.primary,
+                                  BlendMode.srcIn,
+                                ),
                               ),
-                              children: [
-                                TextSpan(
-                                  text: isArabic ? 'العربية' : 'English',
+                              title: AppStrings.editProfile,
+                              onTap: () {},
+                            ),
+                            ProfileItemData(
+                              leadingIcon: SvgPicture.asset(
+                                AppSvg.change,
+                                height: AppSize.s22,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColors.primary,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              title: AppStrings.changeProfile,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  Routes.changePassword,
+                                );
+                              },
+                            ),
+                            ProfileItemData(
+                              leadingIcon: SvgPicture.asset(
+                                AppSvg.language,
+                                height: AppSize.s22,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColors.primary,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              title: '',
+                              customTitleWidget: RichText(
+                                text: TextSpan(
+                                  text: AppStrings.selectLanguage + ' (',
                                   style: getSemiBoldStyle(
                                     context: context,
-                                    color: AppColors.primary,
+                                    color: AppColors.textWhite,
                                     fontSize: AppSize.s16,
                                   ),
+                                  children: [
+                                    TextSpan(
+                                      text: isArabic ? 'العربية' : 'English',
+                                      style: getSemiBoldStyle(
+                                        context: context,
+                                        color: AppColors.primary,
+                                        fontSize: AppSize.s16,
+                                      ),
+                                    ),
+                                    const TextSpan(text: ')'),
+                                  ],
                                 ),
-                                const TextSpan(text: ')'),
-                              ],
-                            ),
-                          ),
-                          trailing: SizedBox(
-                            width: 40,
-                            height: 24,
-                            child: Transform.scale(
-                              scale: 0.7,
-                              alignment: Alignment.centerRight,
-                              child: Switch(
-                                value: context.locale.languageCode == 'ar',
-                                onChanged: (value) async {
-                                  await context.setLocale(
-                                    value
-                                        ? const Locale('ar')
-                                        : const Locale('en'),
-                                  );
-                                },
                               ),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                        ProfileItemData(
-                          leadingIcon: SvgPicture.asset(
-                            AppSvg.lockSetting,
-                            height: AppSize.s22,
-                            colorFilter: const ColorFilter.mode(
-                              AppColors.primary,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                          title: AppStrings.security,
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              Routes.webView,
-                              arguments: WebViewArgs(
-                                title: AppStrings.security,
-                                url: AppKeys.security,
+                              trailing: SizedBox(
+                                width: 40,
+                                height: 24,
+                                child: Transform.scale(
+                                  scale: 0.7,
+                                  alignment: Alignment.centerRight,
+                                  child: Switch(
+                                    value: context.locale.languageCode == 'ar',
+                                    onChanged: (value) async {
+                                      await context.setLocale(
+                                        value
+                                            ? const Locale('ar')
+                                            : const Locale('en'),
+                                      );
+                                    },
+                                  ),
+                                ),
                               ),
-                            );
-                          },
-                        ),
-                        ProfileItemData(
-                          leadingIcon: SvgPicture.asset(
-                            AppSvg.securityWarning,
-                            height: AppSize.s22,
-                            colorFilter: const ColorFilter.mode(
-                              AppColors.primary,
-                              BlendMode.srcIn,
+                              onTap: () {},
                             ),
-                          ),
-                          title: AppStrings.privacyPolicy,
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              Routes.webView,
-                              arguments: WebViewArgs(
-                                title: AppStrings.privacyPolicy,
-                                url: AppKeys.privacyPolicy,
+                            ProfileItemData(
+                              leadingIcon: SvgPicture.asset(
+                                AppSvg.lockSetting,
+                                height: AppSize.s22,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColors.primary,
+                                  BlendMode.srcIn,
+                                ),
                               ),
-                            );
-                          },
-                        ),
-                        ProfileItemData(
-                          leadingIcon: SvgPicture.asset(
-                            AppSvg.help,
-                            height: AppSize.s22,
-                            colorFilter: const ColorFilter.mode(
-                              AppColors.primary,
-                              BlendMode.srcIn,
+                              title: AppStrings.security,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  Routes.webView,
+                                  arguments: WebViewArgs(
+                                    title: AppStrings.security,
+                                    url: AppKeys.security,
+                                  ),
+                                );
+                              },
                             ),
-                          ),
-                          title: AppStrings.help,
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              Routes.webView,
-                              arguments: WebViewArgs(
-                                title: AppStrings.help,
-                                url: AppKeys.help,
+                            ProfileItemData(
+                              leadingIcon: SvgPicture.asset(
+                                AppSvg.securityWarning,
+                                height: AppSize.s22,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColors.primary,
+                                  BlendMode.srcIn,
+                                ),
                               ),
-                            );
-                          },
-                        ),
-                        ProfileItemData(
-                          leadingIcon: SvgPicture.asset(
-                            AppSvg.logout,
-                            height: AppSize.s22,
-                            colorFilter: const ColorFilter.mode(
-                              AppColors.primary,
-                              BlendMode.srcIn,
+                              title: AppStrings.privacyPolicy,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  Routes.webView,
+                                  arguments: WebViewArgs(
+                                    title: AppStrings.privacyPolicy,
+                                    url: AppKeys.privacyPolicy,
+                                  ),
+                                );
+                              },
                             ),
-                          ),
-                          title: AppStrings.logout,
-                          textColor: AppColors.primary,
-                          onTap: () {},
+                            ProfileItemData(
+                              leadingIcon: SvgPicture.asset(
+                                AppSvg.help,
+                                height: AppSize.s22,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColors.primary,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              title: AppStrings.help,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  Routes.webView,
+                                  arguments: WebViewArgs(
+                                    title: AppStrings.help,
+                                    url: AppKeys.help,
+                                  ),
+                                );
+                              },
+                            ),
+                            ProfileItemData(
+                              leadingIcon: SvgPicture.asset(
+                                AppSvg.logout,
+                                height: AppSize.s22,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColors.primary,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              title: AppStrings.logout,
+                              textColor: AppColors.primary,
+                              onTap: () =>
+                                  showLogoutConfirmationDialog(context),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              },
             );
           },
         ),

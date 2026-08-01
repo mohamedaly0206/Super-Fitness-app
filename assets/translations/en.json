@@ -1,4 +1,8 @@
 {
+  "auth": {
+    "new_password": "New Password",
+    "confirm_password": "Confirm Password"
+  },
   "errors": {
     "no_internet": "No internet connection",
     "connection_timeout": "Connection timed out",
@@ -9,7 +13,16 @@
     "unknown_error": "Unknown error",
     "login_successfully": "Login successful",
     "login_error": "Login failed",
-    "signup_successfully": "Signup successful"
+    "signup_successfully": "Signup successful",
+    "change_password_successfully": "Password changed successfully"
+  },
+  "validation": {
+    "password_required": "Password is required",
+    "short_password": "Password must be at least 8 characters",
+    "weak_password": "Password must contain upper, lower, number and special character",
+    "confirm_password_required": "Please confirm your password",
+    "password_not_match": "Passwords do not match",
+    "new_password_same_as_old": "New password must be different from the old password"
   },
   "meals": {
     "ingredients": "Ingredients"
@@ -69,6 +82,10 @@
     "profile": "Profile",
     "logout_confirmation_title": "Are You Sure To Close The Application?",
     "yes": "YES",
-    "no": "NO"
+    "no": "NO",
+    "change_password_subtitle": "Make Sure Its 8 Characters Or More",
+    "create_new_password": "Create New Password",
+    "old_password": "Old Password",
+    "done": "Done"
   }
 }

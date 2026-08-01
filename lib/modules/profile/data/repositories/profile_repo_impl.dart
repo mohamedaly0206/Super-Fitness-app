@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
 import 'package:super_fitness_app/core/network/model/user_entity.dart';
+import 'package:super_fitness_app/modules/profile/domain/entities/change_password_entity.dart';
 import 'package:super_fitness_app/modules/profile/domain/entities/logout_entity.dart';
 import '../../data/datasources/profile_remote_data_source.dart';
 import '../../domain/repositories/profile_repo.dart';
@@ -27,5 +28,25 @@ class ProfileRepoImpl implements ProfileRepo {
   Future<UserEntity> getProfile() async {
     final response = await _remoteDataSource.getProfile();
     return response.user!.toDomain();
+  }
+
+  @override
+  Future<BaseResponse<ChangePasswordEntity>> changePassword({
+    required String password,
+    required String newPassword,
+  }) async {
+    final response = await _remoteDataSource.changePassword(
+      password: password,
+      newPassword: newPassword,
+    );
+
+    switch (response) {
+      case SuccessBaseResponse<ChangePasswordEntity>():
+        return SuccessBaseResponse<ChangePasswordEntity>(data: response.data);
+      case ErrorBaseResponse<ChangePasswordEntity>():
+        return ErrorBaseResponse<ChangePasswordEntity>(
+          failure: response.failure,
+        );
+    }
   }
 }
