@@ -17,8 +17,8 @@ class AuthConstants {
   static String get rememberMe => "auth.remember_me".tr();
   static String get emailVerification => "auth.email_verification".tr();
   static String get resetPassword => "auth.reset_password".tr();
-  static String get newPassword => "auth.new_password".tr();
-  static String get confirmPassword => "auth.confirm_password".tr();
+  static String get newPassword => "profile.new_password".tr();
+  static String get confirmPassword => "profile.confirm_password".tr();
   static String get enterEmailAssociation =>
       "auth.enter_email_association".tr();
   static String get enterCodeSent => "auth.enter_code_sent".tr();

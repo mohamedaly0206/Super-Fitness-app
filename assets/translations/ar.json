@@ -66,6 +66,8 @@
     "change_password_subtitle": "تأكد من أنها 8 أحرف أو أكثر",
     "create_new_password": "إنشاء كلمة مرور جديدة",
     "old_password": "كلمة المرور القديمة",
+    "new_password": "كلمة المرور الجديدة",
+    "confirm_password": "تأكيد كلمة المرور",
     "done": "تم"
   },
   "general": {
