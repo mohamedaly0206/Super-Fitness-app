@@ -6,6 +6,7 @@ import 'package:super_fitness_app/core/localization_constants/profile_constants.
 import 'package:super_fitness_app/core/widgets/custom_appbar.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
+import 'package:super_fitness_app/modules/auth/presentation/login/views/login_view.dart';
 import 'package:super_fitness_app/modules/profile/presentation/logout/cubit/logout_cubit.dart';
 import 'package:super_fitness_app/modules/profile/presentation/logout/widgets/logout_confirmation_dialog.dart';
 import 'package:super_fitness_app/modules/profile/presentation/logout/widgets/logout_list_item.dart';
@@ -24,6 +25,7 @@ class LogoutPage extends StatelessWidget {
         listener: (context, state) {
           if (state.logoutState.data == true) {
             Phoenix.rebirth(context);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginView()), (route) => false);
           } else if (state.logoutState.errorMessage != null) {
             CustomSnackBar.error(context, state.logoutState.errorMessage!);
           }
