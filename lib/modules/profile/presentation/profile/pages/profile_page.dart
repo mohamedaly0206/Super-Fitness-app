@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/core/resources/app_strings.dart';
@@ -10,7 +11,7 @@ import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
 import 'package:super_fitness_app/modules/profile/presentation/logout/cubit/logout_cubit.dart';
 import 'package:super_fitness_app/modules/profile/presentation/logout/widgets/logout_confirmation_dialog.dart';
 
-import '../../../../../config/routes/app_router.dart';
+import '../../../../../config/routes/routes.dart';
 import '../../../../../core/layout/app_size.dart';
 import '../../../../../core/resources/app_svg.dart';
 import '../../../../../core/resources/app_value.dart';
@@ -59,6 +60,7 @@ class ProfileViewBody extends StatelessWidget {
               previous.logoutState != current.logoutState,
           listener: (context, logoutStateState) {
             if (logoutStateState.logoutState.data == true) {
+              Phoenix.rebirth(context);
             } else if (logoutStateState.logoutState.errorMessage != null) {
               CustomSnackBar.error(
                 context,

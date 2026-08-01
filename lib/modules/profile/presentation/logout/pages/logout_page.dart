@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/localization_constants/profile_constants.dart';
 import 'package:super_fitness_app/core/widgets/custom_appbar.dart';
@@ -22,11 +23,7 @@ class LogoutPage extends StatelessWidget {
             previous.logoutState != current.logoutState,
         listener: (context, state) {
           if (state.logoutState.data == true) {
-            // TODO: Navigate to the Login screen after the authentication flow is integrated.
-            // Navigator.of(context).pushAndRemoveUntil(
-            //   MaterialPageRoute(builder: (_) => const LoginPage()),
-            //   (route) => false,
-            // );
+            Phoenix.rebirth(context);
           } else if (state.logoutState.errorMessage != null) {
             CustomSnackBar.error(context, state.logoutState.errorMessage!);
           }

@@ -9,8 +9,9 @@ import 'message_content.dart';
 
 class MessageBubble extends StatefulWidget {
   final Message message;
+  final String? userImageUrl;
 
-  const MessageBubble({super.key, required this.message});
+  const MessageBubble({super.key, required this.message, this.userImageUrl});
 
   @override
   State<MessageBubble> createState() => _MessageBubbleState();
@@ -73,7 +74,10 @@ class _MessageBubbleState extends State<MessageBubble> {
 
               if (isUser) ...[
                 const SizedBox(width: 10),
-                const ChatAvatar(role: MessageRole.user),
+                ChatAvatar(
+                  role: MessageRole.user,
+                  userImageUrl: widget.userImageUrl,
+                ),
               ],
             ],
           ),

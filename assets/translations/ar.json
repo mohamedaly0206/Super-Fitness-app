@@ -137,7 +137,8 @@
   },
   "smart_coach": {
     "assist_you": "كيف يمكنني مساعدتك\nاليوم؟",
-    "get_started": "ابدأ"
+    "get_started": "ابدأ",
+    "welcome_hi": "مرحباً، {name}!"
   },
   "general": {
     "retry": "إعادة المحاولة",

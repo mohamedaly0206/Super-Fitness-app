@@ -67,7 +67,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
         hintText: widget.hintText,
         constraints: const BoxConstraints(
           minHeight: AppSize.s36,
-          maxHeight: AppSize.s36,
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppPadding.p16,

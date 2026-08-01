@@ -7,12 +7,14 @@ class MessageList extends StatelessWidget {
   final List<Message> messages;
   final ScrollController controller;
   final bool isTyping;
+  final String? userImageUrl;
 
   const MessageList({
     super.key,
     required this.messages,
     required this.controller,
     required this.isTyping,
+    this.userImageUrl,
   });
 
   @override
@@ -40,6 +42,7 @@ class MessageList extends StatelessWidget {
           child: MessageBubble(
             key: ValueKey(messages[index].id),
             message: messages[index],
+            userImageUrl: userImageUrl,
           ),
         );
       },

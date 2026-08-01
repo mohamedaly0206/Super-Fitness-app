@@ -5,6 +5,10 @@ abstract class AppKeys {
 
   static const String userIdKey = 'userId';
 
+  static const String userNameKey = 'userName';
+
+  static const String profileImageKey = 'profileImage';
+
   static const String enLocale = 'en';
   static const String arLocale = 'ar';
   static const String translationPath = 'assets/translations';

@@ -137,7 +137,8 @@
   },
   "smart_coach": {
     "assist_you": "How Can I Assist You\nToday ?",
-    "get_started": "Get Started"
+    "get_started": "Get Started",
+    "welcome_hi": "Hi, {name}!"
   },
   "general": {
     "retry": "Retry",

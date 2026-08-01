@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
-import 'package:super_fitness_app/core/network/model/user.dart'; // Ensure this points to where UserDto is
+import 'package:super_fitness_app/core/network/model/user_dto.dart'; // Ensure this points to where UserDto is
 import 'package:super_fitness_app/core/network/safe_api_caller.dart';
 import 'package:super_fitness_app/modules/auth/data/models/request/register_request_dto.dart';
 import 'package:super_fitness_app/modules/auth/data/models/response/register_response_dto.dart';

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:super_fitness_app/core/network/model/user.dart';
+import 'package:super_fitness_app/core/network/model/user_dto.dart';
 
 part 'login_response.g.dart';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
+import 'package:super_fitness_app/core/storage/secure_storage_service.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/smart_coach/presentation/cubit/smart_coach_cubit.dart';
 import 'package:super_fitness_app/modules/smart_coach/presentation/cubit/smart_coach_intent.dart';
@@ -35,6 +36,9 @@ class _SmartCoachView extends StatefulWidget {
 class _SmartCoachViewState extends State<_SmartCoachView> {
   final ScrollController _scrollController = ScrollController();
 
+  String _userName = '';
+  String? _userImage;
+
   void _scrollToBottom({bool animated = true}) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!_scrollController.hasClients) return;
@@ -57,6 +61,8 @@ class _SmartCoachViewState extends State<_SmartCoachView> {
   void initState() {
     super.initState();
 
+    _loadUserData();
+
     _scrollController.addListener(() {
       final offset = _scrollController.offset;
 
@@ -66,6 +72,17 @@ class _SmartCoachViewState extends State<_SmartCoachView> {
         });
       }
     });
+  }
+
+  Future<void> _loadUserData() async {
+    final name = await SecureStorageService.getUserName();
+    final image = await SecureStorageService.getProfileImage();
+    if (mounted) {
+      setState(() {
+        _userName = name ?? '';
+        _userImage = image;
+      });
+    }
   }
 
   @override
@@ -98,14 +115,14 @@ class _SmartCoachViewState extends State<_SmartCoachView> {
             background: Backgrounds.chat,
             extendBehindAppBar: true,
             appBar: state.currentSession == null
-                ? const WelcomeAppBar()
+                ? WelcomeAppBar(userName: _userName)
                 : ChatAppBar(
                     conversation: state.currentSession!.conversation,
                     scrollOffset: _scrollOffset,
                   ),
             endDrawer: const ChatHistoryDrawer(),
             body: state.currentSession == null
-                ? const WelcomeView()
+                ? WelcomeView(userName: _userName)
                 : Column(
                     children: [
                       Expanded(
@@ -113,6 +130,7 @@ class _SmartCoachViewState extends State<_SmartCoachView> {
                           controller: _scrollController,
                           messages: state.currentSession!.messages,
                           isTyping: state.isTyping,
+                          userImageUrl: _userImage,
                         ),
                       ),
                       const MessageInput(),

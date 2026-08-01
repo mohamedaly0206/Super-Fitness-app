@@ -46,6 +46,10 @@ class AuthRepoImpl implements AuthRepoContract {
         if (userId != null && userId.isNotEmpty) {
           await SecureStorageService.saveUserId(userId);
         }
+        final user = response.data.user?.toDomain();
+        if (user != null) {
+          await SecureStorageService.saveUser(user);
+        }
         return SuccessBaseResponse<RegisterResponseEntity>(
           data: response.data.toDomain(),
         );
@@ -69,6 +73,10 @@ class AuthRepoImpl implements AuthRepoContract {
         final userId = response.data.user?.id;
         if (userId != null && userId.isNotEmpty) {
           await SecureStorageService.saveUserId(userId);
+        }
+        final user = response.data.user?.toDomain();
+        if (user != null) {
+          await SecureStorageService.saveUser(user);
         }
 
         return SuccessBaseResponse<UserEntity>(

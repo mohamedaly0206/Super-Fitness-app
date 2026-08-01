@@ -9,7 +9,7 @@ import 'package:super_fitness_app/modules/profile/domain/use_cases/profile_use_c
 
 part 'logout_state.dart';
 
-@lazySingleton
+@injectable
 class LogoutCubit extends Cubit<LogoutState> {
   final ProfileUseCases logoutUseCase;
 
@@ -30,6 +30,9 @@ class LogoutCubit extends Cubit<LogoutState> {
     switch (response) {
       case SuccessBaseResponse<LogoutEntity>():
         await SecureStorageService.deleteToken();
+        await SecureStorageService.deleteUserId();
+        await SecureStorageService.deleteUserName();
+        await SecureStorageService.deleteProfileImage();
         emit(
           state.copyWith(
             logoutState: state.logoutState.copyWith(

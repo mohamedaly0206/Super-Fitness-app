@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
 import 'package:super_fitness_app/config/base/base_state.dart';
 import 'package:super_fitness_app/core/network/model/user_entity.dart';
+import 'package:super_fitness_app/core/storage/secure_storage_service.dart';
 import 'package:super_fitness_app/modules/profile/data/models/requests/edit_profile_request.dart';
 import 'package:super_fitness_app/modules/profile/domain/entities/upload_profile_image_entity.dart';
 import 'package:super_fitness_app/modules/profile/domain/use_cases/edit_profile_use_case.dart';
@@ -119,6 +120,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     );
     switch (result) {
       case SuccessBaseResponse<UserEntity>():
+        await SecureStorageService.saveUser(result.data);
         emit(
           state.copyWith(
             editProfileState: BaseState(

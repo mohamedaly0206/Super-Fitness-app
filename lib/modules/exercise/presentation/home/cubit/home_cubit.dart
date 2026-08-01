@@ -19,7 +19,7 @@ import 'package:super_fitness_app/modules/meals/domain/use_cases/get_categories_
 
 part 'home_state.dart';
 
-@lazySingleton
+@injectable
 class HomeCubit extends Cubit<HomeState> {
   final GetLevelsUseCase getLevelsUseCase;
   final GetExercisesByMuscleAndDifficultyUseCase

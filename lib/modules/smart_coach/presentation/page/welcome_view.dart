@@ -14,7 +14,9 @@ import 'package:super_fitness_app/modules/smart_coach/presentation/cubit/smart_c
 import 'package:super_fitness_app/modules/smart_coach/presentation/cubit/smart_coach_state.dart';
 
 class WelcomeView extends StatelessWidget {
-  const WelcomeView({super.key});
+  final String userName;
+
+  const WelcomeView({super.key, this.userName = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,18 @@ class WelcomeView extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  if (userName.isNotEmpty) ...[
+                    Text(
+                      context.welcomeHi(userName),
+                      textAlign: TextAlign.center,
+                      style: getBoldStyle(
+                        context: context,
+                        color: AppColors.textPrimary,
+                        fontSize: 18,
+                      ),
+                    ),
+                    const AppSizedBox(height: 8),
+                  ],
                   Text(
                     context.assistYou,
                     textAlign: TextAlign.center,

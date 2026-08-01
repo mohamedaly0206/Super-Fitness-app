@@ -7,7 +7,9 @@ import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_back_botton.dart';
 
 class WelcomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const WelcomeAppBar({super.key});
+  final String userName;
+
+  const WelcomeAppBar({super.key, this.userName = ''});
 
   @override
   Size get preferredSize => const Size.fromHeight(80);
@@ -27,7 +29,7 @@ class WelcomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Hi Ahmed ,",
+                    "Hi ${userName.isEmpty ? 'User' : userName} ,",
                     style: getMediumStyle(
                       context: context,
                       color: AppColors.textPrimary,

@@ -4,4 +4,6 @@ import 'package:flutter/material.dart';
 extension SmartCoachConstants on BuildContext {
   String get assistYou => "smart_coach.assist_you".tr();
   String get getStarted => "smart_coach.get_started".tr();
+  String welcomeHi(String name) =>
+      "smart_coach.welcome_hi".tr(namedArgs: {'name': name});
 }

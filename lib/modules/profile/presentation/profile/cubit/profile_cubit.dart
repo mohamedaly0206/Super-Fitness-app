@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:super_fitness_app/core/storage/secure_storage_service.dart';
 
 import '../../../domain/use_cases/profile_use_cases.dart';
 import 'profile_intent.dart';
@@ -30,6 +31,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     try {
       final user = await _profileUseCases.getProfile();
+      await SecureStorageService.saveUser(user);
 
       emit(
         state.copyWith(
