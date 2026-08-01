@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/config/routes/page_transitions.dart';
+import 'package:super_fitness_app/config/routes/routes.dart';
+import 'package:super_fitness_app/core/network/model/user_entity.dart';
 import 'package:super_fitness_app/core/widgets/not_found_screen.dart';
 import 'package:super_fitness_app/core/widgets/ui_showcase_page.dart';
 import 'package:super_fitness_app/modules/app_sections/presentation/pages/app_sections_page.dart';
@@ -12,17 +14,13 @@ import 'package:super_fitness_app/modules/exercise/presentation/workouts/pages/w
 import 'package:super_fitness_app/modules/meals/presentation/food_details/pages/food_details_page.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/page/food_recommendation_page.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
-
-abstract class Routes {
-  static const String splash = '/';
-  static const String exercises = '/exercises';
-  static const String foodRecommendation = '/food-recommendation';
-  static const String homeRoutes = '/home';
-  static const String exerciseDetails = '/exercise-details';
-  static const String workouts = '/workouts';
-  static const String foodDetails = '/foodDetails';
-  static const String uiShowcase = '/ui-showcase';
-}
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_cubit.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_intent.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/pages/edit_activity_level_page.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/pages/edit_goal_page.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/pages/edit_profile_page.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/pages/edit_weight_page.dart';
+import 'package:super_fitness_app/modules/profile/presentation/profile_test_view.dart';
 
 abstract class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -55,6 +53,45 @@ abstract class AppRouter {
           return PageTransitions.fade(
             ExerciseScreen(primeMoverMuscleId: primeMoverMuscleId),
           );
+        case Routes.editProfile:
+          final userData = settings.arguments as UserEntity;
+          return PageTransitions.fade(
+            BlocProvider(
+              create: (context) {
+                final cubit = getIt<EditProfileCubit>();
+                cubit.handleEditProfileIntent(InitUserDataIntent(userData));
+                return cubit;
+              },
+              child: EditProfilePage(userData: userData),
+            ),
+          );
+
+        case Routes.editWeight:
+          final sharedCubit = settings.arguments as EditProfileCubit;
+          return PageTransitions.fade(
+            BlocProvider.value(
+              value: sharedCubit,
+              child: const EditWeightPage(),
+            ),
+          );
+
+        case Routes.editActivityLevel:
+          final sharedCubit = settings.arguments as EditProfileCubit;
+          return PageTransitions.fade(
+            BlocProvider.value(
+              value: sharedCubit,
+              child: const EditActivityLevelPage(),
+            ),
+          );
+
+        case Routes.editGoal:
+          final sharedCubit = settings.arguments as EditProfileCubit;
+          return PageTransitions.fade(
+            BlocProvider.value(value: sharedCubit, child: const EditGoalPage()),
+          );
+        case Routes.dummyProfilePage:
+          return PageTransitions.fade(DummyProfileView());
+
         default:
           return PageTransitions.fade(
             NotFoundScreen(route: settings.name ?? ''),

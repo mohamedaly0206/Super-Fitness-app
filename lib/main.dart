@@ -7,7 +7,7 @@ import 'package:super_fitness_app/core/resources/app_value.dart';
 import 'package:super_fitness_app/core/storage/secure_storage_service.dart';
 
 const staticToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNmE1ZTA2ZTBlYTk2NThjZWEyNDgzNTc3IiwiaWF0IjoxNzg0NTQ3MDQwfQ.1a3d3BuT7yDwMBnqGEB74-KZHAnZTkvlC3zLGQY9_2I';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNmE1OTZjMzdlYTk2NThjZWEyNDgyZDBiIiwiaWF0IjoxNzg1NTUyMzk1fQ.HK4szYFq7UpWWkgD4Geev57lUGo2yC6NLGY1zWEaQnA';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

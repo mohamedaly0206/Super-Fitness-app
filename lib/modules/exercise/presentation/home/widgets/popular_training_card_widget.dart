@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:super_fitness_app/config/routes/app_router.dart';
+import 'package:super_fitness_app/config/routes/routes.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';

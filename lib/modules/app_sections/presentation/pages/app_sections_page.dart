@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
+import 'package:super_fitness_app/config/routes/routes.dart';
+import 'package:super_fitness_app/core/network/model/user_entity.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_cubit.dart';
@@ -9,6 +11,7 @@ import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_
 import 'package:super_fitness_app/modules/exercise/presentation/home/pages/home_page.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/pages/workouts_page.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_cubit.dart';
+import 'package:super_fitness_app/modules/profile/presentation/profile_test_view.dart';
 
 class AppSectionsPage extends StatelessWidget {
   const AppSectionsPage({super.key});
@@ -27,14 +30,12 @@ class AppSectionsPage extends StatelessWidget {
         ),
         BlocProvider(create: (_) => getIt<WorkoutsCubit>()),
       ],
-      child: const _AppSectionsView(),
+      child: _AppSectionsView(),
     );
   }
 }
 
 class _AppSectionsView extends StatelessWidget {
-  const _AppSectionsView();
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppSectionsCubit, AppSectionsState>(
@@ -43,6 +44,7 @@ class _AppSectionsView extends StatelessWidget {
         final currentIndex = state is AppSectionsChanged
             ? state.currentIndex
             : 0;
+        // user data just for testing
 
         return Scaffold(
           extendBody: true,
@@ -54,7 +56,8 @@ class _AppSectionsView extends StatelessWidget {
                   const HomePage(),
                   const WorkoutsPage(),
                   const SizedBox.shrink(),
-                  const SizedBox.shrink(),
+                  //replace with profile
+                  DummyProfileView(),
                 ],
               ),
               Positioned(

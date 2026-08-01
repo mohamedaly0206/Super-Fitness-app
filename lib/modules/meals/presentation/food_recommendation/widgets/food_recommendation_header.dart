@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
-import 'package:super_fitness_app/core/layout/app_size.dart';
-import 'package:super_fitness_app/core/resources/app_png.dart';
 import 'package:super_fitness_app/core/resources/app_strings.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
