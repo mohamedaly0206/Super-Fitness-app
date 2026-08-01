@@ -111,7 +111,21 @@ class ProfileViewBody extends StatelessWidget {
                                 ),
                               ),
                               title: AppStrings.editProfile,
-                              onTap: () {},
+                              onTap: () async {
+                                if (user != null) {
+                                  await Navigator.pushNamed(
+                                    context,
+                                    Routes.editProfile,
+                                    arguments: user,
+                                  );
+
+                                  if (context.mounted) {
+                                    context.read<ProfileCubit>().doIntent(
+                                      const GetProfileDataIntent(),
+                                    );
+                                  }
+                                }
+                              },
                             ),
                             ProfileItemData(
                               leadingIcon: SvgPicture.asset(
