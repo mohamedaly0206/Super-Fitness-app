@@ -61,6 +61,7 @@ class AppColors {
   static const Color hintText = Color(0x8AFFFFFF);
   static const Color iconInactive = Colors.white;
   static const Color borderDefault = Color(0x61FFFFFF);
+  static const Color borderLight = Color(0xFFD9D9D9);
   static const Color borderFocused = Colors.white;
   static const Color borderError = Colors.redAccent;
   static const Color navBarBackground = Color(0xFF1C1C1E);

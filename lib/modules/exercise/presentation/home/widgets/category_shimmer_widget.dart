@@ -28,7 +28,9 @@ Widget categoryShimmer() {
                   height: AppSize.s64,
                   decoration: BoxDecoration(
                     color: AppColors.grey2,
-                    borderRadius: BorderRadius.circular(AppSize.borderRadiusCard),
+                    borderRadius: BorderRadius.circular(
+                      AppSize.borderRadiusCard,
+                    ),
                   ),
                 ),
                 AppSizedBox(height: AppSize.s10),

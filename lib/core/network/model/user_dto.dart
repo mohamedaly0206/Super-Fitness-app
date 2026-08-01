@@ -1,6 +1,6 @@
 import 'package:super_fitness_app/core/network/model/user_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
-part 'user.g.dart';
+part 'user_dto.g.dart';
 
 @JsonSerializable()
 class UserDto {
@@ -25,11 +25,11 @@ class UserDto {
   @JsonKey(name: "addresses")
   final List<dynamic>? addresses;
   @JsonKey(name: "age")
-  final int? age;
+  final num? age;
   @JsonKey(name: "weight")
-  final double? weight;
+  final num? weight;
   @JsonKey(name: "height")
-  final double? height;
+  final num? height;
   @JsonKey(name: "activityLevel")
   final String? activityLevel;
   @JsonKey(name: "goal")
@@ -42,8 +42,8 @@ class UserDto {
     this.lastName,
     this.email,
     this.gender,
-    this.phone,
     this.photo,
+    this.phone,
     this.role,
     this.wishlist,
     this.id,
@@ -68,6 +68,7 @@ class UserDto {
       lastName: lastName,
       email: email,
       gender: gender,
+      phone: phone,
       photo: photo,
       role: role,
       wishlist: wishlist,

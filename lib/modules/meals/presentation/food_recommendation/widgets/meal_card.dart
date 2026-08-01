@@ -27,7 +27,7 @@ class MealCard extends StatelessWidget {
               width: double.infinity,
               height: double.infinity,
             ),
-            
+
             DecoratedBox(
               decoration: BoxDecoration(
                 color: AppColors.grey0.withValues(alpha: 0.15),

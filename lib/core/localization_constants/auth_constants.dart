@@ -65,4 +65,5 @@ class AuthConstants {
       "auth.yourRegularPhysicalActivityLevel".tr();
   static String get registerSuccessMessage =>
       "auth.registerSuccessMessage".tr();
+  static String get done => "auth.done".tr();
 }

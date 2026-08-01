@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:super_fitness_app/app.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/core/network/dio_helper.dart';
@@ -32,13 +33,17 @@ Future<void> main() async {
 
   FlutterNativeSplash.remove();
   runApp(
-    EasyLocalization(
-      supportedLocales: const [
-        Locale(AppKeys.enLocale),
-        Locale(AppKeys.arLocale),
-      ],
-      path: AppKeys.translationPath,
-      child: FitnessApp(hasToken: hasToken),
+    Phoenix(
+      child: EasyLocalization(
+        supportedLocales: const [
+          Locale(AppKeys.enLocale),
+          Locale(AppKeys.arLocale),
+        ],
+        path: AppKeys.translationPath,
+        fallbackLocale: const Locale('en'),
+        saveLocale: true,
+        child: FitnessApp(hasToken: hasToken),
+      ),
     ),
   );
 }

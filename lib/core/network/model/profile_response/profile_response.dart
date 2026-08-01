@@ -1,4 +1,4 @@
-import 'package:super_fitness_app/core/network/model/user.dart';
+import 'package:super_fitness_app/core/network/model/user_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'profile_response.g.dart';

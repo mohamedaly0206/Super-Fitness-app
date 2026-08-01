@@ -23,7 +23,7 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   final GetLevelsUseCase getLevelsUseCase;
   final GetExercisesByMuscleAndDifficultyUseCase
-      getExercisesByMuscleAndDifficultyUseCase;
+  getExercisesByMuscleAndDifficultyUseCase;
   final GetRandomMusclesUseCase getRandomMusclesUseCase;
   final GetAllMusclesUseCase getAllMusclesUseCase;
   final GetMusclesByMuscleGroupUseCase getMusclesByMuscleGroupUseCase;
@@ -65,101 +65,130 @@ class HomeCubit extends Cubit<HomeState> {
       !state.exerciseState.isLoading && state.currentPage < state.totalPages;
 
   void _getLevels() async {
-    emit(state.copyWith(
-        levelState: state.levelState.copyWith(isLoadingParam: true)));
+    emit(
+      state.copyWith(
+        levelState: state.levelState.copyWith(isLoadingParam: true),
+      ),
+    );
     final response = await getLevelsUseCase.call();
     switch (response) {
       case SuccessBaseResponse<List<LevelEntity>>():
-        emit(state.copyWith(
-          levelState: state.levelState.copyWith(
-            isLoadingParam: false,
-            dataParam: response.data,
+        emit(
+          state.copyWith(
+            levelState: state.levelState.copyWith(
+              isLoadingParam: false,
+              dataParam: response.data,
+            ),
           ),
-        ));
+        );
         _tryFetchExercises();
       case ErrorBaseResponse<List<LevelEntity>>():
-        emit(state.copyWith(
-          levelState: state.levelState.copyWith(
-            isLoadingParam: false,
-            errorMessageParam: response.failure.message,
+        emit(
+          state.copyWith(
+            levelState: state.levelState.copyWith(
+              isLoadingParam: false,
+              errorMessageParam: response.failure.message,
+            ),
           ),
-        ));
+        );
     }
   }
 
   void _getRandomMuscles() async {
-    emit(state.copyWith(
-        musclesState: state.musclesState.copyWith(isLoadingParam: true)));
+    emit(
+      state.copyWith(
+        musclesState: state.musclesState.copyWith(isLoadingParam: true),
+      ),
+    );
     final response = await getRandomMusclesUseCase.call();
     switch (response) {
       case SuccessBaseResponse<List<MuscleEntity>>():
-        emit(state.copyWith(
-          musclesState: state.musclesState.copyWith(
-            isLoadingParam: false,
-            dataParam: response.data,
+        emit(
+          state.copyWith(
+            musclesState: state.musclesState.copyWith(
+              isLoadingParam: false,
+              dataParam: response.data,
+            ),
           ),
-        ));
+        );
         _tryFetchExercises();
       case ErrorBaseResponse<List<MuscleEntity>>():
-        emit(state.copyWith(
-          musclesState: state.musclesState.copyWith(
-            isLoadingParam: false,
-            errorMessageParam: response.failure.message,
+        emit(
+          state.copyWith(
+            musclesState: state.musclesState.copyWith(
+              isLoadingParam: false,
+              errorMessageParam: response.failure.message,
+            ),
           ),
-        ));
+        );
     }
   }
 
   void _getMuscleGroups() async {
-    emit(state.copyWith(
-        muscleGroupsState:
-            state.muscleGroupsState.copyWith(isLoadingParam: true)));
+    emit(
+      state.copyWith(
+        muscleGroupsState: state.muscleGroupsState.copyWith(
+          isLoadingParam: true,
+        ),
+      ),
+    );
     final response = await getAllMusclesUseCase();
     switch (response) {
       case SuccessBaseResponse<List<MuscleGroupEntity>>():
-        emit(state.copyWith(
-          muscleGroupsState: state.muscleGroupsState.copyWith(
-            isLoadingParam: false,
-            dataParam: response.data,
+        emit(
+          state.copyWith(
+            muscleGroupsState: state.muscleGroupsState.copyWith(
+              isLoadingParam: false,
+              dataParam: response.data,
+            ),
           ),
-        ));
+        );
         if (response.data.isNotEmpty) {
           _getMusclesByGroup(response.data.first.id);
         }
       case ErrorBaseResponse<List<MuscleGroupEntity>>():
-        emit(state.copyWith(
-          muscleGroupsState: state.muscleGroupsState.copyWith(
-            isLoadingParam: false,
-            errorMessageParam: response.failure.message,
+        emit(
+          state.copyWith(
+            muscleGroupsState: state.muscleGroupsState.copyWith(
+              isLoadingParam: false,
+              errorMessageParam: response.failure.message,
+            ),
           ),
-        ));
+        );
     }
   }
 
   void _getMusclesByGroup(String muscleGroupId) async {
-    emit(state.copyWith(
-      musclesByGroupState:
-          state.musclesByGroupState.copyWith(isLoadingParam: true),
-      selectedMuscleGroupId: muscleGroupId,
-    ));
+    emit(
+      state.copyWith(
+        musclesByGroupState: state.musclesByGroupState.copyWith(
+          isLoadingParam: true,
+        ),
+        selectedMuscleGroupId: muscleGroupId,
+      ),
+    );
     final response = await getMusclesByMuscleGroupUseCase(
       muscleGroupId: muscleGroupId,
     );
     switch (response) {
       case SuccessBaseResponse<List<MuscleEntity>>():
-        emit(state.copyWith(
-          musclesByGroupState: state.musclesByGroupState.copyWith(
-            isLoadingParam: false,
-            dataParam: response.data,
+        emit(
+          state.copyWith(
+            musclesByGroupState: state.musclesByGroupState.copyWith(
+              isLoadingParam: false,
+              dataParam: response.data,
+            ),
           ),
-        ));
+        );
       case ErrorBaseResponse<List<MuscleEntity>>():
-        emit(state.copyWith(
-          musclesByGroupState: state.musclesByGroupState.copyWith(
-            isLoadingParam: false,
-            errorMessageParam: response.failure.message,
+        emit(
+          state.copyWith(
+            musclesByGroupState: state.musclesByGroupState.copyWith(
+              isLoadingParam: false,
+              errorMessageParam: response.failure.message,
+            ),
           ),
-        ));
+        );
     }
   }
 
@@ -176,7 +205,10 @@ class HomeCubit extends Cubit<HomeState> {
     final levels = state.levelState.data;
     final muscles = state.musclesState.data;
 
-    if (levels == null || levels.isEmpty || muscles == null || muscles.isEmpty) {
+    if (levels == null ||
+        levels.isEmpty ||
+        muscles == null ||
+        muscles.isEmpty) {
       return;
     }
 
@@ -185,10 +217,12 @@ class HomeCubit extends Cubit<HomeState> {
 
     final isFirstPage = page == 1;
 
-    emit(state.copyWith(
-      exerciseState: state.exerciseState.copyWith(isLoadingParam: true),
-      currentPage: page,
-    ));
+    emit(
+      state.copyWith(
+        exerciseState: state.exerciseState.copyWith(isLoadingParam: true),
+        currentPage: page,
+      ),
+    );
 
     final response = await getExercisesByMuscleAndDifficultyUseCase.call(
       primeMoverMuscleId: firstMuscleId,
@@ -199,46 +233,59 @@ class HomeCubit extends Cubit<HomeState> {
     switch (response) {
       case SuccessBaseResponse<ExercisesPaginatedResponse>():
         final paginated = response.data;
-        final existingExercises =
-            isFirstPage ? <ExerciseEntity>[] : (state.exerciseState.data ?? []);
-        emit(state.copyWith(
-          exerciseState: state.exerciseState.copyWith(
-            isLoadingParam: false,
-            dataParam: [...existingExercises, ...paginated.exercises],
+        final existingExercises = isFirstPage
+            ? <ExerciseEntity>[]
+            : (state.exerciseState.data ?? []);
+        emit(
+          state.copyWith(
+            exerciseState: state.exerciseState.copyWith(
+              isLoadingParam: false,
+              dataParam: [...existingExercises, ...paginated.exercises],
+            ),
+            currentPage: paginated.currentPage,
+            totalPages: paginated.totalPages,
           ),
-          currentPage: paginated.currentPage,
-          totalPages: paginated.totalPages,
-        ));
+        );
       case ErrorBaseResponse<ExercisesPaginatedResponse>():
-        emit(state.copyWith(
-          exerciseState: state.exerciseState.copyWith(
-            isLoadingParam: false,
-            errorMessageParam: response.failure.message,
+        emit(
+          state.copyWith(
+            exerciseState: state.exerciseState.copyWith(
+              isLoadingParam: false,
+              errorMessageParam: response.failure.message,
+            ),
           ),
-        ));
+        );
     }
   }
 
   void _getFoodCategories() async {
-    emit(state.copyWith(
-        foodCategoriesState:
-            state.foodCategoriesState.copyWith(isLoadingParam: true)));
+    emit(
+      state.copyWith(
+        foodCategoriesState: state.foodCategoriesState.copyWith(
+          isLoadingParam: true,
+        ),
+      ),
+    );
     final response = await getCategoriesUseCase();
     switch (response) {
       case SuccessBaseResponse<List<MealCategoryEntity>>():
-        emit(state.copyWith(
-          foodCategoriesState: state.foodCategoriesState.copyWith(
-            isLoadingParam: false,
-            dataParam: response.data,
+        emit(
+          state.copyWith(
+            foodCategoriesState: state.foodCategoriesState.copyWith(
+              isLoadingParam: false,
+              dataParam: response.data,
+            ),
           ),
-        ));
+        );
       case ErrorBaseResponse<List<MealCategoryEntity>>():
-        emit(state.copyWith(
-          foodCategoriesState: state.foodCategoriesState.copyWith(
-            isLoadingParam: false,
-            errorMessageParam: response.failure.message,
+        emit(
+          state.copyWith(
+            foodCategoriesState: state.foodCategoriesState.copyWith(
+              isLoadingParam: false,
+              errorMessageParam: response.failure.message,
+            ),
           ),
-        ));
+        );
     }
   }
 }

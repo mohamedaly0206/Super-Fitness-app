@@ -37,12 +37,17 @@ Widget exerciseDetailsBody({
                       ),
                     ),
                   ),
-                   const SizedBox(width: AppSize.s10),
+                  const SizedBox(width: AppSize.s10),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: AppPadding.p12, vertical: AppPadding.p8),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppPadding.p12,
+                      vertical: AppPadding.p8,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.primary.withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+                      borderRadius: BorderRadius.circular(
+                        AppSize.borderRadiusOutlined,
+                      ),
                     ),
                     child: Text(
                       exercise.difficultyLevel,
@@ -108,7 +113,10 @@ Widget _infoRow(
   required String value,
 }) {
   return CustomContainer(
-    padding: const EdgeInsets.symmetric(horizontal: AppPadding.p14, vertical: AppPadding.p12),
+    padding: const EdgeInsets.symmetric(
+      horizontal: AppPadding.p14,
+      vertical: AppPadding.p12,
+    ),
     borderRadius: AppSize.borderRadiusTag,
     child: Row(
       children: [

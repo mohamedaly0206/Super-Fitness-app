@@ -29,6 +29,10 @@ abstract class AppPng {
   // smart coach
   static const String robot = 'assets/images/Robot.png';
 
+  //  PASSWORD FIELDS
+  static const String lock = 'assets/svgs/lock.png';
+  static const String eye = 'assets/svgs/eye.png';
+
   // category images
   static const String aerobics = 'assets/images/aerobics.png';
   static const String fitness = 'assets/images/fitness.png';

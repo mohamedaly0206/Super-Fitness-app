@@ -37,7 +37,6 @@ class _FoodRecommendationView extends StatefulWidget {
 }
 
 class _FoodRecommendationViewState extends State<_FoodRecommendationView> {
-
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -51,7 +50,7 @@ class _FoodRecommendationViewState extends State<_FoodRecommendationView> {
                 const FoodRecommendationHeader(),
                 if (state.categories.isEmpty &&
                     (state is FoodRecommendationInitial ||
-                     state is FoodRecommendationLoadingCategories)) ...[
+                        state is FoodRecommendationLoadingCategories)) ...[
                   const SizedBox(height: AppSize.s8),
                   const TabBarShimmer(),
                   const SizedBox(height: AppSize.s8),
@@ -85,7 +84,7 @@ class _FoodRecommendationViewState extends State<_FoodRecommendationView> {
       case FoodRecommendationCategoriesLoaded():
       case FoodRecommendationLoadingMeals():
         return const GridShimmer();
-          case FoodRecommendationMealsLoaded():
+      case FoodRecommendationMealsLoaded():
         return MealsGrid(
           meals: state.meals,
           onMealTap: (meal) {

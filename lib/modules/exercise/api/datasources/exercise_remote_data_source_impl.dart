@@ -25,7 +25,9 @@ class ExerciseRemoteDataSourceImpl implements ExerciseRemoteDataSource {
         data: response.levels?.map((e) => e.toEntity()).toList() ?? [],
       );
     } catch (e) {
-      return ErrorBaseResponse<List<LevelEntity>>(failure: ErrorHandler.handle(e));
+      return ErrorBaseResponse<List<LevelEntity>>(
+        failure: ErrorHandler.handle(e),
+      );
     }
   }
 
@@ -37,7 +39,9 @@ class ExerciseRemoteDataSourceImpl implements ExerciseRemoteDataSource {
         data: response.muscles?.map((e) => e.toEntity()).toList() ?? [],
       );
     } catch (e) {
-      return ErrorBaseResponse<List<MuscleEntity>>(failure: ErrorHandler.handle(e));
+      return ErrorBaseResponse<List<MuscleEntity>>(
+        failure: ErrorHandler.handle(e),
+      );
     }
   }
 
@@ -49,7 +53,9 @@ class ExerciseRemoteDataSourceImpl implements ExerciseRemoteDataSource {
         data: response.musclesGroup?.map((e) => e.toEntity()).toList() ?? [],
       );
     } catch (e) {
-      return ErrorBaseResponse<List<MuscleGroupEntity>>(failure: ErrorHandler.handle(e));
+      return ErrorBaseResponse<List<MuscleGroupEntity>>(
+        failure: ErrorHandler.handle(e),
+      );
     }
   }
 
@@ -65,25 +71,30 @@ class ExerciseRemoteDataSourceImpl implements ExerciseRemoteDataSource {
         data: response.muscles?.map((e) => e.toEntity()).toList() ?? [],
       );
     } catch (e) {
-      return ErrorBaseResponse<List<MuscleEntity>>(failure: ErrorHandler.handle(e));
+      return ErrorBaseResponse<List<MuscleEntity>>(
+        failure: ErrorHandler.handle(e),
+      );
     }
   }
 
   @override
-  Future<BaseResponse<ExercisesPaginatedResponse>> getExercisesByMuscleAndDifficulty({
+  Future<BaseResponse<ExercisesPaginatedResponse>>
+  getExercisesByMuscleAndDifficulty({
     required String primeMoverMuscleId,
     required String difficultyLevelId,
     required int page,
   }) async {
     try {
-      final response = await exerciseApiClient.getExercisesByMuscleAndDifficulty(
-        primeMoverMuscleId: primeMoverMuscleId,
-        difficultyLevelId: difficultyLevelId,
-        page: page,
-      );
+      final response = await exerciseApiClient
+          .getExercisesByMuscleAndDifficulty(
+            primeMoverMuscleId: primeMoverMuscleId,
+            difficultyLevelId: difficultyLevelId,
+            page: page,
+          );
       return SuccessBaseResponse<ExercisesPaginatedResponse>(
         data: ExercisesPaginatedResponse(
-          exercises: response.exercises?.map((e) => e.toDomain()).toList() ?? [],
+          exercises:
+              response.exercises?.map((e) => e.toDomain()).toList() ?? [],
           currentPage: response.currentPage ?? page,
           totalPages: response.totalPages ?? 1,
         ),
@@ -96,9 +107,8 @@ class ExerciseRemoteDataSourceImpl implements ExerciseRemoteDataSource {
   }
 
   @override
-  Future<BaseResponse<DifficultyLevelsResponseDto>> getDifficultyLevelsByPrimeMover({
-    required String primeMoverMuscleId,
-  }) async {
+  Future<BaseResponse<DifficultyLevelsResponseDto>>
+  getDifficultyLevelsByPrimeMover({required String primeMoverMuscleId}) async {
     try {
       final response = await exerciseApiClient.getDifficultyLevelsByPrimeMover(
         primeMoverMuscleId,
@@ -112,15 +122,17 @@ class ExerciseRemoteDataSourceImpl implements ExerciseRemoteDataSource {
   }
 
   @override
-  Future<BaseResponse<ExercisesResponseDto>> getExercisesByPrimeMoverAndDifficulty({
+  Future<BaseResponse<ExercisesResponseDto>>
+  getExercisesByPrimeMoverAndDifficulty({
     required String primeMoverMuscleId,
     required String difficultyLevelId,
   }) async {
     try {
-      final response = await exerciseApiClient.getExercisesByPrimeMoverAndDifficulty(
-        primeMoverMuscleId,
-        difficultyLevelId,
-      );
+      final response = await exerciseApiClient
+          .getExercisesByPrimeMoverAndDifficulty(
+            primeMoverMuscleId,
+            difficultyLevelId,
+          );
       return SuccessBaseResponse<ExercisesResponseDto>(data: response);
     } catch (e) {
       return ErrorBaseResponse<ExercisesResponseDto>(

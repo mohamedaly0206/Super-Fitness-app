@@ -10,6 +10,7 @@ import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_
 import 'package:super_fitness_app/modules/exercise/presentation/home/pages/home_page.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/pages/workouts_page.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_cubit.dart';
+import 'package:super_fitness_app/modules/profile/presentation/profile/pages/profile_page.dart';
 
 class AppSectionsPage extends StatelessWidget {
   const AppSectionsPage({super.key});
@@ -55,7 +56,7 @@ class _AppSectionsView extends StatelessWidget {
                   const HomePage(),
                   const WorkoutsPage(),
                   const SizedBox.shrink(),
-                  const SizedBox.shrink(),
+                  const ProfilePage(),
                 ],
               ),
               Positioned(

@@ -16,7 +16,9 @@ import 'package:super_fitness_app/modules/meals/presentation/food_details/pages/
 import 'package:super_fitness_app/modules/meals/presentation/food_details/widgets/food_details_top_header.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/widgets/ingredients_widget.dart';
 
-class MockFoodDetailsCubit extends MockCubit<FoodDetailsState> implements FoodDetailsCubit {}
+class MockFoodDetailsCubit extends MockCubit<FoodDetailsState>
+    implements FoodDetailsCubit {}
+
 class FakeFoodDetailsState extends Fake implements FoodDetailsState {}
 
 void main() {
@@ -24,17 +26,17 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(FakeFoodDetailsState());
-    
+
     // Optional: If your app requires a one-time global DI setup, call it here:
-    // configureDependencies(); 
+    // configureDependencies();
   });
 
   setUp(() {
     mockCubit = MockFoodDetailsCubit();
-    
+
     // 1. Push a new scope for test isolation (replaces unsafe full resets)
     GetIt.instance.pushNewScope();
-    
+
     // 2. Register our mocked cubit in this scope
     GetIt.instance.registerFactory<FoodDetailsCubit>(() => mockCubit);
   });
@@ -46,9 +48,7 @@ void main() {
   });
 
   Widget buildTestableWidget() {
-    return const MaterialApp(
-      home: FoodDetailsPage(mealId: '12345'),
-    );
+    return const MaterialApp(home: FoodDetailsPage(mealId: '12345'));
   }
 
   group('FoodDetailsPage Widget Tests', () {
@@ -81,7 +81,9 @@ void main() {
       expect(find.text(errorMessage), findsOneWidget);
     });
 
-    testWidgets('shows FoodDetailsTopHeader and IngrediEntsWidget on success', (tester) async {
+    testWidgets('shows FoodDetailsTopHeader and IngrediEntsWidget on success', (
+      tester,
+    ) async {
       final dummyMeal = MealEntity(
         id: '12345',
         name: 'Chicken Salad',

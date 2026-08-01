@@ -93,9 +93,7 @@ class _ExerciseViewState extends State<_ExerciseView> {
                 children: [
                   ExerciseHeader(onPlayVideo: _playVideo),
                   const AppSizedBox(height: AppSize.s10),
-                  Expanded(
-                    child: ExercisesList(onPlayVideo: _playVideo),
-                  ),
+                  Expanded(child: ExercisesList(onPlayVideo: _playVideo)),
                 ],
               );
             },

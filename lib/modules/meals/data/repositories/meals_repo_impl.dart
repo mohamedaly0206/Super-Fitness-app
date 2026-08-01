@@ -55,9 +55,7 @@ class MealsRepoImpl implements MealsRepo {
       case SuccessBaseResponse<MealDetailsEntity>():
         return SuccessBaseResponse<MealDetailsEntity>(data: response.data);
       case ErrorBaseResponse<MealDetailsEntity>():
-        return ErrorBaseResponse<MealDetailsEntity>(
-          failure: response.failure,
-        );
+        return ErrorBaseResponse<MealDetailsEntity>(failure: response.failure);
     }
   }
 

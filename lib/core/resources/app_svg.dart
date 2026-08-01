@@ -25,4 +25,5 @@ abstract class AppSvg {
   static const String back = 'assets/svgs/back.svg';
   static const String menu = 'assets/svgs/menu.svg';
   static const String arrowLeft = 'assets/svgs/Arrow-Left.svg';
+  static const String editIcon = 'assets/svgs/edit_icon.svg';
 }
