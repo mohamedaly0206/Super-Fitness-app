@@ -6,15 +6,9 @@ class ProfileState extends Equatable {
   final BaseState<void> baseState;
   final UserEntity? user;
 
-  const ProfileState({
-    this.baseState = const BaseState<void>(),
-    this.user,
-  });
+  const ProfileState({this.baseState = const BaseState<void>(), this.user});
 
-  ProfileState copyWith({
-    BaseState<void>? baseState,
-    UserEntity? user,
-  }) {
+  ProfileState copyWith({BaseState<void>? baseState, UserEntity? user}) {
     return ProfileState(
       baseState: baseState ?? this.baseState,
       user: user ?? this.user,

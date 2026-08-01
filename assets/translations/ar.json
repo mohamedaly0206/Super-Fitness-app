@@ -42,6 +42,19 @@
     "aerobics": "الкарديو",
     "trainer": "المدرب"
   },
+  "profile": {
+    "profile": "الملف الشخصي",
+    "logout": "تسجيل الخروج",
+    "logout_confirmation_title": "هل أنت متأكد أنك تريد إغلاق التطبيق؟",
+    "yes": "نعم",
+    "no": "لا",
+    "edit_profile": "تعديل الملف الشخصي",
+    "change_password": "تغيير كلمة المرور",
+    "security": "الأمان",
+    "privacy_policy": "سياسة الخصوصية",
+    "help": "المساعدة",
+    "select_language": "اختر اللغة"
+  },
   "general": {
     "retry": "إعادة المحاولة",
     "oops": "عذراً",
@@ -57,13 +70,5 @@
     "workout": "التمارين",
     "chat": "الدردشة",
     "profile": "الملف الشخصي"
-  },
-  "profile": {
-    "edit_profile": "تعديل الملف الشخصي",
-    "change_password": "تغيير كلمة المرور",
-    "security": "الأمان",
-    "privacy_policy": "سياسة الخصوصية",
-    "help": "المساعدة",
-    "logout": "تسجيل الخروج",
-    "select_language": "اختر اللغة"  }
+  }
 }

@@ -65,6 +65,10 @@
     "privacy_policy": "Privacy Policy",
     "help": "Help",
     "logout": "Logout",
-    "select_language": "Select Language"
+    "select_language": "Select Language",
+    "profile": "Profile",
+    "logout_confirmation_title": "Are You Sure To Close The Application?",
+    "yes": "YES",
+    "no": "NO"
   }
 }

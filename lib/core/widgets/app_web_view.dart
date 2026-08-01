@@ -42,18 +42,11 @@ class _AppWebViewState extends State<AppWebView> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       background: Backgrounds.profileAndEdit,
-      appBar: CustomAppBar(
-        title: widget.args.title,
-        showBackButton: true,
-      ),
+      appBar: CustomAppBar(title: widget.args.title, showBackButton: true),
       body: Stack(
         children: [
           WebViewWidget(controller: _webViewController),
-          if (_isLoading)
-            const AppLoadingWidget(
-              size: 50,
-              strokeWidth: 4,
-            ),
+          if (_isLoading) const AppLoadingWidget(size: 50, strokeWidth: 4),
         ],
       ),
     );

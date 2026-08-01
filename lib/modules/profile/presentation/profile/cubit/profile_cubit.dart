@@ -7,9 +7,9 @@ import 'profile_state.dart';
 
 @injectable
 class ProfileCubit extends Cubit<ProfileState> {
-  final GetProfileUseCase _getProfileUseCase;
+  final ProfileUseCases _profileUseCases;
 
-  ProfileCubit(this._getProfileUseCase) : super(const ProfileState());
+  ProfileCubit(this._profileUseCases) : super(const ProfileState());
 
   Future<void> doIntent(ProfileIntent intent) async {
     switch (intent) {
@@ -29,7 +29,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
 
     try {
-      final user = await _getProfileUseCase();
+      final user = await _profileUseCases.getProfile();
 
       emit(
         state.copyWith(
