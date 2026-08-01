@@ -62,6 +62,14 @@ TextStyle getBoldStyle({
   return _getTextStyle(context, fontSize, FontWeightManager.bold, color);
 }
 
+TextStyle getExtraBoldStyle({
+  required BuildContext context,
+  double fontSize = FontSizeManager.s20,
+  required Color color,
+}) {
+  return _getTextStyle(context, fontSize, FontWeightManager.extraBold, color);
+}
+
 // Underlined text
 TextStyle getTextWithLine({
   required BuildContext context,

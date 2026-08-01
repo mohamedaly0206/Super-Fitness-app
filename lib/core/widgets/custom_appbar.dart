@@ -4,6 +4,7 @@ import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:flutter/material.dart';
+import 'package:super_fitness_app/core/widgets/custom_back_button.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -12,6 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
   final bool buttonEnable;
   final VoidCallback? onBack;
+  final bool centerTitle;
 
   const CustomAppBar({
     super.key,
@@ -21,6 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.buttonEnable = true,
     this.actions,
     this.onBack,
+    this.centerTitle = false,
   });
 
   static const _subtitleHeight = 24.0;
@@ -33,20 +36,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 0,
+      centerTitle: centerTitle,
       automaticallyImplyLeading: false,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.transparent,
       titleSpacing: showBackButton ? AppSize.s0 : AppPadding.p16,
       toolbarHeight: preferredSize.height,
       leading: showBackButton
-          ? GestureDetector(
-              onTap: () {
-                if (!buttonEnable) return;
-                (onBack ?? () => Navigator.pop(context))();
-              },
-              child: const Icon(
-                Icons.arrow_back_ios,
-                color: AppColors.textPrimary,
-              ),
+          ? Padding(
+              padding: const EdgeInsets.all(AppPadding.p14),
+              child: CustomBackButton(),
             )
           : null,
       title: subtitle == null
@@ -72,10 +71,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget _buildTitle(BuildContext context) => Text(
     title,
-    style: getMediumStyle(
+    style: getSemiBoldStyle(
       context: context,
       color: AppColors.textPrimary,
-      fontSize: FontSizeManager.s20,
+      fontSize: FontSizeManager.s24,
     ),
   );
 }

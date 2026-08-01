@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/config/routes/page_transitions.dart';
 import 'package:super_fitness_app/core/widgets/app_web_view.dart';
+import 'package:super_fitness_app/core/network/model/user_entity.dart';
 import 'package:super_fitness_app/core/widgets/not_found_screen.dart';
 import 'package:super_fitness_app/core/widgets/ui_showcase_page.dart';
 import 'package:super_fitness_app/modules/app_sections/presentation/pages/app_sections_page.dart';
@@ -16,6 +17,13 @@ import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_enti
 import 'package:super_fitness_app/modules/profile/data/models/requests/web_view_args.dart';
 import 'package:super_fitness_app/modules/profile/presentation/change_password/cubit/change_password_cubit.dart';
 import 'package:super_fitness_app/modules/profile/presentation/change_password/pages/change_password_page.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_cubit.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_intent.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/pages/edit_activity_level_page.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/pages/edit_goal_page.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/pages/edit_profile_page.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/pages/edit_weight_page.dart';
+import 'package:super_fitness_app/modules/profile/presentation/profile_test_view.dart';
 
 abstract class Routes {
   static const String splash = '/';
@@ -28,6 +36,11 @@ abstract class Routes {
   static const String uiShowcase = '/ui-showcase';
   static const String webView = '/web-view';
   static const String changePassword = '/change-password';
+  static const String editProfile = '/edit-profile';
+  static const String editWeight = '/edit-weight';
+  static const String editActivityLevel = '/edit-activity-level';
+  static const String editGoal = '/edit-goal';
+  static const String dummyProfilePage = '/dummy-profile';
 }
 
 abstract class AppRouter {
@@ -71,6 +84,41 @@ abstract class AppRouter {
               child: const ChangePasswordPage(),
             ),
           );
+        case Routes.editProfile:
+          final userData = settings.arguments as UserEntity;
+          return PageTransitions.fade(
+            BlocProvider(
+              create: (context) {
+                final cubit = getIt<EditProfileCubit>();
+                cubit.handleEditProfileIntent(InitUserDataIntent(userData));
+                return cubit;
+              },
+              child: EditProfilePage(userData: userData),
+            ),
+          );
+        case Routes.editWeight:
+          final sharedCubit = settings.arguments as EditProfileCubit;
+          return PageTransitions.fade(
+            BlocProvider.value(
+              value: sharedCubit,
+              child: const EditWeightPage(),
+            ),
+          );
+        case Routes.editActivityLevel:
+          final sharedCubit = settings.arguments as EditProfileCubit;
+          return PageTransitions.fade(
+            BlocProvider.value(
+              value: sharedCubit,
+              child: const EditActivityLevelPage(),
+            ),
+          );
+        case Routes.editGoal:
+          final sharedCubit = settings.arguments as EditProfileCubit;
+          return PageTransitions.fade(
+            BlocProvider.value(value: sharedCubit, child: const EditGoalPage()),
+          );
+        case Routes.dummyProfilePage:
+          return PageTransitions.fade(DummyProfileView());
         default:
           return PageTransitions.fade(
             NotFoundScreen(route: settings.name ?? ''),

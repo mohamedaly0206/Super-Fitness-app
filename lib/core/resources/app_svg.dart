@@ -14,4 +14,5 @@ abstract class AppSvg {
   static const String chatRobot = 'assets/svgs/chat robot.svg';
   static const String backButtonIcon = 'assets/svgs/back_button_icon.svg';
   static const String back = 'assets/svgs/back.svg';
+  static const String editIcon = 'assets/svgs/edit_icon.svg';
 }
