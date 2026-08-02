@@ -6,13 +6,13 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:get_it/get_it.dart';
 
 // --- Your App Imports ---
-import 'package:super_fitness_app/core/widgets/app_loading_widget.dart';
 import 'package:super_fitness_app/config/base/base_state.dart';
 import 'package:super_fitness_app/modules/meals/domain/entities/meal_entity.dart';
 import 'package:super_fitness_app/modules/meals/domain/entities/meals_details_entity.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_cubit.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_state.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/pages/food_details_page.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_details/widgets/food_details_shimmer.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/widgets/food_details_top_header.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/widgets/ingredients_widget.dart';
 
@@ -52,7 +52,7 @@ void main() {
   }
 
   group('FoodDetailsPage Widget Tests', () {
-    testWidgets('shows AppLoadingWidget when state is loading', (tester) async {
+    testWidgets('shows FoodDetailsShimmer when state is loading', (tester) async {
       when(() => mockCubit.state).thenReturn(
         const FoodDetailsState(
           getFoodDetailsState: BaseState(isLoading: true),
@@ -63,7 +63,7 @@ void main() {
 
       await tester.pumpWidget(buildTestableWidget());
 
-      expect(find.byType(AppLoadingWidget), findsOneWidget);
+      expect(find.byType(FoodDetailsShimmer), findsOneWidget);
     });
 
     testWidgets('shows Error Message when state has an error', (tester) async {

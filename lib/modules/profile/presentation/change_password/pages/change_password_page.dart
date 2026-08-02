@@ -19,6 +19,8 @@ import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
 import 'package:super_fitness_app/core/widgets/custom_text_field.dart';
 import 'package:super_fitness_app/core/widgets/primary_button.dart';
 import 'package:super_fitness_app/modules/profile/presentation/change_password/cubit/change_password_cubit.dart';
+import 'package:super_fitness_app/modules/profile/presentation/change_password/cubit/change_password_event.dart';
+import 'package:super_fitness_app/modules/profile/presentation/change_password/cubit/change_password_state.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});
@@ -44,9 +46,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   void _onDone(BuildContext context) {
     if (!_formKey.currentState!.validate()) return;
 
-    context.read<ChangePasswordCubit>().changePassword(
-      password: _oldPasswordController.text,
-      newPassword: _newPasswordController.text,
+    context.read<ChangePasswordCubit>().doEvent(
+      SubmitChangePasswordEvent(
+        password: _oldPasswordController.text,
+        newPassword: _newPasswordController.text,
+      ),
     );
   }
 

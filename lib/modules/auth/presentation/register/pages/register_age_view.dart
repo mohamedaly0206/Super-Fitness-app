@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/localization_constants/auth_constants.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/cubit/register_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/intent/register_intent.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_event.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/widgets/register_number_picker.dart';
 
 class RegisterAgeView extends StatelessWidget {
@@ -23,7 +23,7 @@ class RegisterAgeView extends StatelessWidget {
           isNextEnabled: state.age! >= 15,
           onChanged: (val) => context
               .read<RegisterCubit>()
-              .handleRegisterIntent(SelectAgeIntent(val)),
+              .doEvent(SelectAgeEvent(val)),
           unit: AuthConstants.year,
         );
       },

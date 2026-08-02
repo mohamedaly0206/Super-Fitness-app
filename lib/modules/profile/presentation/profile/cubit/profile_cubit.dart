@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/core/storage/secure_storage_service.dart';
 
 import '../../../domain/use_cases/profile_use_cases.dart';
-import 'profile_intent.dart';
+import 'profile_event.dart';
 import 'profile_state.dart';
 
 @injectable
@@ -12,9 +12,9 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   ProfileCubit(this._profileUseCases) : super(const ProfileState());
 
-  Future<void> doIntent(ProfileIntent intent) async {
-    switch (intent) {
-      case GetProfileDataIntent():
+  Future<void> doEvent(ProfileEvent event) async {
+    switch (event) {
+      case GetProfileDataEvent():
         await _getProfileData();
     }
   }

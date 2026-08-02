@@ -9,8 +9,8 @@ import 'package:super_fitness_app/core/service/remote_config_service.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/request/register_request_entity.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/response/register_response_entity.dart';
 import 'package:super_fitness_app/modules/auth/domain/use_cases/register_use_case.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/intent/register_intent.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
+import 'register_event.dart';
+import 'register_state.dart';
 
 @injectable
 class RegisterCubit extends Cubit<RegisterState> {
@@ -19,51 +19,51 @@ class RegisterCubit extends Cubit<RegisterState> {
   final RemoteConfigService _remoteConfigService;
 
   RegisterCubit(
-      this._registerUseCase,
-      this._googleAuthService,
-      this._remoteConfigService,
-      ) : super(RegisterState());
+    this._registerUseCase,
+    this._googleAuthService,
+    this._remoteConfigService,
+  ) : super(RegisterState());
 
-  void handleRegisterIntent(RegisterIntent intent) {
-    switch (intent) {
-      case SubmitRegisterIntent():
-        _register(intent.request);
+  void doEvent(RegisterEvent event) {
+    switch (event) {
+      case SubmitRegisterEvent():
+        _register(event.request);
         break;
-      case SelectGenderIntent():
-        _changeGender(intent.gender);
+      case SelectGenderEvent():
+        _changeGender(event.gender);
         break;
-      case SelectAgeIntent():
-        _changeAge(intent.age);
+      case SelectAgeEvent():
+        _changeAge(event.age);
         break;
-      case SelectWeightIntent():
-        _changeWeight(intent.weight);
+      case SelectWeightEvent():
+        _changeWeight(event.weight);
         break;
-      case SelectHeightIntent():
-        _changeHeight(intent.height);
+      case SelectHeightEvent():
+        _changeHeight(event.height);
         break;
-      case SelectGoalIntent():
-        _changeGoal(intent.goal);
+      case SelectGoalEvent():
+        _changeGoal(event.goal);
         break;
-      case SelectActivityLevelIntent():
-        _changeActivityLevel(intent.activityLevel);
+      case SelectActivityLevelEvent():
+        _changeActivityLevel(event.activityLevel);
         break;
-      case GoogleRegisterIntent():
+      case GoogleRegisterEvent():
         _registerWithGoogle();
         break;
-      case FacebookRegisterIntent():
+      case FacebookRegisterEvent():
         _registerWithFacebook();
         break;
     }
   }
 
   Future<void> _registerWithGoogle() async {
-    emit(state.copyWith(registerState: const BaseState(isLoading: true)));
+    emit(state.copyWith(isGoogleRegisterLoading: true));
 
     try {
       final googleAccount = await _googleAuthService.signIn();
 
       if (googleAccount == null) {
-        emit(state.copyWith(registerState: const BaseState(isLoading: false)));
+        emit(state.copyWith(isGoogleRegisterLoading: false));
         return;
       }
 
@@ -78,14 +78,17 @@ class RegisterCubit extends Cubit<RegisterState> {
       }
 
       // 🔹 استخراج البيانات بشكل يحمي الكود من الاختلاف في الموديل
-      final String displayName = (googleAccount as dynamic).displayName ??
-          (googleAccount as dynamic).user?.displayName ?? '';
-      final String email = (googleAccount as dynamic).email ??
-          (googleAccount as dynamic).user?.email ?? '';
+      final String displayName = [
+        googleAccount.firstName,
+        googleAccount.lastName,
+      ].whereType<String>().where((part) => part.isNotEmpty).join(' ');
+      final String email = googleAccount.email ?? '';
 
       final nameParts = displayName.trim().split(' ');
       final firstName = nameParts.isNotEmpty ? nameParts.first : 'User';
-      final lastName = nameParts.length > 1 ? nameParts.sublist(1).join(' ') : 'User';
+      final lastName = nameParts.length > 1
+          ? nameParts.sublist(1).join(' ')
+          : 'User';
 
       fillFromGoogleAccount(
         firstName: firstName,
@@ -94,10 +97,11 @@ class RegisterCubit extends Cubit<RegisterState> {
         googlePassword: googlePassword,
       );
 
-      emit(state.copyWith(registerState: const BaseState(isLoading: false)));
+      emit(state.copyWith(isGoogleRegisterLoading: false));
     } catch (e) {
       emit(
         state.copyWith(
+          isGoogleRegisterLoading: false,
           registerState: BaseState(errorMessage: e.toString()),
         ),
       );
@@ -105,7 +109,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   Future<void> _registerWithFacebook() async {
-    emit(state.copyWith(registerState: const BaseState(isLoading: true)));
+    emit(state.copyWith(isFacebookRegisterLoading: true));
 
     try {
       final LoginResult result = await FacebookAuth.instance.login(
@@ -120,8 +124,10 @@ class RegisterCubit extends Cubit<RegisterState> {
         if (email.isEmpty) {
           emit(
             state.copyWith(
+              isFacebookRegisterLoading: false,
               registerState: const BaseState(
-                errorMessage: 'Facebook account does not provide an email address.',
+                errorMessage:
+                    'Facebook account does not provide an email address.',
               ),
             ),
           );
@@ -140,7 +146,9 @@ class RegisterCubit extends Cubit<RegisterState> {
 
         final nameParts = name.trim().split(' ');
         final firstName = nameParts.isNotEmpty ? nameParts.first : 'User';
-        final lastName = nameParts.length > 1 ? nameParts.sublist(1).join(' ') : 'User';
+        final lastName = nameParts.length > 1
+            ? nameParts.sublist(1).join(' ')
+            : 'User';
 
         fillFromGoogleAccount(
           firstName: firstName,
@@ -149,13 +157,14 @@ class RegisterCubit extends Cubit<RegisterState> {
           googlePassword: facebookPassword,
         );
 
-        emit(state.copyWith(registerState: const BaseState(isLoading: false)));
+        emit(state.copyWith(isFacebookRegisterLoading: false));
       } else {
-        emit(state.copyWith(registerState: const BaseState(isLoading: false)));
+        emit(state.copyWith(isFacebookRegisterLoading: false));
       }
     } catch (e) {
       emit(
         state.copyWith(
+          isFacebookRegisterLoading: false,
           registerState: BaseState(errorMessage: e.toString()),
         ),
       );
@@ -163,11 +172,18 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   Future<void> _register(RegisterRequestEntity request) async {
-    emit(state.copyWith(registerState: const BaseState(isLoading: true)));
+    _setLoading(RegisterMethod.email, true);
     final response = await _registerUseCase.call(request);
     switch (response) {
       case SuccessBaseResponse<RegisterResponseEntity>():
-        emit(state.copyWith(registerState: BaseState(data: response.data)));
+        emit(
+          state.copyWith(
+            registerState: BaseState(data: response.data),
+            isEmailRegisterLoading: false,
+            isGoogleRegisterLoading: false,
+            isFacebookRegisterLoading: false,
+          ),
+        );
         emit(
           state.copyWith(
             firstName: null,
@@ -188,8 +204,25 @@ class RegisterCubit extends Cubit<RegisterState> {
         emit(
           state.copyWith(
             registerState: BaseState(errorMessage: response.failure.message),
+            isEmailRegisterLoading: false,
+            isGoogleRegisterLoading: false,
+            isFacebookRegisterLoading: false,
           ),
         );
+        break;
+    }
+  }
+
+  void _setLoading(RegisterMethod method, bool value) {
+    switch (method) {
+      case RegisterMethod.email:
+        emit(state.copyWith(isEmailRegisterLoading: value));
+        break;
+      case RegisterMethod.google:
+        emit(state.copyWith(isGoogleRegisterLoading: value));
+        break;
+      case RegisterMethod.facebook:
+        emit(state.copyWith(isFacebookRegisterLoading: value));
         break;
     }
   }

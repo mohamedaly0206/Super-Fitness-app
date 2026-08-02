@@ -9,7 +9,7 @@ import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_intent.dart';
+import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_event.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/widgets/onboarding_actions.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/widgets/skip_button.dart';
@@ -36,7 +36,6 @@ class _OnboardingView extends StatelessWidget {
     return BlocConsumer<OnboardingCubit, OnboardingState>(
       listener: (context, state) {
         if (state.navigateToLogin) {
-          //Todo: Navigate to Login screen
           Navigator.pushReplacementNamed(context, Routes.login);
         }
       },
@@ -53,7 +52,7 @@ class _OnboardingView extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 itemCount: cubit.items.length,
                 onPageChanged: (index) {
-                  cubit.doIntent(PageChangedIntent(index));
+                  cubit.doEvent(PageChangedEvent(index));
                 },
                 itemBuilder: (_, index) {
                   return Align(

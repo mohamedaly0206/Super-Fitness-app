@@ -5,7 +5,7 @@ import 'package:super_fitness_app/core/resources/app_strings.dart';
 import 'package:super_fitness_app/modules/meals/domain/entities/meal_entity.dart';
 import 'package:super_fitness_app/modules/meals/domain/entities/meals_details_entity.dart';
 import 'package:super_fitness_app/modules/meals/domain/use_cases/get_meals_details_use_case.dart';
-import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_intent.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_event.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -14,16 +14,16 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class FoodDetailsCubit extends Cubit<FoodDetailsState> {
   final GetMealsDetailsUseCase getMealsDetailsUseCase;
   FoodDetailsCubit(this.getMealsDetailsUseCase) : super(FoodDetailsState());
-  void handleFoodDetailsIntent(FoodDetailsIntent intent) {
-    switch (intent) {
-      case GetMealsDetailsIntent():
-        getMealsDetails(intent.mealId);
+  void doEvent(FoodDetailsEvent event) {
+    switch (event) {
+      case GetMealsDetailsEvent():
+        getMealsDetails(event.mealId);
         break;
 
-      case OpenYoutubeVideoIIntent():
-        _playInlineYoutubeVideo(intent.videoUrl);
+      case OpenYoutubeVideoEvent():
+        _playInlineYoutubeVideo(event.videoUrl);
         break;
-      case CloseYoutubeVideoIntent():
+      case CloseYoutubeVideoEvent():
         _closeYoutubeVideo();
         break;
     }

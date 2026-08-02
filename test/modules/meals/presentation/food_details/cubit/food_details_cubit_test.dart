@@ -9,7 +9,7 @@ import 'package:super_fitness_app/modules/meals/domain/entities/meal_entity.dart
 import 'package:super_fitness_app/modules/meals/domain/entities/meals_details_entity.dart';
 import 'package:super_fitness_app/modules/meals/domain/use_cases/get_meals_details_use_case.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_cubit.dart';
-import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_intent.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_event.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_state.dart';
 
 @GenerateNiceMocks([MockSpec<GetMealsDetailsUseCase>()])
@@ -65,7 +65,7 @@ void main() {
         return cubit;
       },
       act: (cubit) =>
-          cubit.handleFoodDetailsIntent(GetMealsDetailsIntent(mealId: tMealId)),
+          cubit.doEvent(GetMealsDetailsEvent(mealId: tMealId)),
       expect: () => [
         // 1. Loading State
         isA<FoodDetailsState>().having(
@@ -120,8 +120,8 @@ void main() {
     blocTest<FoodDetailsCubit, FoodDetailsState>(
       'emits state with error message when video URL is invalid',
       build: () => cubit,
-      act: (cubit) => cubit.handleFoodDetailsIntent(
-        OpenYoutubeVideoIIntent(videoUrl: 'invalid_url'),
+      act: (cubit) => cubit.doEvent(
+        OpenYoutubeVideoEvent(videoUrl: 'invalid_url'),
       ),
       expect: () => [
         isA<FoodDetailsState>().having((s) => s.isLoading, 'isLoading', true),
@@ -139,7 +139,7 @@ void main() {
     blocTest<FoodDetailsCubit, FoodDetailsState>(
       'emits isPlayingVideo = false and youtubeController = null when video is closed',
       build: () => cubit,
-      act: (cubit) => cubit.handleFoodDetailsIntent(CloseYoutubeVideoIntent()),
+      act: (cubit) => cubit.doEvent(CloseYoutubeVideoEvent()),
       expect: () => [
         isA<FoodDetailsState>()
             .having((s) => s.isPlayingVideo, 'isPlayingVideo', false)

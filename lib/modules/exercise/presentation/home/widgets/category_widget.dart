@@ -9,15 +9,32 @@ import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 class DommyCategory {
   final String title;
   final String image;
+  final String? url;
 
-  DommyCategory({required this.title, required this.image});
+  DommyCategory({required this.title, required this.image, this.url});
 }
 
 List<DommyCategory> categoriesBuilder(BuildContext context) => [
-  DommyCategory(title: context.gym, image: AppPng.gym),
-  DommyCategory(title: context.fitness, image: AppPng.fitness),
-  DommyCategory(title: context.yoga, image: AppPng.yoga),
-  DommyCategory(title: context.aerobics, image: AppPng.aerobics),
+  DommyCategory(
+    title: context.gym,
+    image: AppPng.gym,
+    url: 'https://en.wikipedia.org/wiki/Gym',
+  ),
+  DommyCategory(
+    title: context.fitness,
+    image: AppPng.fitness,
+    url: 'https://en.wikipedia.org/wiki/Physical_fitness',
+  ),
+  DommyCategory(
+    title: context.yoga,
+    image: AppPng.yoga,
+    url: 'https://en.wikipedia.org/wiki/Yoga',
+  ),
+  DommyCategory(
+    title: context.aerobics,
+    image: AppPng.aerobics,
+    url: 'https://en.wikipedia.org/wiki/Aerobic_exercise',
+  ),
   DommyCategory(title: context.trainer, image: AppPng.training),
 ];
 

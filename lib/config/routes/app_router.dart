@@ -10,7 +10,7 @@ import 'package:super_fitness_app/core/widgets/ui_showcase_page.dart';
 import 'package:super_fitness_app/modules/app_sections/presentation/pages/app_sections_page.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/page/forget_password_page.dart';
-import 'package:super_fitness_app/modules/auth/presentation/login/view_model/cubit/login_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/login/cubit/login_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/views/login_view.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/page/onboarding_page.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/pages/main_register_view_controller.dart';
@@ -25,12 +25,11 @@ import 'package:super_fitness_app/modules/profile/data/models/requests/web_view_
 import 'package:super_fitness_app/modules/profile/presentation/change_password/cubit/change_password_cubit.dart';
 import 'package:super_fitness_app/modules/profile/presentation/change_password/pages/change_password_page.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_cubit.dart';
-import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_intent.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_event.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/pages/edit_activity_level_page.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/pages/edit_goal_page.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/pages/edit_profile_page.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/pages/edit_weight_page.dart';
-import 'package:super_fitness_app/modules/profile/presentation/profile_test_view.dart';
 import 'package:super_fitness_app/modules/smart_coach/presentation/page/smart_coach_screen.dart';
 
 abstract class AppRouter {
@@ -102,8 +101,6 @@ abstract class AppRouter {
       case Routes.smartCotchChat:
         return PageTransitions.fade(const SmartCoachScreen());
 
-      // case Routes.test:
-      //   return PageTransitions.fade(const TestScreen());
 
       case Routes.webView:
         final args = settings.arguments as WebViewArgs;
@@ -123,7 +120,7 @@ abstract class AppRouter {
           BlocProvider(
             create: (context) {
               final cubit = getIt<EditProfileCubit>();
-              cubit.handleEditProfileIntent(InitUserDataIntent(userData));
+              cubit.doEvent(InitUserDataEvent(userData));
               return cubit;
             },
             child: EditProfilePage(userData: userData),
@@ -153,9 +150,6 @@ abstract class AppRouter {
         return PageTransitions.fade(
           BlocProvider.value(value: sharedCubit, child: const EditGoalPage()),
         );
-
-      case Routes.dummyProfilePage:
-        return PageTransitions.fade(DummyProfileView());
 
       case Routes.uiShowcase:
         return PageTransitions.fade(const UIShowcasePage());

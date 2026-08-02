@@ -1,4 +1,5 @@
-part of 'change_password_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:super_fitness_app/config/base/base_state.dart';
 
 class ChangePasswordState extends Equatable {
   final BaseState<bool> changePasswordState;

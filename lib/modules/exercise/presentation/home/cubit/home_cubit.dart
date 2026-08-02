@@ -1,8 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
-import 'package:super_fitness_app/config/base/base_state.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercises_paginated_response.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/level_entity.dart';
@@ -16,8 +14,7 @@ import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_random_m
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_event.dart';
 import 'package:super_fitness_app/modules/meals/domain/entities/meal_category_entity.dart';
 import 'package:super_fitness_app/modules/meals/domain/use_cases/get_categories_use_case.dart';
-
-part 'home_state.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_state.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {

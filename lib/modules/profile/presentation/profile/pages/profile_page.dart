@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/core/resources/app_strings.dart';
@@ -9,6 +8,7 @@ import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
 import 'package:super_fitness_app/modules/profile/presentation/logout/cubit/logout_cubit.dart';
+import 'package:super_fitness_app/modules/profile/presentation/logout/cubit/logout_state.dart';
 import 'package:super_fitness_app/modules/profile/presentation/logout/widgets/logout_confirmation_dialog.dart';
 
 import '../../../../../config/routes/routes.dart';
@@ -20,7 +20,7 @@ import '../../../../../core/theme/app_text_style.dart';
 import '../../../../../core/theme/font_size_manager.dart';
 import '../../../data/models/requests/web_view_args.dart';
 import '../cubit/profile_cubit.dart';
-import '../cubit/profile_intent.dart';
+import '../cubit/profile_event.dart';
 import '../cubit/profile_state.dart';
 import '../widgets/profile_header.dart';
 import '../widgets/profile_image.dart';
@@ -36,7 +36,7 @@ class ProfilePage extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) =>
-              getIt<ProfileCubit>()..doIntent(const GetProfileDataIntent()),
+              getIt<ProfileCubit>()..doEvent(const GetProfileDataEvent()),
         ),
         BlocProvider(create: (context) => getIt<LogoutCubit>()),
       ],
@@ -60,7 +60,11 @@ class ProfileViewBody extends StatelessWidget {
               previous.logoutState != current.logoutState,
           listener: (context, logoutStateState) {
             if (logoutStateState.logoutState.data == true) {
-              Phoenix.rebirth(context);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.login,
+                (route) => false,
+              );
             } else if (logoutStateState.logoutState.errorMessage != null) {
               CustomSnackBar.error(
                 context,
@@ -122,8 +126,8 @@ class ProfileViewBody extends StatelessWidget {
                                   );
 
                                   if (context.mounted) {
-                                    context.read<ProfileCubit>().doIntent(
-                                      const GetProfileDataIntent(),
+                                    context.read<ProfileCubit>().doEvent(
+                                      const GetProfileDataEvent(),
                                     );
                                   }
                                 }
@@ -158,7 +162,7 @@ class ProfileViewBody extends StatelessWidget {
                               title: '',
                               customTitleWidget: RichText(
                                 text: TextSpan(
-                                  text: AppStrings.selectLanguage + ' (',
+                                  text: '${AppStrings.selectLanguage} (',
                                   style: getSemiBoldStyle(
                                     context: context,
                                     color: AppColors.textWhite,

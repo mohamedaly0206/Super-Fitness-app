@@ -9,10 +9,10 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class ExerciseDetailsCubit extends Cubit<ExerciseDetailsState> {
   ExerciseDetailsCubit() : super(const ExerciseDetailsState());
 
-  void handleIntent(ExerciseDetailsEvent intent) {
-    switch (intent) {
+  void doEvent(ExerciseDetailsEvent event) {
+    switch (event) {
       case OpenYoutubeVideoEvent():
-        _openVideo(intent.videoUrl);
+        _openVideo(event.videoUrl);
         break;
       case CloseYoutubeVideoEvent():
         _closeVideo();

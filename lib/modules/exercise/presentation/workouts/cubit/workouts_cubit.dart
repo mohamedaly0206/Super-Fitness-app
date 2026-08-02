@@ -1,15 +1,12 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
-import 'package:super_fitness_app/config/base/base_state.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_entity.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_group_entity.dart';
 import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_all_muscles_use_case.dart';
 import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_muscles_by_muscle_group_use_case.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_event.dart';
-
-part 'workouts_state.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_state.dart';
 
 @injectable
 class WorkoutsCubit extends Cubit<WorkoutsState> {

@@ -9,13 +9,13 @@ import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/shimmer_loading_widget.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/exercise/cubit/exercise_event.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise/widgets/exercise_card_shimmer.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise/widgets/exercise_header.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise/widgets/exercise_video_overlay.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise/widgets/exercises_list.dart';
 
 import '../cubit/exercise_cubit.dart';
-import '../cubit/exercise_intent.dart';
 
 class ExerciseScreen extends StatelessWidget {
   final String primeMoverMuscleId;
@@ -26,8 +26,8 @@ class ExerciseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => getIt<ExerciseCubit>()
-        ..doIntent(
-          LoadExerciseScreenIntent(primeMoverMuscleId: primeMoverMuscleId),
+        ..doEvent(
+          LoadExerciseScreenEvent(primeMoverMuscleId: primeMoverMuscleId),
         ),
       child: _ExerciseView(primeMoverMuscleId),
     );
@@ -79,8 +79,8 @@ class _ExerciseViewState extends State<_ExerciseView> {
                 return AppErrorWidget(
                   errorMessage: baseState.errorMessage!,
                   onRetry: () {
-                    context.read<ExerciseCubit>().doIntent(
-                      LoadExerciseScreenIntent(
+                    context.read<ExerciseCubit>().doEvent(
+                      LoadExerciseScreenEvent(
                         primeMoverMuscleId: widget.primeMoverMuscleId,
                       ),
                     );

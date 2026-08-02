@@ -10,7 +10,7 @@ import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/primary_button.dart';
 import 'package:super_fitness_app/modules/smart_coach/presentation/cubit/smart_coach_cubit.dart';
-import 'package:super_fitness_app/modules/smart_coach/presentation/cubit/smart_coach_intent.dart';
+import 'package:super_fitness_app/modules/smart_coach/presentation/cubit/smart_coach_event.dart';
 import 'package:super_fitness_app/modules/smart_coach/presentation/cubit/smart_coach_state.dart';
 
 class WelcomeView extends StatelessWidget {
@@ -74,8 +74,8 @@ class WelcomeView extends StatelessWidget {
                       return PrimaryButton(
                         text: context.getStarted,
                         onTap: () {
-                          context.read<SmartCoachCubit>().doIntent(
-                            const CreateNewConversationIntent(),
+                          context.read<SmartCoachCubit>().doEvent(
+                            const CreateNewConversationEvent(),
                           );
                         },
                       );

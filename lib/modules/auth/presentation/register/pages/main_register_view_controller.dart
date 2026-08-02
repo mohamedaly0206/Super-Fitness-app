@@ -5,7 +5,7 @@ import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/resources/app_png.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/cubit/register_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/pages/register_activity_level_view.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/pages/register_age_view.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/pages/register_gender_view.dart';

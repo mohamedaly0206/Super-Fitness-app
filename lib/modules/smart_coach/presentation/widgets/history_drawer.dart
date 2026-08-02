@@ -5,7 +5,7 @@ import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import '../cubit/smart_coach_cubit.dart';
-import '../cubit/smart_coach_intent.dart';
+import '../cubit/smart_coach_event.dart';
 import '../cubit/smart_coach_state.dart';
 import 'conversation_tile.dart';
 
@@ -70,8 +70,8 @@ class ChatHistoryDrawer extends StatelessWidget {
                       elevation: 8,
                       onPressed: () {
                         Navigator.pop(context);
-                        context.read<SmartCoachCubit>().doIntent(
-                          const CreateNewConversationIntent(),
+                        context.read<SmartCoachCubit>().doEvent(
+                          const CreateNewConversationEvent(),
                         );
                       },
                       icon: const Icon(Icons.edit_note_rounded),

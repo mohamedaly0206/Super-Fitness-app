@@ -47,6 +47,7 @@
     "registerSuccessMessage": "Registration successful",
     "register_continuation_placeholder": "Next Register screens will be implemented here.",
     "login_placeholder": "Login screen will be implemented here.",
+    "apple_login_unavailable": "Apple login is under development",
     "done": "Done"
   },
   "errors": {

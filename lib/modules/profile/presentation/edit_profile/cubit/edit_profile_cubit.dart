@@ -11,7 +11,7 @@ import 'package:super_fitness_app/modules/profile/data/models/requests/edit_prof
 import 'package:super_fitness_app/modules/profile/domain/entities/upload_profile_image_entity.dart';
 import 'package:super_fitness_app/modules/profile/domain/use_cases/edit_profile_use_case.dart';
 import 'package:super_fitness_app/modules/profile/domain/use_cases/upload_profile_image_use_case.dart';
-import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_intent.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_event.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_state.dart';
 
 @injectable
@@ -22,39 +22,39 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     : super(EditProfileState());
   final picker = ImagePicker();
 
-  void handleEditProfileIntent(EditProfileIntent intent) {
-    switch (intent) {
-      case InitUserDataIntent():
-        _initUserData(intent.userData);
+  void doEvent(EditProfileEvent event) {
+    switch (event) {
+      case InitUserDataEvent():
+        _initUserData(event.userData);
         break;
-      case FirstNameChangedIntent():
-        emit(state.copyWith(firstName: intent.firstName));
+      case FirstNameChangedEvent():
+        emit(state.copyWith(firstName: event.firstName));
         break;
-      case LastNameChangedIntent():
-        emit(state.copyWith(lastName: intent.lastName));
+      case LastNameChangedEvent():
+          emit(state.copyWith(lastName: event.lastName));
         break;
-      case EmailChangedIntent():
-        emit(state.copyWith(email: intent.email));
+      case EmailChangedEvent():
+        emit(state.copyWith(email: event.email));
         break;
-      case SelectWeightIntent():
-        _changeWeight(intent.weight);
+      case SelectWeightEvent():
+        _changeWeight(event.weight);
         break;
-      case SelectGoalIntent():
-        _changeGoal(intent.goal);
+      case SelectGoalEvent():
+        _changeGoal(event.goal);
         break;
-      case SelectActivityLevelIntent():
-        _changeActivityLevel(intent.activityLevel, intent.activityLevelValue);
+      case SelectActivityLevelEvent():
+        _changeActivityLevel(event.activityLevel, event.activityLevelValue);
         break;
-      case PickProfileImageIntent():
+      case PickProfileImageEvent():
         pickImagePicker();
         break;
-      case SubmitEditProfileIntent():
+      case SubmitEditProfileEvent():
         _submitEditProfile();
         break;
-      case UploadProfileImageIntent():
+      case UploadProfileImageEvent():
         _uploadProfileImage();
         break;
-      case UpdateProfileImageAndDataIntent():
+      case UpdateProfileImageAndDataEvent():
         updateProfileImageAndData();
         break;
     }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_intent.dart';
+import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_event.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/widgets/onboarding_item.dart';
 
@@ -10,25 +10,25 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   final PageController pageController = PageController();
   List<OnboardingItem> get items => onboardingItems;
 
-  void doIntent(OnboardingIntent intent) {
-    switch (intent) {
-      case NextPressedIntent():
+  void doEvent(OnboardingEvent event) {
+    switch (event) {
+      case NextPressedEvent():
         _next();
         break;
 
-      case BackPressedIntent():
+      case BackPressedEvent():
         _back();
         break;
 
-      case SkipPressedIntent():
+      case SkipPressedEvent():
         _skip();
         break;
 
-      case PageChangedIntent():
-        emit(state.copyWith(currentPage: intent.index));
+      case PageChangedEvent():
+        emit(state.copyWith(currentPage: event.index));
         break;
 
-      case FinishPressedIntent():
+      case FinishPressedEvent():
         emit(state.copyWith(navigateToLogin: true));
         break;
     }

@@ -4,7 +4,7 @@ import 'package:super_fitness_app/config/dependency_injection/di.dart';
 import 'package:super_fitness_app/core/storage/secure_storage_service.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/smart_coach/presentation/cubit/smart_coach_cubit.dart';
-import 'package:super_fitness_app/modules/smart_coach/presentation/cubit/smart_coach_intent.dart';
+import 'package:super_fitness_app/modules/smart_coach/presentation/cubit/smart_coach_event.dart';
 import 'package:super_fitness_app/modules/smart_coach/presentation/cubit/smart_coach_state.dart';
 import 'package:super_fitness_app/modules/smart_coach/presentation/page/welcome_view.dart';
 import 'package:super_fitness_app/modules/smart_coach/presentation/widgets/chat_app_bar.dart';
@@ -20,7 +20,7 @@ class SmartCoachScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) =>
-          getIt<SmartCoachCubit>()..doIntent(const LoadConversationsIntent()),
+          getIt<SmartCoachCubit>()..doEvent(const LoadConversationsEvent()),
       child: const _SmartCoachView(),
     );
   }
@@ -123,18 +123,23 @@ class _SmartCoachViewState extends State<_SmartCoachView> {
             endDrawer: const ChatHistoryDrawer(),
             body: state.currentSession == null
                 ? WelcomeView(userName: _userName)
-                : Column(
-                    children: [
-                      Expanded(
-                        child: MessageList(
-                          controller: _scrollController,
-                          messages: state.currentSession!.messages,
-                          isTyping: state.isTyping,
-                          userImageUrl: _userImage,
+                : Padding(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.viewInsetsOf(context).bottom,
+                    ),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: MessageList(
+                            controller: _scrollController,
+                            messages: state.currentSession!.messages,
+                            isTyping: state.isTyping,
+                            userImageUrl: _userImage,
+                          ),
                         ),
-                      ),
-                      const MessageInput(),
-                    ],
+                        const MessageInput(),
+                      ],
+                    ),
                   ),
           );
         },

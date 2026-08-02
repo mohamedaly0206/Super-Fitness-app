@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
-import 'package:super_fitness_app/core/localization_constants/profile_constants.dart';
+import 'package:super_fitness_app/core/resources/app_strings.dart';
 import 'package:super_fitness_app/core/resources/app_svg.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
-import 'package:super_fitness_app/core/widgets/custom_container.dart';
 
 class LogoutListItem extends StatelessWidget {
   final bool isLoading;
@@ -14,54 +12,53 @@ class LogoutListItem extends StatelessWidget {
 
   const LogoutListItem({
     super.key,
-    required this.onTap,
     this.isLoading = false,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: isLoading ? null : onTap,
-      child: CustomContainer(
+      borderRadius: BorderRadius.circular(AppSize.s20),
+      child: Container(
         padding: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p16,
-          vertical: AppPadding.p14,
+          horizontal: AppSize.s16,
+          vertical: AppSize.s12,
+        ),
+        decoration: BoxDecoration(
+          color: const Color(0xFF2A2A2A),
+          borderRadius: BorderRadius.circular(AppSize.s20),
         ),
         child: Row(
           children: [
             SvgPicture.asset(
               AppSvg.logout,
-              width: AppSize.svgIconSize,
-              height: AppSize.svgIconSize,
+              height: AppSize.s22,
               colorFilter: const ColorFilter.mode(
                 AppColors.primary,
                 BlendMode.srcIn,
               ),
             ),
-            const SizedBox(width: AppSize.s12),
+            const SizedBox(width: AppSize.s16),
             Expanded(
               child: Text(
-                context.logout,
-                style: getMediumStyle(
+                AppStrings.logout,
+                style: getSemiBoldStyle(
                   context: context,
-                  color: AppColors.textPrimary,
+                  color: AppColors.primary,
+                  fontSize: AppSize.s16,
                 ),
               ),
             ),
             if (isLoading)
               const SizedBox(
-                width: AppSize.s16,
-                height: AppSize.s16,
+                width: 20,
+                height: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                   color: AppColors.primary,
                 ),
-              )
-            else
-              const Icon(
-                Icons.arrow_forward_ios,
-                size: AppSize.s14,
-                color: AppColors.iconInactive,
               ),
           ],
         ),

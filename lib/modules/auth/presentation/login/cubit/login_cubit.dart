@@ -7,8 +7,8 @@ import 'package:super_fitness_app/core/network/model/user_entity.dart';
 import 'package:super_fitness_app/core/service/google_auth_service.dart';
 import 'package:super_fitness_app/core/service/remote_config_service.dart';
 import 'package:super_fitness_app/modules/auth/domain/use_cases/login_use_case.dart';
-import '../intent/login_intent.dart';
-import '../state/login_state.dart';
+import 'login_event.dart';
+import 'login_state.dart';
 
 @injectable
 class LoginCubit extends Cubit<LoginState> {
@@ -22,28 +22,28 @@ class LoginCubit extends Cubit<LoginState> {
       this._remoteConfigService,
       ) : super(const LoginState());
 
-  void handleLoginIntent(LoginIntent intent) {
-    switch (intent) {
-      case SubmitLoginIntent():
-        _login(email: intent.email, password: intent.password);
+  void doEvent(LoginEvent event) {
+    switch (event) {
+      case SubmitLoginEvent():
+        _login(email: event.email, password: event.password);
         break;
-      case GoogleLoginIntent():
+      case GoogleLoginEvent():
         _loginWithGoogle();
         break;
-      case FacebookLoginIntent():
+      case FacebookLoginEvent():
         _loginWithFacebook();
         break;
     }
   }
 
   Future<void> _loginWithGoogle() async {
-    emit(state.copyWith(loginState: const BaseState(isLoading: true)));
+    emit(state.copyWith(isGoogleLoginLoading: true));
 
     try {
       final googleAccount = await _googleAuthService.signIn();
 
       if (googleAccount == null) {
-        emit(state.copyWith(loginState: const BaseState(isLoading: false)));
+        emit(state.copyWith(isGoogleLoginLoading: false));
         return;
       }
 
@@ -59,10 +59,15 @@ class LoginCubit extends Cubit<LoginState> {
 
       final email = googleAccount.email ?? '';
 
-      await _login(email: email, password: googlePassword);
+      await _login(
+        email: email,
+        password: googlePassword,
+        method: LoginMethod.google,
+      );
     } catch (e) {
       emit(
         state.copyWith(
+          isGoogleLoginLoading: false,
           loginState: BaseState(errorMessage: e.toString()),
         ),
       );
@@ -70,7 +75,7 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> _loginWithFacebook() async {
-    emit(state.copyWith(loginState: const BaseState(isLoading: true)));
+    emit(state.copyWith(isFacebookLoginLoading: true));
 
     try {
       final LoginResult result = await FacebookAuth.instance.login(
@@ -84,6 +89,7 @@ class LoginCubit extends Cubit<LoginState> {
         if (email.isEmpty) {
           emit(
             state.copyWith(
+              isFacebookLoginLoading: false,
               loginState: const BaseState(
                 errorMessage: 'Facebook account does not provide an email address.',
               ),
@@ -102,21 +108,30 @@ class LoginCubit extends Cubit<LoginState> {
           facebookPassword = 'FacebookAuth@2026';
         }
 
-        await _login(email: email, password: facebookPassword);
+        await _login(
+          email: email,
+          password: facebookPassword,
+          method: LoginMethod.facebook,
+        );
       } else {
-        emit(state.copyWith(loginState: const BaseState(isLoading: false)));
+        emit(state.copyWith(isFacebookLoginLoading: false));
       }
     } catch (e) {
       emit(
         state.copyWith(
+          isFacebookLoginLoading: false,
           loginState: BaseState(errorMessage: e.toString()),
         ),
       );
     }
   }
 
-  Future<void> _login({required String email, required String password}) async {
-    emit(state.copyWith(loginState: const BaseState(isLoading: true)));
+  Future<void> _login({
+    required String email,
+    required String password,
+    LoginMethod method = LoginMethod.email,
+  }) async {
+    _setLoading(method, true);
 
     final response = await _loginUseCase.call(
       email: email,
@@ -126,14 +141,38 @@ class LoginCubit extends Cubit<LoginState> {
 
     switch (response) {
       case SuccessBaseResponse<UserEntity>():
-        emit(state.copyWith(loginState: BaseState(data: response.data)));
+        emit(
+          state.copyWith(
+            loginState: BaseState(data: response.data),
+            isEmailLoginLoading: false,
+            isGoogleLoginLoading: false,
+            isFacebookLoginLoading: false,
+          ),
+        );
         break;
       case ErrorBaseResponse<UserEntity>():
         emit(
           state.copyWith(
             loginState: BaseState(errorMessage: response.failure.message),
+            isEmailLoginLoading: false,
+            isGoogleLoginLoading: false,
+            isFacebookLoginLoading: false,
           ),
         );
+        break;
+    }
+  }
+
+  void _setLoading(LoginMethod method, bool value) {
+    switch (method) {
+      case LoginMethod.email:
+        emit(state.copyWith(isEmailLoginLoading: value));
+        break;
+      case LoginMethod.google:
+        emit(state.copyWith(isGoogleLoginLoading: value));
+        break;
+      case LoginMethod.facebook:
+        emit(state.copyWith(isFacebookLoginLoading: value));
         break;
     }
   }

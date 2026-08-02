@@ -37,7 +37,7 @@ class _ExerciseDetailsView extends StatelessWidget {
           canPop: !state.isPlayingVideo,
           onPopInvokedWithResult: (didPop, _) {
             if (!didPop) {
-              context.read<ExerciseDetailsCubit>().handleIntent(
+              context.read<ExerciseDetailsCubit>().doEvent(
                 CloseYoutubeVideoEvent(),
               );
             }

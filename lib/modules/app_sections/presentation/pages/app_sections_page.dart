@@ -5,6 +5,8 @@ import 'package:super_fitness_app/config/routes/routes.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_cubit.dart';
+import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_event.dart';
+import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_state.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_event.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/pages/home_page.dart';
@@ -71,9 +73,9 @@ class _AppSectionsView extends StatelessWidget {
                       selectedIndex: currentIndex,
                       onItemTapped: (index) {
                         if (index == 2) {
-                          Navigator.pushNamed(context, Routes.smartCotchChat).then((_) => cubit.changeSection(0));
+                          Navigator.pushNamed(context, Routes.smartCotchChat).then((_) => cubit.doEvent(const ChangeSectionEvent(0)));
                         } else {
-                          cubit.changeSection(index);
+                          cubit.doEvent(ChangeSectionEvent(index));
                         }
                       },
                     ),

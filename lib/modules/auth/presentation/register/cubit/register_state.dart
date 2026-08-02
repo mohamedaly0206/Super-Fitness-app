@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:super_fitness_app/config/base/base_state.dart';
 import 'package:super_fitness_app/core/network/model/user_entity.dart';
 
+enum RegisterMethod { email, google, facebook }
+
 class RegisterState extends Equatable {
   final BaseState registerState;
   final String? firstName;
@@ -15,7 +17,9 @@ class RegisterState extends Equatable {
   final num? height;
   final String? goal;
   final String? activityLevel;
-  final bool? isLoading;
+  final bool isEmailRegisterLoading;
+  final bool isGoogleRegisterLoading;
+  final bool isFacebookRegisterLoading;
   final String? errorMessage;
   final UserEntity? result;
 
@@ -32,7 +36,9 @@ class RegisterState extends Equatable {
     this.height = 160,
     this.goal,
     this.activityLevel,
-    this.isLoading,
+    this.isEmailRegisterLoading = false,
+    this.isGoogleRegisterLoading = false,
+    this.isFacebookRegisterLoading = false,
     this.errorMessage,
     this.result,
   });
@@ -50,7 +56,9 @@ class RegisterState extends Equatable {
     num? height,
     String? goal,
     String? activityLevel,
-    bool? isLoading,
+    bool? isEmailRegisterLoading,
+    bool? isGoogleRegisterLoading,
+    bool? isFacebookRegisterLoading,
     String? errorMessage,
     UserEntity? result,
   }) {
@@ -67,7 +75,12 @@ class RegisterState extends Equatable {
       height: height ?? this.height,
       goal: goal ?? this.goal,
       activityLevel: activityLevel ?? this.activityLevel,
-      isLoading: isLoading ?? this.isLoading,
+      isEmailRegisterLoading:
+          isEmailRegisterLoading ?? this.isEmailRegisterLoading,
+      isGoogleRegisterLoading:
+          isGoogleRegisterLoading ?? this.isGoogleRegisterLoading,
+      isFacebookRegisterLoading:
+          isFacebookRegisterLoading ?? this.isFacebookRegisterLoading,
       errorMessage: errorMessage ?? this.errorMessage,
       result: result ?? this.result,
     );
@@ -87,8 +100,11 @@ class RegisterState extends Equatable {
     height,
     goal,
     activityLevel,
-    isLoading,
+    isEmailRegisterLoading,
+    isGoogleRegisterLoading,
+    isFacebookRegisterLoading,
     errorMessage,
+    result,
   ];
 }
 

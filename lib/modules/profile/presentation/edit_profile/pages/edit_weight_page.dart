@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/localization_constants/auth_constants.dart';
 import 'package:super_fitness_app/core/widgets/custom_number_picker_widget.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
-import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_intent.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_event.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_state.dart';
 import '../cubit/edit_profile_cubit.dart';
 
@@ -28,7 +28,7 @@ class EditWeightPage extends StatelessWidget {
                 onPressed: () => Navigator.pop(context),
                 onChanged: (val) => context
                     .read<EditProfileCubit>()
-                    .handleEditProfileIntent(SelectWeightIntent(val.toInt())),
+                    .doEvent(SelectWeightEvent(val.toInt())),
               );
             },
           ),

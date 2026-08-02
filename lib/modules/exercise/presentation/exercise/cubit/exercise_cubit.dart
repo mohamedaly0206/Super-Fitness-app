@@ -4,7 +4,7 @@ import 'package:super_fitness_app/config/base/base_response.dart';
 import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_difficulty_levels_by_prime_mover_use_case.dart';
 import 'package:super_fitness_app/modules/exercise/domain/use_cases/get_exercises_by_prime_mover_and_difficulty_use_case.dart';
 
-import 'exercise_intent.dart';
+import 'exercise_event.dart';
 import 'exercise_state.dart';
 
 @injectable
@@ -18,23 +18,23 @@ class ExerciseCubit extends Cubit<ExerciseState> {
 
   late final String _primeMoverMuscleId;
 
-  Future<void> doIntent(ExerciseIntent intent) async {
-    switch (intent) {
-      case LoadExerciseScreenIntent():
-        _primeMoverMuscleId = intent.primeMoverMuscleId;
+  Future<void> doEvent(ExerciseEvent event) async {
+    switch (event) {
+      case LoadExerciseScreenEvent():
+        _primeMoverMuscleId = event.primeMoverMuscleId;
         await _loadDifficultyLevels();
 
-      case DifficultySelectedIntent():
-        if (state.selectedDifficulty?.id == intent.difficulty.id) return;
+      case DifficultySelectedEvent():
+        if (state.selectedDifficulty?.id == event.difficulty.id) return;
 
-        emit(state.copyWith(selectedDifficulty: intent.difficulty));
+        emit(state.copyWith(selectedDifficulty: event.difficulty));
 
-        await _loadExercises(difficultyId: intent.difficulty.id);
+        await _loadExercises(difficultyId: event.difficulty.id);
 
-      case ExerciseSelectedIntent():
-        if (state.selectedExercise?.id == intent.exercise.id) return;
+      case ExerciseSelectedEvent():
+        if (state.selectedExercise?.id == event.exercise.id) return;
 
-        emit(state.copyWith(selectedExercise: intent.exercise));
+        emit(state.copyWith(selectedExercise: event.exercise));
     }
   }
 

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_state.dart';
 
 class RegisterRequestEntity extends Equatable {
   final String firstName;

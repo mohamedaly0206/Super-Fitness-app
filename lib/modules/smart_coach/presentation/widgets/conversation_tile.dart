@@ -6,7 +6,7 @@ import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import '../../domain/entities/conversation.dart';
 import '../cubit/smart_coach_cubit.dart';
-import '../cubit/smart_coach_intent.dart';
+import '../cubit/smart_coach_event.dart';
 
 class ConversationTile extends StatelessWidget {
   final Conversation conversation;
@@ -116,8 +116,8 @@ class ConversationTile extends StatelessWidget {
                             Navigator.pop(context);
                           }
 
-                          cubit.doIntent(
-                            DeleteConversationIntent(conversation.id),
+                          cubit.doEvent(
+                            DeleteConversationEvent(conversation.id),
                           );
                         },
                         style: TextButton.styleFrom(
@@ -165,8 +165,8 @@ class ConversationTile extends StatelessWidget {
       ),
       onTap: () {
         Navigator.pop(context);
-        context.read<SmartCoachCubit>().doIntent(
-          OpenConversationIntent(conversation.id),
+        context.read<SmartCoachCubit>().doEvent(
+          OpenConversationEvent(conversation.id),
         );
       },
       onLongPress: () => _confirmDelete(context),

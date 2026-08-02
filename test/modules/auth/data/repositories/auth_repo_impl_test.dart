@@ -9,7 +9,7 @@ import 'package:super_fitness_app/modules/auth/data/remote/data_sources/auth_rem
 import 'package:super_fitness_app/modules/auth/data/repositories/auth_repo_impl.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/request/register_request_entity.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/response/register_response_entity.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_state.dart';
 
 class MockAuthRemoteDataSource extends Mock
     implements AuthRemoteDataSourceContract {}

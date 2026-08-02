@@ -1,21 +1,26 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
-import 'package:super_fitness_app/config/base/base_state.dart';
 import 'package:super_fitness_app/core/storage/secure_storage_service.dart';
 import 'package:super_fitness_app/modules/profile/domain/entities/change_password_entity.dart';
 import 'package:super_fitness_app/modules/profile/domain/use_cases/profile_use_cases.dart';
+import 'package:super_fitness_app/modules/profile/presentation/change_password/cubit/change_password_event.dart';
+import 'package:super_fitness_app/modules/profile/presentation/change_password/cubit/change_password_state.dart';
 
-part 'change_password_state.dart';
-
-@lazySingleton
+@injectable
 class ChangePasswordCubit extends Cubit<ChangePasswordState> {
   final ProfileUseCases _profileUseCases;
 
   ChangePasswordCubit({required ProfileUseCases profileUseCases})
     : _profileUseCases = profileUseCases,
       super(const ChangePasswordState());
+
+  void doEvent(ChangePasswordEvent event) {
+    switch (event) {
+      case SubmitChangePasswordEvent():
+        changePassword(password: event.password, newPassword: event.newPassword);
+    }
+  }
 
   Future<void> changePassword({
     required String password,

@@ -9,9 +9,9 @@ import 'package:super_fitness_app/core/service/remote_config_service.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/request/register_request_entity.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/response/register_response_entity.dart';
 import 'package:super_fitness_app/modules/auth/domain/use_cases/register_use_case.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/cubit/register_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/intent/register_intent.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_event.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_state.dart';
 
 class MockRegisterUseCase extends Mock implements RegisterUseCase {}
 
@@ -50,24 +50,23 @@ void main() {
     expect(cubit.state, equals(const RegisterState()));
   });
 
-  group('Intent Routing (Form Input Modifications)', () {
+  group('Event Routing (Form Input Modifications)', () {
     blocTest<RegisterCubit, RegisterState>(
-      'should emit state with updated gender when SelectGenderIntent is triggered',
+      'should emit state with updated gender when SelectGenderEvent is triggered',
       build: () => cubit,
-      act: (cubit) =>
-          cubit.handleRegisterIntent(SelectGenderIntent(Gender.male)),
+      act: (cubit) => cubit.doEvent(SelectGenderEvent(Gender.male)),
       expect: () => [const RegisterState().copyWith(gender: Gender.male)],
     );
 
     blocTest<RegisterCubit, RegisterState>(
-      'should emit state with updated age when SelectAgeIntent is triggered',
+      'should emit state with updated age when SelectAgeEvent is triggered',
       build: () => cubit,
-      act: (cubit) => cubit.handleRegisterIntent(SelectAgeIntent(25)),
+      act: (cubit) => cubit.doEvent(SelectAgeEvent(25)),
       expect: () => [const RegisterState().copyWith(age: 25)],
     );
   });
 
-  group('SubmitRegisterIntent', () {
+  group('SubmitRegisterEvent', () {
     final tRequest = RegisterRequestEntity(
       email: 'test@example.com',
       password: 'Password123!',
@@ -92,17 +91,17 @@ void main() {
         ).thenAnswer((_) async => SuccessBaseResponse(data: tResponseEntity));
         return cubit;
       },
-      act: (cubit) =>
-          cubit.handleRegisterIntent(SubmitRegisterIntent(request: tRequest)),
+      act: (cubit) => cubit.doEvent(SubmitRegisterEvent(request: tRequest)),
       expect: () => [
         // 1. Loading state gets emitted first
-        const RegisterState().copyWith(
-          registerState: const BaseState(isLoading: true),
-        ),
+        const RegisterState().copyWith(isEmailRegisterLoading: true),
         // 2. Success state gets emitted with backend payload data
         // Note: The fields remain filled because copyWith ignores the subsequent null emissions
         const RegisterState().copyWith(
           registerState: const BaseState(data: tResponseEntity),
+          isEmailRegisterLoading: false,
+          isGoogleRegisterLoading: false,
+          isFacebookRegisterLoading: false,
         ),
       ],
       verify: (_) {
@@ -119,14 +118,14 @@ void main() {
         );
         return cubit;
       },
-      act: (cubit) =>
-          cubit.handleRegisterIntent(SubmitRegisterIntent(request: tRequest)),
+      act: (cubit) => cubit.doEvent(SubmitRegisterEvent(request: tRequest)),
       expect: () => [
-        const RegisterState().copyWith(
-          registerState: const BaseState(isLoading: true),
-        ),
+        const RegisterState().copyWith(isEmailRegisterLoading: true),
         const RegisterState().copyWith(
           registerState: const BaseState(errorMessage: 'Server Error'),
+          isEmailRegisterLoading: false,
+          isGoogleRegisterLoading: false,
+          isFacebookRegisterLoading: false,
         ),
       ],
       verify: (_) {

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_fitness_app/config/routes/routes.dart';
 import 'package:super_fitness_app/core/resources/app_png.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_cubit.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_event.dart';
+import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_step.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/forget_password_actions.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/forget_password_step_switcher.dart';
@@ -47,10 +49,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
           previous.navigateToLogin != current.navigateToLogin,
       listener: (context, state) {
         if (state.navigateToLogin) {
-          //TODO : Navigator and push Replacement -> Login Page
-
-          // Navigator.pushReplacementNamed(context, Routes.login);
-          // return;
+          Navigator.pushReplacementNamed(context, Routes.login);
         }
 
         if (state.base.errorMessage != null &&
@@ -97,28 +96,28 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                             confirmPasswordController:
                                 _confirmPasswordController,
                             onEmailChanged: (v) =>
-                                cubit.doIntent(EmailChangedIntent(v)),
+                                cubit.doEvent(EmailChangedEvent(v)),
                             onOtpChanged: (v) =>
-                                cubit.doIntent(OtpChangedIntent(v)),
+                                cubit.doEvent(OtpChangedEvent(v)),
                             onPasswordChanged: (v) =>
-                                cubit.doIntent(PasswordChangedIntent(v)),
+                                cubit.doEvent(PasswordChangedEvent(v)),
                             onConfirmPasswordChanged: (v) =>
-                                cubit.doIntent(ConfirmPasswordChangedIntent(v)),
+                                cubit.doEvent(ConfirmPasswordChangedEvent(v)),
                             onContinue: () {
                               if (_formKey.currentState!.validate()) {
-                                cubit.doIntent(const SubmitEmailIntent());
+                                cubit.doEvent(const SubmitEmailEvent());
                               }
                             },
                             onCompletedOtp: () {
-                              cubit.doIntent(const VerifyOtpIntent());
+                              cubit.doEvent(const VerifyOtpEvent());
                             },
                             onReset: () {
                               if (_formKey.currentState!.validate()) {
-                                cubit.doIntent(const SubmitNewPasswordIntent());
+                                cubit.doEvent(const SubmitNewPasswordEvent());
                               }
                             },
                             onResend: () {
-                              cubit.doIntent(const ResendOtpIntent());
+                              cubit.doEvent(const ResendOtpEvent());
                             },
                           ),
                         ),

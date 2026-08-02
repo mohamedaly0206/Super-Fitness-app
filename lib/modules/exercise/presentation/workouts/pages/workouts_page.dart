@@ -11,6 +11,7 @@ import 'package:super_fitness_app/core/widgets/grid_shimmer.dart';
 import 'package:super_fitness_app/core/widgets/tab_bar_shimmer.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_event.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_state.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/widgets/workout_grid_item.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/widgets/workouts_header.dart';
 

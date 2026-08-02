@@ -60,6 +60,7 @@
     "registerSuccessMessage": "تم التسجيل بنجاح",
     "register_continuation_placeholder": "شاشات التسجيل التالية سيتم تنفيذها هنا.",
     "login_placeholder": "شاشة تسجيل الدخول سيتم تنفيذها هنا.",
+    "apple_login_unavailable": "تسجيل الدخول عبر Apple قيد التطوير",
     "done": "تم"
   },
   "validation": {

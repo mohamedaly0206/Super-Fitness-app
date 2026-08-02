@@ -8,6 +8,8 @@ import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_cubit.dart';
+import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_event.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_state.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/see_all_text.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_event.dart';
@@ -74,7 +76,7 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                           groupId: groups[_selectedIndex].id,
                         ),
                       );
-                      context.read<AppSectionsCubit>().changeSection(1);
+                      context.read<AppSectionsCubit>().doEvent(ChangeSectionEvent(1));
                     },
                   ),
                 ],

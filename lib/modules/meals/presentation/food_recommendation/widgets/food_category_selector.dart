@@ -19,12 +19,12 @@ class FoodCategorySelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: AppSize.s30,
+      height: AppSize.s50,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
         itemCount: categories.length,
-        separatorBuilder: (_, _) => const SizedBox(width: AppSize.s24),
+        separatorBuilder: (_, _) => const SizedBox(width: AppSize.s10),
         itemBuilder: (context, index) {
           final category = categories[index];
           return FoodCategoryChip(

@@ -17,7 +17,7 @@ import 'package:super_fitness_app/modules/smart_coach/domain/use_cases/get_messa
 import 'package:super_fitness_app/modules/smart_coach/domain/use_cases/send_smart_coach_message_use_case.dart';
 import 'package:super_fitness_app/modules/smart_coach/presentation/widgets/smart_coach_constants.dart';
 import 'package:uuid/uuid.dart';
-import 'smart_coach_intent.dart';
+import 'smart_coach_event.dart';
 import 'smart_coach_state.dart';
 
 @injectable
@@ -44,24 +44,24 @@ class SmartCoachCubit extends Cubit<SmartCoachState> {
     this._addMessageUseCase,
   ) : super(const SmartCoachState());
 
-  Future<void> doIntent(SmartCoachIntent intent) async {
-    switch (intent) {
-      case LoadConversationsIntent():
+  Future<void> doEvent(SmartCoachEvent event) async {
+    switch (event) {
+      case LoadConversationsEvent():
         await _loadConversations();
 
-      case CreateNewConversationIntent():
+      case CreateNewConversationEvent():
         await _createConversation();
 
-      case OpenConversationIntent():
-        await _openConversation(intent.conversationId);
+      case OpenConversationEvent():
+        await _openConversation(event.conversationId);
 
-      case SendMessageIntent():
-        await _sendMessage(intent.message);
+      case SendMessageEvent():
+        await _sendMessage(event.message);
 
-      case DeleteConversationIntent():
-        await _deleteConversation(intent.conversationId);
+      case DeleteConversationEvent():
+        await _deleteConversation(event.conversationId);
 
-      case RetryLastMessageIntent():
+      case RetryLastMessageEvent():
         // هننفذها بعدين
         break;
     }

@@ -7,9 +7,10 @@ import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/custom_selection_card.dart';
+import 'package:super_fitness_app/core/widgets/primary_button.dart';
 import 'package:super_fitness_app/modules/profile/domain/entities/edit_profile_data.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_cubit.dart';
-import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_intent.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_event.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_state.dart';
 
 class EditGoalPage extends StatelessWidget {
@@ -73,18 +74,16 @@ class EditGoalPage extends StatelessWidget {
                               title: goal,
                               isSelected: state.goal == goal,
                               onTap: () {
-                                cubit.handleEditProfileIntent(
-                                  SelectGoalIntent(goal),
-                                );
+                                cubit.doEvent(SelectGoalEvent(goal));
                               },
                             );
                           },
                         ),
-                        ElevatedButton(
-                          onPressed: state.goal == null
+                        PrimaryButton(
+                          text: AuthConstants.next,
+                          onTap: state.goal == null
                               ? null
                               : () => Navigator.pop(context),
-                          child: Text(AuthConstants.next),
                         ),
                       ],
                     ),

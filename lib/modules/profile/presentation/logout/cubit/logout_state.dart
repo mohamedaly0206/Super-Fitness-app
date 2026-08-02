@@ -1,4 +1,5 @@
-part of 'logout_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:super_fitness_app/config/base/base_state.dart';
 
 class LogoutState extends Equatable {
   final BaseState<bool> logoutState;

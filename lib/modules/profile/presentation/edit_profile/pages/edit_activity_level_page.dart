@@ -8,9 +8,10 @@ import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/custom_selection_card.dart';
+import 'package:super_fitness_app/core/widgets/primary_button.dart';
 import 'package:super_fitness_app/modules/profile/domain/entities/edit_profile_data.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_cubit.dart';
-import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_intent.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_event.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_state.dart';
 
 class EditActivityLevelPage extends StatelessWidget {
@@ -66,8 +67,8 @@ class EditActivityLevelPage extends StatelessWidget {
                               title: activityValue,
                               isSelected: state.activityLevel == activityKey,
                               onTap: () {
-                                cubit.handleEditProfileIntent(
-                                  SelectActivityLevelIntent(
+                                cubit.doEvent(
+                                  SelectActivityLevelEvent(
                                     activityKey,
                                     activityValue,
                                   ),
@@ -76,13 +77,13 @@ class EditActivityLevelPage extends StatelessWidget {
                             );
                           },
                         ),
-                        ElevatedButton(
-                          onPressed: state.activityLevel == null
+                        PrimaryButton(
+                          text: AuthConstants.done,
+                          onTap: state.activityLevel == null
                               ? null
                               : () {
                                   Navigator.pop(context);
                                 },
-                          child: Text(AuthConstants.done),
                         ),
                       ],
                     ),

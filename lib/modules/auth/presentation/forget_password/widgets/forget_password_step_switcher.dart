@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:super_fitness_app/core/localization_constants/forget_password_constants.dart';
-import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/cubit/forget_password_step.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/email_step.dart';
 import 'package:super_fitness_app/modules/auth/presentation/forget_password/widgets/forget_password_actions.dart';

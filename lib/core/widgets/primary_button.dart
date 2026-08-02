@@ -26,7 +26,8 @@ class PrimaryButton extends StatelessWidget {
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
         minimumSize: Size(double.infinity, height ?? AppSize.s38),
-        padding: padding ??
+        padding:
+            padding ??
             const EdgeInsets.symmetric(
               vertical: AppPadding.p8,
               horizontal: AppPadding.p16,

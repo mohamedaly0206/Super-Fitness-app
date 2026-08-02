@@ -9,9 +9,9 @@ import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/cubit/register_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/intent/register_intent.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_event.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/widgets/auth_or_divider.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/widgets/login_redirect_row.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/widgets/register_form_fields.dart';
@@ -66,13 +66,11 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _onGooglePressed() {
-    context.read<RegisterCubit>().handleRegisterIntent(GoogleRegisterIntent());
+    context.read<RegisterCubit>().doEvent(GoogleRegisterEvent());
   }
 
   void _onFacebookPressed() {
-    context.read<RegisterCubit>().handleRegisterIntent(
-      FacebookRegisterIntent(),
-    );
+    context.read<RegisterCubit>().doEvent(FacebookRegisterEvent());
   }
 
   void _onLoginPressed() {
@@ -84,7 +82,11 @@ class _RegisterPageState extends State<RegisterPage> {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listenWhen: (previous, current) =>
           previous.registerState != current.registerState ||
-          previous.email != current.email,
+          previous.email != current.email ||
+          previous.isEmailRegisterLoading != current.isEmailRegisterLoading ||
+          previous.isGoogleRegisterLoading != current.isGoogleRegisterLoading ||
+          previous.isFacebookRegisterLoading !=
+              current.isFacebookRegisterLoading,
       listener: (context, state) {
         if (state.registerState.errorMessage != null &&
             state.registerState.errorMessage!.isNotEmpty) {
@@ -93,7 +95,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
         if (state.email != null &&
             state.email!.isNotEmpty &&
-            !state.registerState.isLoading) {
+            !state.isEmailRegisterLoading &&
+            !state.isGoogleRegisterLoading &&
+            !state.isFacebookRegisterLoading) {
           _firstNameController.text = state.firstName ?? '';
           _lastNameController.text = state.lastName ?? '';
           _emailController.text = state.email ?? '';
@@ -103,8 +107,6 @@ class _RegisterPageState extends State<RegisterPage> {
         }
       },
       builder: (context, state) {
-        final isLoading = state.registerState.isLoading;
-
         return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
           child: Form(
@@ -139,12 +141,18 @@ class _RegisterPageState extends State<RegisterPage> {
                       SocialLoginButtons(
                         onFacebookTap: _onFacebookPressed,
                         onGoogleTap: _onGooglePressed,
-                        onAppleTap: () {},
-                        isGoogleLoading: isLoading,
+                        onAppleTap: () {
+                          CustomSnackBar.info(
+                            context,
+                            AuthConstants.appleLoginUnavailable,
+                          );
+                        },
+                        isGoogleLoading: state.isGoogleRegisterLoading,
+                        isFacebookLoading: state.isFacebookRegisterLoading,
                       ),
                       const AppSizedBox(height: AppSize.s20),
                       RegisterSubmitButton(
-                        isLoading: isLoading,
+                        isLoading: state.isEmailRegisterLoading,
                         onTap: _onRegisterPressed,
                       ),
                       const AppSizedBox(height: AppSize.s20),

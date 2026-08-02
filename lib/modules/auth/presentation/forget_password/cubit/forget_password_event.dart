@@ -4,46 +4,46 @@ sealed class ForgetPasswordEvent {
 
 /// Email
 
-class EmailChangedIntent extends ForgetPasswordEvent {
+class EmailChangedEvent extends ForgetPasswordEvent {
   final String email;
 
-  const EmailChangedIntent(this.email);
+  const EmailChangedEvent(this.email);
 }
 
-class SubmitEmailIntent extends ForgetPasswordEvent {
-  const SubmitEmailIntent();
+class SubmitEmailEvent extends ForgetPasswordEvent {
+  const SubmitEmailEvent();
 }
 
 /// OTP
 
-class OtpChangedIntent extends ForgetPasswordEvent {
+class OtpChangedEvent extends ForgetPasswordEvent {
   final String otp;
 
-  const OtpChangedIntent(this.otp);
+  const OtpChangedEvent(this.otp);
 }
 
-class VerifyOtpIntent extends ForgetPasswordEvent {
-  const VerifyOtpIntent();
+class VerifyOtpEvent extends ForgetPasswordEvent {
+  const VerifyOtpEvent();
 }
 
-class ResendOtpIntent extends ForgetPasswordEvent {
-  const ResendOtpIntent();
+class ResendOtpEvent extends ForgetPasswordEvent {
+  const ResendOtpEvent();
 }
 
 /// Password
 
-class PasswordChangedIntent extends ForgetPasswordEvent {
+class PasswordChangedEvent extends ForgetPasswordEvent {
   final String password;
 
-  const PasswordChangedIntent(this.password);
+  const PasswordChangedEvent(this.password);
 }
 
-class ConfirmPasswordChangedIntent extends ForgetPasswordEvent {
+class ConfirmPasswordChangedEvent extends ForgetPasswordEvent {
   final String password;
 
-  const ConfirmPasswordChangedIntent(this.password);
+  const ConfirmPasswordChangedEvent(this.password);
 }
 
-class SubmitNewPasswordIntent extends ForgetPasswordEvent {
-  const SubmitNewPasswordIntent();
+class SubmitNewPasswordEvent extends ForgetPasswordEvent {
+  const SubmitNewPasswordEvent();
 }

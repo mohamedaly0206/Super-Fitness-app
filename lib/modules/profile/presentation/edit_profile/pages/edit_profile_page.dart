@@ -17,9 +17,10 @@ import 'package:super_fitness_app/core/widgets/custom_appbar.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
 import 'package:super_fitness_app/core/widgets/custom_text_field.dart';
+import 'package:super_fitness_app/core/widgets/primary_button.dart';
 import 'package:super_fitness_app/modules/profile/domain/entities/edit_profile_data.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_cubit.dart';
-import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_intent.dart';
+import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_event.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/cubit/edit_profile_state.dart';
 import 'package:super_fitness_app/modules/profile/presentation/edit_profile/widgets/editable_selection.dart';
 
@@ -112,9 +113,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         backgroundColor: Colors.grey,
                       ),
                       GestureDetector(
-                        onTap: () => profileCubit.handleEditProfileIntent(
-                          PickProfileImageIntent(),
-                        ),
+                        onTap: () =>
+                            profileCubit.doEvent(PickProfileImageEvent()),
                         child: SizedBox(
                           child: SvgPicture.asset(AppSvg.editIcon),
                         ),
@@ -141,9 +141,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           prefixIcon: const Icon(Icons.person_outline),
                           validator: AppValidator.name,
                           onChanged: (val) =>
-                              profileCubit.handleEditProfileIntent(
-                                FirstNameChangedIntent(val),
-                              ),
+                              profileCubit.doEvent(FirstNameChangedEvent(val)),
                         ),
                         const AppSizedBox(height: AppSize.s12),
                         CustomTextField(
@@ -152,9 +150,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           prefixIcon: const Icon(Icons.person_outline),
                           validator: AppValidator.name,
                           onChanged: (val) =>
-                              profileCubit.handleEditProfileIntent(
-                                LastNameChangedIntent(val),
-                              ),
+                              profileCubit.doEvent(LastNameChangedEvent(val)),
                         ),
                         const AppSizedBox(height: AppSize.s12),
                         CustomTextField(
@@ -162,8 +158,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           keyboardType: TextInputType.emailAddress,
                           prefixIcon: const Icon(Icons.mail_outline),
                           validator: AppValidator.email,
-                          onChanged: (val) => profileCubit
-                              .handleEditProfileIntent(EmailChangedIntent(val)),
+                          onChanged: (val) =>
+                              profileCubit.doEvent(EmailChangedEvent(val)),
                         ),
                         const AppSizedBox(height: AppSize.s30),
                         EditableSelection(
@@ -199,34 +195,33 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           ),
                         ),
                         AppSizedBox(height: AppSize.s20),
-                        ElevatedButton(
-                          onPressed:
-                              state.isUserDataChanged ||
-                                  state.isProfileImageChanged
-                              ? () {
-                                  if (state.imageFile != null &&
-                                      state.isProfileImageChanged) {
-                                    profileCubit.handleEditProfileIntent(
-                                      UploadProfileImageIntent(),
-                                    );
-                                  } else if (state.isUserDataChanged) {
-                                    profileCubit.handleEditProfileIntent(
-                                      SubmitEditProfileIntent(),
-                                    );
-                                  } else if (state.isUserDataChanged &&
-                                      state.isProfileImageChanged) {
-                                    profileCubit.handleEditProfileIntent(
-                                      UpdateProfileImageAndDataIntent(),
-                                    );
-                                  }
-                                }
-                              : null,
-                          child:
-                              state.uploadProfileImageState.isLoading ||
-                                  state.editProfileState.isLoading
-                              ? const ButtonLoadingWidget()
-                              : Text(context.saveChanges),
-                        ),
+                        state.uploadProfileImageState.isLoading ||
+                                state.editProfileState.isLoading
+                            ? const ButtonLoadingWidget()
+                            : PrimaryButton(
+                                text: context.saveChanges,
+                                onTap:
+                                    state.isUserDataChanged ||
+                                        state.isProfileImageChanged
+                                    ? () {
+                                        if (state.imageFile != null &&
+                                            state.isProfileImageChanged) {
+                                          profileCubit.doEvent(
+                                            UploadProfileImageEvent(),
+                                          );
+                                        } else if (state.isUserDataChanged) {
+                                          profileCubit.doEvent(
+                                            SubmitEditProfileEvent(),
+                                          );
+                                        } else if (state.isUserDataChanged &&
+                                            state.isProfileImageChanged) {
+                                          profileCubit.doEvent(
+                                            UpdateProfileImageAndDataEvent(),
+                                          );
+                                        }
+                                      }
+                                    : null,
+                              ),
                       ],
                     ),
                   ),

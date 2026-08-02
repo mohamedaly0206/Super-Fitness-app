@@ -64,7 +64,7 @@ class ExerciseDetailsTopHeader extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     if (_videoUrl.isNotEmpty) {
-                      cubit.handleIntent(
+                      cubit.doEvent(
                         OpenYoutubeVideoEvent(videoUrl: _videoUrl),
                       );
                     }
