@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
 
 import '../cubit/exercise_cubit.dart';
-import '../cubit/exercise_intent.dart';
+import '../cubit/exercise_event.dart';
 import 'exercise_card.dart';
 
 class ExerciseListItem extends StatelessWidget {
@@ -28,10 +28,10 @@ class ExerciseListItem extends StatelessWidget {
       exercise: exercise,
       isSelected: isSelected,
       onTap: () {
-        cubit.doIntent(ExerciseSelectedIntent(exercise: exercise));
+        cubit.doEvent(ExerciseSelectedEvent(exercise: exercise));
       },
       onPlay: () {
-        cubit.doIntent(ExerciseSelectedIntent(exercise: exercise));
+        cubit.doEvent(ExerciseSelectedEvent(exercise: exercise));
         onPlayVideo(exercise);
       },
     );

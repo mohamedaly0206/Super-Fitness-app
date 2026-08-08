@@ -1,4 +1,7 @@
-part of 'workouts_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:super_fitness_app/config/base/base_state.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_entity.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_group_entity.dart';
 
 class WorkoutsState extends Equatable {
   final BaseState<List<MuscleGroupEntity>> muscleGroupsState;

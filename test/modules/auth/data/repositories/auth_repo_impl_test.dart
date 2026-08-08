@@ -2,14 +2,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
 import 'package:super_fitness_app/core/error/error_handler.dart'; // Ensure correct import for Failure
-import 'package:super_fitness_app/core/network/model/user.dart';
+import 'package:super_fitness_app/core/network/model/user_dto.dart';
 import 'package:super_fitness_app/modules/auth/data/models/request/register_request_dto.dart';
 import 'package:super_fitness_app/modules/auth/data/models/response/register_response_dto.dart';
 import 'package:super_fitness_app/modules/auth/data/remote/data_sources/auth_remote_data_source_contract.dart';
 import 'package:super_fitness_app/modules/auth/data/repositories/auth_repo_impl.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/request/register_request_entity.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/response/register_response_entity.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_state.dart';
 
 class MockAuthRemoteDataSource extends Mock
     implements AuthRemoteDataSourceContract {}

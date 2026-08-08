@@ -5,15 +5,14 @@ import 'package:super_fitness_app/modules/exercise/presentation/exercise_details
 import 'package:super_fitness_app/modules/exercise/presentation/exercise_details/cubit/exercise_details_state.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-
 @Injectable()
 class ExerciseDetailsCubit extends Cubit<ExerciseDetailsState> {
   ExerciseDetailsCubit() : super(const ExerciseDetailsState());
 
-  void handleIntent(ExerciseDetailsEvent intent) {
-    switch (intent) {
+  void doEvent(ExerciseDetailsEvent event) {
+    switch (event) {
       case OpenYoutubeVideoEvent():
-        _openVideo(intent.videoUrl);
+        _openVideo(event.videoUrl);
         break;
       case CloseYoutubeVideoEvent():
         _closeVideo();
@@ -25,7 +24,12 @@ class ExerciseDetailsCubit extends Cubit<ExerciseDetailsState> {
     emit(state.copyWith(isLoading: true));
 
     if (url.isEmpty) {
-      emit(state.copyWith(isLoading: false, errorMessage: AppStrings.unableToLoadVideo));
+      emit(
+        state.copyWith(
+          isLoading: false,
+          errorMessage: AppStrings.unableToLoadVideo,
+        ),
+      );
       return;
     }
 

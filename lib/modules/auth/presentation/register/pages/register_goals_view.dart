@@ -5,10 +5,11 @@ import 'package:super_fitness_app/core/localization_constants/auth_constants.dar
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
+import 'package:super_fitness_app/core/widgets/primary_button.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/register_data.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/cubit/register_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/intent/register_intent.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_event.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/widgets/register_selection_card.dart';
 
 class RegisterGoalView extends StatelessWidget {
@@ -69,21 +70,19 @@ class RegisterGoalView extends StatelessWidget {
                             title: goal,
                             isSelected: state.goal == goal,
                             onTap: () {
-                              cubit.handleRegisterIntent(
-                                SelectGoalIntent(goal),
-                              );
+                              cubit.doEvent(SelectGoalEvent(goal));
                             },
                           );
                         },
                       ),
-                      ElevatedButton(
-                        onPressed: state.goal == null
+                      PrimaryButton(
+                        text: AuthConstants.next,
+                        onTap: state.goal == null
                             ? null
                             : () => pageController.nextPage(
                                 duration: const Duration(milliseconds: 300),
                                 curve: Curves.easeInOut,
                               ),
-                        child: Text(AuthConstants.next),
                       ),
                     ],
                   ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise/cubit/exercise_cubit.dart';
-import 'package:super_fitness_app/modules/exercise/presentation/exercise/cubit/exercise_intent.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/exercise/cubit/exercise_event.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/exercise/widgets/difficulty_chip.dart';
 
 class DifficultySelector extends StatelessWidget {
@@ -35,8 +35,8 @@ class DifficultySelector extends StatelessWidget {
             title: difficulty.name,
             isSelected: isSelected,
             onTap: () {
-              context.read<ExerciseCubit>().doIntent(
-                DifficultySelectedIntent(difficulty: difficulty),
+              context.read<ExerciseCubit>().doEvent(
+                DifficultySelectedEvent(difficulty: difficulty),
               );
             },
           );

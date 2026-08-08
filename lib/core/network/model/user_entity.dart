@@ -11,9 +11,9 @@ class UserEntity extends Equatable {
   final List<dynamic>? wishlist;
   final String? id;
   final List<dynamic>? addresses;
-  final int? age;
-  final double? weight;
-  final double? height;
+  final num? age;
+  final num? weight;
+  final num? height;
   final String? activityLevel;
   final String? goal;
   final DateTime? createdAt;

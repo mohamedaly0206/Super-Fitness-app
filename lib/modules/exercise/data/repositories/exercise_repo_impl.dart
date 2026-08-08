@@ -47,9 +47,13 @@ class ExerciseRepoImpl implements ExerciseRepo {
 
     switch (response) {
       case SuccessBaseResponse<List<MuscleGroupEntity>>():
-        return SuccessBaseResponse<List<MuscleGroupEntity>>(data: response.data);
+        return SuccessBaseResponse<List<MuscleGroupEntity>>(
+          data: response.data,
+        );
       case ErrorBaseResponse<List<MuscleGroupEntity>>():
-        return ErrorBaseResponse<List<MuscleGroupEntity>>(failure: response.failure);
+        return ErrorBaseResponse<List<MuscleGroupEntity>>(
+          failure: response.failure,
+        );
     }
   }
 
@@ -70,16 +74,18 @@ class ExerciseRepoImpl implements ExerciseRepo {
   }
 
   @override
-  Future<BaseResponse<ExercisesPaginatedResponse>> getExercisesByMuscleAndDifficulty({
+  Future<BaseResponse<ExercisesPaginatedResponse>>
+  getExercisesByMuscleAndDifficulty({
     required String primeMoverMuscleId,
     required String difficultyLevelId,
     required int page,
   }) async {
-    final response = await exerciseRemoteDataSource.getExercisesByMuscleAndDifficulty(
-      primeMoverMuscleId: primeMoverMuscleId,
-      difficultyLevelId: difficultyLevelId,
-      page: page,
-    );
+    final response = await exerciseRemoteDataSource
+        .getExercisesByMuscleAndDifficulty(
+          primeMoverMuscleId: primeMoverMuscleId,
+          difficultyLevelId: difficultyLevelId,
+          page: page,
+        );
 
     switch (response) {
       case SuccessBaseResponse<ExercisesPaginatedResponse>():
@@ -94,12 +100,12 @@ class ExerciseRepoImpl implements ExerciseRepo {
   }
 
   @override
-  Future<BaseResponse<DifficultyLevelsResponseEntity>> getDifficultyLevelsByPrimeMover(
-    String primeMoverMuscleId,
-  ) async {
-    final response = await exerciseRemoteDataSource.getDifficultyLevelsByPrimeMover(
-      primeMoverMuscleId: primeMoverMuscleId,
-    );
+  Future<BaseResponse<DifficultyLevelsResponseEntity>>
+  getDifficultyLevelsByPrimeMover(String primeMoverMuscleId) async {
+    final response = await exerciseRemoteDataSource
+        .getDifficultyLevelsByPrimeMover(
+          primeMoverMuscleId: primeMoverMuscleId,
+        );
 
     switch (response) {
       case SuccessBaseResponse():
@@ -114,14 +120,16 @@ class ExerciseRepoImpl implements ExerciseRepo {
   }
 
   @override
-  Future<BaseResponse<ExercisesResponseEntity>> getExercisesByPrimeMoverAndDifficulty({
+  Future<BaseResponse<ExercisesResponseEntity>>
+  getExercisesByPrimeMoverAndDifficulty({
     required String primeMoverMuscleId,
     required String difficultyLevelId,
   }) async {
-    final response = await exerciseRemoteDataSource.getExercisesByPrimeMoverAndDifficulty(
-      primeMoverMuscleId: primeMoverMuscleId,
-      difficultyLevelId: difficultyLevelId,
-    );
+    final response = await exerciseRemoteDataSource
+        .getExercisesByPrimeMoverAndDifficulty(
+          primeMoverMuscleId: primeMoverMuscleId,
+          difficultyLevelId: difficultyLevelId,
+        );
 
     switch (response) {
       case SuccessBaseResponse():

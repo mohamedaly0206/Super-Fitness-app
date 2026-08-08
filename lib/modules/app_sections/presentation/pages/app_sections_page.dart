@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/config/dependency_injection/di.dart';
+import 'package:super_fitness_app/config/routes/routes.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_cubit.dart';
+import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_event.dart';
+import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_state.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_event.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/pages/home_page.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/pages/workouts_page.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_cubit.dart';
+import 'package:super_fitness_app/modules/profile/presentation/profile/pages/profile_page.dart';
 
 class AppSectionsPage extends StatelessWidget {
   const AppSectionsPage({super.key});
@@ -54,7 +58,7 @@ class _AppSectionsView extends StatelessWidget {
                   const HomePage(),
                   const WorkoutsPage(),
                   const SizedBox.shrink(),
-                  const SizedBox.shrink(),
+                  const ProfilePage(),
                 ],
               ),
               Positioned(
@@ -67,7 +71,13 @@ class _AppSectionsView extends StatelessWidget {
                     color: AppColors.navBarBackground,
                     child: CustomBottomNavBar(
                       selectedIndex: currentIndex,
-                      onItemTapped: cubit.changeSection,
+                      onItemTapped: (index) {
+                        if (index == 2) {
+                          Navigator.pushNamed(context, Routes.smartCotchChat).then((_) => cubit.doEvent(const ChangeSectionEvent(0)));
+                        } else {
+                          cubit.doEvent(ChangeSectionEvent(index));
+                        }
+                      },
                     ),
                   ),
                 ),

@@ -40,34 +40,48 @@ void main() {
   final tEntity = MealsDetailsEntity();
 
   group('getMeals', () {
-    test('should return SuccessBaseResponse<MealsDetailsEntity> when remote data source call is successful', () async {
-      // Arrange
-      when(mockDto.toDomain()).thenReturn(tEntity);
-      when(mockRemoteDataSource.getMeals(tMealId))
-          .thenAnswer((_) async => SuccessBaseResponse<MealsDetailsDto>(data: mockDto));
+    test(
+      'should return SuccessBaseResponse<MealsDetailsEntity> when remote data source call is successful',
+      () async {
+        // Arrange
+        when(mockDto.toDomain()).thenReturn(tEntity);
+        when(mockRemoteDataSource.getMeals(tMealId)).thenAnswer(
+          (_) async => SuccessBaseResponse<MealsDetailsDto>(data: mockDto),
+        );
 
-      // Act
-      final result = await repo.getMeals(tMealId);
+        // Act
+        final result = await repo.getMeals(tMealId);
 
-      // Assert
-      expect(result, isA<SuccessBaseResponse<MealsDetailsEntity>>());
-      expect((result as SuccessBaseResponse<MealsDetailsEntity>).data, equals(tEntity));
-      verify(mockRemoteDataSource.getMeals(tMealId)).called(1);
-    });
+        // Assert
+        expect(result, isA<SuccessBaseResponse<MealsDetailsEntity>>());
+        expect(
+          (result as SuccessBaseResponse<MealsDetailsEntity>).data,
+          equals(tEntity),
+        );
+        verify(mockRemoteDataSource.getMeals(tMealId)).called(1);
+      },
+    );
 
-    test('should return ErrorBaseResponse<MealsDetailsEntity> when remote data source call fails', () async {
-      // Arrange
-      final tFailure = Failure(message: 'Server Error');
-      when(mockRemoteDataSource.getMeals(tMealId))
-          .thenAnswer((_) async => ErrorBaseResponse<MealsDetailsDto>(failure: tFailure));
+    test(
+      'should return ErrorBaseResponse<MealsDetailsEntity> when remote data source call fails',
+      () async {
+        // Arrange
+        final tFailure = Failure(message: 'Server Error');
+        when(mockRemoteDataSource.getMeals(tMealId)).thenAnswer(
+          (_) async => ErrorBaseResponse<MealsDetailsDto>(failure: tFailure),
+        );
 
-      // Act
-      final result = await repo.getMeals(tMealId);
+        // Act
+        final result = await repo.getMeals(tMealId);
 
-      // Assert
-      expect(result, isA<ErrorBaseResponse<MealsDetailsEntity>>());
-      expect((result as ErrorBaseResponse<MealsDetailsEntity>).failure, equals(tFailure));
-      verify(mockRemoteDataSource.getMeals(tMealId)).called(1);
-    });
+        // Assert
+        expect(result, isA<ErrorBaseResponse<MealsDetailsEntity>>());
+        expect(
+          (result as ErrorBaseResponse<MealsDetailsEntity>).failure,
+          equals(tFailure),
+        );
+        verify(mockRemoteDataSource.getMeals(tMealId)).called(1);
+      },
+    );
   });
 }

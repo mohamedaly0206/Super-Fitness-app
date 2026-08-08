@@ -33,26 +33,48 @@ class GoogleAuthServiceImpl implements GoogleAuthService {
   Future<GoogleAuthResult?> signIn() async {
     await _ensureInitialized();
 
-    final GoogleSignInAccount account = await GoogleSignIn.instance
-        .authenticate();
+    GoogleSignInAccount account;
+    try {
+      account = await GoogleSignIn.instance.authenticate();
+    } on GoogleSignInException catch (e) {
+      if (e.code == GoogleSignInExceptionCode.canceled ||
+          e.code == GoogleSignInExceptionCode.interrupted) {
+        return null;
+      }
+      rethrow;
+    }
 
     final idToken = account.authentication.idToken;
+    if (idToken == null || idToken.isEmpty) {
+      throw Exception('Google sign-in failed: missing ID token.');
+    }
 
-    final authorization =
-        await account.authorizationClient.authorizationForScopes(['email']) ??
-        await account.authorizationClient.authorizeScopes(['email']);
+    String? accessToken;
+    try {
+      final authorization = await account.authorizationClient
+          .authorizationForScopes(['email']);
+      accessToken = authorization?.accessToken;
+    } catch (_) {
+      accessToken = null;
+    }
 
     final credential = GoogleAuthProvider.credential(
       idToken: idToken,
-      accessToken: authorization.accessToken,
+      accessToken: accessToken,
     );
 
-    final userCredential = await FirebaseAuth.instance.signInWithCredential(
-      credential,
-    );
-
-    final displayName = userCredential.user?.displayName ?? account.displayName;
-    final email = userCredential.user?.email ?? account.email;
+    String? email = account.email;
+    String? displayName = account.displayName;
+    try {
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(
+        credential,
+      );
+      displayName = userCredential.user?.displayName ?? account.displayName;
+      email = userCredential.user?.email ?? account.email;
+    } catch (_) {
+      // Fall back to the Google account profile when Firebase is unavailable,
+      // so the social login can still continue with the user's email.
+    }
 
     String? firstName;
     String? lastName;

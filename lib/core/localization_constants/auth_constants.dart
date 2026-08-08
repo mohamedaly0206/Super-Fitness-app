@@ -65,4 +65,7 @@ class AuthConstants {
       "auth.yourRegularPhysicalActivityLevel".tr();
   static String get registerSuccessMessage =>
       "auth.registerSuccessMessage".tr();
+  static String get appleLoginUnavailable =>
+      "auth.apple_login_unavailable".tr();
+  static String get done => "auth.done".tr();
 }

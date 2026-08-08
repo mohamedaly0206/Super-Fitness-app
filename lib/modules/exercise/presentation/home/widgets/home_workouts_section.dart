@@ -8,6 +8,8 @@ import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
 import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_cubit.dart';
+import 'package:super_fitness_app/modules/app_sections/presentation/cubit/app_sections_event.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_state.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/see_all_text.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_event.dart';
@@ -35,9 +37,7 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
           prev.muscleGroupsState.data != curr.muscleGroupsState.data,
       builder: (context, state) {
         if (state.muscleGroupsState.isLoading) {
-          return homeTabShimmer(
-            
-          );
+          return homeTabShimmer();
         }
         if (state.muscleGroupsState.errorMessage != null) {
           return Padding(
@@ -54,7 +54,10 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p8),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p8,
+                vertical: AppPadding.p8,
+              ),
               child: Row(
                 children: [
                   Text(
@@ -73,7 +76,7 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                           groupId: groups[_selectedIndex].id,
                         ),
                       );
-                      context.read<AppSectionsCubit>().changeSection(1);
+                      context.read<AppSectionsCubit>().doEvent(ChangeSectionEvent(1));
                     },
                   ),
                 ],
@@ -85,7 +88,8 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 itemCount: groups.length,
-                separatorBuilder: (context, index) => const SizedBox(width: AppSize.s10),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(width: AppSize.s10),
                 itemBuilder: (context, index) {
                   final isSelected = _selectedIndex == index;
                   return GestureDetector(
@@ -103,12 +107,16 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
                       alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppPadding.p20,
+                      ),
                       decoration: BoxDecoration(
                         color: isSelected
                             ? AppColors.primary
                             : Colors.transparent,
-                        borderRadius: BorderRadius.circular(AppSize.borderRadiusPill),
+                        borderRadius: BorderRadius.circular(
+                          AppSize.borderRadiusPill,
+                        ),
                       ),
                       child: AnimatedDefaultTextStyle(
                         duration: const Duration(milliseconds: 300),

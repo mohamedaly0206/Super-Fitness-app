@@ -6,7 +6,7 @@ import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/widgets/app_sizebox.dart';
 import 'package:super_fitness_app/core/widgets/primary_button.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_intent.dart';
+import 'package:super_fitness_app/modules/auth/presentation/onboarding/cubit/onboarding_event.dart';
 import 'package:super_fitness_app/modules/auth/presentation/onboarding/widgets/onboarding_indicator.dart';
 
 class OnboardingActions extends StatelessWidget {
@@ -45,7 +45,7 @@ class OnboardingActions extends StatelessWidget {
               child: PrimaryButton(
                 text: 'Next',
                 onTap: () {
-                  cubit.doIntent(const NextPressedIntent());
+                  cubit.doEvent(const NextPressedEvent());
                 },
               ),
             )
@@ -55,7 +55,7 @@ class OnboardingActions extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                      cubit.doIntent(const BackPressedIntent());
+                      cubit.doEvent(const BackPressedEvent());
                     },
                     child: Text(
                       'Back',
@@ -72,9 +72,9 @@ class OnboardingActions extends StatelessWidget {
                     text: state.isLastPage ? 'Do it' : 'Next',
                     onTap: () {
                       if (state.isLastPage) {
-                        cubit.doIntent(const FinishPressedIntent());
+                        cubit.doEvent(const FinishPressedEvent());
                       } else {
-                        cubit.doIntent(const NextPressedIntent());
+                        cubit.doEvent(const NextPressedEvent());
                       }
                     },
                   ),

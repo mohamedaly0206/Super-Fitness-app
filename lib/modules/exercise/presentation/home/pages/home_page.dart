@@ -6,6 +6,7 @@ import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_cubit.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/home/cubit/home_state.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/category_widget.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/home_card_shimmer_widget.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/home_card_widget.dart';
@@ -16,6 +17,7 @@ import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/pop
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/popular_training_shimmer_widget.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/home/widgets/see_all_text.dart';
 import 'package:super_fitness_app/core/localization_constants/exercise_constants.dart';
+import 'package:super_fitness_app/modules/profile/data/models/requests/web_view_args.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -44,10 +46,27 @@ class HomePage extends StatelessWidget {
                     },
                     itemCount: categoriesBuilder(context).length,
                     itemBuilder: (context, index) {
-                      final category = categoriesBuilder(context)[index];
+                      final categories = categoriesBuilder(context);
+                      final category = categories[index];
+                      final isLast = index == categories.length - 1;
                       return categoryCard(
                         title: category.title,
                         image: category.image,
+                        onTap: isLast
+                            ? () => Navigator.pushNamed(
+                                  context,
+                                  Routes.smartCotchChat,
+                                )
+                            : category.url == null
+                            ? null
+                            : () => Navigator.pushNamed(
+                                  context,
+                                  Routes.webView,
+                                  arguments: WebViewArgs(
+                                    title: category.title,
+                                    url: category.url!,
+                                  ),
+                                ),
                       );
                     },
                   ),

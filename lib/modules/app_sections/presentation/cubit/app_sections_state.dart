@@ -1,4 +1,4 @@
-part of 'app_sections_cubit.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class AppSectionsState extends Equatable {
   const AppSectionsState();

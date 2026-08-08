@@ -11,9 +11,9 @@ import 'package:super_fitness_app/core/widgets/grid_shimmer.dart';
 import 'package:super_fitness_app/core/widgets/tab_bar_shimmer.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_cubit.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_event.dart';
+import 'package:super_fitness_app/modules/exercise/presentation/workouts/cubit/workouts_state.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/widgets/workout_grid_item.dart';
 import 'package:super_fitness_app/modules/exercise/presentation/workouts/widgets/workouts_header.dart';
-
 
 class WorkoutsPage extends StatefulWidget {
   const WorkoutsPage({super.key});
@@ -61,7 +61,9 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                   );
                 }
                 if (state.muscleGroupsState.errorMessage != null) {
-                  return Center(child: Text(state.muscleGroupsState.errorMessage!));
+                  return Center(
+                    child: Text(state.muscleGroupsState.errorMessage!),
+                  );
                 }
                 final groups = state.muscleGroupsState.data;
                 if (groups == null || groups.isEmpty) {
@@ -69,7 +71,9 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                 }
 
                 if (state.selectedGroupId != null) {
-                  final idx = groups.indexWhere((g) => g.id == state.selectedGroupId);
+                  final idx = groups.indexWhere(
+                    (g) => g.id == state.selectedGroupId,
+                  );
                   if (idx != -1 && _selectedIndex != idx) {
                     _selectedIndex = idx;
                   }
@@ -81,7 +85,9 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                       height: AppSize.s50,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppPadding.p8,
+                        ),
                         itemCount: groups.length,
                         separatorBuilder: (context, index) =>
                             const SizedBox(width: AppSize.s10),
@@ -102,12 +108,16 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.easeInOut,
                               alignment: Alignment.center,
-                              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppPadding.p16,
+                              ),
                               decoration: BoxDecoration(
                                 color: isSelected
                                     ? AppColors.primary
                                     : Colors.transparent,
-                                borderRadius: BorderRadius.circular(AppSize.borderRadiusPill),
+                                borderRadius: BorderRadius.circular(
+                                  AppSize.borderRadiusPill,
+                                ),
                               ),
                               child: AnimatedDefaultTextStyle(
                                 duration: const Duration(milliseconds: 300),
@@ -115,7 +125,9 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: FontSizeManager.s14,
-                                  color: isSelected ? Colors.white : Colors.white70,
+                                  color: isSelected
+                                      ? Colors.white
+                                      : Colors.white70,
                                 ),
                                 child: Text(groups[index].name),
                               ),

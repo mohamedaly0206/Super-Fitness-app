@@ -61,6 +61,7 @@ class AppColors {
   static const Color hintText = Color(0x8AFFFFFF);
   static const Color iconInactive = Colors.white;
   static const Color borderDefault = Color(0x61FFFFFF);
+  static const Color borderLight = Color(0xFFD9D9D9);
   static const Color borderFocused = Colors.white;
   static const Color borderError = Colors.redAccent;
   static const Color navBarBackground = Color(0xFF1C1C1E);
@@ -71,4 +72,6 @@ class AppColors {
   static const Color glassFill = Color(0x80242424); // #242424 @ 50%
   static const Color glassBorder = Color(0x33FFFFFF); // 20% white
   static const Color glassShadow = Color(0x33000000); // 20% black
+  static const Color chatGlassPrimaryFill = Color(0x99FF4100);
+  static const Color chatGlassFill = Color(0x80242424);
 }

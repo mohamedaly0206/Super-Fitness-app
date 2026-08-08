@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/localization_constants/auth_constants.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/cubit/register_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
+import 'package:super_fitness_app/core/widgets/primary_button.dart';
 import 'package:wheel_slider/wheel_slider.dart';
 
 class RegisterNumberPickerView extends StatelessWidget {
@@ -110,25 +108,14 @@ class RegisterNumberPickerView extends StatelessWidget {
                   size: 32,
                 ),
                 const SizedBox(height: AppSize.s12),
-                BlocBuilder<RegisterCubit, RegisterState>(
-                  builder: (context, state) {
-                    return ElevatedButton(
-                      onPressed: isNextEnabled
-                          ? () => pageController.nextPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                            )
-                          : null,
-                      child: Text(
-                        AuthConstants.next,
-                        style: getExtraBoldStyle(
-                          context: context,
-                          color: theme.colorScheme.onPrimary,
-                          fontSize: FontSizeManager.s14,
-                        ),
-                      ),
-                    );
-                  },
+                PrimaryButton(
+                  text: AuthConstants.next,
+                  onTap: isNextEnabled
+                      ? () => pageController.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        )
+                      : null,
                 ),
               ],
             ),

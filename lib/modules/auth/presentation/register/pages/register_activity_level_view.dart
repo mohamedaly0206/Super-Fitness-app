@@ -10,11 +10,12 @@ import 'package:super_fitness_app/core/widgets/app_loading_widget.dart';
 import 'package:super_fitness_app/core/widgets/button_loading_widget.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
+import 'package:super_fitness_app/core/widgets/primary_button.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/register_data.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/request/register_request_entity.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/cubit/register_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/intent/register_intent.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_event.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/widgets/register_selection_card.dart';
 
 class RegisterActivityLevelView extends StatelessWidget {
@@ -49,15 +50,18 @@ class RegisterActivityLevelView extends StatelessWidget {
           flex: 2,
           child: BlocConsumer<RegisterCubit, RegisterState>(
             listener: (BuildContext context, RegisterState state) {
-              if (state.registerState.isLoading) {
+              final isLoading =
+                  state.isEmailRegisterLoading ||
+                  state.isGoogleRegisterLoading ||
+                  state.isFacebookRegisterLoading;
+              if (isLoading) {
                 showDialog(
                   context: context,
                   barrierDismissible: false,
                   builder: (context) => const AppLoadingWidget(),
                 );
               }
-              if (state.registerState.data != null &&
-                  state.registerState.isLoading == false) {
+              if (state.registerState.data != null && !isLoading) {
                 Navigator.pop(context);
                 CustomSnackBar.success(
                   context,
@@ -96,41 +100,42 @@ class RegisterActivityLevelView extends StatelessWidget {
                             title: activityValue,
                             isSelected: state.activityLevel == activityKey,
                             onTap: () {
-                              cubit.handleRegisterIntent(
-                                SelectActivityLevelIntent(activityKey),
+                              cubit.doEvent(
+                                SelectActivityLevelEvent(
+                                  activityKey,
+                                  activityValue,
+                                ),
                               );
                             },
                           );
                         },
                       ),
-                      ElevatedButton(
-                        onPressed: state.activityLevel == null
-                            ? null
-                            : () {
-                                final request = RegisterRequestEntity(
-                                  firstName: state.firstName ?? "",
-                                  lastName: state.lastName ?? "",
-                                  email: state.email ?? "",
-                                  password: state.password ?? "",
-                                  rePassword: state.rePassword ?? "",
-                                  gender: state.gender,
-                                  age: state.age ?? 0,
-                                  weight: state.weight ?? 0,
-                                  height: state.height ?? 0,
-                                  goal: state.goal ?? "",
-                                  activityLevel: state.activityLevel ?? "",
-                                );
-                                cubit.handleRegisterIntent(
-                                  SubmitRegisterIntent(request: request),
-                                );
-                              },
-                        child: state.registerState.isLoading
-                            ? const ButtonLoadingWidget()
-                            : Text(
-                                AuthConstants
-                                    .startYourJourney, // Or AuthConstants.next
-                              ),
-                      ),
+                      state.isEmailRegisterLoading
+                          ? const ButtonLoadingWidget()
+                          : PrimaryButton(
+                              text: AuthConstants.startYourJourney,
+                              onTap: state.activityLevel == null
+                                  ? null
+                                  : () {
+                                      final request = RegisterRequestEntity(
+                                        firstName: state.firstName ?? "",
+                                        lastName: state.lastName ?? "",
+                                        email: state.email ?? "",
+                                        password: state.password ?? "",
+                                        rePassword: state.rePassword ?? "",
+                                        gender: state.gender,
+                                        age: state.age ?? 0,
+                                        weight: state.weight ?? 0,
+                                        height: state.height ?? 0,
+                                        goal: state.goal ?? "",
+                                        activityLevel:
+                                            state.activityLevel ?? "",
+                                      );
+                                      cubit.doEvent(
+                                        SubmitRegisterEvent(request: request),
+                                      );
+                                    },
+                            ),
                     ],
                   ),
                 ),

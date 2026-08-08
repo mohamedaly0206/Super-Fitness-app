@@ -1,13 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:equatable/equatable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
 import 'package:super_fitness_app/modules/meals/domain/entities/meal_category_entity.dart';
 import 'package:super_fitness_app/modules/meals/domain/entities/meal_entity.dart';
 import 'package:super_fitness_app/modules/meals/domain/use_cases/get_categories_use_case.dart';
 import 'package:super_fitness_app/modules/meals/domain/use_cases/get_meals_by_category_use_case.dart';
-
-part 'food_recommendation_state.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/cubit/food_recommendation_event.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/cubit/food_recommendation_state.dart';
 
 @Injectable()
 class FoodRecommendationCubit extends Cubit<FoodRecommendationState> {
@@ -18,6 +17,15 @@ class FoodRecommendationCubit extends Cubit<FoodRecommendationState> {
     required this.getCategoriesUseCase,
     required this.getMealsByCategoryUseCase,
   }) : super(const FoodRecommendationInitial());
+
+  void doEvent(FoodRecommendationEvent event) {
+    switch (event) {
+      case LoadCategoriesEvent():
+        loadCategories(initialCategoryName: event.initialCategoryName);
+      case SelectCategoryEvent():
+        selectCategory(event.category);
+    }
+  }
 
   Future<void> loadCategories({String? initialCategoryName}) async {
     emit(const FoodRecommendationLoadingCategories());

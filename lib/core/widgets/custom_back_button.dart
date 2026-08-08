@@ -17,16 +17,16 @@ class CustomBackButton extends StatelessWidget {
             Navigator.pop(context);
           },
       child: Container(
-        width: AppSize.s30,
-        height: AppSize.s30,
+        width: AppSize.s28,
+        height: AppSize.s28,
         decoration: BoxDecoration(
           color: theme.colorScheme.primary,
           shape: BoxShape.circle,
         ),
         child: Center(
           child: SizedBox(
-            width: AppSize.s14,
-            height: AppSize.s14,
+            width: AppSize.s12,
+            height: AppSize.s12,
             child: SvgPicture.asset(AppSvg.backButtonIcon, fit: BoxFit.contain),
           ),
         ),

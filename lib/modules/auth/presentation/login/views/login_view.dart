@@ -6,12 +6,11 @@ import 'package:super_fitness_app/core/widgets/custom_container.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/custom_snack_bar.dart';
 import 'package:super_fitness_app/core/widgets/custom_text_field.dart';
-import 'package:super_fitness_app/modules/auth/presentation/login/view_model/cubit/login_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/login/view_model/intent/login_intent.dart';
-import 'package:super_fitness_app/modules/auth/presentation/login/view_model/state/login_state.dart';
+import 'package:super_fitness_app/modules/auth/presentation/login/cubit/login_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/login/cubit/login_event.dart';
+import 'package:super_fitness_app/modules/auth/presentation/login/cubit/login_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/widgets/login_submit_button.dart';
 import 'package:super_fitness_app/modules/auth/presentation/login/widgets/social_login_buttons.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/pages/main_register_view_controller.dart';
 import '../../../../../config/routes/routes.dart';
 import '../../../../../core/layout/app_padding.dart';
 import '../../../../../core/layout/app_size.dart';
@@ -45,8 +44,8 @@ class _LoginViewState extends State<LoginView> {
   void _onLoginPressed() {
     if (!_formKey.currentState!.validate()) return;
 
-    context.read<LoginCubit>().handleLoginIntent(
-      SubmitLoginIntent(
+    context.read<LoginCubit>().doEvent(
+      SubmitLoginEvent(
         email: emailController.text.trim(),
         password: passwordController.text,
       ),
@@ -54,15 +53,11 @@ class _LoginViewState extends State<LoginView> {
   }
 
   void _onGooglePressed() {
-    context.read<LoginCubit>().handleLoginIntent(
-      GoogleLoginIntent(),
-    );
+    context.read<LoginCubit>().doEvent(GoogleLoginEvent());
   }
 
   void _onFacebookPressed() {
-    context.read<LoginCubit>().handleLoginIntent(
-      FacebookLoginIntent(),
-    );
+    context.read<LoginCubit>().doEvent(FacebookLoginEvent());
   }
 
   @override
@@ -71,7 +66,7 @@ class _LoginViewState extends State<LoginView> {
       background: Backgrounds.login,
       body: BlocListener<LoginCubit, LoginState>(
         listenWhen: (previous, current) =>
-        previous.loginState != current.loginState,
+            previous.loginState != current.loginState,
         listener: (context, state) {
           if (state.loginState.errorMessage != null) {
             CustomSnackBar.error(context, state.loginState.errorMessage!);
@@ -82,106 +77,97 @@ class _LoginViewState extends State<LoginView> {
             Navigator.pushNamedAndRemoveUntil(
               context,
               Routes.appSections,
-                  (route) => false,
+              (route) => false,
             );
           }
         },
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: AppPadding.p32,
-                          horizontal: AppPadding.p16,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Image.asset(
-                                AppPng.logo,
-                                height: AppSize.s100,
-                                width: AppSize.s100,
-                              ),
-                            ),
-                            Text(
-                              AuthConstants.heyThere,
-                              style: getRegularStyle(
-                                context: context,
-                                color: AppColors.textPrimary,
-                                fontSize: FontSizeManager.s18,
-                              ),
-                            ),
-                            Text(
-                              AuthConstants.welcomeBack,
-                              style: getBoldStyle(
-                                context: context,
-                                color: AppColors.textPrimary,
-                                fontSize: FontSizeManager.s20,
-                              ),
-                            ),
-                            const AppSizedBox(height: AppSize.s0),
-                          ],
-                        ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const AppSizedBox(height: AppSize.s20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Image.asset(
+                        AppPng.logo,
+                        height: AppSize.s100,
+                        width: AppSize.s100,
                       ),
-                      CustomContainer(
-                        blur: 5,
-                        borderRadius: AppSize.borderRadiusLarge,
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(AppPadding.p20),
-                        child: Column(
-                          children: [
-                            Text(
-                              AuthConstants.login,
-                              style: getBoldStyle(
-                                context: context,
-                                color: AppColors.textPrimary,
-                                fontSize: FontSizeManager.s24,
-                              ),
+                    ),
+                    Text(
+                      AuthConstants.heyThere,
+                      style: getRegularStyle(
+                        context: context,
+                        color: AppColors.textPrimary,
+                        fontSize: FontSizeManager.s18,
+                      ),
+                    ),
+                    Text(
+                      AuthConstants.welcomeBack,
+                      style: getBoldStyle(
+                        context: context,
+                        color: AppColors.textPrimary,
+                        fontSize: FontSizeManager.s20,
+                      ),
+                    ),
+                  ],
+                ),
+                const AppSizedBox(height: AppSize.s20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppPadding.p4,
+                  ),
+                  child: CustomContainer(
+                    borderRadius: AppSize.borderRadiusLarge,
+                    padding: const EdgeInsets.all(AppPadding.p20),
+                    child: Column(
+                      children: [
+                        Text(
+                          AuthConstants.login,
+                          style: getBoldStyle(
+                            context: context,
+                            color: AppColors.textPrimary,
+                            fontSize: FontSizeManager.s24,
+                          ),
+                        ),
+                        const AppSizedBox(height: AppSize.s20),
+                        CustomTextField(
+                          prefixIcon: const Icon(Icons.email_outlined),
+                          controller: emailController,
+                          hintText: AuthConstants.email,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: AppValidator.email,
+                        ),
+                        const AppSizedBox(height: AppSize.s12),
+                        CustomTextField(
+                          prefixIcon: const Icon(Icons.lock_outline),
+                          controller: passwordController,
+                          hintText: AuthConstants.password,
+                          keyboardType: TextInputType.visiblePassword,
+                          validator: AppValidator.password,
+                          isPassword: true,
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                Routes.forgetPassword,
+                              );
+                            },
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
-                            const AppSizedBox(height: AppSize.s20),
-                            CustomTextField(
-                              prefixIcon: const Icon(Icons.email_outlined),
-                              controller: emailController,
-                              hintText: AuthConstants.email,
-                              keyboardType: TextInputType.emailAddress,
-                              validator: AppValidator.email,
-                            ),
-                            const AppSizedBox(height: AppSize.s12),
-                            CustomTextField(
-                              prefixIcon: const Icon(Icons.lock_outline),
-                              controller: passwordController,
-                              hintText: AuthConstants.password,
-                              keyboardType: TextInputType.visiblePassword,
-                              validator: AppValidator.password,
-                              isPassword: true,
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    Routes.forgetPassword,
-                                  );
-                                },
-                                style: TextButton.styleFrom(
-                                  padding: EdgeInsets.zero,
-                                  tapTargetSize:
-                                  MaterialTapTargetSize.shrinkWrap,
-                                ),
-                                child: Text(
-                                  AuthConstants.forgetPassword,
-                                  style:
+                            child: Text(
+                              AuthConstants.forgetPassword,
+                              style:
                                   getRegularStyle(
                                     context: context,
                                     color: AppColors.primary,
@@ -190,57 +176,58 @@ class _LoginViewState extends State<LoginView> {
                                     decoration: TextDecoration.underline,
                                     decorationColor: AppColors.primary,
                                   ),
-                                ),
-                              ),
                             ),
-                            const AuthOrDivider(),
-                            const AppSizedBox(height: AppSize.s10),
-                            BlocBuilder<LoginCubit, LoginState>(
-                              buildWhen: (previous, current) =>
-                              previous.loginState.isLoading !=
-                                  current.loginState.isLoading,
-                              builder: (context, state) {
-                                return SocialLoginButtons(
-                                  onFacebookTap: _onFacebookPressed,
-                                  onGoogleTap: _onGooglePressed,
-                                  onAppleTap: () {},
-                                  isGoogleLoading: state.loginState.isLoading,
-                                );
-                              },
-                            ),
-                            const AppSizedBox(height: AppSize.s20),
-                            BlocBuilder<LoginCubit, LoginState>(
-                              buildWhen: (previous, current) =>
-                              previous.loginState.isLoading !=
-                                  current.loginState.isLoading,
-                              builder: (context, state) {
-                                return LoginSubmitButton(
-                                  isLoading: state.loginState.isLoading,
-                                  onTap: _onLoginPressed,
-                                );
-                              },
-                            ),
-                            const AppSizedBox(height: AppSize.s20),
-                            LoginRedirectRow(
-                              onLoginTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        MainRegisterViewController(),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
+                        const AuthOrDivider(),
+                        const AppSizedBox(height: AppSize.s20),
+                        BlocBuilder<LoginCubit, LoginState>(
+                          buildWhen: (previous, current) =>
+                              previous.isGoogleLoginLoading !=
+                                  current.isGoogleLoginLoading ||
+                              previous.isFacebookLoginLoading !=
+                                  current.isFacebookLoginLoading,
+                          builder: (context, state) {
+                            return SocialLoginButtons(
+                              onFacebookTap: _onFacebookPressed,
+                              onGoogleTap: _onGooglePressed,
+                              onAppleTap: () {
+                                CustomSnackBar.info(
+                                  context,
+                                  AuthConstants.appleLoginUnavailable,
+                                );
+                              },
+                              isGoogleLoading: state.isGoogleLoginLoading,
+                              isFacebookLoading: state.isFacebookLoginLoading,
+                            );
+                          },
+                        ),
+                        const AppSizedBox(height: AppSize.s20),
+                        BlocBuilder<LoginCubit, LoginState>(
+                          buildWhen: (previous, current) =>
+                              previous.isEmailLoginLoading !=
+                              current.isEmailLoginLoading,
+                          builder: (context, state) {
+                            return LoginSubmitButton(
+                              isLoading: state.isEmailLoginLoading,
+                              onTap: _onLoginPressed,
+                            );
+                          },
+                        ),
+                        const AppSizedBox(height: AppSize.s20),
+                        LoginRedirectRow(
+                          onLoginTap: () {
+                            Navigator.pushNamed(context, Routes.register);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+                const AppSizedBox(height: AppSize.s24),
+              ],
+            ),
+          ),
         ),
       ),
     );

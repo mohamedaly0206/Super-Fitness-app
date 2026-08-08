@@ -33,7 +33,7 @@ class NotFoundScreen extends StatelessWidget {
                 Routes.onboarding,
                 (_) => false,
               ),
-              child: const Text(AppStrings.goHome),
+              child: Text(AppStrings.goHome),
             ),
           ],
         ),

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:equatable/equatable.dart';
 import 'package:super_fitness_app/config/base/base_response.dart';
 import 'package:super_fitness_app/config/base/base_state.dart';
 import 'package:super_fitness_app/modules/auth/domain/entities/forget_password_entity.dart';
@@ -11,9 +10,8 @@ import 'package:super_fitness_app/modules/auth/domain/use_cases/forget_password_
 import 'package:super_fitness_app/modules/auth/domain/use_cases/reset_password_usecase.dart';
 import 'package:super_fitness_app/modules/auth/domain/use_cases/verify_reset_code_usecase.dart';
 import 'forget_password_event.dart';
+import 'forget_password_state.dart';
 import 'forget_password_step.dart';
-
-part 'forget_password_state.dart';
 
 @injectable
 class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
@@ -34,30 +32,30 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     return super.close();
   }
 
-  void doIntent(ForgetPasswordEvent intent) {
-    switch (intent) {
-      case EmailChangedIntent():
-        _onEmailChanged(intent.email);
+  void doEvent(ForgetPasswordEvent event) {
+    switch (event) {
+      case EmailChangedEvent():
+        _onEmailChanged(event.email);
 
-      case SubmitEmailIntent():
+      case SubmitEmailEvent():
         _submitEmail();
 
-      case OtpChangedIntent():
-        _onOtpChanged(intent.otp);
+      case OtpChangedEvent():
+        _onOtpChanged(event.otp);
 
-      case VerifyOtpIntent():
+      case VerifyOtpEvent():
         _verifyOtp();
 
-      case ResendOtpIntent():
+      case ResendOtpEvent():
         _resendOtp();
 
-      case PasswordChangedIntent():
-        _onPasswordChanged(intent.password);
+      case PasswordChangedEvent():
+        _onPasswordChanged(event.password);
 
-      case ConfirmPasswordChangedIntent():
-        _onConfirmPasswordChanged(intent.password);
+      case ConfirmPasswordChangedEvent():
+        _onConfirmPasswordChanged(event.password);
 
-      case SubmitNewPasswordIntent():
+      case SubmitNewPasswordEvent():
         _resetPassword();
     }
   }

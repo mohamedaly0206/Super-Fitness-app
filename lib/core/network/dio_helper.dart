@@ -8,6 +8,7 @@ import 'interceptors/auth_interceptor.dart';
 class DioHelper {
   static late Dio dio;
   static late Dio mealsDio;
+  static late Dio ollamaDio;
 
   static void init() {
     dio = Dio(
@@ -47,6 +48,27 @@ class DioHelper {
         requestHeader: true,
         requestBody: true,
         responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+      ),
+    );
+
+    ollamaDio = Dio(
+      BaseOptions(
+        baseUrl: AppConfig.ollamaBaseUrl,
+        connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(minutes: 5),
+        responseType: ResponseType.stream,
+        headers: {AppHttpHeaders.contentType: AppHttpHeaders.jsonContentType},
+      ),
+    );
+
+    ollamaDio.interceptors.add(
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: false,
         responseHeader: false,
         error: true,
         compact: true,

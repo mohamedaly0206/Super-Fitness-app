@@ -6,17 +6,19 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:get_it/get_it.dart';
 
 // --- Your App Imports ---
-import 'package:super_fitness_app/core/widgets/app_loading_widget.dart';
 import 'package:super_fitness_app/config/base/base_state.dart';
 import 'package:super_fitness_app/modules/meals/domain/entities/meal_entity.dart';
 import 'package:super_fitness_app/modules/meals/domain/entities/meals_details_entity.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_cubit.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_state.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/pages/food_details_page.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_details/widgets/food_details_shimmer.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/widgets/food_details_top_header.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/widgets/ingredients_widget.dart';
 
-class MockFoodDetailsCubit extends MockCubit<FoodDetailsState> implements FoodDetailsCubit {}
+class MockFoodDetailsCubit extends MockCubit<FoodDetailsState>
+    implements FoodDetailsCubit {}
+
 class FakeFoodDetailsState extends Fake implements FoodDetailsState {}
 
 void main() {
@@ -24,17 +26,17 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(FakeFoodDetailsState());
-    
+
     // Optional: If your app requires a one-time global DI setup, call it here:
-    // configureDependencies(); 
+    // configureDependencies();
   });
 
   setUp(() {
     mockCubit = MockFoodDetailsCubit();
-    
+
     // 1. Push a new scope for test isolation (replaces unsafe full resets)
     GetIt.instance.pushNewScope();
-    
+
     // 2. Register our mocked cubit in this scope
     GetIt.instance.registerFactory<FoodDetailsCubit>(() => mockCubit);
   });
@@ -46,13 +48,11 @@ void main() {
   });
 
   Widget buildTestableWidget() {
-    return const MaterialApp(
-      home: FoodDetailsPage(mealId: '12345'),
-    );
+    return const MaterialApp(home: FoodDetailsPage(mealId: '12345'));
   }
 
   group('FoodDetailsPage Widget Tests', () {
-    testWidgets('shows AppLoadingWidget when state is loading', (tester) async {
+    testWidgets('shows FoodDetailsShimmer when state is loading', (tester) async {
       when(() => mockCubit.state).thenReturn(
         const FoodDetailsState(
           getFoodDetailsState: BaseState(isLoading: true),
@@ -63,7 +63,7 @@ void main() {
 
       await tester.pumpWidget(buildTestableWidget());
 
-      expect(find.byType(AppLoadingWidget), findsOneWidget);
+      expect(find.byType(FoodDetailsShimmer), findsOneWidget);
     });
 
     testWidgets('shows Error Message when state has an error', (tester) async {
@@ -81,7 +81,9 @@ void main() {
       expect(find.text(errorMessage), findsOneWidget);
     });
 
-    testWidgets('shows FoodDetailsTopHeader and IngrediEntsWidget on success', (tester) async {
+    testWidgets('shows FoodDetailsTopHeader and IngrediEntsWidget on success', (
+      tester,
+    ) async {
       final dummyMeal = MealEntity(
         id: '12345',
         name: 'Chicken Salad',

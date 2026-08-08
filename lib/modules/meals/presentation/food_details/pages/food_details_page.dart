@@ -5,11 +5,11 @@ import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/localization_constants/meals_constants.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
-import 'package:super_fitness_app/core/widgets/app_loading_widget.dart';
 import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_cubit.dart';
-import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_intent.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_event.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/cubit/food_details_state.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_details/widgets/food_details_shimmer.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/widgets/food_details_top_header.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_details/widgets/ingredients_widget.dart';
 
@@ -22,15 +22,15 @@ class FoodDetailsPage extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           getIt<FoodDetailsCubit>()
-            ..handleFoodDetailsIntent(GetMealsDetailsIntent(mealId: mealId)),
+            ..doEvent(GetMealsDetailsEvent(mealId: mealId)),
       child: BlocBuilder<FoodDetailsCubit, FoodDetailsState>(
         builder: (context, state) {
           return PopScope(
             canPop: !state.isPlayingVideo,
             onPopInvokedWithResult: (didPop, result) {
               if (!didPop) {
-                context.read<FoodDetailsCubit>().handleFoodDetailsIntent(
-                  CloseYoutubeVideoIntent(),
+                context.read<FoodDetailsCubit>().doEvent(
+                  CloseYoutubeVideoEvent(),
                 );
               }
             },
@@ -39,7 +39,7 @@ class FoodDetailsPage extends StatelessWidget {
               body: BlocBuilder<FoodDetailsCubit, FoodDetailsState>(
                 builder: (context, state) {
                   return state.getFoodDetailsState.isLoading
-                      ? const Center(child: AppLoadingWidget())
+                      ? const FoodDetailsShimmer()
                       : state.getFoodDetailsState.errorMessage != null
                       ? Center(
                           child: Text(state.getFoodDetailsState.errorMessage!),

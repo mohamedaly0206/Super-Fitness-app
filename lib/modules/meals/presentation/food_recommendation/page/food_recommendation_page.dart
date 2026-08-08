@@ -8,6 +8,8 @@ import 'package:super_fitness_app/core/widgets/custom_scaffold.dart';
 import 'package:super_fitness_app/core/widgets/grid_shimmer.dart';
 import 'package:super_fitness_app/core/widgets/tab_bar_shimmer.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/cubit/food_recommendation_cubit.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/cubit/food_recommendation_event.dart';
+import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/cubit/food_recommendation_state.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/widgets/food_category_selector.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/widgets/food_recommendation_header.dart';
 import 'package:super_fitness_app/modules/meals/presentation/food_recommendation/widgets/meals_grid.dart';
@@ -22,7 +24,7 @@ class FoodRecommendationPage extends StatelessWidget {
     return BlocProvider(
       create: (_) =>
           getIt<FoodRecommendationCubit>()
-            ..loadCategories(initialCategoryName: initialCategoryName),
+            ..doEvent(LoadCategoriesEvent(initialCategoryName: initialCategoryName)),
       child: const _FoodRecommendationView(),
     );
   }
@@ -37,7 +39,6 @@ class _FoodRecommendationView extends StatefulWidget {
 }
 
 class _FoodRecommendationViewState extends State<_FoodRecommendationView> {
-
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -51,7 +52,7 @@ class _FoodRecommendationViewState extends State<_FoodRecommendationView> {
                 const FoodRecommendationHeader(),
                 if (state.categories.isEmpty &&
                     (state is FoodRecommendationInitial ||
-                     state is FoodRecommendationLoadingCategories)) ...[
+                        state is FoodRecommendationLoadingCategories)) ...[
                   const SizedBox(height: AppSize.s8),
                   const TabBarShimmer(),
                   const SizedBox(height: AppSize.s8),
@@ -62,8 +63,8 @@ class _FoodRecommendationViewState extends State<_FoodRecommendationView> {
                     selectedCategory: state.selectedCategory,
                     onCategorySelected: (category) {
                       if (category.id == state.selectedCategory?.id) return;
-                      context.read<FoodRecommendationCubit>().selectCategory(
-                        category,
+                      context.read<FoodRecommendationCubit>().doEvent(
+                        SelectCategoryEvent(category),
                       );
                     },
                   ),
@@ -85,7 +86,7 @@ class _FoodRecommendationViewState extends State<_FoodRecommendationView> {
       case FoodRecommendationCategoriesLoaded():
       case FoodRecommendationLoadingMeals():
         return const GridShimmer();
-          case FoodRecommendationMealsLoaded():
+      case FoodRecommendationMealsLoaded():
         return MealsGrid(
           meals: state.meals,
           onMealTap: (meal) {
@@ -100,7 +101,7 @@ class _FoodRecommendationViewState extends State<_FoodRecommendationView> {
         return AppErrorWidget(
           errorMessage: state.message,
           onRetry: () =>
-              context.read<FoodRecommendationCubit>().loadCategories(),
+              context.read<FoodRecommendationCubit>().doEvent(LoadCategoriesEvent()),
         );
     }
   }

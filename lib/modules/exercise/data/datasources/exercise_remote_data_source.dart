@@ -13,15 +13,16 @@ abstract class ExerciseRemoteDataSource {
   Future<BaseResponse<List<MuscleEntity>>> getMusclesByMuscleGroup({
     required String muscleGroupId,
   });
-  Future<BaseResponse<ExercisesPaginatedResponse>> getExercisesByMuscleAndDifficulty({
+  Future<BaseResponse<ExercisesPaginatedResponse>>
+  getExercisesByMuscleAndDifficulty({
     required String primeMoverMuscleId,
     required String difficultyLevelId,
     required int page,
   });
-  Future<BaseResponse<DifficultyLevelsResponseDto>> getDifficultyLevelsByPrimeMover({
-    required String primeMoverMuscleId,
-  });
-  Future<BaseResponse<ExercisesResponseDto>> getExercisesByPrimeMoverAndDifficulty({
+  Future<BaseResponse<DifficultyLevelsResponseDto>>
+  getDifficultyLevelsByPrimeMover({required String primeMoverMuscleId});
+  Future<BaseResponse<ExercisesResponseDto>>
+  getExercisesByPrimeMoverAndDifficulty({
     required String primeMoverMuscleId,
     required String difficultyLevelId,
   });

@@ -1,4 +1,10 @@
-part of 'home_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:super_fitness_app/config/base/base_state.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/exercise_entity.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/level_entity.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_entity.dart';
+import 'package:super_fitness_app/modules/exercise/domain/entities/muscle_group_entity.dart';
+import 'package:super_fitness_app/modules/meals/domain/entities/meal_category_entity.dart';
 
 class HomeState extends Equatable {
   final BaseState<List<LevelEntity>> levelState;
@@ -41,7 +47,8 @@ class HomeState extends Equatable {
       muscleGroupsState: muscleGroupsState ?? this.muscleGroupsState,
       musclesByGroupState: musclesByGroupState ?? this.musclesByGroupState,
       foodCategoriesState: foodCategoriesState ?? this.foodCategoriesState,
-      selectedMuscleGroupId: selectedMuscleGroupId ?? this.selectedMuscleGroupId,
+      selectedMuscleGroupId:
+          selectedMuscleGroupId ?? this.selectedMuscleGroupId,
       currentPage: currentPage ?? this.currentPage,
       totalPages: totalPages ?? this.totalPages,
     );
@@ -49,14 +56,14 @@ class HomeState extends Equatable {
 
   @override
   List<Object> get props => [
-        levelState,
-        exerciseState,
-        musclesState,
-        muscleGroupsState,
-        musclesByGroupState,
-        foodCategoriesState,
-        ? selectedMuscleGroupId,
-        currentPage,
-        totalPages,
-      ];
+    levelState,
+    exerciseState,
+    musclesState,
+    muscleGroupsState,
+    musclesByGroupState,
+    foodCategoriesState,
+    ?selectedMuscleGroupId,
+    currentPage,
+    totalPages,
+  ];
 }

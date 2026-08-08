@@ -12,6 +12,8 @@ class CustomSnackBar {
     required String message,
     required Color accentColor,
     required IconData icon,
+    Duration? duration,
+    EdgeInsetsGeometry? contentPadding,
   }) {
     final messenger = ScaffoldMessenger.of(context);
 
@@ -20,11 +22,13 @@ class CustomSnackBar {
       ..showSnackBar(
         SnackBar(
           content: Container(
-            padding: const EdgeInsets.symmetric(vertical: AppPadding.p4),
+            padding:
+                contentPadding ??
+                const EdgeInsets.symmetric(vertical: AppPadding.p4),
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(AppPadding.p8),
+                  padding: const EdgeInsets.all(AppPadding.p4),
                   decoration: BoxDecoration(
                     color: accentColor.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
@@ -47,9 +51,9 @@ class CustomSnackBar {
               ],
             ),
           ),
-          backgroundColor: AppColors.grey1,
+          backgroundColor: AppColors.grey2,
           behavior: SnackBarBehavior.floating,
-          duration: AppDurations.snackBarDisplay,
+          duration: duration ?? AppDurations.snackBarDisplay,
           elevation: AppSize.s8,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSize.borderRadiusSnackBar),
@@ -90,6 +94,20 @@ class CustomSnackBar {
       message: message,
       accentColor: AppColors.primary,
       icon: Icons.info_rounded,
+    );
+  }
+
+  static void copied(
+    BuildContext context, {
+    String message = 'Copied to clipboard',
+  }) {
+    _show(
+      context,
+      message: message,
+      accentColor: AppColors.textSecondary,
+      icon: Icons.copy_rounded,
+      duration: const Duration(seconds: 1),
+      contentPadding: const EdgeInsets.symmetric(vertical: 0),
     );
   }
 }

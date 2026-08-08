@@ -19,10 +19,14 @@ abstract interface class MealsApiClient {
   Future<MealCategoriesResponseDto> getCategories();
 
   @GET(MealEndPoint.filter)
-  Future<MealsResponseDto> getMealsByCategory({@Query("c") required String category});
+  Future<MealsResponseDto> getMealsByCategory({
+    @Query("c") required String category,
+  });
 
   @GET(MealEndPoint.lookup)
-  Future<MealDetailsResponseDto> getMealDetails({@Query("i") required String id});
+  Future<MealDetailsResponseDto> getMealDetails({
+    @Query("i") required String id,
+  });
   @GET(MealEndPoint.lookup)
   Future<MealsDetailsDto> getMeals(@Query('i') String id);
 }

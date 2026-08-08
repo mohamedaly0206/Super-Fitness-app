@@ -1,4 +1,6 @@
-part of 'forget_password_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:super_fitness_app/config/base/base_state.dart';
+import 'forget_password_step.dart';
 
 class ForgetPasswordState extends Equatable {
   final BaseState<dynamic> base;

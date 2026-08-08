@@ -3,7 +3,6 @@ import 'package:super_fitness_app/core/layout/app_durations.dart';
 import 'package:super_fitness_app/core/layout/app_padding.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/theme/app_colors.dart';
-import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 
 class FoodCategoryChip extends StatelessWidget {
@@ -24,23 +23,26 @@ class FoodCategoryChip extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: AppDurations.navBarAnimation,
-        height: AppSize.s30,
+        height: AppSize.s50,
         alignment: Alignment.center,
-        clipBehavior: Clip.antiAlias,
-        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
+        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primary : AppColors.transparent,
-          borderRadius: BorderRadius.circular(AppSize.borderRadiusOutlined),
+          borderRadius: BorderRadius.circular(AppSize.borderRadiusPill),
         ),
-        child: Text(
-          label,
-          textAlign: TextAlign.center,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: getMediumStyle(
-            context: context,
-            color: AppColors.textWhite,
-            fontSize: FontSizeManager.s12,
+        child: AnimatedDefaultTextStyle(
+          duration: AppDurations.navBarAnimation,
+          curve: Curves.easeInOut,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: FontSizeManager.s14,
+            color: isSelected ? Colors.white : Colors.white70,
+          ),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ),

@@ -1,4 +1,6 @@
-part of 'food_recommendation_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:super_fitness_app/modules/meals/domain/entities/meal_category_entity.dart';
+import 'package:super_fitness_app/modules/meals/domain/entities/meal_entity.dart';
 
 sealed class FoodRecommendationState extends Equatable {
   const FoodRecommendationState();

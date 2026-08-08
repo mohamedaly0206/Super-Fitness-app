@@ -5,6 +5,10 @@
     <key>LSApplicationQueriesSchemes</key>
     <array>
     <string>https</string>
+    <string>fbapi</string>
+    <string>fb-messenger-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
     </array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
@@ -28,7 +32,22 @@
             <string>com.googleusercontent.apps.289966024088-ktn60nadmj6edaj4s5l5tbpq721d14qu</string>
         </array>
     </dict>
+    <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>fb123456789012345</string>
+        </array>
+    </dict>
 </array>
+	<key>FacebookAppID</key>
+	<string>123456789012345</string>
+	<key>FacebookClientToken</key>
+	<string>abcdefabcdefabcdefabcdefabcdefab</string>
+	<key>FacebookDisplayName</key>
+	<string>Super Fitness</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -113,5 +132,11 @@
 		</array>
 		<key>UIStatusBarHidden</key>
 		<false/>
-	</dict>
+		<key>NSLocalNetworkUsageDescription</key>
+	<string>This app connects to a local Ollama server for AI-powered fitness coaching.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_http._tcp</string>
+	</array>
+</dict>
 </plist>

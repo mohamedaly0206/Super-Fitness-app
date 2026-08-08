@@ -7,9 +7,10 @@ import 'package:super_fitness_app/core/resources/app_svg.dart';
 import 'package:super_fitness_app/core/theme/app_text_style.dart';
 import 'package:super_fitness_app/core/theme/font_size_manager.dart';
 import 'package:super_fitness_app/core/widgets/custom_container.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/cubit/register_cubit.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/intent/register_intent.dart';
-import 'package:super_fitness_app/modules/auth/presentation/register/view_model/state/register_state.dart';
+import 'package:super_fitness_app/core/widgets/primary_button.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_cubit.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_event.dart';
+import 'package:super_fitness_app/modules/auth/presentation/register/cubit/register_state.dart';
 import 'package:super_fitness_app/modules/auth/presentation/register/widgets/gender_card.dart';
 
 class RegisterGenderView extends StatelessWidget {
@@ -57,9 +58,7 @@ class RegisterGenderView extends StatelessWidget {
                     icon: AppSvg.male,
                     selected: state.gender == Gender.male,
                     onTap: () {
-                      cubit.handleRegisterIntent(
-                        SelectGenderIntent(Gender.male),
-                      );
+                      cubit.doEvent(SelectGenderEvent(Gender.male));
                     },
                   ),
                   const SizedBox(height: 20),
@@ -69,33 +68,18 @@ class RegisterGenderView extends StatelessWidget {
                     icon: AppSvg.female,
                     selected: state.gender == Gender.female,
                     onTap: () {
-                      cubit.handleRegisterIntent(
-                        SelectGenderIntent(Gender.female),
-                      );
+                      cubit.doEvent(SelectGenderEvent(Gender.female));
                     },
                   ),
                   SizedBox(height: AppSize.s24),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: state.gender == null
-                              ? null
-                              : () => pageController.nextPage(
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.easeInOut,
-                                ),
-                          child: Text(
-                            AuthConstants.next,
-                            style: getExtraBoldStyle(
-                              context: context,
-                              color: theme.colorScheme.onPrimary,
-                              fontSize: FontSizeManager.s14,
-                            ),
+                  PrimaryButton(
+                    text: AuthConstants.next,
+                    onTap: state.gender == null
+                        ? null
+                        : () => pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
                           ),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
