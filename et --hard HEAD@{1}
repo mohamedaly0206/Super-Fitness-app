@@ -1,0 +1,16 @@
+[33mde22d1c[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/FST3-4&5-complete-register[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33m559b3b0[m HEAD@{1}: commit: feat: add unit tests for registration flow and update dependencies
+[33mde22d1c[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/FST3-4&5-complete-register[m[33m)[m HEAD@{2}: commit: refactor: Remove unused import statements and update background color in circular progress indicator
+[33m971e336[m HEAD@{3}: commit: feat: Add registration flow enhancements and new UI components
+[33m7891688[m HEAD@{4}: commit: feat: complete user registration flow with gender selection and localization support
+[33me628672[m HEAD@{5}: commit: feat: implement multi-step user registration flow with localization support
+[33mf270636[m HEAD@{6}: commit: feat: implement user registration functionality with DTOs and API client
+[33m4fec3ba[m[33m ([m[1;32mfeature/auth-module[m[33m)[m HEAD@{7}: checkout: moving from feature/auth-module to feature/FST3-4&5-complete-register
+[33m4fec3ba[m[33m ([m[1;32mfeature/auth-module[m[33m)[m HEAD@{8}: commit: refactor: add auth modules files structure and clean up code formatting
+[33mba9653b[m[33m ([m[1;31morigin/development[m[33m)[m HEAD@{9}: pull --tags origin feature/auth-module: Fast-forward
+[33m7748f85[m HEAD@{10}: pull origin development: Fast-forward
+[33m948f439[m HEAD@{11}: checkout: moving from main to feature/auth-module
+[33mdd140a0[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{12}: commit: initial commit
+[33mba15e46[m HEAD@{13}: Branch: renamed refs/heads/main to refs/heads/main
+[33mba15e46[m HEAD@{15}: Branch: renamed refs/heads/master to refs/heads/main
+[33mba15e46[m HEAD@{17}: commit (initial): first commit

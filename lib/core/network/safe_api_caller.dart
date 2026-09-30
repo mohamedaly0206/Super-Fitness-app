@@ -1,0 +1,16 @@
+import 'package:super_fitness_app/config/base/base_response.dart';
+import 'package:super_fitness_app/core/error/error_handler.dart';
+import 'package:injectable/injectable.dart';
+
+@injectable
+class SafeApiCaller {
+  Future<BaseResponse<T>> safeCall<T>(Future<T> Function() call) async {
+    try {
+      final response = await call();
+      return SuccessBaseResponse<T>(data: response);
+    } catch (error) {
+      final failure = ErrorHandler.handle(error);
+      return ErrorBaseResponse<T>(failure: failure);
+    }
+  }
+}

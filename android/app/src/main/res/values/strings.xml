@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Super Fitness</string>
+    <!-- TODO: Replace the placeholder values below with your real Facebook
+         credentials from https://developers.facebook.com/apps
+         -> Your App -> Settings -> Basic (App ID + Client Token).
+         The App ID must be a number, and the Client Token a 32-char hex string. -->
+    <string name="facebook_app_id">123456789012345</string>
+    <string name="facebook_client_token">abcdefabcdefabcdefabcdefabcdefab</string>
+    <string name="fb_login_protocol_scheme">fb123456789012345</string>
+</resources>
