@@ -48,54 +48,50 @@ class _ExerciseVideoOverlayState extends State<ExerciseVideoOverlay> {
     return GestureDetector(
       onTap: widget.onClose,
       child: Container(
-        color: Colors.black54,
+        color: AppColors.glassShadow.withOpacity(0.8),
         child: Center(
-          child: GestureDetector(
-            onTap: () {},
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
-              decoration: BoxDecoration(
-                color: AppColors.background,
-                borderRadius: BorderRadius.circular(AppSize.s16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.4),
-                    blurRadius: AppSize.s20,
-                    spreadRadius: AppSize.s2,
-                  ),
-                ],
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: IconButton(
-                      onPressed: widget.onClose,
-                      icon: const Icon(
-                        Icons.close_rounded,
-                        color: AppColors.textPrimary,
-                        size: AppSize.s28,
-                      ),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.8),
+              borderRadius: BorderRadius.circular(AppSize.s5),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.4),
+                  blurRadius: AppSize.s20,
+                  spreadRadius: AppSize.s2,
+                ),
+              ],
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    onPressed: widget.onClose,
+                    icon: const Icon(
+                      Icons.close_rounded,
+                      color: AppColors.textPrimary,
+                      size: AppSize.s28,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: AppPadding.p12,
-                      right: AppPadding.p12,
-                      bottom: AppPadding.p16,
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(AppSize.s12),
-                      child: YoutubePlayer(
-                        controller: _controller,
-                        aspectRatio: 16 / 9,
-                      ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: AppPadding.p4,
+                    right: AppPadding.p4,
+                    bottom: AppPadding.p10,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(AppSize.s12),
+                    child: YoutubePlayer(
+                      controller: _controller,
+                      aspectRatio: 16 / 9,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

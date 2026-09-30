@@ -105,7 +105,8 @@ class _SmartCoachViewState extends State<_SmartCoachView> {
           final oldLength = previous.currentSession?.messages.length ?? 0;
           final newLength = current.currentSession?.messages.length ?? 0;
           return oldLength != newLength ||
-              previous.isTyping != current.isTyping;
+              previous.isTyping != current.isTyping ||
+              previous.showTypingIndicator != current.showTypingIndicator;
         },
         listener: (_, state) {
           _scrollToBottom();
@@ -133,7 +134,7 @@ class _SmartCoachViewState extends State<_SmartCoachView> {
                           child: MessageList(
                             controller: _scrollController,
                             messages: state.currentSession!.messages,
-                            isTyping: state.isTyping,
+                            isTyping: state.showTypingIndicator,
                             userImageUrl: _userImage,
                           ),
                         ),

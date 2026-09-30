@@ -55,7 +55,7 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: AppPadding.p8,
+                horizontal: 5,
                 vertical: AppPadding.p8,
               ),
               child: Row(
@@ -76,7 +76,9 @@ class _HomeWorkoutsSectionState extends State<HomeWorkoutsSection> {
                           groupId: groups[_selectedIndex].id,
                         ),
                       );
-                      context.read<AppSectionsCubit>().doEvent(ChangeSectionEvent(1));
+                      context.read<AppSectionsCubit>().doEvent(
+                        ChangeSectionEvent(1),
+                      );
                     },
                   ),
                 ],

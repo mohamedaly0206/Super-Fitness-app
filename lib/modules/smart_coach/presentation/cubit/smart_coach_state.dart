@@ -10,6 +10,8 @@ class SmartCoachState extends Equatable {
 
   final bool isTyping;
 
+  final bool showTypingIndicator;
+
   final bool isLoading;
 
   final bool limitReached;
@@ -20,6 +22,7 @@ class SmartCoachState extends Equatable {
     this.conversations = const [],
     this.currentSession,
     this.isTyping = false,
+    this.showTypingIndicator = false,
     this.isLoading = false,
     this.limitReached = false,
     this.errorMessage,
@@ -29,6 +32,7 @@ class SmartCoachState extends Equatable {
     List<Conversation>? conversations,
     ChatSession? currentSession,
     bool? isTyping,
+    bool? showTypingIndicator,
     bool? isLoading,
     bool? limitReached,
     String? errorMessage,
@@ -38,6 +42,7 @@ class SmartCoachState extends Equatable {
       conversations: conversations ?? this.conversations,
       currentSession: currentSession ?? this.currentSession,
       isTyping: isTyping ?? this.isTyping,
+      showTypingIndicator: showTypingIndicator ?? this.showTypingIndicator,
       isLoading: isLoading ?? this.isLoading,
       limitReached: limitReached ?? this.limitReached,
       errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
@@ -49,6 +54,7 @@ class SmartCoachState extends Equatable {
     conversations,
     currentSession,
     isTyping,
+    showTypingIndicator,
     isLoading,
     limitReached,
     errorMessage,

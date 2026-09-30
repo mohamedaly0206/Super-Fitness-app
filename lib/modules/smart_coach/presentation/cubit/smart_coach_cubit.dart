@@ -99,10 +99,7 @@ class SmartCoachCubit extends Cubit<SmartCoachState> {
       status: ConversationStatus.active,
     );
 
-    final session = ChatSession(
-      conversation: conversation,
-      messages: const [],
-    );
+    final session = ChatSession(conversation: conversation, messages: const []);
 
     _conversationPersisted = false;
 
@@ -178,7 +175,13 @@ class SmartCoachCubit extends Cubit<SmartCoachState> {
 
     ChatSession session = state.currentSession!;
 
-    emit(state.copyWith(isTyping: true, clearError: true));
+    emit(
+      state.copyWith(
+        isTyping: true,
+        showTypingIndicator: true,
+        clearError: true,
+      ),
+    );
 
     _streamSubscription?.cancel();
 
@@ -224,7 +227,12 @@ class SmartCoachCubit extends Cubit<SmartCoachState> {
 
                 session = session.copyWith(messages: messages);
 
-                emit(state.copyWith(currentSession: session));
+                emit(
+                  state.copyWith(
+                    currentSession: session,
+                    showTypingIndicator: false,
+                  ),
+                );
 
               case AssistantMessageSaved():
                 final messages = [...session.messages];
@@ -267,10 +275,16 @@ class SmartCoachCubit extends Cubit<SmartCoachState> {
             }
           },
           onError: (e) {
-            emit(state.copyWith(isTyping: false, errorMessage: e.toString()));
+            emit(
+              state.copyWith(
+                isTyping: false,
+                showTypingIndicator: false,
+                errorMessage: e.toString(),
+              ),
+            );
           },
           onDone: () {
-            emit(state.copyWith(isTyping: false));
+            emit(state.copyWith(isTyping: false, showTypingIndicator: false));
           },
           cancelOnError: true,
         );

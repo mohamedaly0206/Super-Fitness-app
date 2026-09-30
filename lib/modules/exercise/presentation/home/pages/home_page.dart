@@ -54,19 +54,19 @@ class HomePage extends StatelessWidget {
                         image: category.image,
                         onTap: isLast
                             ? () => Navigator.pushNamed(
-                                  context,
-                                  Routes.smartCotchChat,
-                                )
+                                context,
+                                Routes.smartCotchChat,
+                              )
                             : category.url == null
                             ? null
                             : () => Navigator.pushNamed(
-                                  context,
-                                  Routes.webView,
-                                  arguments: WebViewArgs(
-                                    title: category.title,
-                                    url: category.url!,
-                                  ),
+                                context,
+                                Routes.webView,
+                                arguments: WebViewArgs(
+                                  title: category.title,
+                                  url: category.url!,
                                 ),
+                              ),
                       );
                     },
                   ),

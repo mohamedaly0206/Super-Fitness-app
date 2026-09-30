@@ -11,9 +11,14 @@ class ExerciseListLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.all(AppPadding.p16),
+      padding: const EdgeInsets.only(
+        left: AppPadding.p10,
+        right: AppPadding.p10,
+        top: 0,
+        bottom: 0,
+      ),
       itemCount: 5,
-      separatorBuilder: (_, __) => const SizedBox(height: AppSize.s16),
+      separatorBuilder: (_, __) => const SizedBox(height: AppSize.s5),
       itemBuilder: (_, __) => const ExerciseCardShimmer(),
     );
   }

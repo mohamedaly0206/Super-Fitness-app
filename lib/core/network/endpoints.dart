@@ -5,7 +5,7 @@ class AppConfig {
   static const String mealsBaseUrl = "https://www.themealdb.com/api/json/v1/1/";
 
   static String get ollamaBaseUrl {
-    if (Platform.isAndroid) return 'http://10.0.2.2:11434';
+    if (Platform.isAndroid) return 'http://127.0.0.1:11434';
     if (Platform.isIOS || Platform.isMacOS) return 'http://127.0.0.1:11434';
     if (Platform.isWindows || Platform.isLinux) return 'http://127.0.0.1:11434';
     return 'http://127.0.0.1:11434';

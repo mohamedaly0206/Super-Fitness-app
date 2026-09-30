@@ -72,9 +72,8 @@ abstract class AppRouter {
 
       case Routes.exercises:
         final primeMoverMuscleId = settings.arguments as String;
-        return PageTransitions.slide(
+        return PageTransitions.fade(
           ExerciseScreen(primeMoverMuscleId: primeMoverMuscleId),
-          settings: settings,
         );
 
       case Routes.exerciseDetails:
@@ -100,7 +99,6 @@ abstract class AppRouter {
 
       case Routes.smartCotchChat:
         return PageTransitions.fade(const SmartCoachScreen());
-
 
       case Routes.webView:
         final args = settings.arguments as WebViewArgs;
@@ -130,10 +128,7 @@ abstract class AppRouter {
       case Routes.editWeight:
         final sharedCubit = settings.arguments as EditProfileCubit;
         return PageTransitions.fade(
-          BlocProvider.value(
-            value: sharedCubit,
-            child: const EditWeightPage(),
-          ),
+          BlocProvider.value(value: sharedCubit, child: const EditWeightPage()),
         );
 
       case Routes.editActivityLevel:

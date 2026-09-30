@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:super_fitness_app/core/layout/app_size.dart';
 import 'package:super_fitness_app/core/network/endpoints.dart';
+import 'package:super_fitness_app/core/resources/app_png.dart';
 import 'package:super_fitness_app/core/widgets/shimmer_loading_widget.dart';
-import 'package:super_fitness_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CachedNetworkImageWidget extends StatelessWidget {
@@ -32,8 +32,12 @@ class CachedNetworkImageWidget extends StatelessWidget {
       imageUrl: _fullUrl,
       fit: BoxFit.cover,
       placeholder: (context, url) => ImageShimmer(width: width, height: height),
-      errorWidget: (context, url, error) =>
-          const Icon(Icons.error, color: AppColors.error, size: AppSize.s24),
+      errorWidget: (context, url, error) => Image.asset(
+        AppPng.logo2,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }

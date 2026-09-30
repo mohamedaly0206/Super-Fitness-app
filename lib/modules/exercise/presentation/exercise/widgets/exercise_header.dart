@@ -103,26 +103,6 @@ class ExerciseHeader extends StatelessWidget {
             ),
           ),
 
-          Positioned.fill(
-            child: Center(
-              child: InkWell(
-                onTap: () => onPlayVideo(exercise),
-                child: Container(
-                  padding: const EdgeInsets.all(AppPadding.p18),
-                  decoration: const BoxDecoration(
-                    color: AppColors.glassShadow,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.play_arrow_rounded,
-                    color: AppColors.primary,
-                    size: AppSize.s42,
-                  ),
-                ),
-              ),
-            ),
-          ),
-
           Positioned(
             left: AppPadding.p20,
             right: AppPadding.p20,
@@ -146,6 +126,26 @@ class ExerciseHeader extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+
+          Positioned.fill(
+            child: Center(
+              child: GestureDetector(
+                onTap: () => onPlayVideo(exercise),
+                child: Container(
+                  padding: const EdgeInsets.all(AppPadding.p18),
+                  decoration: const BoxDecoration(
+                    color: AppColors.glassFill,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.play_arrow_rounded,
+                    color: AppColors.primary,
+                    size: AppSize.s42,
+                  ),
+                ),
+              ),
             ),
           ),
 
