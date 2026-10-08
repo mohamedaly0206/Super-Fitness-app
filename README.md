@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/Ollama-AI-black?style=for-the-badge"/>
 </p>
 <p align="center">
-  <img src="shots/cover.png" alt="Super Fitness Cover" width="100%"/>
+  <img src="shots/cover3.png" alt="Super Fitness Cover" width="100%"/>
 </p>
 
 ## Overview
